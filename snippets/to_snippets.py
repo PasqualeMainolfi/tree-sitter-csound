@@ -110,6 +110,7 @@ def get_snippet(opnames, opcode_body, types):
         matches = [m.start() for m  in indexes_leg]
         temp_args = []
         prev = 0
+        temp_args.append(opcode_body_args[:matches[0]])
         for i, start_index  in enumerate(matches):
             if start_index > 1:
                 f = opcode_body_args[start_index - 1]
