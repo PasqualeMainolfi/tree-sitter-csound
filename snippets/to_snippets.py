@@ -6,7 +6,7 @@ import os
 import re
 import html
 
-PATH_TO_OPCODES_ROOT: str = "csound_manual/docs/opcodes"
+PATH_TO_OPCODES_ROOT: str = "../csound_manual/docs/opcodes"
 
 TEMPLATE = {
     "prefix": "",
@@ -32,8 +32,8 @@ def check_newline(lines, current_line, current_index, counter):
         counter += 1
     return current_line, counter
 
-def make_prefix_string(prefix):
-    return prefix
+def escape_dollar(prefix):
+    return re.sub(r'\$', r'\\$', prefix)
 
 def parse_opcode_types(current_line):
     tsplit_equal = current_line.split("=")
@@ -142,6 +142,7 @@ def main() -> None:
                     if line.startswith(NAME_FLAG):
                         opnames = html.unescape(line.split(" ")[1])
                         # if opnames not in TO_AVOID and opnames[0] not in TO_AVOID and len(opnames) != 1 and opnames not in opcodes_dict:
+                        opnames = escape_dollar(prefix=opnames)
                         if opnames not in opcodes_dict:
                             name_line = i
                             opcodes_dict[opnames] = op
@@ -170,7 +171,7 @@ def main() -> None:
                         description = html.escape(description)
                         if regex.search(description):
                             description = regex.sub("", description)
-                        opcodes_dict[opnames]["description"] = description
+                        opcodes_dict[opnames]["description"] = escape_dollar(prefix=description)
                     if line.startswith(MODERN_FLAG):
                         if i > 0 and lines[i - 1].strip().startswith(SYNTAX_FLAG):
                             j = i + 1
@@ -203,7 +204,7 @@ def main() -> None:
                                 # print("op body format: ", types)
                                 body = get_snippet(opnames, opcode_body, types)
                                 # print("body: ", body)
-                                opcodes_dict[opnames]["prefix"] = make_prefix_string(prefix=body)
+                                opcodes_dict[opnames]["prefix"] = escape_dollar(prefix=body)
                                 # print(opcodes_dict[opnames])
                             else:
                                 print(f"[WARNING] Wrong opcode prefix format {opnames, current_line, j, index}")
@@ -218,9 +219,9 @@ def main() -> None:
                             if regex_c.search(current_line):
                                 opcode_body = current_line.split(" ")
                                 if len(opcode_body) > 0:
-                                    opcodes_dict[opnames]["prefix"] = make_prefix_string(prefix=opcode_body[0])
+                                    opcodes_dict[opnames]["prefix"] = escape_dollar(prefix=opcode_body[0])
                             else:
-                                opcodes_dict[opnames]["prefix"] =  make_prefix_string(prefix=current_line)
+                                opcodes_dict[opnames]["prefix"] =  escape_dollar(prefix=current_line)
 
 
 

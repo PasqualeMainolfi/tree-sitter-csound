@@ -9,7 +9,6 @@ This grammar can be used to provide syntax highlighting, indentation, and parsin
 - Syntax highlighting for:
   - Orchestra statements
   - Score statements
-  - Cabbage widgets
   - Macros and preprocessor directives
 - Parsing support for:
   - Instruments (`instr ... endin`)
