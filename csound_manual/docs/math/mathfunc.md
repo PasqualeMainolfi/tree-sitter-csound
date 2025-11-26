@@ -1,0 +1,31 @@
+# **Mathematical Functions**
+
+Opcodes that perform mathematical functions are:
+
+* [abs](../opcodes/abs.md)
+* [arg](../opcodes/arg.md)
+* [ceil](../opcodes/ceil.md)
+* [chebyshevpoly](../opcodes/chebyshevpoly.md)
+* [complex](../opcodes/complex.md)
+* [conj](../opcodes/conj.md)
+* [exp](../opcodes/exp.md)
+* [floor](../opcodes/floor.md)
+* [frac](../opcodes/frac.md)
+* [imag](../opcodes/imag.md)
+* [int](../opcodes/int.md)
+* [log](../opcodes/log.md)
+* [log2](../opcodes/log2.md)
+* [log10](../opcodes/log10.md)
+* [logbtwo](../opcodes/logbtwo.md)
+* [polar](../opcodes/polar.md)
+* [polynomial](../opcodes/polynomial.md)
+* [pow](../opcodes/pow.md)
+* [powershape](../opcodes/powershape.md)
+* [powoftwo](../opcodes/powoftwo.md)
+* [qinf](../opcodes/qinf.md)
+* [qnan](../opcodes/qnan.md)
+* [real](../opcodes/real.md)
+* [round](../opcodes/round.md)
+* [sqrt](../opcodes/sqrt.md)
+* [taninv2](../opcodes/taninv2.md)
+

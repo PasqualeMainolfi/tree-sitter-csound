@@ -1,0 +1,21 @@
+{
+  "typeCheckingMode": "basic",
+  "useLibraryCodeForTypes": true,
+  "autoImportCompletions": true,
+  "reportDuplicateImport": "error",
+  "reportImportCycles": "error",
+  "reportMissingImports": "error",
+  "diagnosticMode": "workspace",
+  "reportMissingTypeStubs": "none",
+  "reportOptionalMemberAccess": "none",
+  "reportAttributeAccessIssue": "none",
+  "reportArgumentType": "none",
+  "reportReturnType": "none",
+  "reportOptionalSubscript": "none",
+  "reportCallIssue": "none",
+  "reportIndexIssue": "none",
+  "reportOperatorIssue": "none",
+  "reportOptionalOperand": "none",
+  "reportOptionalIterable": "none",
+  "reportGeneralTypeIssues": "none"
+}

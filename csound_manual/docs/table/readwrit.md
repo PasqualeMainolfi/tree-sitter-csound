@@ -1,0 +1,37 @@
+# **Read/Write Operations**
+
+Opcodes that read and write to a table are:
+
+* [ftaudio](../opcodes/ftaudio.md)
+* [ftloadk](../opcodes/ftloadk.md)
+* [ftload](../opcodes/ftload.md)
+* [ftmorf](../opcodes/ftmorf.md)
+* [ftset](../opcodes/ftset.md)
+* [ftslice](../opcodes/ftslice.md)
+* [ftslicei](../opcodes/ftslicei.md)
+* [ftprint](../opcodes/ftprint.md) 
+* [ftsamplebank](../opcodes/ftsamplebank.md)
+* [ftsavek](../opcodes/ftsavek.md)
+* [ftsave](../opcodes/ftsave.md)
+* [tablecopy](../opcodes/tablecopy.md) 
+* [tableicopy](../opcodes/tableicopy.md)
+* [tablefilter](../opcodes/tablefilter.md)
+* [tablefilteri](../opcodes/tablefilteri.md)
+* [tablegpw](../opcodes/tablegpw.md)
+* [tableigpw](../opcodes/tableigpw.md)
+* [tableimix](../opcodes/tableimix.md)
+* [tableiw](../opcodes/tableiw.md)
+* [tablemix](../opcodes/tablemix.md)
+* [tablera](../opcodes/tablera.md)
+* [tableshuffle](../opcodes/tableshuffle.md)
+* [tablew](../opcodes/tablew.md)
+* [tablewa](../opcodes/tablewa.md)
+* [tablewkt](../opcodes/tablewkt.md)
+* [tabmorph](../opcodes/tabmorph.md)
+* [tabmorpha](../opcodes/tabmorpha.md)
+* [tabmorphak](../opcodes/tabmorphak.md)
+* [tabmorphi](../opcodes/tabmorphi.md)
+* [tabrec](../opcodes/tabrec.md)
+* [tabplay](../opcodes/tabplay.md)
+
+Many oscillators are in fact specialized table readers. See the [Basic oscillators](../siggen/basic.md) section

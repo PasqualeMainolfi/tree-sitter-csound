@@ -1,0 +1,3 @@
+[submodule "csound_manual"]
+	path = csound_manual
+	url = https://github.com/csound/manual.git
