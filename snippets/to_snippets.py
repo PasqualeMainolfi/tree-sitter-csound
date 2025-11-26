@@ -103,6 +103,7 @@ def get_snippet(opnames, opcode_body, types):
         opcode_body_args = f"({types}{body_clos}"
     else:
         opcode_body_args = f"({types})"
+        print("t: ", opcode_body_args)
 
     if "[, " in opcode_body_args:
         # index_leg = opcode_body_args.find("[, ")
@@ -110,21 +111,22 @@ def get_snippet(opnames, opcode_body, types):
         matches = [m.start() for m  in indexes_leg]
         temp_args = []
         prev = 0
-        temp_args.append(opcode_body_args[:matches[0]])
+        print("B: ", opcode_body_args)
+        # temp_args.append(opcode_body_args[:matches[0]])
         for i, start_index  in enumerate(matches):
-            if start_index > 1:
-                f = opcode_body_args[start_index - 1]
-                if f == ",":
-                    temp_args.append(opcode_body_args[prev:start_index - 1])
-                elif f not in [",", " "]:
-                    temp_args.append(opcode_body_args[prev:start_index])
+            t = opcode_body_args[prev:start_index - 1].strip()
+            if t.endswith(","):
+                t = t[:-1]
+            temp_args.append(t)
             prev = start_index
+            print(i, start_index, temp_args)
         temp_args.append(opcode_body_args[prev:])
-        opcode_body_args = ''.join(temp_args)
+        opcode_body_args = ' '.join(temp_args)
         # print(opcode_body_args)
     if opcode_body_args[-2] == ",":
         opcode_body_args =  f"{opcode_body_args[:-2]})"
     body = f"{opnames}{opcode_body_args}"
+    print(body)
     return body
 
 def main() -> None:
