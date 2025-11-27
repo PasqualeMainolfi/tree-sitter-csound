@@ -1,3 +1,4 @@
+(instrument_definition) @indent
 (instr_body) @indent
 (instrument_definition "endin" @outdent)
 

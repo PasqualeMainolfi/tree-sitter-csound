@@ -10,7 +10,6 @@ nchnls = 2
 
 
 instr 1
-    sig:a = poscil(1, 440)
 
 endin
 
