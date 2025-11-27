@@ -28,7 +28,7 @@
 [
   "instr" "endin" "opcode" "endop" "struct"
   "if" "then" "ithen" "kthen" "elseif" "else" "endif" "fi"
-  "while" "until" "do" "od" "for" "in" "switch" "case"
+  "while" "until" "do" "od" "for" "in" "switch" "case" "default"
   "return" "goto" "kgoto" "igoto"
   "xin" "xout" "void" (switch_end)
 ] @keyword

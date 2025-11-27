@@ -21,8 +21,10 @@ instr 1
     switch p4
         case 1
             print(1)
-            case 2
-                print(3)
+        case 2
+            print(2)
+        default
+            print(3)
     endsw
 
 endin
