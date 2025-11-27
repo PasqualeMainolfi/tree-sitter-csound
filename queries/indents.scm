@@ -55,12 +55,12 @@
 ;;; 6. LISTS & EXPRESSIONS
 
 (parenthesized_expression) @indent
-(parenthesized_expression ")" @outdent)
+; (parenthesized_expression ")" @outdent)
 
 (function_call) @indent
 
 (modern_udo_inputs) @indent
-(modern_udo_inputs ")" @outdent)
+; (modern_udo_inputs ")" @outdent)
 
 (modern_udo_outputs) @indent
-(modern_udo_outputs ")" @outdent)
+; (modern_udo_outputs ")" @outdent)
