@@ -1848,6 +1848,11 @@
     }
   },
   {
+    "type": "switch_end",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "switch_statement",
     "named": true,
     "fields": {},
@@ -2864,6 +2869,10 @@
     "named": false
   },
   {
+    "type": "endsw",
+    "named": false
+  },
+  {
     "type": "fi",
     "named": false
   },
@@ -2978,10 +2987,6 @@
   {
     "type": "switch",
     "named": false
-  },
-  {
-    "type": "switch_end",
-    "named": true
   },
   {
     "type": "tag_cabbage_end",

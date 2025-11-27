@@ -1482,10 +1482,14 @@
       ]
     },
     "switch_end": {
-      "type": "TOKEN",
+      "type": "PREC",
+      "value": 1,
       "content": {
-        "type": "STRING",
-        "value": "endsw"
+        "type": "TOKEN",
+        "content": {
+          "type": "STRING",
+          "value": "endsw"
+        }
       }
     },
     "switch_statement": {
@@ -1531,10 +1535,14 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "TOKEN",
+          "type": "PREC",
+          "value": 1,
           "content": {
-            "type": "STRING",
-            "value": "case"
+            "type": "TOKEN",
+            "content": {
+              "type": "STRING",
+              "value": "case"
+            }
           }
         },
         {
@@ -1554,10 +1562,14 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "TOKEN",
+          "type": "PREC",
+          "value": 1,
           "content": {
-            "type": "STRING",
-            "value": "default"
+            "type": "TOKEN",
+            "content": {
+              "type": "STRING",
+              "value": "default"
+            }
           }
         },
         {
