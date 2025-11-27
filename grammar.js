@@ -145,18 +145,6 @@ module.exports = grammar({
       $.label_statement
     ),
 
-   case_statement: $ => choice(
-      $.header_assignment,
-      $.typed_assignment_statement,
-      $.assignment_statement,
-      $.xin_statement,
-      $.xout_statement,
-      $.function_call,
-      $.opcode_statement,
-      $.control_statement,
-      $.label_statement
-    ),
-
     xin_statement: $ => seq(
       field('outputs', sep1($._lvalue, ',')),
       'xin'
@@ -271,12 +259,12 @@ module.exports = grammar({
     case_block: $ => seq(
       $.case_key,
       $._expression,
-      repeat($.case_statement)
+      repeat($._statement)
     ),
 
     default_block: $ => seq(
       $.default_key,
-      repeat($.case_statement)
+      repeat($._statement)
     ),
 
     goto_statement: $ => seq(choice('goto', 'kgoto', 'igoto'), $.identifier),

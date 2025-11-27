@@ -774,47 +774,6 @@
         }
       ]
     },
-    "case_statement": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "header_assignment"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "typed_assignment_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "assignment_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "xin_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "xout_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "function_call"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "opcode_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "control_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "label_statement"
-        }
-      ]
-    },
     "xin_statement": {
       "type": "SEQ",
       "members": [
@@ -1617,7 +1576,7 @@
           "type": "REPEAT",
           "content": {
             "type": "SYMBOL",
-            "name": "case_statement"
+            "name": "_statement"
           }
         }
       ]
@@ -1633,7 +1592,7 @@
           "type": "REPEAT",
           "content": {
             "type": "SYMBOL",
-            "name": "case_statement"
+            "name": "_statement"
           }
         }
       ]
