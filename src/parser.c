@@ -21,7 +21,7 @@
 #define ALIAS_COUNT 1
 #define TOKEN_COUNT 130
 #define EXTERNAL_TOKEN_COUNT 0
-#define FIELD_COUNT 22
+#define FIELD_COUNT 24
 #define MAX_ALIAS_SEQUENCE_LENGTH 8
 #define MAX_RESERVED_WORD_SET_SIZE 0
 #define PRODUCTION_ID_COUNT 33
@@ -1650,35 +1650,39 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
 
 enum ts_field_identifiers {
   field_array = 1,
-  field_case_header = 2,
-  field_condition = 3,
-  field_count = 4,
-  field_default_header = 5,
-  field_fields = 6,
-  field_function = 7,
-  field_inputs = 8,
-  field_key = 9,
-  field_left = 10,
-  field_macro_name = 11,
-  field_member = 12,
-  field_name = 13,
-  field_object = 14,
-  field_op = 15,
-  field_opcode = 16,
-  field_operator = 17,
-  field_outputs = 18,
-  field_right = 19,
-  field_type = 20,
-  field_value = 21,
-  field_widget = 22,
+  field_case_body = 2,
+  field_case_header = 3,
+  field_condition = 4,
+  field_count = 5,
+  field_default_body = 6,
+  field_default_header = 7,
+  field_fields = 8,
+  field_function = 9,
+  field_inputs = 10,
+  field_key = 11,
+  field_left = 12,
+  field_macro_name = 13,
+  field_member = 14,
+  field_name = 15,
+  field_object = 16,
+  field_op = 17,
+  field_opcode = 18,
+  field_operator = 19,
+  field_outputs = 20,
+  field_right = 21,
+  field_type = 22,
+  field_value = 23,
+  field_widget = 24,
 };
 
 static const char * const ts_field_names[] = {
   [0] = NULL,
   [field_array] = "array",
+  [field_case_body] = "case_body",
   [field_case_header] = "case_header",
   [field_condition] = "condition",
   [field_count] = "count",
+  [field_default_body] = "default_body",
   [field_default_header] = "default_header",
   [field_fields] = "fields",
   [field_function] = "function",
@@ -1725,12 +1729,12 @@ static const TSMapSlice ts_field_map_slices[PRODUCTION_ID_COUNT] = {
   [24] = {.index = 39, .length = 2},
   [25] = {.index = 41, .length = 4},
   [26] = {.index = 45, .length = 4},
-  [27] = {.index = 49, .length = 1},
-  [28] = {.index = 50, .length = 1},
-  [29] = {.index = 51, .length = 2},
-  [30] = {.index = 53, .length = 3},
-  [31] = {.index = 56, .length = 3},
-  [32] = {.index = 59, .length = 3},
+  [27] = {.index = 49, .length = 2},
+  [28] = {.index = 51, .length = 2},
+  [29] = {.index = 53, .length = 2},
+  [30] = {.index = 55, .length = 3},
+  [31] = {.index = 58, .length = 3},
+  [32] = {.index = 61, .length = 3},
 };
 
 static const TSFieldMapEntry ts_field_map_entries[] = {
@@ -1809,21 +1813,23 @@ static const TSFieldMapEntry ts_field_map_entries[] = {
     {field_operator, 2},
     {field_right, 3},
   [49] =
+    {field_default_body, 1},
     {field_default_header, 0},
-  [50] =
-    {field_case_header, 0},
   [51] =
+    {field_case_body, 1},
+    {field_case_header, 0},
+  [53] =
     {field_key, 0},
     {field_value, 2},
-  [53] =
+  [55] =
     {field_inputs, 4},
     {field_name, 1},
     {field_outputs, 2},
-  [56] =
+  [58] =
     {field_inputs, 2},
     {field_name, 1},
     {field_outputs, 4},
-  [59] =
+  [61] =
     {field_inputs, 5},
     {field_name, 1},
     {field_outputs, 3},

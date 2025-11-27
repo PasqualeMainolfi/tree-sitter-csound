@@ -258,12 +258,12 @@ module.exports = grammar({
 
     case_block: $ => seq(
       field('case_header', $.case_header),
-      repeat1($._statement)
+      field('case_body', repeat1($._statement))
     ),
 
     default_block: $ => seq(
       field('default_header', $.default_key),
-      repeat1($._statement)
+      field('default_body', repeat1($._statement))
     ),
 
     case_header: $ => seq(

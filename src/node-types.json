@@ -410,6 +410,48 @@
     "type": "case_block",
     "named": true,
     "fields": {
+      "case_body": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "assignment_statement",
+            "named": true
+          },
+          {
+            "type": "control_statement",
+            "named": true
+          },
+          {
+            "type": "function_call",
+            "named": true
+          },
+          {
+            "type": "header_assignment",
+            "named": true
+          },
+          {
+            "type": "label_statement",
+            "named": true
+          },
+          {
+            "type": "opcode_statement",
+            "named": true
+          },
+          {
+            "type": "typed_assignment_statement",
+            "named": true
+          },
+          {
+            "type": "xin_statement",
+            "named": true
+          },
+          {
+            "type": "xout_statement",
+            "named": true
+          }
+        ]
+      },
       "case_header": {
         "multiple": false,
         "required": true,
@@ -420,48 +462,6 @@
           }
         ]
       }
-    },
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "assignment_statement",
-          "named": true
-        },
-        {
-          "type": "control_statement",
-          "named": true
-        },
-        {
-          "type": "function_call",
-          "named": true
-        },
-        {
-          "type": "header_assignment",
-          "named": true
-        },
-        {
-          "type": "label_statement",
-          "named": true
-        },
-        {
-          "type": "opcode_statement",
-          "named": true
-        },
-        {
-          "type": "typed_assignment_statement",
-          "named": true
-        },
-        {
-          "type": "xin_statement",
-          "named": true
-        },
-        {
-          "type": "xout_statement",
-          "named": true
-        }
-      ]
     }
   },
   {
@@ -639,6 +639,48 @@
     "type": "default_block",
     "named": true,
     "fields": {
+      "default_body": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "assignment_statement",
+            "named": true
+          },
+          {
+            "type": "control_statement",
+            "named": true
+          },
+          {
+            "type": "function_call",
+            "named": true
+          },
+          {
+            "type": "header_assignment",
+            "named": true
+          },
+          {
+            "type": "label_statement",
+            "named": true
+          },
+          {
+            "type": "opcode_statement",
+            "named": true
+          },
+          {
+            "type": "typed_assignment_statement",
+            "named": true
+          },
+          {
+            "type": "xin_statement",
+            "named": true
+          },
+          {
+            "type": "xout_statement",
+            "named": true
+          }
+        ]
+      },
       "default_header": {
         "multiple": false,
         "required": true,
@@ -649,48 +691,6 @@
           }
         ]
       }
-    },
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "assignment_statement",
-          "named": true
-        },
-        {
-          "type": "control_statement",
-          "named": true
-        },
-        {
-          "type": "function_call",
-          "named": true
-        },
-        {
-          "type": "header_assignment",
-          "named": true
-        },
-        {
-          "type": "label_statement",
-          "named": true
-        },
-        {
-          "type": "opcode_statement",
-          "named": true
-        },
-        {
-          "type": "typed_assignment_statement",
-          "named": true
-        },
-        {
-          "type": "xin_statement",
-          "named": true
-        },
-        {
-          "type": "xout_statement",
-          "named": true
-        }
-      ]
     }
   },
   {

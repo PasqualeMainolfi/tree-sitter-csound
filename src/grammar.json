@@ -1573,10 +1573,14 @@
           }
         },
         {
-          "type": "REPEAT1",
+          "type": "FIELD",
+          "name": "case_body",
           "content": {
-            "type": "SYMBOL",
-            "name": "_statement"
+            "type": "REPEAT1",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_statement"
+            }
           }
         }
       ]
@@ -1593,10 +1597,14 @@
           }
         },
         {
-          "type": "REPEAT1",
+          "type": "FIELD",
+          "name": "default_body",
           "content": {
-            "type": "SYMBOL",
-            "name": "_statement"
+            "type": "REPEAT1",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_statement"
+            }
           }
         }
       ]
