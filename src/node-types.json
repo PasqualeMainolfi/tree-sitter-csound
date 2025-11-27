@@ -410,49 +410,64 @@
     "type": "case_block",
     "named": true,
     "fields": {
-      "case_body": {
-        "multiple": true,
-        "required": false,
+      "case_header": {
+        "multiple": false,
+        "required": true,
         "types": [
           {
-            "type": "assignment_statement",
-            "named": true
-          },
-          {
-            "type": "control_statement",
-            "named": true
-          },
-          {
-            "type": "function_call",
-            "named": true
-          },
-          {
-            "type": "header_assignment",
-            "named": true
-          },
-          {
-            "type": "label_statement",
-            "named": true
-          },
-          {
-            "type": "opcode_statement",
-            "named": true
-          },
-          {
-            "type": "typed_assignment_statement",
-            "named": true
-          },
-          {
-            "type": "xin_statement",
-            "named": true
-          },
-          {
-            "type": "xout_statement",
+            "type": "case_header",
             "named": true
           }
         ]
       }
     },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "assignment_statement",
+          "named": true
+        },
+        {
+          "type": "control_statement",
+          "named": true
+        },
+        {
+          "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "header_assignment",
+          "named": true
+        },
+        {
+          "type": "label_statement",
+          "named": true
+        },
+        {
+          "type": "opcode_statement",
+          "named": true
+        },
+        {
+          "type": "typed_assignment_statement",
+          "named": true
+        },
+        {
+          "type": "xin_statement",
+          "named": true
+        },
+        {
+          "type": "xout_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "case_header",
+    "named": true,
+    "fields": {},
     "children": {
       "multiple": true,
       "required": true,
@@ -624,55 +639,55 @@
     "type": "default_block",
     "named": true,
     "fields": {
-      "case_body": {
-        "multiple": true,
-        "required": false,
+      "default_header": {
+        "multiple": false,
+        "required": true,
         "types": [
           {
-            "type": "assignment_statement",
-            "named": true
-          },
-          {
-            "type": "control_statement",
-            "named": true
-          },
-          {
-            "type": "function_call",
-            "named": true
-          },
-          {
-            "type": "header_assignment",
-            "named": true
-          },
-          {
-            "type": "label_statement",
-            "named": true
-          },
-          {
-            "type": "opcode_statement",
-            "named": true
-          },
-          {
-            "type": "typed_assignment_statement",
-            "named": true
-          },
-          {
-            "type": "xin_statement",
-            "named": true
-          },
-          {
-            "type": "xout_statement",
+            "type": "default_key",
             "named": true
           }
         ]
       }
     },
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
-          "type": "default_key",
+          "type": "assignment_statement",
+          "named": true
+        },
+        {
+          "type": "control_statement",
+          "named": true
+        },
+        {
+          "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "header_assignment",
+          "named": true
+        },
+        {
+          "type": "label_statement",
+          "named": true
+        },
+        {
+          "type": "opcode_statement",
+          "named": true
+        },
+        {
+          "type": "typed_assignment_statement",
+          "named": true
+        },
+        {
+          "type": "xin_statement",
+          "named": true
+        },
+        {
+          "type": "xout_statement",
           "named": true
         }
       ]

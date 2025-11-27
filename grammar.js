@@ -257,14 +257,18 @@ module.exports = grammar({
     ),
 
     case_block: $ => seq(
-      $.case_key,
-      $._expression,
-      field('case_body', repeat($._statement))
+      field('case_header', $.case_header),
+      repeat1($._statement)
     ),
 
     default_block: $ => seq(
-      $.default_key,
-      field('case_body', repeat($._statement))
+      field('default_header', $.default_key),
+      repeat1($._statement)
+    ),
+
+    case_header: $ => seq(
+      $.case_key,
+      $._expression,
     ),
 
     goto_statement: $ => seq(choice('goto', 'kgoto', 'igoto'), $.identifier),
