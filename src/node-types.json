@@ -412,7 +412,7 @@
     "fields": {
       "case_body": {
         "multiple": true,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "assignment_statement",
@@ -641,7 +641,7 @@
     "fields": {
       "default_body": {
         "multiple": true,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "assignment_statement",

@@ -1525,6 +1525,23 @@
         }
       }
     },
+    "case_header": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "case_key"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_expression"
+        }
+      ]
+    },
+    "default_header": {
+      "type": "SYMBOL",
+      "name": "default_key"
+    },
     "switch_statement": {
       "type": "SEQ",
       "members": [
@@ -1562,74 +1579,60 @@
       ]
     },
     "case_block": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "FIELD",
-          "name": "case_header",
-          "content": {
-            "type": "SYMBOL",
-            "name": "case_header"
-          }
-        },
-        {
-          "type": "FIELD",
-          "name": "case_body",
-          "content": {
-            "type": "REPEAT1",
+      "type": "PREC_LEFT",
+      "value": 1,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "FIELD",
+            "name": "case_header",
             "content": {
               "type": "SYMBOL",
-              "name": "_statement"
+              "name": "case_header"
+            }
+          },
+          {
+            "type": "FIELD",
+            "name": "case_body",
+            "content": {
+              "type": "REPEAT",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_statement"
+              }
             }
           }
-        }
-      ]
+        ]
+      }
     },
     "default_block": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "FIELD",
-          "name": "default_header",
-          "content": {
-            "type": "SYMBOL",
-            "name": "default_header"
-          }
-        },
-        {
-          "type": "FIELD",
-          "name": "default_body",
-          "content": {
-            "type": "REPEAT1",
+      "type": "PREC_LEFT",
+      "value": 1,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "FIELD",
+            "name": "default_header",
             "content": {
               "type": "SYMBOL",
-              "name": "_statement"
+              "name": "default_header"
+            }
+          },
+          {
+            "type": "FIELD",
+            "name": "default_body",
+            "content": {
+              "type": "REPEAT",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_statement"
+              }
             }
           }
-        }
-      ]
-    },
-    "case_header": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "case_key"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_expression"
-        }
-      ]
-    },
-    "default_header": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "default_key"
-        }
-      ]
+        ]
+      }
     },
     "goto_statement": {
       "type": "SEQ",

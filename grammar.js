@@ -245,8 +245,15 @@ module.exports = grammar({
 
     switch_start: $ => prec(1, token('switch')),
     switch_end: $ => prec(1, token('endsw')),
-    case_key: $ =>  prec(1, token('case')),
-    default_key: $ =>  prec(1, token('default')),
+    case_key: $ => prec(1, token('case')),
+    default_key: $ => prec(1, token('default')),
+
+    case_header: $ => seq(
+      $.case_key,
+      $._expression,
+    ),
+
+    default_header: $ => $.default_key,
 
     switch_statement: $ => seq(
       $.switch_start,
@@ -256,24 +263,15 @@ module.exports = grammar({
       $.switch_end
     ),
 
-    case_block: $ => seq(
+    case_block: $ => prec.left(1, seq(
       field('case_header', $.case_header),
-      field('case_body', repeat1($._statement))
-    ),
+      field('case_body', repeat($._statement))
+    )),
 
-    default_block: $ => seq(
+    default_block: $ => prec.left(1, seq(
       field('default_header', $.default_header),
-      field('default_body', repeat1($._statement))
-    ),
-
-    case_header: $ => seq(
-      $.case_key,
-      $._expression,
-    ),
-
-    default_header: $ => seq(
-      $.default_key
-    ),
+      field('default_body', repeat($._statement))
+    )),
 
     goto_statement: $ => seq(choice('goto', 'kgoto', 'igoto'), $.identifier),
     return_statement: $ => choice('return', 'rireturn'),
