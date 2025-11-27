@@ -1573,10 +1573,14 @@
           "name": "_expression"
         },
         {
-          "type": "REPEAT",
+          "type": "FIELD",
+          "name": "case_body",
           "content": {
-            "type": "SYMBOL",
-            "name": "_statement"
+            "type": "REPEAT",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_statement"
+            }
           }
         }
       ]
@@ -1589,10 +1593,14 @@
           "name": "default_key"
         },
         {
-          "type": "REPEAT",
+          "type": "FIELD",
+          "name": "case_body",
           "content": {
-            "type": "SYMBOL",
-            "name": "_statement"
+            "type": "REPEAT",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_statement"
+            }
           }
         }
       ]
