@@ -255,10 +255,13 @@ module.exports = grammar({
       'od'
     ),
 
-    switch_end: $ => prec(1, token("endsw")),
+    switch_start: $ => prec(1, token('switch')),
+    switch_end: $ => prec(1, token('endsw')),
+    case_key: $ =>  prec(1, token('case')),
+    default_key: $ =>  prec(1, token('default')),
 
     switch_statement: $ => seq(
-      token('switch'),
+      $.switch_start,
       $._expression,
       repeat($.case_block),
       optional($.default_block),
@@ -266,13 +269,13 @@ module.exports = grammar({
     ),
 
     case_block: $ => seq(
-      prec(1, token('case')),
+      $.case_key,
       $._expression,
       repeat($.case_statement)
     ),
 
     default_block: $ => seq(
-      prec(1, token('default')),
+      $.default_key,
       repeat($.case_statement)
     ),
 

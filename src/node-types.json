@@ -423,6 +423,10 @@
           "named": true
         },
         {
+          "type": "case_key",
+          "named": true
+        },
+        {
           "type": "case_statement",
           "named": true
         },
@@ -468,6 +472,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "case_key",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "case_statement",
@@ -625,14 +634,23 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "case_statement",
           "named": true
+        },
+        {
+          "type": "default_key",
+          "named": true
         }
       ]
     }
+  },
+  {
+    "type": "default_key",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "else_block",
@@ -1840,6 +1858,11 @@
     "fields": {}
   },
   {
+    "type": "switch_start",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "switch_statement",
     "named": true,
     "fields": {},
@@ -1897,6 +1920,10 @@
         },
         {
           "type": "switch_end",
+          "named": true
+        },
+        {
+          "type": "switch_start",
           "named": true
         },
         {

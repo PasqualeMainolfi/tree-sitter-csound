@@ -1522,6 +1522,17 @@
         }
       ]
     },
+    "switch_start": {
+      "type": "PREC",
+      "value": 1,
+      "content": {
+        "type": "TOKEN",
+        "content": {
+          "type": "STRING",
+          "value": "switch"
+        }
+      }
+    },
     "switch_end": {
       "type": "PREC",
       "value": 1,
@@ -1533,15 +1544,34 @@
         }
       }
     },
+    "case_key": {
+      "type": "PREC",
+      "value": 1,
+      "content": {
+        "type": "TOKEN",
+        "content": {
+          "type": "STRING",
+          "value": "case"
+        }
+      }
+    },
+    "default_key": {
+      "type": "PREC",
+      "value": 1,
+      "content": {
+        "type": "TOKEN",
+        "content": {
+          "type": "STRING",
+          "value": "default"
+        }
+      }
+    },
     "switch_statement": {
       "type": "SEQ",
       "members": [
         {
-          "type": "TOKEN",
-          "content": {
-            "type": "STRING",
-            "value": "switch"
-          }
+          "type": "SYMBOL",
+          "name": "switch_start"
         },
         {
           "type": "SYMBOL",
@@ -1576,15 +1606,8 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "PREC",
-          "value": 1,
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "STRING",
-              "value": "case"
-            }
-          }
+          "type": "SYMBOL",
+          "name": "case_key"
         },
         {
           "type": "SYMBOL",
@@ -1603,15 +1626,8 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "PREC",
-          "value": 1,
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "STRING",
-              "value": "default"
-            }
-          }
+          "type": "SYMBOL",
+          "name": "default_key"
         },
         {
           "type": "REPEAT",
