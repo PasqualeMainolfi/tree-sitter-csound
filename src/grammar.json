@@ -1593,7 +1593,7 @@
           "name": "default_header",
           "content": {
             "type": "SYMBOL",
-            "name": "default_key"
+            "name": "default_header"
           }
         },
         {
@@ -1619,6 +1619,15 @@
         {
           "type": "SYMBOL",
           "name": "_expression"
+        }
+      ]
+    },
+    "default_header": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "default_key"
         }
       ]
     },
