@@ -58,7 +58,6 @@
 (parenthesized_expression ")" @outdent)
 
 (function_call) @indent
-(function_call ")" @outdent)
 
 (modern_udo_inputs) @indent
 (modern_udo_inputs ")" @outdent)
