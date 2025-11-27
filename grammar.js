@@ -74,11 +74,9 @@ module.exports = grammar({
     instrument_definition: $ => seq(
       'instr',
       field('name', sep1(choice($.identifier, $.number, $.plus_identifier), ',')),
-      optional($.instr_body),
+      repeat($._statement),
       'endin'
     ),
-
-    instr_body: $ => seq(repeat1($._statement)),
 
     // --- UDO DEFINITIONS ---
     udo_definition: $ => choice(

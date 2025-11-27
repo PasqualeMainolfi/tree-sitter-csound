@@ -363,32 +363,15 @@
           }
         },
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "instr_body"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        },
-        {
-          "type": "STRING",
-          "value": "endin"
-        }
-      ]
-    },
-    "instr_body": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "REPEAT1",
+          "type": "REPEAT",
           "content": {
             "type": "SYMBOL",
             "name": "_statement"
           }
+        },
+        {
+          "type": "STRING",
+          "value": "endin"
         }
       ]
     },

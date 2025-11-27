@@ -1,5 +1,4 @@
 (instrument_definition) @indent
-(instr_body) @indent
 (instrument_definition "endin" @outdent)
 
 (udo_definition_legacy) @indent
