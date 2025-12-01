@@ -17,7 +17,7 @@ endop
 instr 1
 
     sig:a = poscil(1, 440)
-
+    filter:a = butterbp(sig, 300, 50)
 
     switch p4
         case 1

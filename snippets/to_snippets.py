@@ -1,12 +1,10 @@
-# [...=...] -> opzionale
-
-
 import json
 import os
 import re
 import html
 
 PATH_TO_OPCODES_ROOT: str = "../csound_manual/docs/opcodes"
+TEMPLATE_OPCODE_ADDRESS = "https://csound.com/manual/opcodes/"
 
 TEMPLATE = {
     "prefix": "",
@@ -133,6 +131,7 @@ def main() -> None:
     opcodes_files = os.listdir(PATH_TO_OPCODES_ROOT)
     same_to_check = []
     opcodes_dict = {}
+    opcode_indexes = {}
     for opcode in opcodes_files:
         if opcode.endswith(".md"):
             path_to_opcode = os.path.join(PATH_TO_OPCODES_ROOT, opcode)
@@ -144,12 +143,15 @@ def main() -> None:
                 for i, line in enumerate(lines):
                     if line.startswith(NAME_FLAG):
                         opnames = html.unescape(line.split(" ")[1])
-                        # if opnames not in TO_AVOID and opnames[0] not in TO_AVOID and len(opnames) != 1 and opnames not in opcodes_dict:
                         opnames = escape_dollar(prefix=opnames)
                         if opnames not in opcodes_dict:
                             name_line = i
                             opcodes_dict[opnames] = op
                             opcodes_dict[opnames]["body"] = opnames
+
+                            op_index_name = opcode.split(".")[0]
+                            opcode_indexes[op_index_name] = f"{TEMPLATE_OPCODE_ADDRESS}{op_index_name}/"
+
                     if line.strip().lower().startswith("same as"):
                         find_ref = re.findall(r'\[(\w+)\]', line)
                         # print("REFERENCE: ", find_ref, "CURRENT: ", opnames)
@@ -248,8 +250,10 @@ def main() -> None:
             else:
                 opcodes_dict[snippet] = value
 
-    with open("snippets.json", "w", encoding="utf-8") as f:
+    with open("csound.json", "w", encoding="utf-8") as f, open("manual_indexes.json") as m:
         json.dump(opcodes_dict, f, ensure_ascii=True, indent=4)
+        json.dump(opcode_indexes, m, ensure_ascii=True, indent=4)
+
 
 if __name__ == "__main__":
     main()
