@@ -2,7 +2,7 @@
     "struct" : {
         "prefix": "struct MyType val0:types, val1:types, ...",
         "body": [
-        "struct ${1:name}, ${2:...}"
+        "struct ${1:name} ${2:args}"
         ],
         "description": "User-defineid type"
     },
