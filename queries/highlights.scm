@@ -1,3 +1,10 @@
+((identifier) @variable (#match? @variable "^a"))
+((identifier) @variable.parameter (#match? @variable.parameter "^k"))
+((identifier) @constant (#match? @constant "^i"))
+((identifier) @string.special (#match? @string.special "^S"))
+((identifier) @variable.builtin (#match? @variable.builtin "^g"))
+((identifier) @variable.parameter (#match? @variable.parameter "^p[0-9]+$"))
+
 (header_identifier) @variable.builtin
 (global_keyword) @keyword
 
@@ -26,25 +33,20 @@
 (number) @constant.numeric
 
 [
-  "instr" "endin" "opcode" "endop" "struct"
-  "if" "then" "ithen" "kthen" "elseif" "else" "endif" "fi"
-  "while" "until" "do" "od" "for" "in" "switch" "case" "default"
-  "return" "goto" "kgoto" "igoto"
-  "xin" "xout" "void" (switch_end)
+    "instr" "endin" "opcode" "endop" "struct"
+    "if" "then" "ithen" "kthen" "elseif" "else" "endif" "fi"
+    "while" "until" "do" "od" "for" "in" "switch" "case" "default"
+    "return" "goto" "kgoto" "igoto"
+    "xin" "xout" "void" (switch_end)
 ] @keyword
-
-((identifier) @variable (#match? @variable "^a"))
-((identifier) @variable.parameter (#match? @variable.parameter "^k"))
-((identifier) @constant (#match? @constant "^i"))
-((identifier) @string.special (#match? @string.special "^S"))
-((identifier) @variable.builtin (#match? @variable.builtin "^g"))
-((identifier) @variable.parameter (#match? @variable.parameter "^p[0-9]+$"))
 
 (identifier) @variable
 
 (struct_name) @type
-(struct_definition fields: (typed_identifier name: (identifier) @property))
-(struct_access member: (identifier) @property)
+(struct_definition fields: (typed_identifier
+    name: (identifier) @variable))
+(struct_access
+    member: (identifier) @property)
 
 (tag_synthesizer_start) @tag
 (tag_synthesizer_end) @tag
@@ -57,7 +59,7 @@
 (tag_cabbage_start) @tag
 (tag_cabbage_end) @tag
 
-["=" "+" "-" "*" "/" "%" "^" "?" ":" "init" "tival" "divz"] @operator
+["=" "+" "-" "*" "/" "%" "^" "?" ":"] @operator
 ["," ";"] @punctuation.delimiter
 ["(" ")" "[" "]" "{" "}"] @punctuation.bracket
 
