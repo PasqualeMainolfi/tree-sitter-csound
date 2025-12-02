@@ -16,7 +16,7 @@ endop
 
 instr 1
 
-    struct MyType val0:i, val2:i
+    struct MyType val0:i, val1:i
 
     sig:a = poscil(1, 440)
     asignal poscil 1, 440
