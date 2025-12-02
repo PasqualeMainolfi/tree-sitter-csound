@@ -16,13 +16,14 @@ endop
 
 instr 1
 
+    struct MyType val0:i, val1:i
+
     sig:a = poscil(1, 440)
     asignal poscil 1, 440
     ; sig2:b = poscile(1, 3)
     filter:b = butterbp(sig, 300, 50)
     filter2:b = poscil(1, 440)
 
-    struct MyType val0:i, val1:i
 
     switch p4
         case 1
@@ -31,7 +32,7 @@ instr 1
             print(2)
         default
             print(3)
-    endsw
+    endsw=
 
 endin
 

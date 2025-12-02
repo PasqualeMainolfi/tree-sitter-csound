@@ -35,7 +35,7 @@
         "description": "Uses the data from an ATS analysis file to perform noise resynthesis using a modified randi function."
     },
     "linen": {
-        "prefix": "linen({x, k}amp, irise, idur, idec)",
+        "prefix": "linen({k, x}amp, irise, idur, idec)",
         "body": "linen",
         "description": "Applies a straight line rise and decay pattern to an input amp signal."
     },
@@ -75,7 +75,7 @@
         "description": "Sends 14-bit MIDI controller output at k-rate."
     },
     "linenr": {
-        "prefix": "linenr({x, k}amp, irise, idec, iatdec)",
+        "prefix": "linenr({k, x}amp, irise, idec, iatdec)",
         "body": "linenr",
         "description": "The _linen_ opcode extended with a final release segment."
     },
@@ -110,7 +110,7 @@
         "description": "Streaming linear prediction all-pole filter whose coefficients are obtained from streaming linear prediction analysis."
     },
     "tablew": {
-        "prefix": "tablew({a, i, k}sig, andx, ifn [, ixmode] [, ixoff] [, iwgmode])",
+        "prefix": "tablew({k, i, a}sig, andx, ifn [, ixmode] [, ixoff] [, iwgmode])",
         "body": "tablew",
         "description": "Change the contents of existing function tables."
     },
@@ -125,7 +125,7 @@
         "description": "Returns the number of events in a MIDI file."
     },
     "cmp": {
-        "prefix": "cmp({a, k}1, S_operator, a2)",
+        "prefix": "cmp({k, a}1, S_operator, a2)",
         "body": "cmp",
         "description": "Compares audio signals or arrays."
     },
@@ -235,7 +235,7 @@
         "description": "Modulation matrix opcode with optimizations for sparse matrices."
     },
     "ampmidicurve": {
-        "prefix": "ampmidicurve({i, k}velocity, idynamicrange, iexponent)",
+        "prefix": "ampmidicurve({k, i}velocity, idynamicrange, iexponent)",
         "body": "ampmidicurve",
         "description": "Maps an input MIDI velocity number to an output gain factor with a maximum value of 1, modifying the output gain by a dynamic range and a shaping exponent."
     },
@@ -290,7 +290,7 @@
         "description": "Read vectors (from tables -or arrays of vectors) at k-rate."
     },
     "printarray": {
-        "prefix": "printarray({i, k}xs[] [, Smft, Slabel ])",
+        "prefix": "printarray({k, i}xs[] [, Smft, Slabel ])",
         "body": "printarray",
         "description": "Print the contents of an array."
     },
@@ -325,12 +325,12 @@
         "description": "Calculates distance values from xy coordinates."
     },
     "pchtom": {
-        "prefix": "pchtom({i, k}pch)",
+        "prefix": "pchtom({k, i}pch)",
         "body": "pchtom",
         "description": "Convert pch to midi note number."
     },
     "framebuffer": {
-        "prefix": "framebuffer({a, k}in, isize)",
+        "prefix": "framebuffer({k, a}in, isize)",
         "body": "framebuffer",
         "description": "Read audio signals into 1 dimensional k-rate arrays and vice-versa with a specified buffer size."
     },
@@ -345,7 +345,7 @@
         "description": "Sends an i-rate or k-rate signal or string to a user-defined channel."
     },
     "strtod": {
-        "prefix": "strtod({i, S}str)",
+        "prefix": "strtod({S, i}str)",
         "body": "strtod",
         "description": "Converts a string to a floating point value (i-rate)."
     },
@@ -370,7 +370,7 @@
         "description": "Subtraction operator."
     },
     "filter2": {
-        "prefix": "filter2({a, k}sig, ibcoefs, iacoefs, ib0, ib1, ..., ibM, ia1, ia2, ..., iaN)",
+        "prefix": "filter2({k, a}sig, ibcoefs, iacoefs, ib0, ib1, ..., ibM, ia1, ia2, ..., iaN)",
         "body": "filter2",
         "description": "General purpose custom filter."
     },
@@ -480,7 +480,7 @@
         "description": "Takes a numeric array (k or i-rate) and returns it sorted in ascending order."
     },
     "duserrnd": {
-        "prefix": "duserrnd({i, k}tableNum)",
+        "prefix": "duserrnd({k, i}tableNum)",
         "body": "duserrnd",
         "description": "Discrete USER-defined-distribution RaNDom generator."
     },
@@ -530,7 +530,7 @@
         "description": "Defines and initializes numeric arrays at orchestra load time."
     },
     "diff": {
-        "prefix": "diff({a, k}sig [, iskip])",
+        "prefix": "diff({k, a}sig [, iskip])",
         "body": "diff",
         "description": "Modify a signal by differentiation."
     },
@@ -560,7 +560,7 @@
         "description": "Generates a natural-sounding user-controllable vibrato."
     },
     "rifft": {
-        "prefix": "rifft({in:Complex[], in:k[]})",
+        "prefix": "rifft({in:k[], in:Complex[]})",
         "body": "rifft",
         "description": "Complex-to-real Inverse Fast Fourier Transform."
     },
@@ -670,7 +670,7 @@
         "description": "An opcode which can be used to implement a remote midi orchestra. This opcode will broadcast the midi events to all the machines involved in the remote concert."
     },
     "tableng": {
-        "prefix": "tableng({i, k}fn)",
+        "prefix": "tableng({k, i}fn)",
         "body": "tableng",
         "description": "Interrogates a function table for length."
     },
@@ -720,7 +720,7 @@
         "description": "Returns a frequency, amplitude pair from an [ATSbufread] opcode."
     },
     "tablewkt": {
-        "prefix": "tablewkt({a, k}sig, andx, kfn [, ixmode] [, ixoff] [, iwgmode])",
+        "prefix": "tablewkt({k, a}sig, andx, kfn [, ixmode] [, ixoff] [, iwgmode])",
         "body": "tablewkt",
         "description": "Change the contents of existing function tables."
     },
@@ -780,7 +780,7 @@
         "description": "Resynthesises a signal from the data passed internally by a previous _lpread_, applying formant shifting."
     },
     "lagud": {
-        "prefix": "lagud({a, k}in, klagup, klagdown [, initialvalue])",
+        "prefix": "lagud({k, a}in, klagup, klagdown [, initialvalue])",
         "body": "lagud",
         "description": "Exponential Lag."
     },
@@ -850,7 +850,7 @@
         "description": "Trace a series of line segments between specified points including a release segment."
     },
     "socksend": {
-        "prefix": "socksend({a, k}sig, Sipaddr, iport, ilength)",
+        "prefix": "socksend({k, a}sig, Sipaddr, iport, ilength)",
         "body": "socksend",
         "description": "Sends data to other processes using the low-level UDP or TCP protocols."
     },
@@ -915,7 +915,7 @@
         "description": "Local maximum (or minimum) value of an incoming asig signal, checked in the time interval between ktrig has become true twice."
     },
     "ntrpol": {
-        "prefix": "ntrpol({a, i, k}sig1, asig2, kpoint [, imin] [, imax])",
+        "prefix": "ntrpol({k, i, a}sig1, asig2, kpoint [, imin] [, imax])",
         "body": "ntrpol",
         "description": "Calculates the weighted mean value (i.e. linear interpolation) of two input signals."
     },
@@ -940,7 +940,7 @@
         "description": "Allpole filter implementation using direct convolution."
     },
     "limit1": {
-        "prefix": "limit1({i, k}arg)",
+        "prefix": "limit1({k, i}arg)",
         "body": "limit1",
         "description": "Limits the value of an argument to the range [0,1]."
     },
@@ -1005,7 +1005,7 @@
         "description": "An emulation of a human voice."
     },
     "oscili": {
-        "prefix": "oscili({x, k}amp, xcp [, ifn, iphs])",
+        "prefix": "oscili({k, x}amp, xcp [, ifn, iphs])",
         "body": "oscili",
         "description": "A simple oscillator with linear interpolation."
     },
@@ -1095,7 +1095,7 @@
         "description": "Trace a series of line segments between specified absolute points with"
     },
     "jspline": {
-        "prefix": "jspline({x, k}amp, kcpsMin, kcpsMax)",
+        "prefix": "jspline({k, x}amp, kcpsMin, kcpsMax)",
         "body": "jspline",
         "description": "A jitter-spline generator."
     },
@@ -1105,7 +1105,7 @@
         "description": "Assign to a string variable by copying the source which may be a constant or another string variable."
     },
     "randc": {
-        "prefix": "randc({x, k}amp, xcps [, iseed] [, isize] [, ioffset])",
+        "prefix": "randc({k, x}amp, xcps [, iseed] [, isize] [, ioffset])",
         "body": "randc",
         "description": "Generates a controlled random number series with cubic interpolation between each new number."
     },
@@ -1125,7 +1125,7 @@
         "description": "Output is a controlled random number series between -*amp* and +*amp*."
     },
     "min": {
-        "prefix": "min({i, a, k}in1, ain2 [, ain3] [, ain4] [...])",
+        "prefix": "min({k, i, a}in1, ain2 [, ain3] [, ain4] [...])",
         "body": "min",
         "description": "Produces a signal that is the minimum of any number of input signals."
     },
@@ -1230,7 +1230,7 @@
         "description": "Apply a gammatone filter of various orders to an audio signal."
     },
     "peak": {
-        "prefix": "peak({a, k}sig)",
+        "prefix": "peak({k, a}sig)",
         "body": "peak",
         "description": "Maintains the output equal to the highest absolute value received."
     },
@@ -1240,7 +1240,7 @@
         "description": "Apply tempo control to an uninterpreted score."
     },
     "dctinv": {
-        "prefix": "dctinv({i, k}in[])",
+        "prefix": "dctinv({k, i}in[])",
         "body": "dctinv",
         "description": "Inverse Discrete Cosine Transform of a sample array (type-III DCT)."
     },
@@ -1310,7 +1310,7 @@
         "description": "Writes one of four scalar values into the scratchpad of the instance of an instrument."
     },
     "loop_ge": {
-        "prefix": "loop_ge({i, k}ndx, idecr, imin, label)",
+        "prefix": "loop_ge({k, i}ndx, idecr, imin, label)",
         "body": "loop_ge",
         "description": "Construction of looping operations."
     },
@@ -1480,7 +1480,7 @@
         "description": "During the i-time pass only, unconditionally transfer control to the statement labeled by _label_."
     },
     "ftom": {
-        "prefix": "ftom({i, k}freq [,irnd])",
+        "prefix": "ftom({k, i}freq [,irnd])",
         "body": "ftom",
         "description": "Convert frequency to midi note number, taking global value of A4 into account."
     },
@@ -1575,7 +1575,7 @@
         "description": "Writes samples to stereo channel 2 of an external device or stream."
     },
     "ampmidid": {
-        "prefix": "ampmidid({i, k}velocity, idecibels)",
+        "prefix": "ampmidid({k, i}velocity, idecibels)",
         "body": "ampmidid",
         "description": "Musically map MIDI velocity to peak amplitude within a specified dynamic range in decibels."
     },
@@ -1650,7 +1650,7 @@
         "description": "Applies the amplitudes from one phase vocoder analysis file to the data from a second file and then performs the resynthesis."
     },
     "cbrt": {
-        "prefix": "cbrt({i, k}arg)",
+        "prefix": "cbrt({k, i}arg)",
         "body": "cbrt",
         "description": "Cubic root function."
     },
@@ -1695,7 +1695,7 @@
         "description": "Retrieves variables from a user-defined opcode block."
     },
     "loop_lt": {
-        "prefix": "loop_lt({i, k}ndx, incr, imax, label)",
+        "prefix": "loop_lt({k, i}ndx, incr, imax, label)",
         "body": "loop_lt",
         "description": "Construction of looping operations."
     },
@@ -1715,7 +1715,7 @@
         "description": "Extracts an integer from a decimal number."
     },
     "strtodk": {
-        "prefix": "strtodk({k, S}str)",
+        "prefix": "strtodk({S, k}str)",
         "body": "strtodk",
         "description": "Converts a string to a floating point value at i- or k-rate."
     },
@@ -1770,7 +1770,7 @@
         "description": "Start a multicast listening process to a particular port, which can be used by OSClisten."
     },
     "midifilepos": {
-        "prefix": "midifilepos({pos: [, id:i], [id:i], pos: [, id:i]})",
+        "prefix": "midifilepos({[id:i], pos: [, id:i], pos: [, id:i]})",
         "body": "midifilepos",
         "description": "Gets/Sets the playback position of a MIDI file. "
     },
@@ -1935,7 +1935,7 @@
         "description": "Writes 32-channel audio data to an external device or stream."
     },
     "active": {
-        "prefix": "active({i, k, S}nsnum [,iopt [,inorel]])",
+        "prefix": "active({S, i, k}nsnum [,iopt [,inorel]])",
         "body": "active",
         "description": "Returns the number of active instances of an instrument with options to ignore releasing instances."
     },
@@ -1950,7 +1950,7 @@
         "description": "Rewinds playback of a MIDI file. "
     },
     "tablekt": {
-        "prefix": "tablekt({x, k}ndx, kfn [, ixmode] [, ixoff] [, iwrap])",
+        "prefix": "tablekt({k, x}ndx, kfn [, ixmode] [, ixoff] [, iwrap])",
         "body": "tablekt",
         "description": "Provides k-rate control over table numbers."
     },
@@ -2000,7 +2000,7 @@
         "description": "Convert Ssrc to lower case, and write the result to Sdst."
     },
     "push": {
-        "prefix": "push({x, i}val1, [xval2, ... , xval31])",
+        "prefix": "push({i, x}val1, [xval2, ... , xval31])",
         "body": "push",
         "description": "Pushes a value into the global stack.  Deprecated."
     },
@@ -2055,7 +2055,7 @@
         "description": "Track the pitch and amplitude of a PVS signal as k-rate variables."
     },
     "mton": {
-        "prefix": "mton({i, k}midi)",
+        "prefix": "mton({k, i}midi)",
         "body": "mton",
         "description": "Convert midi note number to string note name, with an accuracy of 1 cent."
     },
@@ -2095,12 +2095,12 @@
         "description": "Copies spectral data to k-rate arrays (or t-variables). Also known as [pvs2array](pvs2array.md)."
     },
     "cpuprc": {
-        "prefix": "cpuprc({i, S}nsnum, ipercent)",
+        "prefix": "cpuprc({S, i}nsnum, ipercent)",
         "body": "cpuprc",
         "description": "Control allocation of cpu resources on a per-instrument basis, to optimize realtime output."
     },
     "lpcanal": {
-        "prefix": "lpcanal({i, a, k}src, kflg, kprd, isiz, iord [, iwin])",
+        "prefix": "lpcanal({k, i, a}src, kflg, kprd, isiz, iord [, iwin])",
         "body": "lpcanal",
         "description": "Streaming linear prediction analysis."
     },
@@ -2185,7 +2185,7 @@
         "description": "Uses FM synthesis to create a percussive flute sound."
     },
     "randh": {
-        "prefix": "randh({x, k}amp, xcps [, iseed] [, isize] [, ioffset])",
+        "prefix": "randh({k, x}amp, xcps [, iseed] [, isize] [, ioffset])",
         "body": "randh",
         "description": "Generates random numbers and holds them for a period of time."
     },
@@ -2285,7 +2285,7 @@
         "description": "Generates a trigger signal according to the values stored in a table."
     },
     "changed2": {
-        "prefix": "changed2({a, k}var1 [, kvar2,..., kvarN])",
+        "prefix": "changed2({k, a}var1 [, kvar2,..., kvarN])",
         "body": "changed2",
         "description": "k-rate signal change detector."
     },
@@ -2405,7 +2405,7 @@
         "description": "Calculates the dot product of two arrays."
     },
     "sum": {
-        "prefix": "sum({i, a, k}sig1 [, asig2] [, asig3] [...])",
+        "prefix": "sum({k, i, a}sig1 [, asig2] [, asig3] [...])",
         "body": "sum",
         "description": "Sums any number of a-rate signals, or array elements."
     },
@@ -2455,7 +2455,7 @@
         "description": "Reads a directory and outputs to a string array a list of file names."
     },
     "ftaudio": {
-        "prefix": "ftaudio({i, k}fn, \"filename\", iforma [, ibeg, iend])",
+        "prefix": "ftaudio({k, i}fn, \"filename\", iforma [, ibeg, iend])",
         "body": "ftaudio",
         "description": "Write a previously-allocated table to an audio file in a variety of formats."
     },
@@ -2500,7 +2500,7 @@
         "description": "Adds a new score event."
     },
     "fft": {
-        "prefix": "fft({in:Complex[], in:k[], in:Complex[ [, inverse:i]})",
+        "prefix": "fft({in:Complex[ [, inverse:i], in:k[], in:Complex[]})",
         "body": "fft",
         "description": "Complex-to-complex Fast Fourier Transform."
     },
@@ -2520,7 +2520,7 @@
         "description": "Periodically reads four orchestra control-signal values from an external file."
     },
     "tableikt": {
-        "prefix": "tableikt({x, k}ndx, kfn [, ixmode] [, ixoff] [, iwrap])",
+        "prefix": "tableikt({k, x}ndx, kfn [, ixmode] [, ixoff] [, iwrap])",
         "body": "tableikt",
         "description": "Provides k-rate control over table numbers."
     },
@@ -2625,7 +2625,7 @@
         "description": "Prints information on an opcode definition and its overloads."
     },
     "randi": {
-        "prefix": "randi({x, k}amp, xcps [, iseed] [, isize] [, ioffset])",
+        "prefix": "randi({k, x}amp, xcps [, iseed] [, isize] [, ioffset])",
         "body": "randi",
         "description": "Generates a controlled random number series with interpolation between each new number."
     },
@@ -2635,7 +2635,7 @@
         "description": "Modify amplitudes using a function table, with dynamic scaling."
     },
     "lincos": {
-        "prefix": "lincos({i, k}x, ky0, ky1 [, kx0, kx1 ])",
+        "prefix": "lincos({k, i}x, ky0, ky1 [, kx0, kx1 ])",
         "body": "lincos",
         "description": "Linear to cosine interpolation."
     },
@@ -2680,7 +2680,7 @@
         "description": "Loads a preset of values for MIDI controllers from a previous ctrlpreset call."
     },
     "table": {
-        "prefix": "table({a, i, k}ndx, ifn [, ixmode] [, ixoff] [, iwrap])",
+        "prefix": "table({k, i, a}ndx, ifn [, ixmode] [, ixoff] [, iwrap])",
         "body": "table",
         "description": "Accesses table values by direct indexing."
     },
@@ -2700,7 +2700,7 @@
         "description": "Returns the argument of a complex number."
     },
     "minabs": {
-        "prefix": "minabs({a, k}in1, ain2 [, ain3] [, ain4] [...])",
+        "prefix": "minabs({k, a}in1, ain2 [, ain3] [, ain4] [...])",
         "body": "minabs",
         "description": "Produces a signal that is the minimum of the absolute values of any number of input signals."
     },
@@ -2730,12 +2730,12 @@
         "description": "Distributes an audio signal among 8 channels."
     },
     "maxalloc": {
-        "prefix": "maxalloc({i, S}nsnum, icount)",
+        "prefix": "maxalloc({S, i}nsnum, icount)",
         "body": "maxalloc",
         "description": "Limits the number of allocations of an instrument."
     },
     "wrap": {
-        "prefix": "wrap({a, i, k}sig, klow, khigh)",
+        "prefix": "wrap({k, i, a}sig, klow, khigh)",
         "body": "wrap",
         "description": "Wraps-around the signal that exceeds the low and high thresholds."
     },
@@ -2760,7 +2760,7 @@
         "description": "Read sampled sound (up to 16 channels) from a table, with optional sustain and release looping."
     },
     "fmax": {
-        "prefix": "fmax({i, k}arg1[], iarg2[])",
+        "prefix": "fmax({k, i}arg1[], iarg2[])",
         "body": "fmax",
         "description": "Returns the maximum of its two arguments."
     },
@@ -2770,7 +2770,7 @@
         "description": "Linear distribution random number generator (positive values only)."
     },
     "rspline": {
-        "prefix": "rspline({x, k}rangeMin, xrangeMax, kcpsMin, kcpsMax)",
+        "prefix": "rspline({k, x}rangeMin, xrangeMax, kcpsMin, kcpsMax)",
         "body": "rspline",
         "description": "Generate random spline curves."
     },
@@ -2805,7 +2805,7 @@
         "description": "Converts a pitch-class value to octave-point-decimal."
     },
     "table3": {
-        "prefix": "table3({a, i, k}ndx, ifn [, ixmode] [, ixoff] [, iwrap])",
+        "prefix": "table3({k, i, a}ndx, ifn [, ixmode] [, ixoff] [, iwrap])",
         "body": "table3",
         "description": "Accesses table values by direct indexing with cubic interpolation."
     },
@@ -3055,12 +3055,12 @@
         "description": "Generates dynamic 3d binaural audio for headphones using magnitude interpolation and phase truncation."
     },
     "lag": {
-        "prefix": "lag({a, k}in, klagtime [, initialvalue])",
+        "prefix": "lag({k, a}in, klagtime [, initialvalue])",
         "body": "lag",
         "description": "Exponential Lag."
     },
     "tab": {
-        "prefix": "tab({x, k}ndx, if [, ixmode])",
+        "prefix": "tab({k, x}ndx, if [, ixmode])",
         "body": "tab",
         "description": "Fast table opcode."
     },
@@ -3095,7 +3095,7 @@
         "description": "Reverberates an input signal with a &amp;#8220;natural room&amp;#8221; frequency response."
     },
     "init": {
-        "prefix": "init({size1: [, size2:i, ...], a, op:Opcod [, arg1:*, ...], inst:Inst [, p4:i, ...]})",
+        "prefix": "init({size1: [, size2:i, ...], inst:Inst [, p4:i, ...], a, op:Opcod [, arg1:*, ...]})",
         "body": "init",
         "description": "Initialises one or more objects."
     },
@@ -3105,7 +3105,7 @@
         "description": "Distributes an audio signal among 8 channels with moving virtual sources."
     },
     "cuserrnd": {
-        "prefix": "cuserrnd({i, k}min, kmax, ktableNum)",
+        "prefix": "cuserrnd({k, i}min, kmax, ktableNum)",
         "body": "cuserrnd",
         "description": "Continuous USER-defined-distribution RaNDom generator."
     },
@@ -3155,7 +3155,7 @@
         "description": "Process a PV stream by retaining only the N bins with the highest amplitude, zeroing the others."
     },
     "fmod": {
-        "prefix": "fmod({i, k}arg1[], iarg2[])",
+        "prefix": "fmod({k, i}arg1[], iarg2[])",
         "body": "fmod",
         "description": "Computes the remainder of the division of its first argument by the second."
     },
@@ -3165,7 +3165,7 @@
         "description": "Accepts a trigger signal as input and outputs a group of values."
     },
     "nstrstr": {
-        "prefix": "nstrstr({i, k}nsno)",
+        "prefix": "nstrstr({k, i}nsno)",
         "body": "nstrstr",
         "description": "Returns the string of a named instr from its number or an empty string if no such association exists."
     },
@@ -3200,7 +3200,7 @@
         "description": "Writes the audio signal to a digital delay line."
     },
     "linlin": {
-        "prefix": "linlin({i, k}x, ky0, ky1 [, kx0, kx1 ])",
+        "prefix": "linlin({k, i}x, ky0, ky1 [, kx0, kx1 ])",
         "body": "linlin",
         "description": "Linear to linear interpolation."
     },
@@ -3230,7 +3230,7 @@
         "description": "Uses FM synthesis to create a &amp;#8220;Heavy Metal&amp;#8221; sound."
     },
     "tabw": {
-        "prefix": "tabw({a, k}sig, kndx, ifn [,ixmode])",
+        "prefix": "tabw({k, a}sig, kndx, ifn [,ixmode])",
         "body": "tabw",
         "description": "Fast table opcodes."
     },
@@ -3300,7 +3300,7 @@
         "description": "Variable time delay applied to a k-rate signal."
     },
     "copya2ftab": {
-        "prefix": "copya2ftab({i, k}Array[], ktab [, koffset])",
+        "prefix": "copya2ftab({k, i}Array[], ktab [, koffset])",
         "body": "copya2ftab",
         "description": "The _copya2ftab_ opcode takes a k-array and copies the contents to an f-table."
     },
@@ -3315,7 +3315,7 @@
         "description": "An interpolating variable time delay."
     },
     "strtolk": {
-        "prefix": "strtolk({k, S}str)",
+        "prefix": "strtolk({S, k}str)",
         "body": "strtolk",
         "description": "Converts a string to a signed integer value at i- or k-rate."
     },
@@ -3485,7 +3485,7 @@
         "description": "Indicates whether a note is in its _release_ stage."
     },
     "mirror": {
-        "prefix": "mirror({a, i, k}sig, klow, khigh)",
+        "prefix": "mirror({k, i, a}sig, klow, khigh)",
         "body": "mirror",
         "description": "Reflects the signal that exceeds the low and high thresholds."
     },
@@ -3530,7 +3530,7 @@
         "description": "Convert Ssrc to upper case, and write the result to Sdst."
     },
     "samphold": {
-        "prefix": "samphold({a, k}sig, agate [, ival] [, ivstor])",
+        "prefix": "samphold({k, a}sig, agate [, ival] [, ivstor])",
         "body": "samphold",
         "description": "Performs a sample-and-hold operation on its input."
     },
@@ -3565,7 +3565,7 @@
         "description": "Returns the natural log of _x_ (_x_ positive only)."
     },
     "ftslice": {
-        "prefix": "ftslice({i, k}fnsource, ifndest [, kstart, kend, kstep ])",
+        "prefix": "ftslice({k, i}fnsource, ifndest [, kstart, kend, kstep ])",
         "body": "ftslice",
         "description": "Copy a slice from an f-table to another f-table at performance."
     },
@@ -3675,7 +3675,7 @@
         "description": "Freeze the amplitude and frequency time functions of a pv stream according to a control-rate trigger."
     },
     "dct": {
-        "prefix": "dct({i, k}in[])",
+        "prefix": "dct({k, i}in[])",
         "body": "dct",
         "description": "Discrete Cosine Transform of a sample array (type-II DCT)."
     },
@@ -3710,7 +3710,7 @@
         "description": "Returns the square root of _x_ (_x_ non-negative)."
     },
     "oscil3": {
-        "prefix": "oscil3({x, k}amp, xcps [, ifn, iphs])",
+        "prefix": "oscil3({k, x}amp, xcps [, ifn, iphs])",
         "body": "oscil3",
         "description": "A simple oscillator with cubic interpolation."
     },
@@ -3725,7 +3725,7 @@
         "description": "Prints a list of all instruments of a previously loaded SoundFont2 (SF2) sample file."
     },
     "ftexists": {
-        "prefix": "ftexists({i, k}fn)",
+        "prefix": "ftexists({k, i}fn)",
         "body": "ftexists",
         "description": "Query if a given table exists."
     },
@@ -3735,7 +3735,7 @@
         "description": "Clears a number of audio output channel of the named software bus."
     },
     "loop_gt": {
-        "prefix": "loop_gt({i, k}ndx, idecr, imin, label)",
+        "prefix": "loop_gt({k, i}ndx, idecr, imin, label)",
         "body": "loop_gt",
         "description": "Construction of looping operations."
     },
@@ -3855,7 +3855,7 @@
         "description": "Defines the port for use with the _insremot_, _midremot_, _insglobal_ and _midglobal_ opcodes."
     },
     "hypot": {
-        "prefix": "hypot({i, k}arg1[], iarg2[])",
+        "prefix": "hypot({k, i}arg1[], iarg2[])",
         "body": "hypot",
         "description": "Euclidean distance function."
     },
@@ -3925,12 +3925,12 @@
         "description": "A high-pass Butterworth filter."
     },
     "strtol": {
-        "prefix": "strtol({i, S}str)",
+        "prefix": "strtol({S, i}str)",
         "body": "strtol",
         "description": "Converts a string to a signed integer value (i-rate)."
     },
     "create": {
-        "prefix": "create({opc:OpcodeDef, len: [, overload:i], opc:OpcodeDe [, overload:, code:S, instr:InstrDef})",
+        "prefix": "create({instr:InstrDef, opc:OpcodeDef, len: [, overload:i], code:S, opc:OpcodeDe [, overload:})",
         "body": "create",
         "description": "Creates a new instrument definition, instrument instance, or opcode object."
     },
@@ -3980,7 +3980,7 @@
         "description": "Adds a scalar value to a vector in a table."
     },
     "genarray": {
-        "prefix": "genarray({i, k}start, kens [, inc])",
+        "prefix": "genarray({k, i}start, kens [, inc])",
         "body": "genarray",
         "description": "Generate a vector (one-dimensional k-rate or i-rate array) with an arithmetic sequence."
     },
@@ -4155,12 +4155,12 @@
         "description": "Read signals from a file at i-rate."
     },
     "perf": {
-        "prefix": "perf({opc:Opcod [, arg1:*, ...], ins:Inst [, p4:k, ...]})",
+        "prefix": "perf({ins:Inst [, p4:k, ...], opc:Opcod [, arg1:*, ...]})",
         "body": "perf",
         "description": "Execute a performance pass on an instrument or opcode."
     },
     "oscilikt": {
-        "prefix": "oscilikt({x, k}amp, xcps, kfn [, iphs] [, istor])",
+        "prefix": "oscilikt({k, x}amp, xcps, kfn [, iphs] [, istor])",
         "body": "oscilikt",
         "description": "A linearly interpolated oscillator that allows changing the table number at k-rate."
     },
@@ -4190,7 +4190,7 @@
         "description": "Writes stereo audio data to an external device or stream."
     },
     "ficlose": {
-        "prefix": "ficlose({i, S}handle)",
+        "prefix": "ficlose({S, i}handle)",
         "body": "ficlose",
         "description": "Closes a previously opened file."
     },
@@ -4235,7 +4235,7 @@
         "description": "Returns a table number at k-time for a given oscillator frequency and wavform."
     },
     "envlpx": {
-        "prefix": "envlpx({x, k}amp, irise, idur, idec, ifn, iatss, iatdec [, ixmod])",
+        "prefix": "envlpx({k, x}amp, irise, idur, idec, ifn, iatss, iatdec [, ixmod])",
         "body": "envlpx",
         "description": "Applies an envelope consisting of 3 segments."
     },
@@ -4300,7 +4300,7 @@
         "description": "Allows a floating-point 7-bit MIDI signal scaled with a minimum and a maximum range."
     },
     "maxabs": {
-        "prefix": "maxabs({a, k}in1, ain2 [, ain3] [, ain4] [...])",
+        "prefix": "maxabs({k, a}in1, ain2 [, ain3] [, ain4] [...])",
         "body": "maxabs",
         "description": "Produces a signal that is the maximum of the absolute values of any number of input signals."
     },
@@ -4360,7 +4360,7 @@
         "description": "Sets the value of 0 decibels using full scale amplitude."
     },
     "fillarray": {
-        "prefix": "fillarray({i, k}val1, ival2,.....ivaln)",
+        "prefix": "fillarray({k, i}val1, ival2,.....ivaln)",
         "body": "fillarray",
         "description": "Generate a vector (one-dimensional k-rate array) with a sequence of"
     },
@@ -4380,7 +4380,7 @@
         "description": "Returns the arctangent of _x_ (_x_ in radians)."
     },
     "bpf": {
-        "prefix": "bpf({i, a, k}x, kx1, ky1, kx2, ..., kxn, kyn)",
+        "prefix": "bpf({k, i, a}x, kx1, ky1, kx2, ..., kxn, kyn)",
         "body": "bpf",
         "description": "Break point function with linear interpolation."
     },
@@ -4430,7 +4430,7 @@
         "description": "Read absolute time, in k-rate cycles, since the start of the performance."
     },
     "pow": {
-        "prefix": "pow({a, i, k}arg, k)",
+        "prefix": "pow({k, i, a}arg, k)",
         "body": "pow",
         "description": "Computes one argument to the power of another argument and scales the result."
     },
@@ -4440,7 +4440,7 @@
         "description": "Sets the base frequency for pitch A4."
     },
     "system": {
-        "prefix": "system({i, k}trig, Scmd, [inowait])",
+        "prefix": "system({k, i}trig, Scmd, [inowait])",
         "body": "system",
         "description": "Call an external program via the system call."
     },
@@ -4675,7 +4675,7 @@
         "description": "Returns the amplitude equivalent for a given decibel amount."
     },
     "max": {
-        "prefix": "max({i, a, k}in1, ain2 [, ain3] [, ain4] [...])",
+        "prefix": "max({k, i, a}in1, ain2 [, ain3] [, ain4] [...])",
         "body": "max",
         "description": "Produces a signal that is the maximum of any number of input signals."
     },
@@ -4755,7 +4755,7 @@
         "description": "Returns the largest integer not greater than *x*."
     },
     "mtof": {
-        "prefix": "mtof({i, k}midi)",
+        "prefix": "mtof({k, i}midi)",
         "body": "mtof",
         "description": "Convert a midi note number value to frequency, taking global value of A4 into account."
     },
@@ -4795,7 +4795,7 @@
         "description": "Returns the real part of a complex number."
     },
     "sockrecv": {
-        "prefix": "sockrecv({i, S}port, ilength)",
+        "prefix": "sockrecv({S, i}port, ilength)",
         "body": "sockrecv",
         "description": "Receives data from other processes using the low-level UDP or TCP protocols."
     },
@@ -4825,7 +4825,7 @@
         "description": "PVS-based oscillator simulator."
     },
     "phasorbnk": {
-        "prefix": "phasorbnk({x, k}cps, kndx, icnt [, iphs])",
+        "prefix": "phasorbnk({k, x}cps, kndx, icnt [, iphs])",
         "body": "phasorbnk",
         "description": "Produce an arbitrary number of normalized moving phase values, accessable by an index."
     },
@@ -4850,7 +4850,7 @@
         "description": "Reads data from and ATS data file and stores it in an internal data table of frequency, amplitude pairs."
     },
     "chnset": {
-        "prefix": "chnset({a, i, S, k}val, Sname)",
+        "prefix": "chnset({k, i, S, a}val, Sname)",
         "body": "chnset",
         "description": "Writes data to a channel of the named software bus."
     },
@@ -5080,12 +5080,12 @@
         "description": "Performs division between two vectorial control signals."
     },
     "phasor": {
-        "prefix": "phasor({x, k}cps [, iphs])",
+        "prefix": "phasor({k, x}cps [, iphs])",
         "body": "phasor",
         "description": "Produce a normalized moving phase value."
     },
     "tablei": {
-        "prefix": "tablei({a, i, k}ndx, ifn [, ixmode] [, ixoff] [, iwrap])",
+        "prefix": "tablei({k, i, a}ndx, ifn [, ixmode] [, ixoff] [, iwrap])",
         "body": "tablei",
         "description": "Accesses table values by direct indexing with linear interpolation."
     },
@@ -5130,7 +5130,7 @@
         "description": "A resonator filter bank."
     },
     "integ": {
-        "prefix": "integ({a, k}sig [, iskip])",
+        "prefix": "integ({k, a}sig [, iskip])",
         "body": "integ",
         "description": "Modify a signal by integration."
     },
@@ -5160,7 +5160,7 @@
         "description": "Constructs a user-definable envelope with extended release segment."
     },
     "gtadsr": {
-        "prefix": "gtadsr({a, k}sig, katt, kdec, ksus, krel, kgate)",
+        "prefix": "gtadsr({k, a}sig, katt, kdec, ksus, krel, kgate)",
         "body": "gtadsr",
         "description": "A gated linear attack-decay-sustain with exponential release."
     },
@@ -5190,7 +5190,7 @@
         "description": "Read absolute time, in seconds, since the start of the performance."
     },
     "random": {
-        "prefix": "random({i, k}min, kmax)",
+        "prefix": "random({k, i}min, kmax)",
         "body": "random",
         "description": "Generates a controlled pseudo-random number series between min and max values."
     },
@@ -5395,7 +5395,7 @@
         "description": "Return the ASCII code of the character in Sstr at ipos (defaults to zero which means the first character), or zero if ipos is out of range."
     },
     "trim": {
-        "prefix": "trim({x, i}array, ilen)",
+        "prefix": "trim({i, x}array, ilen)",
         "body": "trim",
         "description": "Adjust size of a one-dimensional array."
     },
@@ -5420,7 +5420,7 @@
         "description": "A band reject filter working in the spectral domain."
     },
     "limit": {
-        "prefix": "limit({a, i, k}sig, klow, khigh)",
+        "prefix": "limit({k, i, a}sig, klow, khigh)",
         "body": "limit",
         "description": "Sets the lower and upper limits of the value it processes."
     },
@@ -5430,7 +5430,7 @@
         "description": "Returns one of four scalar values stored in the instance of an instrument."
     },
     "poscil": {
-        "prefix": "poscil({a, k}amp, acps [, ifn, iphs])",
+        "prefix": "poscil({k, a}amp, acps [, ifn, iphs])",
         "body": "poscil",
         "description": "High precision oscillator."
     },
@@ -5480,7 +5480,7 @@
         "description": "Marks the end of an user-defined opcode block."
     },
     "trighold": {
-        "prefix": "trighold({a, k}in, kdur)",
+        "prefix": "trighold({k, a}in, kdur)",
         "body": "trighold",
         "description": "Timed trigger, holds a value for a given time."
     },
@@ -5580,7 +5580,7 @@
         "description": "Implementation of Zoelzer&#x27;s parametric equalizer filters, with some modifications by the author."
     },
     "fmin": {
-        "prefix": "fmin({i, k}arg1[], iarg2[])",
+        "prefix": "fmin({k, i}arg1[], iarg2[])",
         "body": "fmin",
         "description": "Returns the minimum of its two arguments."
     },
@@ -5670,7 +5670,7 @@
         "description": "Accumulates the maximum of the absolute values of audio signals."
     },
     "turnoff2": {
-        "prefix": "turnoff2({i, k}insno, kmode, krelease)",
+        "prefix": "turnoff2({k, i}insno, kmode, krelease)",
         "body": "turnoff2",
         "description": "Turn off instance(s) of other instruments at performance time."
     },
@@ -5750,7 +5750,7 @@
         "description": "Poisson distribution random number generator (positive values only)."
     },
     "envlpxr": {
-        "prefix": "envlpxr({x, k}amp, irise, idec, ifn, iatss, iatdec [, ixmod] [,irind])",
+        "prefix": "envlpxr({k, x}amp, irise, idec, ifn, iatss, iatdec [, ixmod] [,irind])",
         "body": "envlpxr",
         "description": "The _envlpx_ opcode with a final release segment."
     },
@@ -5780,7 +5780,7 @@
         "description": "A hi-pass filter whose transfer functions are the complements of the [tonek] opcode."
     },
     "poscil3": {
-        "prefix": "poscil3({a, k}amp, acps [, ifn, iphs])",
+        "prefix": "poscil3({k, a}amp, acps [, ifn, iphs])",
         "body": "poscil3",
         "description": "High precision oscillator with cubic interpolation."
     },
@@ -5795,7 +5795,7 @@
         "description": "Reads audio data from an external device or stream and can alter its pitch."
     },
     "loop_le": {
-        "prefix": "loop_le({i, k}ndx, incr, imax, label)",
+        "prefix": "loop_le({k, i}ndx, incr, imax, label)",
         "body": "loop_le",
         "description": "Construction of looping operations."
     },
@@ -5855,7 +5855,7 @@
         "description": "Sends a MIDI CLOCK message."
     },
     "chano": {
-        "prefix": "chano({a, k}val, kchan)",
+        "prefix": "chano({k, a}val, kchan)",
         "body": "chano",
         "description": "Send data to a channel of the outward software bus."
     },
@@ -5900,7 +5900,7 @@
         "description": "A simple wave-terrain synthesis opcode."
     },
     "gauss": {
-        "prefix": "gauss({i, k}range)",
+        "prefix": "gauss({k, i}range)",
         "body": "gauss",
         "description": "Gaussian distribution random number generator."
     },
@@ -5980,7 +5980,7 @@
         "description": "Spectral azimuth-based de-mixing of stereo sources, with a reverse-panning result."
     },
     "oscil": {
-        "prefix": "oscil({x, k}amp, xcps [, ifn, iphs])",
+        "prefix": "oscil({k, x}amp, xcps [, ifn, iphs])",
         "body": "oscil",
         "description": "A simple oscillator without any interpolation."
     },
@@ -6135,7 +6135,7 @@
         "description": "Complex  product of two arrays of the same size and in real-imaginary interleaved format."
     },
     "rnd31": {
-        "prefix": "rnd31({i, k}scl, krpow [, iseed])",
+        "prefix": "rnd31({k, i}scl, krpow [, iseed])",
         "body": "rnd31",
         "description": "31-bit bipolar random opcodes with controllable distribution."
     },
@@ -6213,6 +6213,13 @@
         "prefix": "tableimix(idft, idoff, ilen, is1ft, is1off, is1g, is2ft, is2off, is2g)",
         "body": "tableimix",
         "description": "Mixes two tables."
+    },
+    "struct": {
+        "prefix": "struct MyType val0:types, val1:types, ...",
+        "body": [
+            "struct ${1:name} ${2:...}"
+        ],
+        "description": "User-defineid type"
     },
     "instr_block": {
         "prefix": "instr block",

@@ -250,8 +250,9 @@ def main() -> None:
             else:
                 opcodes_dict[snippet] = value
 
-    with open("csound.json", "w", encoding="utf-8") as f, open("manual_indexes.json") as m:
+    with open("csound.json", "w", encoding="utf-8") as f:
         json.dump(opcodes_dict, f, ensure_ascii=True, indent=4)
+    with open("manual_indexes.json", "w", encoding="utf-8") as m:
         json.dump(opcode_indexes, m, ensure_ascii=True, indent=4)
 
 
