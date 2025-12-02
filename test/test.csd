@@ -13,12 +13,16 @@ opcode print_value(value:i):(void)
     print(value)
 endop
 
+
 instr 1
 
     sig:a = poscil(1, 440)
-    asignal  poscil 1, 440
-    sig2:a = poscile(1, 3)
-    filter:a = butterbp(sig, 300, 50)
+    asignal poscil 1, 440
+    ; sig2:b = poscile(1, 3)
+    filter:b = butterbp(sig, 300, 50)
+    filter2:b = poscil(1, 440)
+
+    struct MyType val0:i, val1:i
 
     switch p4
         case 1

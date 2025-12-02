@@ -439,6 +439,10 @@
             "named": true
           },
           {
+            "type": "struct_definition",
+            "named": true
+          },
+          {
             "type": "typed_assignment_statement",
             "named": true
           },
@@ -668,6 +672,10 @@
             "named": true
           },
           {
+            "type": "struct_definition",
+            "named": true
+          },
+          {
             "type": "typed_assignment_statement",
             "named": true
           },
@@ -743,6 +751,10 @@
         },
         {
           "type": "opcode_statement",
+          "named": true
+        },
+        {
+          "type": "struct_definition",
           "named": true
         },
         {
@@ -826,6 +838,10 @@
         },
         {
           "type": "struct_access",
+          "named": true
+        },
+        {
+          "type": "struct_definition",
           "named": true
         },
         {
@@ -917,6 +933,10 @@
         },
         {
           "type": "struct_access",
+          "named": true
+        },
+        {
+          "type": "struct_definition",
           "named": true
         },
         {
@@ -1207,6 +1227,10 @@
           "named": true
         },
         {
+          "type": "struct_definition",
+          "named": true
+        },
+        {
           "type": "typed_assignment_statement",
           "named": true
         },
@@ -1255,6 +1279,10 @@
         },
         {
           "type": "opcode_statement",
+          "named": true
+        },
+        {
+          "type": "struct_definition",
           "named": true
         },
         {
@@ -1340,6 +1368,10 @@
         },
         {
           "type": "opcode_statement",
+          "named": true
+        },
+        {
+          "type": "struct_definition",
           "named": true
         },
         {
@@ -2307,6 +2339,10 @@
           "named": true
         },
         {
+          "type": "struct_definition",
+          "named": true
+        },
+        {
           "type": "typed_assignment_statement",
           "named": true
         },
@@ -2382,6 +2418,10 @@
         },
         {
           "type": "opcode_statement",
+          "named": true
+        },
+        {
+          "type": "struct_definition",
           "named": true
         },
         {
@@ -2542,6 +2582,10 @@
           "named": true
         },
         {
+          "type": "struct_definition",
+          "named": true
+        },
+        {
           "type": "ternary_expression",
           "named": true
         },
@@ -2630,6 +2674,10 @@
         },
         {
           "type": "struct_access",
+          "named": true
+        },
+        {
+          "type": "struct_definition",
           "named": true
         },
         {

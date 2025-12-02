@@ -8,6 +8,7 @@ module.exports = grammar({
 
   conflicts: $ => [
     [$._root_statement, $._score_item],
+    [$._root_statement, $._statement],
     [$.opcode_statement, $._lvalue],
     [$.opcode_statement, $.opcode_name],
     [$.opcode_statement],
@@ -142,7 +143,8 @@ module.exports = grammar({
       $.function_call,
       $.opcode_statement,
       $.control_statement,
-      $.label_statement
+      $.label_statement,
+      $.struct_definition
     ),
 
     xin_statement: $ => seq(
@@ -333,6 +335,7 @@ module.exports = grammar({
     identifier: $ => /[a-zA-Z_]\w*/,
     plus_identifier: $ => /\+[a-zA-Z_]\w*/,
 
+    // TODO: fix type_identifier in explicit type assign
     typed_identifier: $ => prec(2, seq(
       field('name', $.identifier),
       ':',

@@ -771,6 +771,10 @@
         {
           "type": "SYMBOL",
           "name": "label_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "struct_definition"
         }
       ]
     },
@@ -2846,6 +2850,10 @@
     [
       "_root_statement",
       "_score_item"
+    ],
+    [
+      "_root_statement",
+      "_statement"
     ],
     [
       "opcode_statement",
