@@ -205,18 +205,6 @@
           {
             "type": "=",
             "named": false
-          },
-          {
-            "type": "divz",
-            "named": false
-          },
-          {
-            "type": "init",
-            "named": false
-          },
-          {
-            "type": "tival",
-            "named": false
           }
         ]
       },
@@ -1548,6 +1536,10 @@
           {
             "type": "identifier",
             "named": true
+          },
+          {
+            "type": "typed_identifier",
+            "named": true
           }
         ]
       }
@@ -2154,18 +2146,6 @@
           },
           {
             "type": "=",
-            "named": false
-          },
-          {
-            "type": "divz",
-            "named": false
-          },
-          {
-            "type": "init",
-            "named": false
-          },
-          {
-            "type": "tival",
             "named": false
           }
         ]
@@ -2964,10 +2944,6 @@
     "named": false
   },
   {
-    "type": "divz",
-    "named": false
-  },
-  {
     "type": "do",
     "named": false
   },
@@ -3025,10 +3001,6 @@
   },
   {
     "type": "in",
-    "named": false
-  },
-  {
-    "type": "init",
     "named": false
   },
   {
@@ -3157,10 +3129,6 @@
   },
   {
     "type": "tif",
-    "named": false
-  },
-  {
-    "type": "tival",
     "named": false
   },
   {

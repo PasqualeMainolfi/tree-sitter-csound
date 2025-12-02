@@ -952,18 +952,6 @@
                 },
                 {
                   "type": "STRING",
-                  "value": "init"
-                },
-                {
-                  "type": "STRING",
-                  "value": "tival"
-                },
-                {
-                  "type": "STRING",
-                  "value": "divz"
-                },
-                {
-                  "type": "STRING",
                   "value": "+="
                 },
                 {
@@ -1052,18 +1040,6 @@
               },
               {
                 "type": "STRING",
-                "value": "init"
-              },
-              {
-                "type": "STRING",
-                "value": "tival"
-              },
-              {
-                "type": "STRING",
-                "value": "divz"
-              },
-              {
-                "type": "STRING",
                 "value": "+="
               },
               {
@@ -1148,8 +1124,17 @@
                     "type": "SEQ",
                     "members": [
                       {
-                        "type": "SYMBOL",
-                        "name": "identifier"
+                        "type": "CHOICE",
+                        "members": [
+                          {
+                            "type": "SYMBOL",
+                            "name": "identifier"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "typed_identifier"
+                          }
+                        ]
                       },
                       {
                         "type": "REPEAT",
@@ -1161,8 +1146,17 @@
                               "value": ","
                             },
                             {
-                              "type": "SYMBOL",
-                              "name": "identifier"
+                              "type": "CHOICE",
+                              "members": [
+                                {
+                                  "type": "SYMBOL",
+                                  "name": "identifier"
+                                },
+                                {
+                                  "type": "SYMBOL",
+                                  "name": "typed_identifier"
+                                }
+                              ]
                             }
                           ]
                         }
@@ -2864,6 +2858,10 @@
       "opcode_name"
     ],
     [
+      "opcode_statement",
+      "typed_assignment_statement"
+    ],
+    [
       "opcode_statement"
     ],
     [
@@ -2878,42 +2876,6 @@
     ],
     [
       "xout_statement"
-    ],
-    [
-      "opcode_statement",
-      "struct_definition"
-    ],
-    [
-      "opcode_statement",
-      "_expression"
-    ],
-    [
-      "opcode_statement",
-      "header_assignment"
-    ],
-    [
-      "label_statement",
-      "typed_assignment_statement"
-    ],
-    [
-      "assignment_statement",
-      "label_statement"
-    ],
-    [
-      "function_call",
-      "opcode_statement"
-    ],
-    [
-      "opcode_statement",
-      "assignment_statement"
-    ],
-    [
-      "xin_statement",
-      "assignment_statement"
-    ],
-    [
-      "xout_statement",
-      "header_assignment"
     ]
   ],
   "precedences": [],

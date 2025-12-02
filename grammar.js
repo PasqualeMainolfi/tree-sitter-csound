@@ -11,20 +11,21 @@ module.exports = grammar({
     [$._root_statement, $._statement],
     [$.opcode_statement, $._lvalue],
     [$.opcode_statement, $.opcode_name],
+    [$.opcode_statement, $.typed_assignment_statement],
     [$.opcode_statement],
     [$.cabbage_statement],
     [$.macro_usage],
     [$.argument_list, $.parenthesized_expression],
     [$.xout_statement],
-    [$.opcode_statement, $.struct_definition],
-    [$.opcode_statement, $._expression],
-    [$.opcode_statement, $.header_assignment],
-    [$.label_statement, $.typed_assignment_statement],
-    [$.assignment_statement, $.label_statement],
-    [$.function_call, $.opcode_statement],
-    [$.opcode_statement, $.assignment_statement],
-    [$.xin_statement, $.assignment_statement],
-    [$.xout_statement, $.header_assignment]
+    // [$.opcode_statement, $.struct_definition],
+    // [$.opcode_statement, $._expression],
+    // [$.opcode_statement, $.header_assignment],
+    // [$.label_statement, $.typed_assignment_statement],
+    // [$.assignment_statement, $.label_statement],
+    // [$.function_call, $.opcode_statement],
+    // [$.opcode_statement, $.assignment_statement],
+    // [$.xin_statement, $.assignment_statement],
+    // [$.xout_statement, $.header_assignment]
   ],
 
   rules: {
@@ -162,13 +163,13 @@ module.exports = grammar({
 
     typed_assignment_statement: $ => prec(2, seq(
       field('left', sep1(choice($.typed_identifier, $.global_typed_identifier), ',')),
-      field('operator', choice('=', 'init', 'tival', 'divz', '+=', '-=', '*=', '/=', '##addin', '##subin', '##mulin', '##divin')),
+      field('operator', choice('=', '+=', '-=', '*=', '/=', '##addin', '##subin', '##mulin', '##divin')),
       field('right', $._expression)
     )),
 
     assignment_statement: $ => seq(
       field('left', sep1($._lvalue, ',')),
-      field('operator', choice('=', 'init', 'tival', 'divz', '+=', '-=', '*=', '/=', '##addin', '##subin', '##mulin', '##divin')),
+      field('operator', choice('=', '+=', '-=', '*=', '/=', '##addin', '##subin', '##mulin', '##divin')),
       field('right', $._expression)
     ),
 
@@ -181,7 +182,11 @@ module.exports = grammar({
     ),
 
     opcode_statement: $ => seq(
-      field('outputs', optional(seq(sep1($.identifier, ',')))),
+      field('outputs', optional(
+          seq(sep1(
+              choice($.identifier, $.typed_identifier), ',')
+        ))
+      ),
       field('op', $.opcode_name),
       field('inputs', optional($.argument_list))
     ),

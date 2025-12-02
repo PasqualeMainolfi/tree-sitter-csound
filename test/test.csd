@@ -20,10 +20,11 @@ instr 1
 
     sig:a = poscil(1, 440)
     asignal poscil 1, 440
-    ; sig2:b = poscile(1, 3)
+    sig2:b = poscile(1, 3)
     filter:b = butterbp(sig, 300, 50)
     filter2:b = poscil(1, 440)
 
+    gambo:MyType init 8, 88
 
     switch p4
         case 1
@@ -32,7 +33,7 @@ instr 1
             print(2)
         default
             print(3)
-    endsw=
+    endsw
 
 endin
 
