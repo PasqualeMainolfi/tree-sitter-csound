@@ -349,7 +349,7 @@ module.exports = grammar({
     global_keyword: $ => '@global',
     opcode_name: $ => alias($.identifier, 'opcode_name'),
 
-    type_identifier: $ => alias(token(prec(5, /(InstrDef|Instr|Opcode|Complex|[aikSfw])(\[\])*/)), 'type_identifier'),
+    type_identifier: $ => alias(token(prec(5, /(InstrDef|Instr|Opcode|Complex|[aikbSfw])(\[\])*/)), 'type_identifier'),
 
     number: $ => choice(/\d+/, /0[xX][0-9a-fA-F]+/, /\d+\.\d+([eE][+-]?\d+)?/, /\d+[eE][+-]?\d+/),
     string: $ => seq('"', repeat(choice(/[^"\\\n]+/, /\\./)), '"'),

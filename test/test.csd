@@ -13,15 +13,16 @@ opcode print_value(value:i):(void)
     print(value)
 endop
 
-
 instr 1
 
     sig:a = poscil(1, 440)
+    asignal  poscil 1, 440
+    sig2:a = poscile(1, 3)
     filter:a = butterbp(sig, 300, 50)
 
     switch p4
         case 1
-            print(1)
+            print_value(1)
         case 2
             print(2)
         default

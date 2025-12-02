@@ -2722,7 +2722,7 @@
           "value": 5,
           "content": {
             "type": "PATTERN",
-            "value": "(InstrDef|Instr|Opcode|Complex|[aikSfw])(\\[\\])*"
+            "value": "(InstrDef|Instr|Opcode|Complex|[aikbSfw])(\\[\\])*"
           }
         }
       },
