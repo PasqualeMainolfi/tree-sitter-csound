@@ -1,59 +1,52 @@
-(instrument_definition) @local.scope
-(udo_definition_legacy) @local.scope
-(udo_definition_modern) @local.scope
+(struct_definition
+  (struct_name) @local.definition)
 
-(udo_definition_legacy name: (opcode_name) @local.definition)
-(udo_definition_modern name: (opcode_name) @local.definition)
-
-(struct_definition name: (struct_name) @local.definition)
-
-(global_typed_identifier
-  name: (identifier) @local.definition)
-
-(udo_definition_legacy
-  inputs: (_) @local.definition)
-
-(udo_definition_modern
-  inputs: (typed_identifier
-    name: (identifier) @local.definition))
-
-(instrument_definition name: (_) @local.definition)
+(struct_definition
+    (typed_identifier) @local.definition)
 
 (typed_assignment_statement
-  left: (typed_identifier
-    name: (identifier) @local.definition))
+  left: (typed_identifier) @local.definition)
+
+(typed_assignment_statement
+  right: (function_call
+    (argument_list
+        (identifier) @local.reference)))
+
+(opcode_statement
+  (typed_identifier) @local.definition)
+
+(opcode_statement
+  (argument_list
+    (_) @local.definition))
 
 (assignment_statement
   left: (identifier) @local.definition)
 
 (assignment_statement
-  left: (array_access
-    array: (identifier) @local.definition))
+  left: (typed_identifier) @local.definition)
 
-(opcode_statement
-  outputs: (identifier) @local.definition)
+(label_statement
+  (identifier) @local.definition)
 
-(xin_statement
-  outputs: (identifier) @local.definition)
+(macro_define
+  (identifier) @local.definition)
 
-(xin_statement
-  outputs: (typed_identifier
-    name: (identifier) @local.definition))
+(argument_list
+  (identifier) @local.reference)
 
-(opcode_name) @local.reference
+(score_statement
+  (identifier)+ @local.definition)
 
-(struct_name) @local.reference
+(score_statement
+  (number)+ @local.definition)
 
-(assignment_statement right: (identifier) @local.reference)
-(typed_assignment_statement right: (identifier) @local.reference)
-(header_assignment (identifier) @local.reference)
-(header_identifier) @local.reference
+(score_statement
+  (string)+ @local.definition)
 
-(argument_list (identifier) @local.reference)
-
-(if_statement condition: (identifier) @local.reference)
-(while_loop (identifier) @local.reference)
-
-(struct_access member: (identifier) @local.reference)
+(score_statement
+  (macro_usage)+ @local.definition)
 
 (identifier) @local.reference
+(typed_identifier) @local.reference
+(opcode_name) @local.reference
+(struct_name) @local.reference

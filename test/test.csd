@@ -13,7 +13,6 @@ opcode print_value(value:i):(void)
     print(value)
 endop
 
-
 instr 1
 
     struct MyType val0:i, val1:i
@@ -41,6 +40,7 @@ endin
 </CsInstruments>
 <CsScore>
 
+i 1 0 1
 
 
 </CsScore>
