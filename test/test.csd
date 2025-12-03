@@ -13,6 +13,12 @@ opcode print_value(value:i):(void)
     print(value)
 endop
 
+opcode add, 0, ii
+    i1, i2 xin
+    xout(i1 + i2)
+endop
+
+
 instr 1
 
     struct MyType val0:i, val1:i
