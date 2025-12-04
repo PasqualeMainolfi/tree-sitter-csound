@@ -2632,9 +2632,13 @@
     "named": true,
     "fields": {
       "inputs": {
-        "multiple": false,
+        "multiple": true,
         "required": false,
         "types": [
+          {
+            "type": ",",
+            "named": false
+          },
           {
             "type": "argument_list",
             "named": true
