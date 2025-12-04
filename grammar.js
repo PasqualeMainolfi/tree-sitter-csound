@@ -12,11 +12,16 @@ module.exports = grammar({
     [$.opcode_statement, $._lvalue],
     [$.opcode_statement, $.opcode_name],
     [$.opcode_statement, $.typed_assignment_statement],
-    [$.argument_list, $.parenthesized_expression],
+    [$._expression_list, $.parenthesized_expression],
+    [$._expression_list, $.argument_list],
+    [$.parenthesized_expression, $._expression_list, $.argument_list],
     [$.cabbage_statement],
     [$.opcode_statement],
-    [$.argument_list],
     [$.macro_usage],
+    // [$.argument_list],
+    // [$.function_call, $.parenthesized_expression],
+    // [$.argument_list, $.parenthesized_expression],
+    // [$.function_call, $.argument_list],
     // [$.opcode_statement, $.struct_definition],
     // [$.opcode_statement, $._expression],
     // [$.opcode_statement, $.header_assignment],
@@ -161,30 +166,12 @@ module.exports = grammar({
       'xin'
     ),
 
-    // xout_statement: $ => choice(
-    //     seq(
-    //         'xout',
-    //         '(',
-    //         field('inputs', optional($.argument_list)),
-    //         ')'
-    //     ),
-    //     seq(
-    //         'xout',
-    //         field('inputs', optional($.argument_list)),
-    //     )
-    // ),
-
-    xout_statement: $ => choice(
-        seq(
-            'xout',
-            '(',
-            field('inputs', sep1($.argument_list, ',')),
-            ')'
-        ),
-        seq(
-            'xout',
-            field('inputs', sep1($.argument_list, ','))
-        )
+    xout_statement: $ => seq(
+        'xout',
+        optional(choice(
+            $.function_call,
+            $.opcode_statement
+        ))
     ),
 
     header_assignment: $ => seq($.header_identifier, '=', $._expression),
@@ -330,9 +317,14 @@ module.exports = grammar({
       $.macro_usage
     ),
 
+    _expression_list: $ => sep1($._expression, ','),
+
     parenthesized_expression: $ => seq(
         '(',
-        optional(sep1($._expression, ',')),
+        choice(
+            $._expression,
+            $._expression_list
+        ),
         ')'
     ),
 
@@ -345,8 +337,8 @@ module.exports = grammar({
         )),
 
     argument_list: $ => seq(
-        $._expression,
-        repeat(seq(',', $._expression))
+      $._expression,
+      repeat(seq(',', $._expression))
     ),
 
     unary_expression: $ => prec.left(10, seq(choice('-', '~', '!'), $._expression)),

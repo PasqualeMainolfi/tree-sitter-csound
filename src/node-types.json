@@ -1561,7 +1561,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "array_access",
@@ -2630,21 +2630,20 @@
   {
     "type": "xout_statement",
     "named": true,
-    "fields": {
-      "inputs": {
-        "multiple": true,
-        "required": true,
-        "types": [
-          {
-            "type": ",",
-            "named": false
-          },
-          {
-            "type": "argument_list",
-            "named": true
-          }
-        ]
-      }
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "opcode_statement",
+          "named": true
+        }
+      ]
     }
   },
   {
