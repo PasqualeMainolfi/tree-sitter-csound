@@ -8,16 +8,17 @@ ksmps = 1
 nchnls = 2
 0dbfs = 1
 
+// TODO: lsp: add unused variables, fix type in case as below in xout, add definition of udo, fix mul
 
-opcode print_value(value:i):(void)
+opcode print_value(value:i):(ii)
     print(value)
+    xout(10, 11)
 endop
 
 opcode add, ii, ii
     i1, i2 xin
-    xout(i1 + i2, i2)
+    xout(i1, i2)
 endop
-
 
 instr 1
 
