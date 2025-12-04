@@ -13,9 +13,9 @@ opcode print_value(value:i):(void)
     print(value)
 endop
 
-opcode add, 0, ii
+opcode add, ii, ii
     i1, i2 xin
-    xout(i1 + i2)
+    xout(i1, i2)
 endop
 
 
