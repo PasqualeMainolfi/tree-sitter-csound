@@ -16,6 +16,7 @@ module.exports = grammar({
     [$._expression_list, $.parenthesized_expression],
     [$._expression_list, $.argument_list],
     [$.parenthesized_expression, $.argument_list, $._expression_list],
+    [$.xout_statement, $._expression],
     [$.cabbage_statement],
     [$.opcode_statement],
     [$.macro_usage],
@@ -170,13 +171,11 @@ module.exports = grammar({
     xout_statement: $ => choice(
         seq(
             'xout',
-            '(',
-            field('inputs', $.argument_list),
-            ')'
+            field('inputs', $.parenthesized_expression),
         ),
         seq(
             'xout',
-            field('inputs', $.argument_list),
+            field('inputs', $._expression_list),
         )
     ),
 

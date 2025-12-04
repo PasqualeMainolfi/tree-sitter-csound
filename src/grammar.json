@@ -825,20 +825,12 @@
               "value": "xout"
             },
             {
-              "type": "STRING",
-              "value": "("
-            },
-            {
               "type": "FIELD",
               "name": "inputs",
               "content": {
                 "type": "SYMBOL",
-                "name": "argument_list"
+                "name": "parenthesized_expression"
               }
-            },
-            {
-              "type": "STRING",
-              "value": ")"
             }
           ]
         },
@@ -854,7 +846,7 @@
               "name": "inputs",
               "content": {
                 "type": "SYMBOL",
-                "name": "argument_list"
+                "name": "_expression_list"
               }
             }
           ]
@@ -2931,6 +2923,10 @@
       "parenthesized_expression",
       "argument_list",
       "_expression_list"
+    ],
+    [
+      "xout_statement",
+      "_expression"
     ],
     [
       "cabbage_statement"
