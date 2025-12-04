@@ -341,7 +341,7 @@ module.exports = grammar({
 
     argument_list: $ => seq(
       $._expression,
-      repeat(seq(',', $._expression))
+      repeat(seq(choice(', ', ','), $._expression))
     ),
 
     unary_expression: $ => prec.left(10, seq(choice('-', '~', '!'), $._expression)),
