@@ -815,32 +815,15 @@
       ]
     },
     "xout_statement": {
-      "type": "SEQ",
+      "type": "CHOICE",
       "members": [
         {
-          "type": "STRING",
-          "value": "xout"
+          "type": "SYMBOL",
+          "name": "function_call"
         },
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "function_call"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "opcode_statement"
-                }
-              ]
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
+          "type": "SYMBOL",
+          "name": "opcode_statement"
         }
       ]
     },
@@ -2907,9 +2890,13 @@
       "argument_list"
     ],
     [
+      "_statement",
+      "xout_statement"
+    ],
+    [
       "parenthesized_expression",
-      "_expression_list",
-      "argument_list"
+      "argument_list",
+      "_expression_list"
     ],
     [
       "cabbage_statement"

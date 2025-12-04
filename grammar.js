@@ -14,14 +14,16 @@ module.exports = grammar({
     [$.opcode_statement, $.typed_assignment_statement],
     [$._expression_list, $.parenthesized_expression],
     [$._expression_list, $.argument_list],
-    [$.parenthesized_expression, $._expression_list, $.argument_list],
+    [$._statement, $.xout_statement],
+    [$.parenthesized_expression, $.argument_list, $._expression_list],
     [$.cabbage_statement],
     [$.opcode_statement],
     [$.macro_usage],
-    // [$.argument_list],
-    // [$.function_call, $.parenthesized_expression],
     // [$.argument_list, $.parenthesized_expression],
+    // [$.argument_list],
+    // [$.parenthesized_expression, $.argument_list],
     // [$.function_call, $.argument_list],
+    // [$.function_call, $.parenthesized_expression],
     // [$.opcode_statement, $.struct_definition],
     // [$.opcode_statement, $._expression],
     // [$.opcode_statement, $.header_assignment],
@@ -122,7 +124,9 @@ module.exports = grammar({
 
     modern_udo_inputs: $ => seq(
       '(',
-      optional(sep1(choice($.typed_identifier, $.identifier), ',')),
+      optional(sep1(
+          choice($.typed_identifier, $.identifier), ','
+      )),
       ')'
     ),
 
@@ -166,12 +170,9 @@ module.exports = grammar({
       'xin'
     ),
 
-    xout_statement: $ => seq(
-        'xout',
-        optional(choice(
-            $.function_call,
-            $.opcode_statement
-        ))
+    xout_statement: $ => choice(
+        $.function_call,
+        $.opcode_statement
     ),
 
     header_assignment: $ => seq($.header_identifier, '=', $._expression),

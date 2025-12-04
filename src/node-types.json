@@ -2633,7 +2633,7 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "function_call",
@@ -3060,10 +3060,6 @@
   },
   {
     "type": "xin",
-    "named": false
-  },
-  {
-    "type": "xout",
     "named": false
   },
   {
