@@ -13,9 +13,7 @@ module.exports = grammar({
     [$.opcode_statement, $.opcode_name],
     [$.opcode_statement, $.typed_assignment_statement],
     [$.argument_list, $.parenthesized_expression],
-    [$._expression_list, $.parenthesized_expression],
-    [$._expression_list, $.argument_list],
-    [$.parenthesized_expression, $.argument_list, $._expression_list],
+    [$.parenthesized_expression, $.argument_list],
     [$.xout_statement, $._expression],
     [$.cabbage_statement],
     [$.opcode_statement],
@@ -175,7 +173,7 @@ module.exports = grammar({
         ),
         seq(
             'xout',
-            field('inputs', $._expression_list),
+            field('inputs', $.argument_list),
         )
     ),
 
@@ -322,12 +320,11 @@ module.exports = grammar({
       $.macro_usage
     ),
 
-    _expression_list: $ => sep1($._expression, ','),
     parenthesized_expression: $ => seq(
         '(',
         choice(
             $._expression,
-            $._expression_list
+            $.argument_list
         ),
         ')'
     ),
