@@ -12,12 +12,11 @@ module.exports = grammar({
     [$.opcode_statement, $._lvalue],
     [$.opcode_statement, $.opcode_name],
     [$.opcode_statement, $.typed_assignment_statement],
-    [$.opcode_statement],
-    [$.cabbage_statement],
-    [$.macro_usage],
     [$.argument_list, $.parenthesized_expression],
-    [$.xout_statement, $.parenthesized_expression]
-    // [$.argument_list],
+    [$.cabbage_statement],
+    [$.opcode_statement],
+    [$.argument_list],
+    [$.macro_usage],
     // [$.opcode_statement, $.struct_definition],
     // [$.opcode_statement, $._expression],
     // [$.opcode_statement, $.header_assignment],
@@ -179,12 +178,12 @@ module.exports = grammar({
         seq(
             'xout',
             '(',
-            field('inputs', sep1($._expression, ',')),
+            field('inputs', sep1($.argument_list, ',')),
             ')'
         ),
         seq(
             'xout',
-            field('inputs', sep1($._expression, ','))
+            field('inputs', sep1($.argument_list, ','))
         )
     ),
 
@@ -331,7 +330,11 @@ module.exports = grammar({
       $.macro_usage
     ),
 
-    parenthesized_expression: $ => seq('(', $._expression, ')'),
+    parenthesized_expression: $ => seq(
+        '(',
+        optional(sep1($._expression, ',')),
+        ')'
+    ),
 
     function_call: $ => prec(2,
         seq(

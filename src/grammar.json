@@ -836,7 +836,7 @@
                 "members": [
                   {
                     "type": "SYMBOL",
-                    "name": "_expression"
+                    "name": "argument_list"
                   },
                   {
                     "type": "REPEAT",
@@ -849,7 +849,7 @@
                         },
                         {
                           "type": "SYMBOL",
-                          "name": "_expression"
+                          "name": "argument_list"
                         }
                       ]
                     }
@@ -878,7 +878,7 @@
                 "members": [
                   {
                     "type": "SYMBOL",
-                    "name": "_expression"
+                    "name": "argument_list"
                   },
                   {
                     "type": "REPEAT",
@@ -891,7 +891,7 @@
                         },
                         {
                           "type": "SYMBOL",
-                          "name": "_expression"
+                          "name": "argument_list"
                         }
                       ]
                     }
@@ -1811,8 +1811,37 @@
           "value": "("
         },
         {
-          "type": "SYMBOL",
-          "name": "_expression"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_expression"
+                },
+                {
+                  "type": "REPEAT",
+                  "content": {
+                    "type": "SEQ",
+                    "members": [
+                      {
+                        "type": "STRING",
+                        "value": ","
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "_expression"
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         },
         {
           "type": "STRING",
@@ -2924,21 +2953,20 @@
       "typed_assignment_statement"
     ],
     [
-      "opcode_statement"
+      "argument_list",
+      "parenthesized_expression"
     ],
     [
       "cabbage_statement"
     ],
     [
+      "opcode_statement"
+    ],
+    [
+      "argument_list"
+    ],
+    [
       "macro_usage"
-    ],
-    [
-      "argument_list",
-      "parenthesized_expression"
-    ],
-    [
-      "xout_statement",
-      "parenthesized_expression"
     ]
   ],
   "precedences": [],
