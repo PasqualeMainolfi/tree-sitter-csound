@@ -433,14 +433,6 @@
           {
             "type": "typed_assignment_statement",
             "named": true
-          },
-          {
-            "type": "xin_statement",
-            "named": true
-          },
-          {
-            "type": "xout_statement",
-            "named": true
           }
         ]
       },
@@ -666,14 +658,6 @@
           {
             "type": "typed_assignment_statement",
             "named": true
-          },
-          {
-            "type": "xin_statement",
-            "named": true
-          },
-          {
-            "type": "xout_statement",
-            "named": true
           }
         ]
       },
@@ -747,14 +731,6 @@
         },
         {
           "type": "typed_assignment_statement",
-          "named": true
-        },
-        {
-          "type": "xin_statement",
-          "named": true
-        },
-        {
-          "type": "xout_statement",
           "named": true
         }
       ]
@@ -843,14 +819,6 @@
         {
           "type": "unary_expression",
           "named": true
-        },
-        {
-          "type": "xin_statement",
-          "named": true
-        },
-        {
-          "type": "xout_statement",
-          "named": true
         }
       ]
     }
@@ -937,14 +905,6 @@
         },
         {
           "type": "unary_expression",
-          "named": true
-        },
-        {
-          "type": "xin_statement",
-          "named": true
-        },
-        {
-          "type": "xout_statement",
           "named": true
         }
       ]
@@ -1221,14 +1181,6 @@
         {
           "type": "typed_assignment_statement",
           "named": true
-        },
-        {
-          "type": "xin_statement",
-          "named": true
-        },
-        {
-          "type": "xout_statement",
-          "named": true
         }
       ]
     }
@@ -1275,14 +1227,6 @@
         },
         {
           "type": "typed_assignment_statement",
-          "named": true
-        },
-        {
-          "type": "xin_statement",
-          "named": true
-        },
-        {
-          "type": "xout_statement",
           "named": true
         }
       ]
@@ -1364,14 +1308,6 @@
         },
         {
           "type": "typed_assignment_statement",
-          "named": true
-        },
-        {
-          "type": "xin_statement",
-          "named": true
-        },
-        {
-          "type": "xout_statement",
           "named": true
         }
       ]
@@ -1614,14 +1550,6 @@
         },
         {
           "type": "udo_definition",
-          "named": true
-        },
-        {
-          "type": "xin_statement",
-          "named": true
-        },
-        {
-          "type": "xout_statement",
           "named": true
         }
       ]
@@ -2409,10 +2337,6 @@
           "named": true
         },
         {
-          "type": "xin_statement",
-          "named": true
-        },
-        {
           "type": "xout_statement",
           "named": true
         }
@@ -2576,14 +2500,6 @@
         {
           "type": "unary_expression",
           "named": true
-        },
-        {
-          "type": "xin_statement",
-          "named": true
-        },
-        {
-          "type": "xout_statement",
-          "named": true
         }
       ]
     }
@@ -2670,14 +2586,6 @@
         },
         {
           "type": "unary_expression",
-          "named": true
-        },
-        {
-          "type": "xin_statement",
-          "named": true
-        },
-        {
-          "type": "xout_statement",
           "named": true
         }
       ]

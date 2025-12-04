@@ -16,7 +16,6 @@ module.exports = grammar({
     [$.cabbage_statement],
     [$.macro_usage],
     [$.argument_list, $.parenthesized_expression],
-    [$.xout_statement],
     // [$.opcode_statement, $.struct_definition],
     // [$.opcode_statement, $._expression],
     // [$.opcode_statement, $.header_assignment],
@@ -93,7 +92,9 @@ module.exports = grammar({
       field('outputs', $.legacy_udo_output_types),
       ',',
       field('inputs', $.legacy_udo_input_types),
+      optional($.xin_statement),
       repeat($._statement),
+      optional($.xout_statement),
       'endop'
     ),
 
@@ -106,6 +107,7 @@ module.exports = grammar({
         field('outputs', $.modern_udo_outputs)
       )),
       repeat($._statement),
+      optional($.xout_statement),
       'endop'
     ),
 
@@ -139,8 +141,6 @@ module.exports = grammar({
       $.header_assignment,
       $.typed_assignment_statement,
       $.assignment_statement,
-      $.xin_statement,
-      $.xout_statement,
       $.function_call,
       $.opcode_statement,
       $.control_statement,
