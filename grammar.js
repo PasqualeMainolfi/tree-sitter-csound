@@ -125,8 +125,8 @@ module.exports = grammar({
           '(',
           optional(choice(
               $.type_identifier,
-              $.legacy_udo_output_types)
-          ),
+              $.legacy_udo_output_types
+          )),
           ')'
       ),
       'void',
@@ -312,7 +312,11 @@ module.exports = grammar({
 
     function_call: $ => prec(2, seq(field('function', $.opcode_name), '(', optional($.argument_list), ')')),
 
-    argument_list: $ => sep1($._expression, ','),
+    argument_list: $ => seq(
+        $._expression,
+        repeat(seq(',', $._expression))
+    ),
+
     unary_expression: $ => prec.left(10, seq(choice('-', '~', '!'), $._expression)),
     binary_expression: $ => choice(
       prec.right(9, seq($._expression, '^', $._expression)),
