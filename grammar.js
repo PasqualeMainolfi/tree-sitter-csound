@@ -162,16 +162,16 @@ module.exports = grammar({
     ),
 
     xout_statement: $ => choice(
-        seq(
+        prec(2, seq(
             'xout',
             '(',
             field('inputs', optional(sep1($.argument_list, ','))),
             ')'
-        ),
-        seq(
+        )),
+        prec(1, seq(
             'xout',
             field('inputs', optional(sep1($.argument_list, ','))),
-        )
+        ))
     ),
 
     header_assignment: $ => seq($.header_identifier, '=', $._expression),
