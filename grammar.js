@@ -161,17 +161,26 @@ module.exports = grammar({
       'xin'
     ),
 
-    xout_statement: $ => choice(
-        seq(
-            'xout',
+    // xout_statement: $ => choice(
+    //     seq(
+    //         'xout',
+    //         '(',
+    //         field('inputs', optional($.argument_list)),
+    //         ')'
+    //     ),
+    //     seq(
+    //         'xout',
+    //         field('inputs', optional($.argument_list)),
+    //     )
+    // ),
+
+    xout_statement: $ => seq(
+        'xout',
+        optional(seq(
             '(',
-            field('inputs', optional($.argument_list)),
+            field('inputs', sep1($._expression, ',')),
             ')'
-        ),
-        seq(
-            'xout',
-            field('inputs', optional($.argument_list)),
-        )
+        ))
     ),
 
     header_assignment: $ => seq($.header_identifier, '=', $._expression),
