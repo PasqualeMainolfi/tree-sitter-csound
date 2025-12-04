@@ -161,16 +161,16 @@ module.exports = grammar({
     ),
 
     xout_statement: $ => choice(
-        seq(
+        prec(2, seq(
             'xout',
             '(',
             field('inputs', optional($.argument_list)),
             ')'
-        ),
-        seq(
+        )),
+        prec(1, seq(
             'xout',
             field('inputs', optional($.argument_list))
-        )
+        ))
     ),
 
     header_assignment: $ => seq($.header_identifier, '=', $._expression),
@@ -303,9 +303,17 @@ module.exports = grammar({
     // --- EXPRESSIONS ---
     _expression: $ => choice(
       $.function_call,
-      $.unary_expression, $.binary_expression, $.ternary_expression, $.parenthesized_expression,
+      $.unary_expression,
+      $.binary_expression,
+      $.ternary_expression,
+      $.parenthesized_expression,
       $.header_identifier,
-      $.number, $.string, $.identifier, $.array_access, $.struct_access, $.macro_usage
+      $.number,
+      $.string,
+      $.identifier,
+      $.array_access,
+      $.struct_access,
+      $.macro_usage
     ),
 
     parenthesized_expression: $ => seq('(', $._expression, ')'),
