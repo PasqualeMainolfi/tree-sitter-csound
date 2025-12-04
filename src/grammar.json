@@ -645,8 +645,17 @@
               "type": "CHOICE",
               "members": [
                 {
-                  "type": "SYMBOL",
-                  "name": "legacy_udo_output_types"
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "type_identifier"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "legacy_udo_output_types"
+                    }
+                  ]
                 },
                 {
                   "type": "BLANK"

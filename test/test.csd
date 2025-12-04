@@ -8,7 +8,7 @@ ksmps = 1
 nchnls = 2
 0dbfs = 1
 
-// TODO: lsp: add unused variables, fix type in case as below in xout, add definition of udo, fix mul
+// TODO: lsp: add unused variables, fix type in case as below in xout, add definition of udo in orc, fix mul
 
 opcode print_value(value:i):(ii)
     print(value)
