@@ -24,6 +24,7 @@
 
 (udo_definition_legacy inputs: (_) @type)
 (udo_definition_legacy outputs: (_) @type)
+(udo_definition_modern outputs: (_) @type)
 
 (instrument_definition name: (_) @entity.name.function)
 
