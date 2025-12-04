@@ -320,13 +320,15 @@ module.exports = grammar({
       $.macro_usage
     ),
 
-    parenthesized_expression: $ => seq(
-        '(',
-        choice(
-            $._expression,
-            $.argument_list
-        ),
-        ')'
+    parenthesized_expression: $ => prec.left(
+          seq(
+            '(',
+            choice(
+                $._expression,
+                $.argument_list
+            ),
+            ')'
+        )
     ),
 
     function_call: $ => prec(2,
