@@ -2630,20 +2630,17 @@
   {
     "type": "xout_statement",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "function_call",
-          "named": true
-        },
-        {
-          "type": "opcode_statement",
-          "named": true
-        }
-      ]
+    "fields": {
+      "inputs": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "argument_list",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -3060,6 +3057,10 @@
   },
   {
     "type": "xin",
+    "named": false
+  },
+  {
+    "type": "xout",
     "named": false
   },
   {

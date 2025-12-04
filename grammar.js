@@ -12,14 +12,13 @@ module.exports = grammar({
     [$.opcode_statement, $._lvalue],
     [$.opcode_statement, $.opcode_name],
     [$.opcode_statement, $.typed_assignment_statement],
+    [$.argument_list, $.parenthesized_expression],
     [$._expression_list, $.parenthesized_expression],
     [$._expression_list, $.argument_list],
-    [$._statement, $.xout_statement],
     [$.parenthesized_expression, $.argument_list, $._expression_list],
     [$.cabbage_statement],
     [$.opcode_statement],
     [$.macro_usage],
-    // [$.argument_list, $.parenthesized_expression],
     // [$.argument_list],
     // [$.parenthesized_expression, $.argument_list],
     // [$.function_call, $.argument_list],
@@ -124,9 +123,7 @@ module.exports = grammar({
 
     modern_udo_inputs: $ => seq(
       '(',
-      optional(sep1(
-          choice($.typed_identifier, $.identifier), ','
-      )),
+      optional(sep1(choice($.typed_identifier, $.identifier), ',')),
       ')'
     ),
 
@@ -171,8 +168,16 @@ module.exports = grammar({
     ),
 
     xout_statement: $ => choice(
-        $.function_call,
-        $.opcode_statement
+        seq(
+            'xout',
+            '(',
+            field('inputs', $.argument_list),
+            ')'
+        ),
+        seq(
+            'xout',
+            field('inputs', $.argument_list),
+        )
     ),
 
     header_assignment: $ => seq($.header_identifier, '=', $._expression),
@@ -319,7 +324,6 @@ module.exports = grammar({
     ),
 
     _expression_list: $ => sep1($._expression, ','),
-
     parenthesized_expression: $ => seq(
         '(',
         choice(
