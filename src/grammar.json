@@ -436,6 +436,10 @@
           }
         },
         {
+          "type": "STRING",
+          "value": "\n"
+        },
+        {
           "type": "CHOICE",
           "members": [
             {
@@ -665,6 +669,10 @@
             {
               "type": "STRING",
               "value": ")"
+            },
+            {
+              "type": "STRING",
+              "value": "\n"
             }
           ]
         },

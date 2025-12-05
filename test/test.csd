@@ -8,14 +8,14 @@ ksmps = 1
 nchnls = 2
 0dbfs = 1
 
-// TODO: lsp: add unused variables, fix type in case as below in xout, add definition of udo in orc, fix mul
+// TODO: lsp: add unused variables, add definition of udo in orc, fix mul
 
 opcode print_value(value:i, value1:k):(ii)
     print(value)
     xout(10, i2)
 endop
 
-opcode add, ii, ii
+opcode add, ii, iic
     i1, i2 xin
     xout(i1, 10)
 endop

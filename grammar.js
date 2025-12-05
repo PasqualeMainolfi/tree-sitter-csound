@@ -98,6 +98,7 @@ module.exports = grammar({
       field('outputs', $.legacy_udo_output_types),
       ',',
       field('inputs', $.legacy_udo_input_types),
+      '\n',
       optional($.xin_statement),
       repeat($._statement),
       optional($.xout_statement),
@@ -133,7 +134,8 @@ module.exports = grammar({
               $.type_identifier,
               $.legacy_udo_output_types
           )),
-          ')'
+          ')',
+          '\n'
       ),
       'void',
       $.type_identifier
