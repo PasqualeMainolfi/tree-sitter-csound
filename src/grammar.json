@@ -420,7 +420,7 @@
           "name": "outputs",
           "content": {
             "type": "SYMBOL",
-            "name": "legacy_udo_output_types"
+            "name": "legacy_udo_args"
           }
         },
         {
@@ -432,7 +432,7 @@
           "name": "inputs",
           "content": {
             "type": "SYMBOL",
-            "name": "legacy_udo_input_types"
+            "name": "legacy_udo_args"
           }
         },
         {
@@ -545,25 +545,14 @@
         }
       ]
     },
-    "legacy_udo_input_types": {
+    "legacy_udo_args": {
       "type": "TOKEN",
       "content": {
         "type": "PREC",
         "value": 5,
         "content": {
           "type": "PATTERN",
-          "value": "[afijkopOPVJKS0]+(\\[\\])*"
-        }
-      }
-    },
-    "legacy_udo_output_types": {
-      "type": "TOKEN",
-      "content": {
-        "type": "PREC",
-        "value": 5,
-        "content": {
-          "type": "PATTERN",
-          "value": "[afijkKS0]+(\\[\\])*"
+          "value": "[a-zA-Z0-9]+(\\[\\])*"
         }
       }
     },
@@ -653,7 +642,7 @@
                     },
                     {
                       "type": "SYMBOL",
-                      "name": "legacy_udo_output_types"
+                      "name": "legacy_udo_args"
                     }
                   ]
                 },

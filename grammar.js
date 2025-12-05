@@ -95,9 +95,9 @@ module.exports = grammar({
       'opcode',
       field('name', $.opcode_name),
       optional(','),
-      field('outputs', $.legacy_udo_output_types),
+      field('outputs', $.legacy_udo_args),
       ',',
-      field('inputs', $.legacy_udo_input_types),
+      field('inputs', $.legacy_udo_args),
       optional($.xin_statement),
       repeat($._statement),
       optional($.xout_statement),
@@ -117,8 +117,7 @@ module.exports = grammar({
       'endop'
     ),
 
-    legacy_udo_input_types: $ => token(prec(5, /[afijkopOPVJKS0]+(\[\])*/)),
-    legacy_udo_output_types: $ => token(prec(5, /[afijkKS0]+(\[\])*/)),
+    legacy_udo_args: $ => token(prec(5, /[a-zA-Z0-9]+(\[\])*/)),
 
     modern_udo_inputs: $ => seq(
       '(',
@@ -131,7 +130,7 @@ module.exports = grammar({
           '(',
           optional(choice(
               $.type_identifier,
-              $.legacy_udo_output_types
+              $.legacy_udo_args
           )),
           ')'
       ),

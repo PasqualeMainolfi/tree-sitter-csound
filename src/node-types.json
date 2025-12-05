@@ -1417,7 +1417,7 @@
       "required": false,
       "types": [
         {
-          "type": "legacy_udo_output_types",
+          "type": "legacy_udo_args",
           "named": true
         },
         {
@@ -2196,7 +2196,7 @@
         "required": true,
         "types": [
           {
-            "type": "legacy_udo_input_types",
+            "type": "legacy_udo_args",
             "named": true
           }
         ]
@@ -2216,7 +2216,7 @@
         "required": true,
         "types": [
           {
-            "type": "legacy_udo_output_types",
+            "type": "legacy_udo_args",
             "named": true
           }
         ]
@@ -2944,11 +2944,7 @@
     "named": false
   },
   {
-    "type": "legacy_udo_input_types",
-    "named": true
-  },
-  {
-    "type": "legacy_udo_output_types",
+    "type": "legacy_udo_args",
     "named": true
   },
   {
