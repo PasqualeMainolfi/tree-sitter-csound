@@ -133,22 +133,6 @@
     }
   },
   {
-    "type": "array_variable",
-    "named": true,
-    "fields": {
-      "name": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
     "type": "assignment_statement",
     "named": true,
     "fields": {
@@ -162,10 +146,6 @@
           },
           {
             "type": "array_access",
-            "named": true
-          },
-          {
-            "type": "array_variable",
             "named": true
           },
           {
@@ -1404,21 +1384,6 @@
     }
   },
   {
-    "type": "legacy_array_identifier",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "type_identifier_legacy",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "legacy_typed_assignment_statement",
     "named": true,
     "fields": {
@@ -1429,10 +1394,6 @@
           {
             "type": ",",
             "named": false
-          },
-          {
-            "type": "legacy_array_identifier",
-            "named": true
           },
           {
             "type": "type_identifier_legacy",
@@ -1651,10 +1612,6 @@
           {
             "type": ",",
             "named": false
-          },
-          {
-            "type": "array_variable",
-            "named": true
           },
           {
             "type": "type_identifier_legacy",
@@ -2811,10 +2768,6 @@
           },
           {
             "type": "array_access",
-            "named": true
-          },
-          {
-            "type": "array_variable",
             "named": true
           },
           {

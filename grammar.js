@@ -200,26 +200,15 @@ module.exports = grammar({
     ),
 
     legacy_typed_assignment_statement: $ => prec(3, seq(
-      field('left', sep1(choice($.type_identifier_legacy, $.legacy_array_identifier), ',')),
+      field('left', sep1($.type_identifier_legacy, ',')),
       field('operator', choice('=', '+=', '-=', '*=', '/=', '##addin', '##subin', '##mulin', '##divin')),
       field('right', $._expression)
     )),
-
-    array_variable: $ => seq(
-        field('name', $.identifier),
-        repeat1(seq('[', ']'))
-    ),
-
-    legacy_array_identifier: $ => seq(
-        $.type_identifier_legacy,
-        repeat1(seq('[', ']'))
-    ),
 
     _lvalue: $ => choice(
       $.typed_identifier,
       $.global_typed_identifier,
       $.array_access,
-      $.array_variable,
       $.struct_access,
       alias(choice($.identifier, $.type_identifier_legacy), $.identifier)
     ),
@@ -227,7 +216,7 @@ module.exports = grammar({
     opcode_statement: $ => seq(
         field('outputs', optional(
             sep1(
-                choice($.typed_identifier, $.type_identifier_legacy, $.array_variable),
+                choice($.typed_identifier, $.type_identifier_legacy),
                 ','
             )
         )),
@@ -428,7 +417,7 @@ module.exports = grammar({
     opcode_name: $ => alias(choice($.type_identifier_legacy, $.identifier), 'opcode_name'),
 
     type_identifier: $ => token(prec(1, /(InstrDef|Instr|Opcode|Complex|[aikbSfw])(\[\])*/)),
-    type_identifier_legacy: $ => token(prec(1, /[aikbSfw][a-zA-Z0-9_]*/)),
+    type_identifier_legacy: $ => token(prec(1, /[aikbSfw][a-zA-Z0-9_\[\]]*/)),
 
     number: $ => choice(/\d+/, /0[xX][0-9a-fA-F]+/, /\d+\.\d+([eE][+-]?\d+)?/, /\d+[eE][+-]?\d+/),
     string: $ => seq('"', repeat(choice(/[^"\\\n]+/, /\\./)), '"'),
