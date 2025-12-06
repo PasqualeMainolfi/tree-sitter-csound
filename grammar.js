@@ -394,8 +394,7 @@ module.exports = grammar({
     identifier: $ => /[a-zA-Z_]\w*/,
     plus_identifier: $ => /\+[a-zA-Z_]\w*/,
 
-    // TODO: fix type_identifier in explicit type assign
-    typed_identifier: $ => prec(2, seq(
+    typed_identifier: $ => prec(3, seq(
       field('name', $.identifier),
       ':',
       field('type', choice($.type_identifier, $.identifier))
