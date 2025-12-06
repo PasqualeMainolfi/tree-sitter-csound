@@ -2835,8 +2835,17 @@
     "opcode_name": {
       "type": "ALIAS",
       "content": {
-        "type": "SYMBOL",
-        "name": "identifier"
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "type_identifier_legacy"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "identifier"
+          }
+        ]
       },
       "named": false,
       "value": "opcode_name"

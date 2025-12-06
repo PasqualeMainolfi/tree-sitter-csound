@@ -406,7 +406,7 @@ module.exports = grammar({
     )),
 
     global_keyword: $ => '@global',
-    opcode_name: $ => alias($.identifier, 'opcode_name'),
+    opcode_name: $ => alias(choice($.type_identifier_legacy, $.identifier), 'opcode_name'),
 
     type_identifier: $ => token.immediate(/(InstrDef|Instr|Opcode|Complex|[aikbSfw])(\[\])*/),
     type_identifier_legacy: $ => token(prec(1, /[aikbSfw][a-zA-Z_]\w*(\[(?:[^]\[]*)\])*/)),
