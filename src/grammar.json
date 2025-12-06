@@ -634,17 +634,8 @@
               "value": "("
             },
             {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "type_identifier"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "legacy_udo_args"
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "legacy_udo_args"
             },
             {
               "type": "STRING",
