@@ -163,7 +163,7 @@ module.exports = grammar({
     ),
 
     xin_statement: $ => seq(
-      field('outputs', sep1($._lvalue, ',')),
+      field('outputs', sep1($.type_identifier_legacy, ',')),
       'xin'
     ),
 

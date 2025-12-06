@@ -46,6 +46,7 @@ instr 1
             print(3)
     endsw
 
+    outs(sig2, sig2)
 endin
 
 
