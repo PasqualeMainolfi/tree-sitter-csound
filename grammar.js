@@ -119,7 +119,7 @@ module.exports = grammar({
     ),
 
     legacy_udo_args: $ => token(/[a-zA-Z0-9\[\]]+/),
-    modern_udo_output_args: $ => token(/\\([a-zA-Z0-9\[\]]+\\)/),
+    modern_udo_output_args: $ => token(seq('(', /[a-zA-Z0-9\[\]]+/, ')')),
 
     modern_udo_inputs: $ => seq(
       '(',

@@ -542,8 +542,21 @@
     "modern_udo_output_args": {
       "type": "TOKEN",
       "content": {
-        "type": "PATTERN",
-        "value": "\\\\([a-zA-Z0-9\\[\\]]+\\\\)"
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "("
+          },
+          {
+            "type": "PATTERN",
+            "value": "[a-zA-Z0-9\\[\\]]+"
+          },
+          {
+            "type": "STRING",
+            "value": ")"
+          }
+        ]
       }
     },
     "modern_udo_inputs": {
