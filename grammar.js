@@ -120,13 +120,15 @@ module.exports = grammar({
       'endop'
     ),
 
-    legacy_udo_args: $ => token(prec(2, /[a-zA-Z0-9\[\]]+/)),
+    legacy_udo_args: $ => token(/[a-zA-Z0-9\[\]]+/),
 
     modern_udo_inputs: $ => seq(
       '(',
       optional(sep1(choice($.typed_identifier, $.identifier), ',')),
       ')'
     ),
+
+    _void: $ => token('void'),
 
     modern_udo_outputs: $ => choice(
       seq(
@@ -137,7 +139,7 @@ module.exports = grammar({
           )),
           ')'
       ),
-      'void',
+      $._void,
       $.type_identifier
     ),
 
