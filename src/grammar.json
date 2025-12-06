@@ -635,7 +635,7 @@
             },
             {
               "type": "SYMBOL",
-              "name": "legacy_udo_args"
+              "name": "type_identifier"
             },
             {
               "type": "STRING",

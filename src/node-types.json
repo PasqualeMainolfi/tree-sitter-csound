@@ -1604,10 +1604,6 @@
       "required": false,
       "types": [
         {
-          "type": "legacy_udo_args",
-          "named": true
-        },
-        {
           "type": "type_identifier",
           "named": true
         }
