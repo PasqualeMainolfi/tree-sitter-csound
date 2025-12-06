@@ -546,15 +546,47 @@
       ]
     },
     "legacy_udo_args": {
-      "type": "TOKEN",
+      "type": "ALIAS",
       "content": {
-        "type": "PREC",
-        "value": 10,
-        "content": {
-          "type": "PATTERN",
-          "value": "[a-zA-Z0-9\\[\\]]+"
-        }
-      }
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "identifier"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "number"
+          },
+          {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "identifier"
+              },
+              {
+                "type": "REPEAT1",
+                "content": {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "STRING",
+                      "value": "["
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "]"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "named": false,
+      "value": "legacy_udo_args"
     },
     "modern_udo_inputs": {
       "type": "SEQ",
@@ -1320,6 +1352,10 @@
                       {
                         "type": "SYMBOL",
                         "name": "array_variable"
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "identifier"
                       }
                     ]
                   },
@@ -1346,6 +1382,10 @@
                             {
                               "type": "SYMBOL",
                               "name": "array_variable"
+                            },
+                            {
+                              "type": "SYMBOL",
+                              "name": "identifier"
                             }
                           ]
                         }
@@ -2978,7 +3018,7 @@
         "value": 1,
         "content": {
           "type": "PATTERN",
-          "value": "[aikbSfw][a-zA-Z_]\\w*(\\[(?:[^]\\[]*)\\])*"
+          "value": "[aikbSfw][a-zA-Z0-9_]*"
         }
       }
     },

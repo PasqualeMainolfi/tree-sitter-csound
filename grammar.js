@@ -120,7 +120,15 @@ module.exports = grammar({
       'endop'
     ),
 
-    legacy_udo_args: $ => token(prec(10, /[a-zA-Z0-9\[\]]+/)),
+    // legacy_udo_args: $ => token(/[a-zA-Z0-9]+(\[\])*/),
+    legacy_udo_args: $ => alias(
+        choice(
+            $.identifier,
+            $.number,
+            seq($.identifier, repeat1(seq('[', ']')))
+        ),
+        'legacy_udo_args'
+    ),
 
     modern_udo_inputs: $ => seq(
       '(',
@@ -223,7 +231,7 @@ module.exports = grammar({
     opcode_statement: $ => seq(
         field('outputs', optional(
             sep1(
-                choice($.typed_identifier, $.type_identifier_legacy, $.array_variable),
+                choice($.typed_identifier, $.type_identifier_legacy, $.array_variable, $.identifier),
                 ','
             )
         )),
@@ -424,7 +432,7 @@ module.exports = grammar({
     opcode_name: $ => alias(choice($.type_identifier_legacy, $.identifier), 'opcode_name'),
 
     type_identifier: $ => token.immediate(/(InstrDef|Instr|Opcode|Complex|[aikbSfw])(\[\])*/),
-    type_identifier_legacy: $ => token(prec(1, /[aikbSfw][a-zA-Z_]\w*(\[(?:[^]\[]*)\])*/)),
+    type_identifier_legacy: $ => token(prec(1, /[aikbSfw][a-zA-Z0-9_]*/)),
 
     number: $ => choice(/\d+/, /0[xX][0-9a-fA-F]+/, /\d+\.\d+([eE][+-]?\d+)?/, /\d+[eE][+-]?\d+/),
     string: $ => seq('"', repeat(choice(/[^"\\\n]+/, /\\./)), '"'),

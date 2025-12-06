@@ -1539,6 +1539,11 @@
     }
   },
   {
+    "type": "legacy_udo_args",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "macro_define",
     "named": true,
     "fields": {},
@@ -1658,6 +1663,10 @@
           },
           {
             "type": "array_variable",
+            "named": true
+          },
+          {
+            "type": "identifier",
             "named": true
           },
           {
@@ -3155,7 +3164,7 @@
   },
   {
     "type": "legacy_udo_args",
-    "named": true
+    "named": false
   },
   {
     "type": "nchnls",
