@@ -2767,23 +2767,7 @@
             "named": false
           },
           {
-            "type": "array_access",
-            "named": true
-          },
-          {
-            "type": "global_typed_identifier",
-            "named": true
-          },
-          {
-            "type": "identifier",
-            "named": true
-          },
-          {
-            "type": "struct_access",
-            "named": true
-          },
-          {
-            "type": "typed_identifier",
+            "type": "type_identifier_legacy",
             "named": true
           }
         ]

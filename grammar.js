@@ -9,17 +9,18 @@ module.exports = grammar({
   conflicts: $ => [
     [$._root_statement, $._score_item],
     [$._root_statement, $._statement],
-    [$.opcode_statement, $._lvalue],
     [$.opcode_statement, $.opcode_name],
     [$.opcode_statement, $.typed_assignment_statement],
     [$.argument_list, $.parenthesized_expression],
     [$.parenthesized_expression, $.argument_list],
     [$.legacy_typed_assignment_statement, $.opcode_statement],
+    [$.xin_statement, $.opcode_statement, $.legacy_typed_assignment_statement],
     [$.xout_statement, $._expression],
     [$.cabbage_statement],
     [$.opcode_statement],
     [$.macro_usage],
-    [$._lvalue]
+    // [$.opcode_statement, $._lvalue],
+    // [$._lvalue]
     // [$.argument_list],
     // [$.parenthesized_expression, $.argument_list],
     // [$.function_call, $.argument_list],
@@ -168,18 +169,20 @@ module.exports = grammar({
       $.struct_definition
     ),
 
+    _xin: $ => token('xin'),
     xin_statement: $ => seq(
-      field('outputs', sep1($._lvalue, ',')),
-      'xin'
+      field('outputs', sep1($.type_identifier_legacy, ',')),
+      $._xin
     ),
 
+    _xout: $ => token('xout'),
     xout_statement: $ => choice(
         seq(
-            'xout',
+            $._xout,
             field('inputs', $.parenthesized_expression),
         ),
         seq(
-            'xout',
+            $._xout,
             field('inputs', $.argument_list),
         )
     ),
@@ -210,7 +213,7 @@ module.exports = grammar({
       $.global_typed_identifier,
       $.array_access,
       $.struct_access,
-      alias(choice($.identifier, $.type_identifier_legacy), $.identifier)
+      $.identifier
     ),
 
     opcode_statement: $ => seq(
@@ -417,7 +420,7 @@ module.exports = grammar({
     opcode_name: $ => alias(choice($.type_identifier_legacy, $.identifier), 'opcode_name'),
 
     type_identifier: $ => token(prec(1, /(InstrDef|Instr|Opcode|Complex|[aikbSfw])(\[\])*/)),
-    type_identifier_legacy: $ => token(prec(1, /[aikbSfw][a-zA-Z0-9_\[\]]*/)),
+    type_identifier_legacy: $ => token(prec(1, /[aikbSfw][a-zA-Z0-9_]*/)),
 
     number: $ => choice(/\d+/, /0[xX][0-9a-fA-F]+/, /\d+\.\d+([eE][+-]?\d+)?/, /\d+[eE][+-]?\d+/),
     string: $ => seq('"', repeat(choice(/[^"\\\n]+/, /\\./)), '"'),

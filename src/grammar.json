@@ -738,6 +738,13 @@
         }
       ]
     },
+    "_xin": {
+      "type": "TOKEN",
+      "content": {
+        "type": "STRING",
+        "value": "xin"
+      }
+    },
     "xin_statement": {
       "type": "SEQ",
       "members": [
@@ -749,7 +756,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "_lvalue"
+                "name": "type_identifier_legacy"
               },
               {
                 "type": "REPEAT",
@@ -762,7 +769,7 @@
                     },
                     {
                       "type": "SYMBOL",
-                      "name": "_lvalue"
+                      "name": "type_identifier_legacy"
                     }
                   ]
                 }
@@ -771,10 +778,17 @@
           }
         },
         {
-          "type": "STRING",
-          "value": "xin"
+          "type": "SYMBOL",
+          "name": "_xin"
         }
       ]
+    },
+    "_xout": {
+      "type": "TOKEN",
+      "content": {
+        "type": "STRING",
+        "value": "xout"
+      }
     },
     "xout_statement": {
       "type": "CHOICE",
@@ -783,8 +797,8 @@
           "type": "SEQ",
           "members": [
             {
-              "type": "STRING",
-              "value": "xout"
+              "type": "SYMBOL",
+              "name": "_xout"
             },
             {
               "type": "FIELD",
@@ -800,8 +814,8 @@
           "type": "SEQ",
           "members": [
             {
-              "type": "STRING",
-              "value": "xout"
+              "type": "SYMBOL",
+              "name": "_xout"
             },
             {
               "type": "FIELD",
@@ -1168,22 +1182,8 @@
           "name": "struct_access"
         },
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "identifier"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "type_identifier_legacy"
-              }
-            ]
-          },
-          "named": true,
-          "value": "identifier"
+          "type": "SYMBOL",
+          "name": "identifier"
         }
       ]
     },
@@ -2867,7 +2867,7 @@
         "value": 1,
         "content": {
           "type": "PATTERN",
-          "value": "[aikbSfw][a-zA-Z0-9_\\[\\]]*"
+          "value": "[aikbSfw][a-zA-Z0-9_]*"
         }
       }
     },
@@ -2995,10 +2995,6 @@
     ],
     [
       "opcode_statement",
-      "_lvalue"
-    ],
-    [
-      "opcode_statement",
       "opcode_name"
     ],
     [
@@ -3018,6 +3014,11 @@
       "opcode_statement"
     ],
     [
+      "xin_statement",
+      "opcode_statement",
+      "legacy_typed_assignment_statement"
+    ],
+    [
       "xout_statement",
       "_expression"
     ],
@@ -3029,9 +3030,6 @@
     ],
     [
       "macro_usage"
-    ],
-    [
-      "_lvalue"
     ]
   ],
   "precedences": [],
