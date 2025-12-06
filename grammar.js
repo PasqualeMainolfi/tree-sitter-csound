@@ -149,7 +149,7 @@ module.exports = grammar({
       )
     ),
 
-    struct_name: $ => token(prec(5, /[a-zA-Z0-9_]+/)),
+    struct_name: $ => /[a-zA-Z0-9_]+/,
 
     // --- STATEMENTS ---
     _statement: $ => choice(
