@@ -402,7 +402,7 @@ module.exports = grammar({
     plus_identifier: $ => /\+[a-zA-Z_]\w*/,
 
     typed_identifier: $ => prec(3, seq(
-      field('name', $.identifier),
+      field('name', choice($.identifier, $.type_identifier_legacy)),
       ':',
       field('type', choice($.type_identifier, $.identifier))
     )),

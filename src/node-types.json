@@ -2296,6 +2296,10 @@
           {
             "type": "identifier",
             "named": true
+          },
+          {
+            "type": "type_identifier_legacy",
+            "named": true
           }
         ]
       },
