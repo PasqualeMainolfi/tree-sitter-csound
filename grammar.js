@@ -120,6 +120,7 @@ module.exports = grammar({
 
     legacy_udo_args: $ => token(/[a-zA-Z0-9\[\]]+/),
     modern_udo_output_args: $ => token(seq('(', /[a-zA-Z0-9\[\]]+/, ')')),
+    _void: $ => token('void'),
 
     modern_udo_inputs: $ => seq(
       '(',
@@ -127,12 +128,9 @@ module.exports = grammar({
       ')'
     ),
 
-    _void: $ => token('void'),
-
     modern_udo_outputs: $ => choice(
       $.modern_udo_output_args,
-      $._void,
-      $.type_identifier
+      $._void
     ),
 
     // modern_udo_outputs: $ => choice(

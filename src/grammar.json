@@ -559,6 +559,13 @@
         ]
       }
     },
+    "_void": {
+      "type": "TOKEN",
+      "content": {
+        "type": "STRING",
+        "value": "void"
+      }
+    },
     "modern_udo_inputs": {
       "type": "SEQ",
       "members": [
@@ -623,13 +630,6 @@
         }
       ]
     },
-    "_void": {
-      "type": "TOKEN",
-      "content": {
-        "type": "STRING",
-        "value": "void"
-      }
-    },
     "modern_udo_outputs": {
       "type": "CHOICE",
       "members": [
@@ -640,10 +640,6 @@
         {
           "type": "SYMBOL",
           "name": "_void"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "type_identifier"
         }
       ]
     },

@@ -1606,10 +1606,6 @@
         {
           "type": "modern_udo_output_args",
           "named": true
-        },
-        {
-          "type": "type_identifier",
-          "named": true
         }
       ]
     }
