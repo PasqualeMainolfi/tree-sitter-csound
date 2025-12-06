@@ -427,6 +427,10 @@
             "named": true
           },
           {
+            "type": "legacy_typed_assignment_statement",
+            "named": true
+          },
+          {
             "type": "opcode_statement",
             "named": true
           },
@@ -652,6 +656,10 @@
             "named": true
           },
           {
+            "type": "legacy_typed_assignment_statement",
+            "named": true
+          },
+          {
             "type": "opcode_statement",
             "named": true
           },
@@ -726,6 +734,10 @@
           "named": true
         },
         {
+          "type": "legacy_typed_assignment_statement",
+          "named": true
+        },
+        {
           "type": "opcode_statement",
           "named": true
         },
@@ -782,6 +794,10 @@
         },
         {
           "type": "label_statement",
+          "named": true
+        },
+        {
+          "type": "legacy_typed_assignment_statement",
           "named": true
         },
         {
@@ -869,6 +885,10 @@
         },
         {
           "type": "label_statement",
+          "named": true
+        },
+        {
+          "type": "legacy_typed_assignment_statement",
           "named": true
         },
         {
@@ -1175,6 +1195,10 @@
           "named": true
         },
         {
+          "type": "legacy_typed_assignment_statement",
+          "named": true
+        },
+        {
           "type": "opcode_statement",
           "named": true
         },
@@ -1219,6 +1243,10 @@
         },
         {
           "type": "label_statement",
+          "named": true
+        },
+        {
+          "type": "legacy_typed_assignment_statement",
           "named": true
         },
         {
@@ -1303,6 +1331,10 @@
           "named": true
         },
         {
+          "type": "legacy_typed_assignment_statement",
+          "named": true
+        },
+        {
           "type": "opcode_statement",
           "named": true
         },
@@ -1353,6 +1385,122 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "legacy_typed_assignment_statement",
+    "named": true,
+    "fields": {
+      "left": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": ",",
+            "named": false
+          },
+          {
+            "type": "type_identifier_legacy",
+            "named": true
+          }
+        ]
+      },
+      "operator": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "##addin",
+            "named": false
+          },
+          {
+            "type": "##divin",
+            "named": false
+          },
+          {
+            "type": "##mulin",
+            "named": false
+          },
+          {
+            "type": "##subin",
+            "named": false
+          },
+          {
+            "type": "*=",
+            "named": false
+          },
+          {
+            "type": "+=",
+            "named": false
+          },
+          {
+            "type": "-=",
+            "named": false
+          },
+          {
+            "type": "/=",
+            "named": false
+          },
+          {
+            "type": "=",
+            "named": false
+          }
+        ]
+      },
+      "right": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "array_access",
+            "named": true
+          },
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "function_call",
+            "named": true
+          },
+          {
+            "type": "header_identifier",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "macro_usage",
+            "named": true
+          },
+          {
+            "type": "number",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          },
+          {
+            "type": "struct_access",
+            "named": true
+          },
+          {
+            "type": "ternary_expression",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -1530,6 +1678,10 @@
         },
         {
           "type": "label_statement",
+          "named": true
+        },
+        {
+          "type": "legacy_typed_assignment_statement",
           "named": true
         },
         {
@@ -2242,6 +2394,10 @@
           "named": true
         },
         {
+          "type": "legacy_typed_assignment_statement",
+          "named": true
+        },
+        {
           "type": "opcode_statement",
           "named": true
         },
@@ -2321,6 +2477,10 @@
         },
         {
           "type": "label_statement",
+          "named": true
+        },
+        {
+          "type": "legacy_typed_assignment_statement",
           "named": true
         },
         {
@@ -2461,6 +2621,10 @@
           "named": true
         },
         {
+          "type": "legacy_typed_assignment_statement",
+          "named": true
+        },
+        {
           "type": "macro_usage",
           "named": true
         },
@@ -2545,6 +2709,10 @@
         },
         {
           "type": "label_statement",
+          "named": true
+        },
+        {
+          "type": "legacy_typed_assignment_statement",
           "named": true
         },
         {

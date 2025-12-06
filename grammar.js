@@ -153,6 +153,7 @@ module.exports = grammar({
       $.header_assignment,
       $.typed_assignment_statement,
       $.assignment_statement,
+      $.legacy_typed_assignment_statement,
       $.function_call,
       $.opcode_statement,
       $.control_statement,
@@ -190,6 +191,12 @@ module.exports = grammar({
       field('operator', choice('=', '+=', '-=', '*=', '/=', '##addin', '##subin', '##mulin', '##divin')),
       field('right', $._expression)
     ),
+
+    legacy_typed_assignment_statement: $ => prec(3, seq(
+      field('left', sep1($.type_identifier_legacy, ',')),
+      field('operator', choice('=', '+=', '-=', '*=', '/=', '##addin', '##subin', '##mulin', '##divin')),
+      field('right', $._expression)
+    )),
 
     _lvalue: $ => choice(
       $.typed_identifier,
