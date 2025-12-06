@@ -780,7 +780,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "type_identifier_legacy"
+                "name": "_lvalue"
               },
               {
                 "type": "REPEAT",
@@ -793,7 +793,7 @@
                     },
                     {
                       "type": "SYMBOL",
-                      "name": "type_identifier_legacy"
+                      "name": "_lvalue"
                     }
                   ]
                 }
