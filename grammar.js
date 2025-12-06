@@ -14,6 +14,7 @@ module.exports = grammar({
     [$.opcode_statement, $.typed_assignment_statement],
     [$.argument_list, $.parenthesized_expression],
     [$.parenthesized_expression, $.argument_list],
+    [$.legacy_typed_assignment_statement, $.opcode_statement],
     [$.xout_statement, $._expression],
     [$.xin_statement, $._statement],
     [$.cabbage_statement],
@@ -119,7 +120,15 @@ module.exports = grammar({
       'endop'
     ),
 
-    legacy_udo_args: $ => token(/[a-zA-Z0-9]+(\[\])*/),
+    // legacy_udo_args: $ => token(/[a-zA-Z0-9]+(\[\])*/),
+    legacy_udo_args: $ => alias(
+        choice(
+            $.identifier,
+            seq($.identifier, repeat1(seq('[', ']'))),
+            $.number
+        ),
+        'legacy_udo_args'
+    ),
 
     modern_udo_inputs: $ => seq(
       '(',
@@ -200,18 +209,27 @@ module.exports = grammar({
       field('right', $._expression)
     )),
 
+    array_variable: $ => seq(
+        field('name', $.identifier),
+        repeat1(seq('[', ']'))
+    ),
+
     _lvalue: $ => choice(
       $.typed_identifier,
       $.global_typed_identifier,
       $.array_access,
+      $.array_variable,
       $.struct_access,
       alias(choice($.identifier, $.type_identifier_legacy), $.identifier)
     ),
 
     opcode_statement: $ => seq(
         field('outputs', optional(
-            choice($.typed_identifier, $.type_identifier_legacy))
-        ),
+            sep1(
+                choice($.typed_identifier, $.type_identifier_legacy, $.array_variable),
+                ','
+            )
+        )),
         field('op', $.opcode_name),
         field('inputs', optional($.argument_list))
     ),

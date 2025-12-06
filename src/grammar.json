@@ -546,11 +546,47 @@
       ]
     },
     "legacy_udo_args": {
-      "type": "TOKEN",
+      "type": "ALIAS",
       "content": {
-        "type": "PATTERN",
-        "value": "[a-zA-Z0-9]+(\\[\\])*"
-      }
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "identifier"
+          },
+          {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "identifier"
+              },
+              {
+                "type": "REPEAT1",
+                "content": {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "STRING",
+                      "value": "["
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "]"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "type": "SYMBOL",
+            "name": "number"
+          }
+        ]
+      },
+      "named": false,
+      "value": "legacy_udo_args"
     },
     "modern_udo_inputs": {
       "type": "SEQ",
@@ -1175,6 +1211,35 @@
         ]
       }
     },
+    "array_variable": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "SYMBOL",
+            "name": "identifier"
+          }
+        },
+        {
+          "type": "REPEAT1",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "STRING",
+                "value": "["
+              },
+              {
+                "type": "STRING",
+                "value": "]"
+              }
+            ]
+          }
+        }
+      ]
+    },
     "_lvalue": {
       "type": "CHOICE",
       "members": [
@@ -1189,6 +1254,10 @@
         {
           "type": "SYMBOL",
           "name": "array_access"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "array_variable"
         },
         {
           "type": "SYMBOL",
@@ -1224,15 +1293,53 @@
             "type": "CHOICE",
             "members": [
               {
-                "type": "CHOICE",
+                "type": "SEQ",
                 "members": [
                   {
-                    "type": "SYMBOL",
-                    "name": "typed_identifier"
+                    "type": "CHOICE",
+                    "members": [
+                      {
+                        "type": "SYMBOL",
+                        "name": "typed_identifier"
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "type_identifier_legacy"
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "array_variable"
+                      }
+                    ]
                   },
                   {
-                    "type": "SYMBOL",
-                    "name": "type_identifier_legacy"
+                    "type": "REPEAT",
+                    "content": {
+                      "type": "SEQ",
+                      "members": [
+                        {
+                          "type": "STRING",
+                          "value": ","
+                        },
+                        {
+                          "type": "CHOICE",
+                          "members": [
+                            {
+                              "type": "SYMBOL",
+                              "name": "typed_identifier"
+                            },
+                            {
+                              "type": "SYMBOL",
+                              "name": "type_identifier_legacy"
+                            },
+                            {
+                              "type": "SYMBOL",
+                              "name": "array_variable"
+                            }
+                          ]
+                        }
+                      ]
+                    }
                   }
                 ]
               },
@@ -3005,6 +3112,10 @@
     [
       "parenthesized_expression",
       "argument_list"
+    ],
+    [
+      "legacy_typed_assignment_statement",
+      "opcode_statement"
     ],
     [
       "xout_statement",
