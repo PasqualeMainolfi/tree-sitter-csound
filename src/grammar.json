@@ -539,26 +539,6 @@
         "value": "[a-zA-Z0-9\\[\\]]+"
       }
     },
-    "modern_udo_output_args": {
-      "type": "TOKEN",
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "STRING",
-            "value": "("
-          },
-          {
-            "type": "PATTERN",
-            "value": "[a-zA-Z0-9\\[\\]]+"
-          },
-          {
-            "type": "STRING",
-            "value": ")"
-          }
-        ]
-      }
-    },
     "_void": {
       "type": "TOKEN",
       "content": {
@@ -634,8 +614,21 @@
       "type": "CHOICE",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "modern_udo_output_args"
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "("
+            },
+            {
+              "type": "SYMBOL",
+              "name": "legacy_udo_args"
+            },
+            {
+              "type": "STRING",
+              "value": ")"
+            }
+          ]
         },
         {
           "type": "SYMBOL",
