@@ -19,7 +19,7 @@ module.exports = grammar({
     [$.cabbage_statement],
     [$.opcode_statement],
     [$.macro_usage],
-    // [$._lvalue]
+    [$._lvalue]
     // [$.argument_list],
     // [$.parenthesized_expression, $.argument_list],
     // [$.function_call, $.argument_list],

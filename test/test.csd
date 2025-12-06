@@ -15,7 +15,7 @@ opcode print_value(value:i, value1:k):(ii[]d)
     xout(10, i2)
 endop
 
-opcode add, ii, ii[]d
+opcode add, ii, ii
     i1, i2 xin
     xout(i1, 10)
 endop
@@ -24,7 +24,7 @@ instr 1
 
     struct MyType val0:i, val1:i
 
-    ifreq = 400
+    ifreq[] = 400
     sig:a = poscil(1, 440)
     asignal[] poscil ifreq, 44
     sig2:a[] = poscile(1, 3)
