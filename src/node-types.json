@@ -52,10 +52,6 @@
           "named": true
         },
         {
-          "type": "type_identifier_legacy",
-          "named": true
-        },
-        {
           "type": "unary_expression",
           "named": true
         }
@@ -130,10 +126,6 @@
           "named": true
         },
         {
-          "type": "type_identifier_legacy",
-          "named": true
-        },
-        {
           "type": "unary_expression",
           "named": true
         }
@@ -166,10 +158,6 @@
           },
           {
             "type": "struct_access",
-            "named": true
-          },
-          {
-            "type": "type_identifier_legacy",
             "named": true
           },
           {
@@ -269,10 +257,6 @@
             "named": true
           },
           {
-            "type": "type_identifier_legacy",
-            "named": true
-          },
-          {
             "type": "unary_expression",
             "named": true
           }
@@ -330,10 +314,6 @@
         },
         {
           "type": "ternary_expression",
-          "named": true
-        },
-        {
-          "type": "type_identifier_legacy",
           "named": true
         },
         {
@@ -526,10 +506,6 @@
         },
         {
           "type": "ternary_expression",
-          "named": true
-        },
-        {
-          "type": "type_identifier_legacy",
           "named": true
         },
         {
@@ -853,10 +829,6 @@
           "named": true
         },
         {
-          "type": "type_identifier_legacy",
-          "named": true
-        },
-        {
           "type": "typed_assignment_statement",
           "named": true
         },
@@ -945,10 +917,6 @@
         },
         {
           "type": "ternary_expression",
-          "named": true
-        },
-        {
-          "type": "type_identifier_legacy",
           "named": true
         },
         {
@@ -1111,10 +1079,6 @@
           "named": true
         },
         {
-          "type": "type_identifier_legacy",
-          "named": true
-        },
-        {
           "type": "unary_expression",
           "named": true
         }
@@ -1181,10 +1145,6 @@
           },
           {
             "type": "ternary_expression",
-            "named": true
-          },
-          {
-            "type": "type_identifier_legacy",
             "named": true
           },
           {
@@ -1532,10 +1492,6 @@
             "named": true
           },
           {
-            "type": "type_identifier_legacy",
-            "named": true
-          },
-          {
             "type": "unary_expression",
             "named": true
           }
@@ -1801,10 +1757,6 @@
         },
         {
           "type": "ternary_expression",
-          "named": true
-        },
-        {
-          "type": "type_identifier_legacy",
           "named": true
         },
         {
@@ -2144,10 +2096,6 @@
           "named": true
         },
         {
-          "type": "type_identifier_legacy",
-          "named": true
-        },
-        {
           "type": "unary_expression",
           "named": true
         }
@@ -2204,10 +2152,6 @@
         },
         {
           "type": "ternary_expression",
-          "named": true
-        },
-        {
-          "type": "type_identifier_legacy",
           "named": true
         },
         {
@@ -2327,10 +2271,6 @@
           },
           {
             "type": "ternary_expression",
-            "named": true
-          },
-          {
-            "type": "type_identifier_legacy",
             "named": true
           },
           {
@@ -2611,10 +2551,6 @@
           "named": true
         },
         {
-          "type": "type_identifier_legacy",
-          "named": true
-        },
-        {
           "type": "unary_expression",
           "named": true
         }
@@ -2717,10 +2653,6 @@
           "named": true
         },
         {
-          "type": "type_identifier_legacy",
-          "named": true
-        },
-        {
           "type": "typed_assignment_statement",
           "named": true
         },
@@ -2812,10 +2744,6 @@
           "named": true
         },
         {
-          "type": "type_identifier_legacy",
-          "named": true
-        },
-        {
           "type": "typed_assignment_statement",
           "named": true
         },
@@ -2852,10 +2780,6 @@
           },
           {
             "type": "struct_access",
-            "named": true
-          },
-          {
-            "type": "type_identifier_legacy",
             "named": true
           },
           {

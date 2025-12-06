@@ -1188,10 +1188,6 @@
         },
         {
           "type": "SYMBOL",
-          "name": "type_identifier_legacy"
-        },
-        {
-          "type": "SYMBOL",
           "name": "global_typed_identifier"
         },
         {
@@ -1205,6 +1201,24 @@
         {
           "type": "SYMBOL",
           "name": "identifier"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "identifier"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "type_identifier_legacy"
+              }
+            ]
+          },
+          "named": true,
+          "value": "identifier"
         }
       ]
     },
@@ -1789,12 +1803,22 @@
           "name": "string"
         },
         {
-          "type": "SYMBOL",
-          "name": "identifier"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "type_identifier_legacy"
+          "type": "ALIAS",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "identifier"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "type_identifier_legacy"
+              }
+            ]
+          },
+          "named": true,
+          "value": "identifier"
         },
         {
           "type": "SYMBOL",
@@ -2993,6 +3017,9 @@
     ],
     [
       "macro_usage"
+    ],
+    [
+      "_lvalue"
     ]
   ],
   "precedences": [],

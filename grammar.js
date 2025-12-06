@@ -18,6 +18,7 @@ module.exports = grammar({
     [$.cabbage_statement],
     [$.opcode_statement],
     [$.macro_usage],
+    [$._lvalue]
     // [$.argument_list],
     // [$.parenthesized_expression, $.argument_list],
     // [$.function_call, $.argument_list],
@@ -200,22 +201,12 @@ module.exports = grammar({
 
     _lvalue: $ => choice(
       $.typed_identifier,
-      $.type_identifier_legacy,
       $.global_typed_identifier,
       $.array_access,
       $.struct_access,
-      $.identifier
+      $.identifier,
+      alias(choice($.identifier, $.type_identifier_legacy), $.identifier)
     ),
-
-    // opcode_statement: $ => seq(
-    //     field('outputs', optional(
-    //         seq(
-    //             sep1(choice($.identifier, $.typed_identifier), ',')
-    //         ))
-    //     ),
-    //     field('op', $.opcode_name),
-    //     field('inputs', optional($.argument_list))
-    // ),
 
     opcode_statement: $ => seq(
         field('outputs', optional(
@@ -329,8 +320,7 @@ module.exports = grammar({
       $.header_identifier,
       $.number,
       $.string,
-      $.identifier,
-      $.type_identifier_legacy,
+      alias(choice($.identifier, $.type_identifier_legacy), $.identifier),
       $.array_access,
       $.struct_access,
       $.macro_usage
