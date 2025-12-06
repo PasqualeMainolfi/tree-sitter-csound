@@ -770,42 +770,13 @@
       ]
     },
     "xin_statement": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "FIELD",
-          "name": "outputs",
-          "content": {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "_lvalue"
-              },
-              {
-                "type": "REPEAT",
-                "content": {
-                  "type": "SEQ",
-                  "members": [
-                    {
-                      "type": "STRING",
-                      "value": ","
-                    },
-                    {
-                      "type": "SYMBOL",
-                      "name": "_lvalue"
-                    }
-                  ]
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "STRING",
-          "value": "xin"
-        }
-      ]
+      "type": "ALIAS",
+      "content": {
+        "type": "SYMBOL",
+        "name": "opcode_statement"
+      },
+      "named": false,
+      "value": "xin_statement"
     },
     "xout_statement": {
       "type": "CHOICE",
@@ -3004,6 +2975,10 @@
     [
       "xout_statement",
       "_expression"
+    ],
+    [
+      "xin_statement",
+      "_statement"
     ],
     [
       "cabbage_statement"

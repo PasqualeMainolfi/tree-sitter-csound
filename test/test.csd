@@ -24,8 +24,9 @@ instr 1
 
     struct MyType val0:i, val1:i
 
+    ifreq = 400
     sig:a = poscil(1, 440)
-    asignal poscil 1, 44
+    asignal[] poscil ifreq, 44 //fix error type in []
     sig2:a = poscile(1, 3)
     sig3:a += poscil(1, 440)
     filter:a = butterbp(sig, 300, 50)

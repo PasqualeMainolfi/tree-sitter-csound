@@ -15,6 +15,7 @@ module.exports = grammar({
     [$.argument_list, $.parenthesized_expression],
     [$.parenthesized_expression, $.argument_list],
     [$.xout_statement, $._expression],
+    [$.xin_statement, $._statement],
     [$.cabbage_statement],
     [$.opcode_statement],
     [$.macro_usage],
@@ -162,10 +163,12 @@ module.exports = grammar({
       $.struct_definition
     ),
 
-    xin_statement: $ => seq(
-      field('outputs', sep1($._lvalue, ',')),
-      'xin'
-    ),
+    xin_statement: $ => alias($.opcode_statement, 'xin_statement'),
+
+    // xin_statement: $ => seq(
+    //   field('outputs', sep1($._lvalue, ',')),
+    //   'xin'
+    // ),
 
     xout_statement: $ => choice(
         seq(
@@ -403,7 +406,6 @@ module.exports = grammar({
       ':',
       field('type', choice($.type_identifier, $.identifier))
     )),
-
 
     global_keyword: $ => '@global',
     opcode_name: $ => alias($.identifier, 'opcode_name'),
