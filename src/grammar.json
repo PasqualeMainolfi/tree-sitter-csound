@@ -1199,10 +1199,6 @@
           "name": "struct_access"
         },
         {
-          "type": "SYMBOL",
-          "name": "identifier"
-        },
-        {
           "type": "ALIAS",
           "content": {
             "type": "CHOICE",

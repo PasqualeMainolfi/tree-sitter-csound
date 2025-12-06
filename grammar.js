@@ -204,7 +204,6 @@ module.exports = grammar({
       $.global_typed_identifier,
       $.array_access,
       $.struct_access,
-      $.identifier,
       alias(choice($.identifier, $.type_identifier_legacy), $.identifier)
     ),
 
