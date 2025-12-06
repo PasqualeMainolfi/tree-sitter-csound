@@ -231,7 +231,7 @@ module.exports = grammar({
     opcode_statement: $ => seq(
         field('outputs', optional(
             sep1(
-                choice($.typed_identifier, $.type_identifier_legacy, $.array_variable, $.identifier),
+                choice($.typed_identifier, $.type_identifier_legacy, $.array_variable),
                 ','
             )
         )),

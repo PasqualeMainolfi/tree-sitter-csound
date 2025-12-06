@@ -1352,10 +1352,6 @@
                       {
                         "type": "SYMBOL",
                         "name": "array_variable"
-                      },
-                      {
-                        "type": "SYMBOL",
-                        "name": "identifier"
                       }
                     ]
                   },
@@ -1382,10 +1378,6 @@
                             {
                               "type": "SYMBOL",
                               "name": "array_variable"
-                            },
-                            {
-                              "type": "SYMBOL",
-                              "name": "identifier"
                             }
                           ]
                         }
