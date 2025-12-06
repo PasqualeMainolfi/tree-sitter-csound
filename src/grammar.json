@@ -546,47 +546,11 @@
       ]
     },
     "legacy_udo_args": {
-      "type": "ALIAS",
+      "type": "TOKEN",
       "content": {
-        "type": "CHOICE",
-        "members": [
-          {
-            "type": "SYMBOL",
-            "name": "identifier"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "number"
-          },
-          {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "identifier"
-              },
-              {
-                "type": "REPEAT1",
-                "content": {
-                  "type": "SEQ",
-                  "members": [
-                    {
-                      "type": "STRING",
-                      "value": "["
-                    },
-                    {
-                      "type": "STRING",
-                      "value": "]"
-                    }
-                  ]
-                }
-              }
-            ]
-          }
-        ]
-      },
-      "named": false,
-      "value": "legacy_udo_args"
+        "type": "PATTERN",
+        "value": "[a-zA-Z0-9]+(\\[\\])*"
+      }
     },
     "modern_udo_inputs": {
       "type": "SEQ",
@@ -3010,7 +2974,7 @@
         "value": 1,
         "content": {
           "type": "PATTERN",
-          "value": "[aikbSfw][a-zA-Z0-9_]*"
+          "value": "[aikbSfw][a-zA-Z_]\\w*(\\[(?:[^]\\[]*)\\])*"
         }
       }
     },

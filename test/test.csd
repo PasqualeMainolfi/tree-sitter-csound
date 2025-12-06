@@ -10,7 +10,7 @@ nchnls = 2
 
 // TODO: lsp: add unused variables
 
-opcode print_value(value:i, value1:k):(ii[]d)
+opcode print_value(value:i, value1:k):(ii[])
     print(value)
     xout(10, i2)
 endop
