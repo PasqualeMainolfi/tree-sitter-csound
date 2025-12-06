@@ -330,6 +330,7 @@ module.exports = grammar({
       $.number,
       $.string,
       $.identifier,
+      $.type_identifier_legacy,
       $.array_access,
       $.struct_access,
       $.macro_usage

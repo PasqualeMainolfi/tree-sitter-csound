@@ -1794,6 +1794,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "type_identifier_legacy"
+        },
+        {
+          "type": "SYMBOL",
           "name": "array_access"
         },
         {
