@@ -28,7 +28,7 @@ instr 1
     asignal poscil 1, 440
     sig2:a = poscile(1, 3)
     sig3:a += poscil(1, 440)
-    ; filter:a = butterbp(sig, 300, 50)
+    filter:a = butterbp(sig, 300, 50)
     vilter2:a = poscil(1, 440)
 
     gambo:MyType init 8, 88

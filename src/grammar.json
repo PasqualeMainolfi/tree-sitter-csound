@@ -578,7 +578,7 @@
                     },
                     {
                       "type": "SYMBOL",
-                      "name": "identifier"
+                      "name": "type_identifier_legacy"
                     }
                   ]
                 },
@@ -600,7 +600,7 @@
                           },
                           {
                             "type": "SYMBOL",
-                            "name": "identifier"
+                            "name": "type_identifier_legacy"
                           }
                         ]
                       }
@@ -1093,6 +1093,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "type_identifier_legacy"
+        },
+        {
+          "type": "SYMBOL",
           "name": "global_typed_identifier"
         },
         {
@@ -1109,70 +1113,6 @@
         }
       ]
     },
-    "declaration_out_op_legacy": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "type_identifier"
-        },
-        {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "identifier"
-            },
-            {
-              "type": "REPEAT",
-              "content": {
-                "type": "SEQ",
-                "members": [
-                  {
-                    "type": "STRING",
-                    "value": ","
-                  },
-                  {
-                    "type": "SYMBOL",
-                    "name": "identifier"
-                  }
-                ]
-              }
-            }
-          ]
-        }
-      ]
-    },
-    "declaration_out_op_modern": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "typed_identifier"
-            },
-            {
-              "type": "REPEAT",
-              "content": {
-                "type": "SEQ",
-                "members": [
-                  {
-                    "type": "STRING",
-                    "value": ","
-                  },
-                  {
-                    "type": "SYMBOL",
-                    "name": "typed_identifier"
-                  }
-                ]
-              }
-            }
-          ]
-        }
-      ]
-    },
     "opcode_statement": {
       "type": "SEQ",
       "members": [
@@ -1183,15 +1123,50 @@
             "type": "CHOICE",
             "members": [
               {
-                "type": "CHOICE",
+                "type": "SEQ",
                 "members": [
                   {
-                    "type": "SYMBOL",
-                    "name": "declaration_out_op_legacy"
-                  },
-                  {
-                    "type": "SYMBOL",
-                    "name": "declaration_out_op_modern"
+                    "type": "SEQ",
+                    "members": [
+                      {
+                        "type": "CHOICE",
+                        "members": [
+                          {
+                            "type": "SYMBOL",
+                            "name": "type_identifier_legacy"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "typed_identifier"
+                          }
+                        ]
+                      },
+                      {
+                        "type": "REPEAT",
+                        "content": {
+                          "type": "SEQ",
+                          "members": [
+                            {
+                              "type": "STRING",
+                              "value": ","
+                            },
+                            {
+                              "type": "CHOICE",
+                              "members": [
+                                {
+                                  "type": "SYMBOL",
+                                  "name": "type_identifier_legacy"
+                                },
+                                {
+                                  "type": "SYMBOL",
+                                  "name": "typed_identifier"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      }
+                    ]
                   }
                 ]
               },
@@ -2741,6 +2716,58 @@
         ]
       }
     },
+    "type_identifier_legacy": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "type",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PATTERN",
+              "value": "[aikbSfw]"
+            }
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "SYMBOL",
+            "name": "identifier"
+          }
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "STRING",
+                "value": "["
+              },
+              {
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "SYMBOL",
+                    "name": "_expression"
+                  },
+                  {
+                    "type": "BLANK"
+                  }
+                ]
+              },
+              {
+                "type": "STRING",
+                "value": "]"
+              }
+            ]
+          }
+        }
+      ]
+    },
     "global_keyword": {
       "type": "STRING",
       "value": "@global"
@@ -2902,14 +2929,6 @@
     [
       "parenthesized_expression",
       "argument_list"
-    ],
-    [
-      "typed_assignment_statement",
-      "declaration_out_op_modern"
-    ],
-    [
-      "identifier",
-      "type_identifier"
     ],
     [
       "xout_statement",

@@ -14,8 +14,6 @@ module.exports = grammar({
     [$.opcode_statement, $.typed_assignment_statement],
     [$.argument_list, $.parenthesized_expression],
     [$.parenthesized_expression, $.argument_list],
-    [$.typed_assignment_statement, $.declaration_out_op_modern],
-    [$.identifier, $.type_identifier],
     [$.xout_statement, $._expression],
     [$.cabbage_statement],
     [$.opcode_statement],
@@ -123,7 +121,7 @@ module.exports = grammar({
 
     modern_udo_inputs: $ => seq(
       '(',
-      optional(sep1(choice($.typed_identifier, $.identifier), ',')),
+      optional(sep1(choice($.typed_identifier, $.type_identifier_legacy), ',')),
       ')'
     ),
 
@@ -195,6 +193,7 @@ module.exports = grammar({
 
     _lvalue: $ => choice(
       $.typed_identifier,
+      $.type_identifier_legacy,
       $.global_typed_identifier,
       $.array_access,
       $.struct_access,
@@ -211,19 +210,12 @@ module.exports = grammar({
     //     field('inputs', optional($.argument_list))
     // ),
 
-    declaration_out_op_legacy: $ => seq(
-        $.type_identifier,
-        sep1($.identifier, ',')
-    ),
-
-    declaration_out_op_modern: $ => seq(
-        sep1($.typed_identifier, ',')
-    ),
-
     opcode_statement: $ => seq(
         field('outputs', optional(
-            choice($.declaration_out_op_legacy, $.declaration_out_op_modern))
-        ),
+            seq(
+                sep1(choice($.type_identifier_legacy, $.typed_identifier), ',')
+            )
+        )),
         field('op', $.opcode_name),
         field('inputs', optional($.argument_list))
     ),
@@ -417,6 +409,18 @@ module.exports = grammar({
       ':',
       field('type', choice($.type_identifier, $.identifier))
     )),
+
+    type_identifier_legacy: $ => seq(
+        field("type", token(/[aikbSfw]/)),
+        field("name", $.identifier),
+        repeat(
+            seq(
+                '[',
+                optional($._expression),
+                ']'
+            )
+        )
+    ),
 
     global_keyword: $ => '@global',
     opcode_name: $ => alias($.identifier, 'opcode_name'),
