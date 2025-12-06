@@ -120,7 +120,7 @@ module.exports = grammar({
       'endop'
     ),
 
-    legacy_udo_args: $ => token(/[a-zA-Z0-9]+(\[\])*/),
+    legacy_udo_args: $ => token(prec(2, /[a-zA-Z0-9\[\]]+/)),
 
     modern_udo_inputs: $ => seq(
       '(',
@@ -149,7 +149,7 @@ module.exports = grammar({
       )
     ),
 
-    struct_name: $ => /[a-zA-Z0-9_]+/,
+    struct_name: $ => token(prec(5, /[a-zA-Z0-9_]+/)),
 
     // --- STATEMENTS ---
     _statement: $ => choice(
