@@ -1133,8 +1133,17 @@
               "type": "SEQ",
               "members": [
                 {
-                  "type": "SYMBOL",
-                  "name": "type_identifier_legacy"
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "type_identifier_legacy"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "legacy_array_identifier"
+                    }
+                  ]
                 },
                 {
                   "type": "REPEAT",
@@ -1146,8 +1155,17 @@
                         "value": ","
                       },
                       {
-                        "type": "SYMBOL",
-                        "name": "type_identifier_legacy"
+                        "type": "CHOICE",
+                        "members": [
+                          {
+                            "type": "SYMBOL",
+                            "name": "type_identifier_legacy"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "legacy_array_identifier"
+                          }
+                        ]
                       }
                     ]
                   }
@@ -1221,6 +1239,31 @@
             "type": "SYMBOL",
             "name": "identifier"
           }
+        },
+        {
+          "type": "REPEAT1",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "STRING",
+                "value": "["
+              },
+              {
+                "type": "STRING",
+                "value": "]"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "legacy_array_identifier": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "type_identifier_legacy"
         },
         {
           "type": "REPEAT1",

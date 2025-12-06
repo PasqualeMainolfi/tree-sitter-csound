@@ -204,13 +204,18 @@ module.exports = grammar({
     ),
 
     legacy_typed_assignment_statement: $ => prec(3, seq(
-      field('left', sep1($.type_identifier_legacy, ',')),
+      field('left', sep1(choice($.type_identifier_legacy, $.legacy_array_identifier), ',')),
       field('operator', choice('=', '+=', '-=', '*=', '/=', '##addin', '##subin', '##mulin', '##divin')),
       field('right', $._expression)
     )),
 
     array_variable: $ => seq(
         field('name', $.identifier),
+        repeat1(seq('[', ']'))
+    ),
+
+    legacy_array_identifier: $ => seq(
+        $.type_identifier_legacy,
         repeat1(seq('[', ']'))
     ),
 
