@@ -637,15 +637,20 @@
               "type": "CHOICE",
               "members": [
                 {
-                  "type": "CHOICE",
+                  "type": "SEQ",
                   "members": [
                     {
-                      "type": "SYMBOL",
-                      "name": "type_identifier"
-                    },
-                    {
-                      "type": "SYMBOL",
-                      "name": "legacy_udo_args"
+                      "type": "CHOICE",
+                      "members": [
+                        {
+                          "type": "SYMBOL",
+                          "name": "type_identifier"
+                        },
+                        {
+                          "type": "SYMBOL",
+                          "name": "legacy_udo_args"
+                        }
+                      ]
                     }
                   ]
                 },
