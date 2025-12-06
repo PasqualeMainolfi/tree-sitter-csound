@@ -496,29 +496,16 @@
           }
         },
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "STRING",
-                  "value": ":"
-                },
-                {
-                  "type": "FIELD",
-                  "name": "outputs",
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "modern_udo_outputs"
-                  }
-                }
-              ]
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
+          "type": "STRING",
+          "value": ":"
+        },
+        {
+          "type": "FIELD",
+          "name": "outputs",
+          "content": {
+            "type": "SYMBOL",
+            "name": "modern_udo_outputs"
+          }
         },
         {
           "type": "REPEAT",
@@ -634,8 +621,17 @@
               "value": "("
             },
             {
-              "type": "SYMBOL",
-              "name": "type_identifier"
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "type_identifier"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "legacy_udo_args"
+                }
+              ]
             },
             {
               "type": "STRING",

@@ -111,10 +111,8 @@ module.exports = grammar({
       'opcode',
       field('name', $.opcode_name),
       field('inputs', $.modern_udo_inputs),
-      optional(seq(
-        ':',
-        field('outputs', $.modern_udo_outputs)
-      )),
+      ':',
+      field('outputs', $.modern_udo_outputs),
       repeat($._statement),
       optional($.xout_statement),
       'endop'
@@ -133,7 +131,7 @@ module.exports = grammar({
     modern_udo_outputs: $ => choice(
       seq(
           '(',
-          $.type_identifier,
+            choice($.type_identifier, $.legacy_udo_args),
           ')'
       ),
       $._void,

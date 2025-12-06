@@ -15,7 +15,7 @@ opcode print_value(value:i, value1:k):(iid)
     xout(10, i2)
 endop
 
-opcode add, ii, ii
+opcode add, ii, iid
     i1, i2 xin
     xout(i1, 10)
 endop

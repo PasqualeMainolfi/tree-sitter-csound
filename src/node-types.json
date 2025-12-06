@@ -1604,6 +1604,10 @@
       "required": false,
       "types": [
         {
+          "type": "legacy_udo_args",
+          "named": true
+        },
+        {
           "type": "type_identifier",
           "named": true
         }
@@ -2485,7 +2489,7 @@
       },
       "outputs": {
         "multiple": false,
-        "required": false,
+        "required": true,
         "types": [
           {
             "type": "modern_udo_outputs",
