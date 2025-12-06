@@ -2681,17 +2681,6 @@
         ]
       }
     },
-    "type_identifier_legacy": {
-      "type": "TOKEN",
-      "content": {
-        "type": "PREC",
-        "value": 2,
-        "content": {
-          "type": "PATTERN",
-          "value": "[aikbSfw][a-zA-Z_]\\w*(\\[(?:[^]\\[]*)\\])*"
-        }
-      }
-    },
     "global_keyword": {
       "type": "STRING",
       "value": "@global"
@@ -2710,6 +2699,17 @@
       "content": {
         "type": "PATTERN",
         "value": "(InstrDef|Instr|Opcode|Complex|[aikbSfw])(\\[\\])*"
+      }
+    },
+    "type_identifier_legacy": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "[aikbSfw][a-zA-Z_]\\w*(\\[(?:[^]\\[]*)\\])*"
+        }
       }
     },
     "number": {
