@@ -8,14 +8,14 @@ ksmps = 1
 nchnls = 2
 0dbfs = 1
 
-// TODO: lsp: add unused variables, add definition of udo in orc, fix mul
+// TODO: lsp: add unused variables
 
-opcode print_value(value:i, value1:k):(ii)
+opcode print_value(value:i, value1:k):(void)
     print(value)
     xout(10, i2)
 endop
 
-opcode add, ii, iic
+opcode add, ii, ii
     i1, i2 xin
     xout(i1, 10)
 endop
@@ -26,11 +26,16 @@ instr 1
 
     sig:a = poscil(1, 440)
     asignal poscil 1, 440
-    sig2:b = poscile(1, 3)
-    filter:b = butterbp(sig, 300, 50)
-    filter2:b = poscil(1, 440)
+    sig2:a = poscile(1, 3)
+    sig3:a += poscil(1, 440)
+    filter:a = butterbp(sig, 300, 50)
+    filter2:a = poscil(1, 440)
 
     gambo:MyType init 8, 88
+
+    v:i = 10
+
+    iv add 1, 2
 
     switch p4
         case 1

@@ -14,6 +14,7 @@ module.exports = grammar({
     [$.opcode_statement, $.typed_assignment_statement],
     [$.argument_list, $.parenthesized_expression],
     [$.parenthesized_expression, $.argument_list],
+    [$.typed_assignment_statement, $.declaration_out_op_modern],
     [$.xout_statement, $._expression],
     [$.cabbage_statement],
     [$.opcode_statement],
@@ -199,14 +200,31 @@ module.exports = grammar({
       $.identifier
     ),
 
+    // opcode_statement: $ => seq(
+    //     field('outputs', optional(
+    //         seq(
+    //             sep1(choice($.identifier, $.typed_identifier), ',')
+    //         ))
+    //     ),
+    //     field('op', $.opcode_name),
+    //     field('inputs', optional($.argument_list))
+    // ),
+
+    declaration_out_op_legacy: $ => seq(
+        $.type_identifier,
+        sep1($.identifier, ',')
+    ),
+
+    declaration_out_op_modern: $ => seq(
+        sep1($.typed_identifier, ',')
+    ),
+
     opcode_statement: $ => seq(
-      field('outputs', optional(
-          seq(sep1(
-              choice($.identifier, $.typed_identifier), ',')
-        ))
-      ),
-      field('op', $.opcode_name),
-      field('inputs', optional($.argument_list))
+        field('outputs', optional(
+            choice($.declaration_out_op_legacy, $.declaration_out_op_modern))
+        ),
+        field('op', $.opcode_name),
+        field('inputs', optional($.argument_list))
     ),
 
     control_statement: $ => choice(
