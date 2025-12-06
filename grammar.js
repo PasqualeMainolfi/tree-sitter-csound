@@ -121,7 +121,7 @@ module.exports = grammar({
 
     modern_udo_inputs: $ => seq(
       '(',
-      optional(sep1(choice($.typed_identifier, $.type_identifier_legacy), ',')),
+      optional(sep1(choice($.typed_identifier, $.identifier), ',')),
       ')'
     ),
 
@@ -212,10 +212,8 @@ module.exports = grammar({
 
     opcode_statement: $ => seq(
         field('outputs', optional(
-            seq(
-                sep1(choice($.type_identifier_legacy, $.typed_identifier), ',')
-            )
-        )),
+            choice($.typed_identifier, $.type_identifier_legacy))
+        ),
         field('op', $.opcode_name),
         field('inputs', optional($.argument_list))
     ),
@@ -410,17 +408,7 @@ module.exports = grammar({
       field('type', choice($.type_identifier, $.identifier))
     )),
 
-    type_identifier_legacy: $ => seq(
-        field("type", token(/[aikbSfw]/)),
-        field("name", $.identifier),
-        repeat(
-            seq(
-                '[',
-                optional($._expression),
-                ']'
-            )
-        )
-    ),
+    type_identifier_legacy: $ => token(prec(2, /[aikbSfw][a-zA-Z_]\w*(\[(?:[^]\[]*)\])*/)),
 
     global_keyword: $ => '@global',
     opcode_name: $ => alias($.identifier, 'opcode_name'),

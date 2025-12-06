@@ -578,7 +578,7 @@
                     },
                     {
                       "type": "SYMBOL",
-                      "name": "type_identifier_legacy"
+                      "name": "identifier"
                     }
                   ]
                 },
@@ -600,7 +600,7 @@
                           },
                           {
                             "type": "SYMBOL",
-                            "name": "type_identifier_legacy"
+                            "name": "identifier"
                           }
                         ]
                       }
@@ -1123,50 +1123,15 @@
             "type": "CHOICE",
             "members": [
               {
-                "type": "SEQ",
+                "type": "CHOICE",
                 "members": [
                   {
-                    "type": "SEQ",
-                    "members": [
-                      {
-                        "type": "CHOICE",
-                        "members": [
-                          {
-                            "type": "SYMBOL",
-                            "name": "type_identifier_legacy"
-                          },
-                          {
-                            "type": "SYMBOL",
-                            "name": "typed_identifier"
-                          }
-                        ]
-                      },
-                      {
-                        "type": "REPEAT",
-                        "content": {
-                          "type": "SEQ",
-                          "members": [
-                            {
-                              "type": "STRING",
-                              "value": ","
-                            },
-                            {
-                              "type": "CHOICE",
-                              "members": [
-                                {
-                                  "type": "SYMBOL",
-                                  "name": "type_identifier_legacy"
-                                },
-                                {
-                                  "type": "SYMBOL",
-                                  "name": "typed_identifier"
-                                }
-                              ]
-                            }
-                          ]
-                        }
-                      }
-                    ]
+                    "type": "SYMBOL",
+                    "name": "typed_identifier"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "type_identifier_legacy"
                   }
                 ]
               },
@@ -2717,56 +2682,15 @@
       }
     },
     "type_identifier_legacy": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "FIELD",
-          "name": "type",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "[aikbSfw]"
-            }
-          }
-        },
-        {
-          "type": "FIELD",
-          "name": "name",
-          "content": {
-            "type": "SYMBOL",
-            "name": "identifier"
-          }
-        },
-        {
-          "type": "REPEAT",
-          "content": {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "STRING",
-                "value": "["
-              },
-              {
-                "type": "CHOICE",
-                "members": [
-                  {
-                    "type": "SYMBOL",
-                    "name": "_expression"
-                  },
-                  {
-                    "type": "BLANK"
-                  }
-                ]
-              },
-              {
-                "type": "STRING",
-                "value": "]"
-              }
-            ]
-          }
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 2,
+        "content": {
+          "type": "PATTERN",
+          "value": "[aikbSfw][a-zA-Z_]\\w*(\\[(?:[^]\\[]*)\\])*"
         }
-      ]
+      }
     },
     "global_keyword": {
       "type": "STRING",
