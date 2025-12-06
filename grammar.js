@@ -133,12 +133,7 @@ module.exports = grammar({
     modern_udo_outputs: $ => choice(
       seq(
           '(',
-          optional(seq(
-              choice(
-                $.type_identifier,
-                $.legacy_udo_args
-              )
-          )),
+            choice($.type_identifier, $.legacy_udo_args),
           ')'
       ),
       $._void,
