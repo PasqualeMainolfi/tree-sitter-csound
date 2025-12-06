@@ -119,6 +119,7 @@ module.exports = grammar({
     ),
 
     legacy_udo_args: $ => token(/[a-zA-Z0-9\[\]]+/),
+    modern_udo_output_args: $ => token(/\\([a-zA-Z0-9\[\]]+\\)/),
 
     modern_udo_inputs: $ => seq(
       '(',
@@ -129,14 +130,20 @@ module.exports = grammar({
     _void: $ => token('void'),
 
     modern_udo_outputs: $ => choice(
-      seq(
-          '(',
-            choice($.type_identifier, $.legacy_udo_args),
-          ')'
-      ),
+      $.modern_udo_output_args,
       $._void,
       $.type_identifier
     ),
+
+    // modern_udo_outputs: $ => choice(
+    //   seq(
+    //       '(',
+    //         choice($.type_identifier, $.legacy_udo_args),
+    //       ')'
+    //   ),
+    //   $._void,
+    //   $.type_identifier
+    // ),
 
     // --- STRUCT DEFINITION (Csound 7) ---
     struct_definition: $ => prec(2, seq(

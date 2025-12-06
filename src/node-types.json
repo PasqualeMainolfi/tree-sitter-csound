@@ -1604,7 +1604,7 @@
       "required": false,
       "types": [
         {
-          "type": "legacy_udo_args",
+          "type": "modern_udo_output_args",
           "named": true
         },
         {
@@ -3155,6 +3155,10 @@
   },
   {
     "type": "legacy_udo_args",
+    "named": true
+  },
+  {
+    "type": "modern_udo_output_args",
     "named": true
   },
   {
