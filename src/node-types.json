@@ -2044,11 +2044,6 @@
     }
   },
   {
-    "type": "type_identifier",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "typed_assignment_statement",
     "named": true,
     "fields": {
@@ -3075,7 +3070,7 @@
   },
   {
     "type": "type_identifier",
-    "named": false
+    "named": true
   },
   {
     "type": "until",

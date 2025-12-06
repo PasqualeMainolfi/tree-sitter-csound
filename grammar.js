@@ -15,6 +15,7 @@ module.exports = grammar({
     [$.argument_list, $.parenthesized_expression],
     [$.parenthesized_expression, $.argument_list],
     [$.typed_assignment_statement, $.declaration_out_op_modern],
+    [$.identifier, $.type_identifier],
     [$.xout_statement, $._expression],
     [$.cabbage_statement],
     [$.opcode_statement],
@@ -420,7 +421,7 @@ module.exports = grammar({
     global_keyword: $ => '@global',
     opcode_name: $ => alias($.identifier, 'opcode_name'),
 
-    type_identifier: $ => alias(token(prec(5, /(InstrDef|Instr|Opcode|Complex|[aikbSfw])(\[\])*/)), 'type_identifier'),
+    type_identifier: $ => token.immediate(/(InstrDef|Instr|Opcode|Complex|[aikbSfw])(\[\])*/),
 
     number: $ => choice(/\d+/, /0[xX][0-9a-fA-F]+/, /\d+\.\d+([eE][+-]?\d+)?/, /\d+[eE][+-]?\d+/),
     string: $ => seq('"', repeat(choice(/[^"\\\n]+/, /\\./)), '"'),

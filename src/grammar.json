@@ -2755,20 +2755,11 @@
       "value": "opcode_name"
     },
     "type_identifier": {
-      "type": "ALIAS",
+      "type": "IMMEDIATE_TOKEN",
       "content": {
-        "type": "TOKEN",
-        "content": {
-          "type": "PREC",
-          "value": 5,
-          "content": {
-            "type": "PATTERN",
-            "value": "(InstrDef|Instr|Opcode|Complex|[aikbSfw])(\\[\\])*"
-          }
-        }
-      },
-      "named": false,
-      "value": "type_identifier"
+        "type": "PATTERN",
+        "value": "(InstrDef|Instr|Opcode|Complex|[aikbSfw])(\\[\\])*"
+      }
     },
     "number": {
       "type": "CHOICE",
@@ -2915,6 +2906,10 @@
     [
       "typed_assignment_statement",
       "declaration_out_op_modern"
+    ],
+    [
+      "identifier",
+      "type_identifier"
     ],
     [
       "xout_statement",
