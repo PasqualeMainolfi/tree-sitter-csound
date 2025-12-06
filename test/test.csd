@@ -10,12 +10,12 @@ nchnls = 2
 
 // TODO: lsp: add unused variables
 
-opcode print_value(value:i, value1:k):(iiid)
+opcode print_value(value:i, value1:k):(ii[]d)
     print(value)
     xout(10, i2)
 endop
 
-opcode add, ii, iid
+opcode add, ii, ii[]d
     i1, i2 xin
     xout(i1, 10)
 endop
