@@ -3106,10 +3106,6 @@
       "_expression"
     ],
     [
-      "xin_statement",
-      "_statement"
-    ],
-    [
       "cabbage_statement"
     ],
     [
@@ -3117,9 +3113,6 @@
     ],
     [
       "macro_usage"
-    ],
-    [
-      "_lvalue"
     ]
   ],
   "precedences": [],

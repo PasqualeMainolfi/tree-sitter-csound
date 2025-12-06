@@ -16,11 +16,10 @@ module.exports = grammar({
     [$.parenthesized_expression, $.argument_list],
     [$.legacy_typed_assignment_statement, $.opcode_statement],
     [$.xout_statement, $._expression],
-    [$.xin_statement, $._statement],
     [$.cabbage_statement],
     [$.opcode_statement],
     [$.macro_usage],
-    [$._lvalue]
+    // [$._lvalue]
     // [$.argument_list],
     // [$.parenthesized_expression, $.argument_list],
     // [$.function_call, $.argument_list],
