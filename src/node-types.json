@@ -2758,32 +2758,28 @@
     "type": "xin_statement",
     "named": true,
     "fields": {
-      "inputs": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "argument_list",
-            "named": true
-          }
-        ]
-      },
-      "op": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "opcode_name",
-            "named": true
-          }
-        ]
-      },
       "outputs": {
-        "multiple": false,
-        "required": false,
+        "multiple": true,
+        "required": true,
         "types": [
           {
-            "type": "type_identifier_legacy",
+            "type": ",",
+            "named": false
+          },
+          {
+            "type": "array_access",
+            "named": true
+          },
+          {
+            "type": "global_typed_identifier",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "struct_access",
             "named": true
           },
           {
@@ -3224,6 +3220,10 @@
   },
   {
     "type": "while",
+    "named": false
+  },
+  {
+    "type": "xin",
     "named": false
   },
   {

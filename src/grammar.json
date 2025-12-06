@@ -770,13 +770,42 @@
       ]
     },
     "xin_statement": {
-      "type": "ALIAS",
-      "content": {
-        "type": "SYMBOL",
-        "name": "opcode_statement"
-      },
-      "named": false,
-      "value": "xin_statement"
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "outputs",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "_lvalue"
+              },
+              {
+                "type": "REPEAT",
+                "content": {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "STRING",
+                      "value": ","
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "_lvalue"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "STRING",
+          "value": "xin"
+        }
+      ]
     },
     "xout_statement": {
       "type": "CHOICE",

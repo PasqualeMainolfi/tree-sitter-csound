@@ -163,12 +163,10 @@ module.exports = grammar({
       $.struct_definition
     ),
 
-    xin_statement: $ => alias($.opcode_statement, 'xin_statement'),
-
-    // xin_statement: $ => seq(
-    //   field('outputs', sep1($._lvalue, ',')),
-    //   'xin'
-    // ),
+    xin_statement: $ => seq(
+      field('outputs', sep1($._lvalue, ',')),
+      'xin'
+    ),
 
     xout_statement: $ => choice(
         seq(
