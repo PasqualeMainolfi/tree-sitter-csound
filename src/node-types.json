@@ -149,10 +149,6 @@
             "named": true
           },
           {
-            "type": "global_legacy_keyword",
-            "named": true
-          },
-          {
             "type": "global_typed_identifier",
             "named": true
           },
@@ -970,21 +966,6 @@
       "types": [
         {
           "type": "generic_tag_block",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "global_legacy_keyword",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "type_identifier_legacy",
           "named": true
         }
       ]
@@ -3046,10 +3027,6 @@
   },
   {
     "type": "for",
-    "named": false
-  },
-  {
-    "type": "g",
     "named": false
   },
   {

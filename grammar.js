@@ -201,7 +201,6 @@ module.exports = grammar({
     _lvalue: $ => choice(
       $.typed_identifier,
       $.global_typed_identifier,
-      $.global_legacy_keyword,
       $.array_access,
       $.struct_access,
       $.identifier
@@ -408,15 +407,11 @@ module.exports = grammar({
     )),
 
     global_keyword: $ => token('@global'),
-    global_legacy_keyword: $ => prec(2, seq(
-        token('g'),
-        $.type_identifier_legacy
-    )),
 
     opcode_name: $ => alias(choice($.type_identifier_legacy, $.identifier), 'opcode_name'),
 
     type_identifier: $ => token(prec(1, /(InstrDef|Instr|Opcode|Complex|[aikbSfw])(\[\])*/)),
-    type_identifier_legacy: $ => token(prec(1, /[aikbSfw][a-zA-Z0-9_\[\]]*/)),
+    type_identifier_legacy: $ => token(prec(1, /g?[aikbSfw][a-zA-Z0-9_\[\]]*/)),
 
     number: $ => choice(/\d+/, /0[xX][0-9a-fA-F]+/, /\d+\.\d+([eE][+-]?\d+)?/, /\d+[eE][+-]?\d+/),
     string: $ => seq('"', repeat(choice(/[^"\\\n]+/, /\\./)), '"'),
