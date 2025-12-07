@@ -22,6 +22,9 @@ opcode add, ii, ii[]
     xout(i1, 10)
 endop
 
+freq@global:i = 10
+gamp init 10
+
 instr 1
 
     struct MyType val0:i, val1:i
@@ -31,7 +34,7 @@ instr 1
     asignal[] poscil ifreq, 44
     sig2:a[] = poscile(1, 3)
     sig3:a += poscil(1, 440)
-    filter:a = butterbp(sig, 300, 50)
+    filter:a = butterbp(sig, freq, 50)
     filter2:a = poscil(1, 440)
 
     gambo:MyType init 8, 88

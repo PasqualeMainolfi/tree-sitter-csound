@@ -2810,8 +2810,24 @@
       }
     },
     "global_keyword": {
-      "type": "STRING",
-      "value": "@global"
+      "type": "TOKEN",
+      "content": {
+        "type": "STRING",
+        "value": "@global"
+      }
+    },
+    "global_legacy_keyword": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "g"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "type_identifier_legacy"
+        }
+      ]
     },
     "opcode_name": {
       "type": "ALIAS",
@@ -2849,7 +2865,7 @@
         "value": 1,
         "content": {
           "type": "PATTERN",
-          "value": "[aikbSfw][a-zA-Z0-9_\\[\\]]*"
+          "value": "[gaikbSfw][a-zA-Z0-9_\\[\\]]*"
         }
       }
     },
