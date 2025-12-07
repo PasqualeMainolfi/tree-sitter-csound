@@ -2821,24 +2821,24 @@
       }
     },
     "global_legacy_keyword": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "TOKEN",
-          "content": {
-            "type": "PREC",
-            "value": 5,
+      "type": "PREC",
+      "value": 2,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "TOKEN",
             "content": {
               "type": "STRING",
               "value": "g"
             }
+          },
+          {
+            "type": "SYMBOL",
+            "name": "type_identifier_legacy"
           }
-        },
-        {
-          "type": "SYMBOL",
-          "name": "type_identifier_legacy"
-        }
-      ]
+        ]
+      }
     },
     "opcode_name": {
       "type": "ALIAS",

@@ -408,10 +408,10 @@ module.exports = grammar({
     )),
 
     global_keyword: $ => token('@global'),
-    global_legacy_keyword: $ => seq(
-        token(prec(5, 'g')),
+    global_legacy_keyword: $ => prec(2, seq(
+        token('g'),
         $.type_identifier_legacy
-    ),
+    )),
 
     opcode_name: $ => alias(choice($.type_identifier_legacy, $.identifier), 'opcode_name'),
 
