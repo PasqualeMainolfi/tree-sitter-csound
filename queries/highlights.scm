@@ -64,7 +64,7 @@
 (tag_cabbage_end) @tag
 
 ["=" "+" "-" "*" "/" "%" "^" "?" ":"] @operator
-["," ";"] @punctuation.delimiter
+[","] @punctuation.delimiter
 ["(" ")" "[" "]" "{" "}"] @punctuation.bracket
 
 (cabbage_statement . (identifier) @type)

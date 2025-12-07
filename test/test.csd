@@ -27,7 +27,6 @@ instr 1
 
     struct MyType val0:i, val1:i
 
-
     ifreq = 400
     sig:a = poscil(1, 440)
     sig2:a[] = poscile(1, 3)
@@ -36,7 +35,8 @@ instr 1
     filter2:a = poscil(1, 440)
 
     ; asignal poscil 1, 330
-    afilter butbp noise(1), 300, 3000
+    asignal[] poscil noise(1), 300
+    afilter butbp noise(1), 3, 3000
 
     gambo:MyType init 8, 88
 
