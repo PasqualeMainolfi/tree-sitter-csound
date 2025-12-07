@@ -201,6 +201,7 @@ module.exports = grammar({
     _lvalue: $ => choice(
       $.typed_identifier,
       $.global_typed_identifier,
+      $.global_legacy_keyword,
       $.array_access,
       $.struct_access,
       $.identifier
