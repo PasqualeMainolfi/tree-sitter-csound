@@ -36,7 +36,9 @@ instr 1
     filter2:a = poscil(1, 440)
 
     gambo:MyType init 8, 88
-    ifreq = gambo.val0
+
+    ifreq = gambo.val0 > 300 ? 1000:5000
+    iamp = gambo.val0
 
     v:i = 10
     ib = 10
