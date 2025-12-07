@@ -409,7 +409,7 @@ module.exports = grammar({
 
     global_keyword: $ => token('@global'),
     global_legacy_keyword: $ => seq(
-        'g',
+        token(prec(5, 'g')),
         $.type_identifier_legacy
     ),
 

@@ -2824,8 +2824,15 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "g"
+          "type": "TOKEN",
+          "content": {
+            "type": "PREC",
+            "value": 5,
+            "content": {
+              "type": "STRING",
+              "value": "g"
+            }
+          }
         },
         {
           "type": "SYMBOL",
