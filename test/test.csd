@@ -10,16 +10,14 @@ nchnls = 2
 
 #define PIG # 21 #
 
-// TODO: lsp: add unused variables
-
-opcode print_value(value:i, value1:k):(ii[])
-    print(value)
+opcode print_value(value:i, value1:k):(ii)
+    print(value, value1)
     xout(10, $PIG)
 endop
 
-opcode add, ii, ii[]
+opcode add, ii, ii
     i1, i2 xin
-    xout(i1, 10)
+    xout(i1, i2)
 endop
 
 freq@global:i = 10

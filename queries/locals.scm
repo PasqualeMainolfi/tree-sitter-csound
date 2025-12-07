@@ -71,3 +71,9 @@
 
 (opcode_statement
   (type_identifier_legacy) @local.definition)
+
+(macro_define
+  (identifier) @local.definition)
+
+(header_assignment
+  (header_identifier) @local.definition)
