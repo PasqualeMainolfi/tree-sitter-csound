@@ -1,11 +1,11 @@
-((identifier) @variable (#match? @variable "^a"))
-((identifier) @variable.parameter (#match? @variable.parameter "^k"))
-((identifier) @constant (#match? @constant "^i"))
-((identifier) @string.special (#match? @string.special "^S"))
-((identifier) @variable.builtin (#match? @variable.builtin "^g"))
-((identifier) @variable.parameter (#match? @variable.parameter "^p[0-9]+$"))
+; ((identifier) @variable (#match? @variable "^a"))
+; ((identifier) @variable.parameter (#match? @variable.parameter "^k"))
+; ((identifier) @constant (#match? @constant "^i"))
+; ((identifier) @string.special (#match? @string.special "^S"))
+; ((identifier) @variable.builtin (#match? @variable.builtin "^g"))
+; ((identifier) @variable.parameter (#match? @variable.parameter "^p[0-9]+$"))
 
-(header_identifier) @variable.builtin
+(header_identifier) @keyword
 (global_keyword) @keyword
 
 (global_typed_identifier name: (identifier) @variable)

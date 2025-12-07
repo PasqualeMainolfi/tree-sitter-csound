@@ -14,7 +14,7 @@ nchnls = 2
 
 opcode print_value(value:i, value1:k):(ii[])
     print(value)
-    xout(10, i2)
+    xout(10, $PIG)
 endop
 
 opcode add, ii, ii[]
