@@ -47,7 +47,9 @@
 (struct_name) @type
 (struct_definition fields: (typed_identifier
     name: (identifier) @variable))
+
 (struct_access
+    called_struct: (_) @variable
     member: (identifier) @property)
 
 (tag_synthesizer_start) @tag
