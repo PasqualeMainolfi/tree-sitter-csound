@@ -8,6 +8,9 @@ ksmps = 1
 nchnls = 2
 0dbfs = 1
 
+// TODO: add 0 in udo args
+
+
 #define PIG # 21 #
 
 opcode print_value(value:i, value1:k):(ii)
@@ -15,7 +18,7 @@ opcode print_value(value:i, value1:k):(ii)
     xout(10, $PIG)
 endop
 
-opcode add, ii, ii
+opcode add, 0, ii
     i1, i2 xin
     xout(i1, i2)
 endop
