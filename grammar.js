@@ -9,7 +9,6 @@ module.exports = grammar({
   conflicts: $ => [
     [$._root_statement, $._score_item],
     [$._root_statement, $._statement],
-    [$.opcode_statement, $.opcode_name],
     [$.opcode_statement, $.typed_assignment_statement],
     [$.argument_list, $.parenthesized_expression],
     [$.parenthesized_expression, $.argument_list],
@@ -19,6 +18,7 @@ module.exports = grammar({
     [$.cabbage_statement],
     [$.opcode_statement],
     [$.macro_usage],
+    // [$.opcode_statement, $.opcode_name],
     // [$.opcode_statement, $._lvalue],
     // [$._lvalue]
     // [$.argument_list],
@@ -218,15 +218,21 @@ module.exports = grammar({
       $.identifier
     ),
 
-    opcode_statement: $ => seq(
-        field('outputs', optional(
-            sep1(
-                choice($.typed_identifier, $.type_identifier_legacy),
-                ','
-            )
+    opcode_statement: $ => choice(
+        prec(2, seq(
+            field('outputs', optional(
+                sep1(
+                    choice($.typed_identifier, $.type_identifier_legacy),
+                    ','
+                )
+            )),
+            field('op', $.opcode_name),
+            field('inputs', optional($.argument_list))
         )),
-        field('op', $.opcode_name),
-        field('inputs', optional($.argument_list))
+        prec(1, seq(
+            field('op', $.opcode_name),
+            field('inputs', optional($.argument_list))
+        ))
     ),
 
     control_statement: $ => choice(

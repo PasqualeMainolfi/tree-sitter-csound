@@ -1216,39 +1216,23 @@
       ]
     },
     "opcode_statement": {
-      "type": "SEQ",
+      "type": "CHOICE",
       "members": [
         {
-          "type": "FIELD",
-          "name": "outputs",
+          "type": "PREC",
+          "value": 2,
           "content": {
-            "type": "CHOICE",
+            "type": "SEQ",
             "members": [
               {
-                "type": "SEQ",
-                "members": [
-                  {
-                    "type": "CHOICE",
-                    "members": [
-                      {
-                        "type": "SYMBOL",
-                        "name": "typed_identifier"
-                      },
-                      {
-                        "type": "SYMBOL",
-                        "name": "type_identifier_legacy"
-                      }
-                    ]
-                  },
-                  {
-                    "type": "REPEAT",
-                    "content": {
+                "type": "FIELD",
+                "name": "outputs",
+                "content": {
+                  "type": "CHOICE",
+                  "members": [
+                    {
                       "type": "SEQ",
                       "members": [
-                        {
-                          "type": "STRING",
-                          "value": ","
-                        },
                         {
                           "type": "CHOICE",
                           "members": [
@@ -1261,38 +1245,96 @@
                               "name": "type_identifier_legacy"
                             }
                           ]
+                        },
+                        {
+                          "type": "REPEAT",
+                          "content": {
+                            "type": "SEQ",
+                            "members": [
+                              {
+                                "type": "STRING",
+                                "value": ","
+                              },
+                              {
+                                "type": "CHOICE",
+                                "members": [
+                                  {
+                                    "type": "SYMBOL",
+                                    "name": "typed_identifier"
+                                  },
+                                  {
+                                    "type": "SYMBOL",
+                                    "name": "type_identifier_legacy"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
                         }
                       ]
+                    },
+                    {
+                      "type": "BLANK"
                     }
-                  }
-                ]
+                  ]
+                }
               },
               {
-                "type": "BLANK"
+                "type": "FIELD",
+                "name": "op",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "opcode_name"
+                }
+              },
+              {
+                "type": "FIELD",
+                "name": "inputs",
+                "content": {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "argument_list"
+                    },
+                    {
+                      "type": "BLANK"
+                    }
+                  ]
+                }
               }
             ]
           }
         },
         {
-          "type": "FIELD",
-          "name": "op",
+          "type": "PREC",
+          "value": 1,
           "content": {
-            "type": "SYMBOL",
-            "name": "opcode_name"
-          }
-        },
-        {
-          "type": "FIELD",
-          "name": "inputs",
-          "content": {
-            "type": "CHOICE",
+            "type": "SEQ",
             "members": [
               {
-                "type": "SYMBOL",
-                "name": "argument_list"
+                "type": "FIELD",
+                "name": "op",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "opcode_name"
+                }
               },
               {
-                "type": "BLANK"
+                "type": "FIELD",
+                "name": "inputs",
+                "content": {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "argument_list"
+                    },
+                    {
+                      "type": "BLANK"
+                    }
+                  ]
+                }
               }
             ]
           }
@@ -2988,10 +3030,6 @@
     [
       "_root_statement",
       "_statement"
-    ],
-    [
-      "opcode_statement",
-      "opcode_name"
     ],
     [
       "opcode_statement",
