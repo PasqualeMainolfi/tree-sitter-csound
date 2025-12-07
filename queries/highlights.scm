@@ -1,17 +1,18 @@
-((identifier) @variable (#match? @variable "^a"))
-((identifier) @variable.parameter (#match? @variable.parameter "^k"))
-((identifier) @constant (#match? @constant "^i"))
-((identifier) @string.special (#match? @string.special "^S"))
-((identifier) @variable.builtin (#match? @variable.builtin "^g"))
-((identifier) @variable.parameter (#match? @variable.parameter "^p[0-9]+$"))
+; ((identifier) @variable (#match? @variable "^a"))
+; ((identifier) @variable.parameter (#match? @variable.parameter "^k"))
+; ((identifier) @constant (#match? @constant "^i"))
+; ((identifier) @string.special (#match? @string.special "^S"))
+; ((identifier) @variable.builtin (#match? @variable.builtin "^g"))
+; ((identifier) @variable.parameter (#match? @variable.parameter "^p[0-9]+$"))
 
-(header_identifier) @variable.builtin
+(header_identifier) @keyword
 (global_keyword) @keyword
 
 (global_typed_identifier name: (identifier) @variable)
 
 (type_identifier) @type
 (typed_identifier type: (_) @type)
+(type_identifier_legacy) @type
 
 (typed_identifier name: (identifier) @variable)
 
@@ -24,6 +25,7 @@
 
 (udo_definition_legacy inputs: (_) @type)
 (udo_definition_legacy outputs: (_) @type)
+(udo_definition_modern outputs: (_) @type)
 
 (instrument_definition name: (_) @entity.name.function)
 

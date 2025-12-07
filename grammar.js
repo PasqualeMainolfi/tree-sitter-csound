@@ -9,14 +9,22 @@ module.exports = grammar({
   conflicts: $ => [
     [$._root_statement, $._score_item],
     [$._root_statement, $._statement],
-    [$.opcode_statement, $._lvalue],
     [$.opcode_statement, $.opcode_name],
     [$.opcode_statement, $.typed_assignment_statement],
-    [$.opcode_statement],
-    [$.cabbage_statement],
-    [$.macro_usage],
     [$.argument_list, $.parenthesized_expression],
-    [$.xout_statement],
+    [$.parenthesized_expression, $.argument_list],
+    [$.legacy_typed_assignment_statement, $.opcode_statement],
+    [$.xin_statement, $.opcode_statement, $.legacy_typed_assignment_statement],
+    [$.xout_statement, $._expression],
+    [$.cabbage_statement],
+    [$.opcode_statement],
+    [$.macro_usage],
+    // [$.opcode_statement, $._lvalue],
+    // [$._lvalue]
+    // [$.argument_list],
+    // [$.parenthesized_expression, $.argument_list],
+    // [$.function_call, $.argument_list],
+    // [$.function_call, $.parenthesized_expression],
     // [$.opcode_statement, $.struct_definition],
     // [$.opcode_statement, $._expression],
     // [$.opcode_statement, $.header_assignment],
@@ -90,10 +98,12 @@ module.exports = grammar({
       'opcode',
       field('name', $.opcode_name),
       optional(','),
-      field('outputs', $.legacy_udo_output_types),
+      field('outputs', $.legacy_udo_args),
       ',',
-      field('inputs', $.legacy_udo_input_types),
+      field('inputs', $.legacy_udo_args),
+      optional($.xin_statement),
       repeat($._statement),
+      optional($.xout_statement),
       'endop'
     ),
 
@@ -101,16 +111,15 @@ module.exports = grammar({
       'opcode',
       field('name', $.opcode_name),
       field('inputs', $.modern_udo_inputs),
-      optional(seq(
-        ':',
-        field('outputs', $.modern_udo_outputs)
-      )),
+      ':',
+      field('outputs', $.modern_udo_outputs),
       repeat($._statement),
+      optional($.xout_statement),
       'endop'
     ),
 
-    legacy_udo_input_types: $ => token(prec(5, /[afijkopOPVJKS0]+(\[\])*/)),
-    legacy_udo_output_types: $ => token(prec(5, /[afijkKS0]+(\[\])*/)),
+    legacy_udo_args: $ => token(/[a-zA-Z_\[\]]+/),
+    _void: $ => token('void'),
 
     modern_udo_inputs: $ => seq(
       '(',
@@ -119,9 +128,12 @@ module.exports = grammar({
     ),
 
     modern_udo_outputs: $ => choice(
-      seq('(', optional(sep1(choice($.type_identifier, $.identifier), ',')), ')'),
-      'void',
-      $.type_identifier
+        seq(
+            '(',
+            $.legacy_udo_args,
+            ')'
+        ),
+        $._void
     ),
 
     // --- STRUCT DEFINITION (Csound 7) ---
@@ -139,8 +151,7 @@ module.exports = grammar({
       $.header_assignment,
       $.typed_assignment_statement,
       $.assignment_statement,
-      $.xin_statement,
-      $.xout_statement,
+      $.legacy_typed_assignment_statement,
       $.function_call,
       $.opcode_statement,
       $.control_statement,
@@ -148,18 +159,26 @@ module.exports = grammar({
       $.struct_definition
     ),
 
+    _xin: $ => token('xin'),
     xin_statement: $ => seq(
-      field('outputs', sep1($._lvalue, ',')),
-      'xin'
+      field('outputs', sep1($.type_identifier_legacy, ',')),
+      $._xin
     ),
 
-    xout_statement: $ => seq(
-      'xout',
-      field('inputs', optional($.argument_list))
+    _xout: $ => token('xout'),
+    xout_statement: $ => choice(
+        seq(
+            $._xout,
+            field('inputs', $.parenthesized_expression),
+        ),
+        seq(
+            $._xout,
+            field('inputs', $.argument_list),
+        )
     ),
 
     header_assignment: $ => seq($.header_identifier, '=', $._expression),
-    header_identifier: $ => choice('sr', 'kr', 'ksmps', 'nchnls', 'nchnls_i', '0dbfs'),
+    header_identifier: $ => token(prec(10, /(sr|kr|ksmps|nchnls|nchnls_i|0dbfs)/)),
 
     typed_assignment_statement: $ => prec(2, seq(
       field('left', sep1(choice($.typed_identifier, $.global_typed_identifier), ',')),
@@ -173,6 +192,12 @@ module.exports = grammar({
       field('right', $._expression)
     ),
 
+    legacy_typed_assignment_statement: $ => prec(3, seq(
+      field('left', sep1($.type_identifier_legacy, ',')),
+      field('operator', choice('=', '+=', '-=', '*=', '/=', '##addin', '##subin', '##mulin', '##divin')),
+      field('right', $._expression)
+    )),
+
     _lvalue: $ => choice(
       $.typed_identifier,
       $.global_typed_identifier,
@@ -182,13 +207,14 @@ module.exports = grammar({
     ),
 
     opcode_statement: $ => seq(
-      field('outputs', optional(
-          seq(sep1(
-              choice($.identifier, $.typed_identifier), ',')
-        ))
-      ),
-      field('op', $.opcode_name),
-      field('inputs', optional($.argument_list))
+        field('outputs', optional(
+            sep1(
+                choice($.typed_identifier, $.type_identifier_legacy),
+                ','
+            )
+        )),
+        field('op', $.opcode_name),
+        field('inputs', optional($.argument_list))
     ),
 
     control_statement: $ => choice(
@@ -288,16 +314,43 @@ module.exports = grammar({
     // --- EXPRESSIONS ---
     _expression: $ => choice(
       $.function_call,
-      $.unary_expression, $.binary_expression, $.ternary_expression, $.parenthesized_expression,
+      $.unary_expression,
+      $.binary_expression,
+      $.ternary_expression,
+      $.parenthesized_expression,
       $.header_identifier,
-      $.number, $.string, $.identifier, $.array_access, $.struct_access, $.macro_usage
+      $.number,
+      $.string,
+      alias(choice($.identifier, $.type_identifier_legacy), $.identifier),
+      $.array_access,
+      $.struct_access,
+      $.macro_usage
     ),
 
-    parenthesized_expression: $ => seq('(', $._expression, ')'),
+    parenthesized_expression: $ => prec.left(
+        seq(
+            '(',
+            choice(
+                $._expression,
+                $.argument_list
+            ),
+            ')'
+        )
+    ),
 
-    function_call: $ => prec(2, seq(field('function', $.opcode_name), '(', optional($.argument_list), ')')),
+    function_call: $ => prec(2,
+        seq(
+            field('function', $.opcode_name),
+            '(',
+            optional($.argument_list),
+            ')'
+        )),
 
-    argument_list: $ => sep1($._expression, ','),
+    argument_list: $ => seq(
+      $._expression,
+      repeat(seq(',', $._expression))
+    ),
+
     unary_expression: $ => prec.left(10, seq(choice('-', '~', '!'), $._expression)),
     binary_expression: $ => choice(
       prec.right(9, seq($._expression, '^', $._expression)),
@@ -340,24 +393,25 @@ module.exports = grammar({
     identifier: $ => /[a-zA-Z_]\w*/,
     plus_identifier: $ => /\+[a-zA-Z_]\w*/,
 
-    // TODO: fix type_identifier in explicit type assign
-    typed_identifier: $ => prec(2, seq(
-      field('name', $.identifier),
+    typed_identifier: $ => prec(3, seq(
+      field('name', alias(choice($.identifier, $.type_identifier_legacy), $.identifier)),
       ':',
       field('type', choice($.type_identifier, $.identifier))
     )),
 
     global_typed_identifier: $ => prec(2, seq(
-      field('name', $.identifier),
+      field('name', alias(choice($.identifier, $.type_identifier_legacy), $.identifier)),
       $.global_keyword,
       ':',
       field('type', choice($.type_identifier, $.identifier))
     )),
 
-    global_keyword: $ => '@global',
-    opcode_name: $ => alias($.identifier, 'opcode_name'),
+    global_keyword: $ => token('@global'),
 
-    type_identifier: $ => alias(token(prec(5, /(InstrDef|Instr|Opcode|Complex|[aikbSfw])(\[\])*/)), 'type_identifier'),
+    opcode_name: $ => alias(choice($.type_identifier_legacy, $.identifier), 'opcode_name'),
+
+    type_identifier: $ => token(prec(1, /(InstrDef|Instr|Opcode|Complex|[aikbSfw])(\[\])*/)),
+    type_identifier_legacy: $ => token(prec(1, /g?[aikbSfw][a-zA-Z0-9_\[\]]*/)),
 
     number: $ => choice(/\d+/, /0[xX][0-9a-fA-F]+/, /\d+\.\d+([eE][+-]?\d+)?/, /\d+[eE][+-]?\d+/),
     string: $ => seq('"', repeat(choice(/[^"\\\n]+/, /\\./)), '"'),

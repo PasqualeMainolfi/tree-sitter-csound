@@ -12,6 +12,10 @@
     (argument_list
         (identifier) @local.reference)))
 
+(type_identifier_legacy) @local.reference
+
+(global_typed_identifier) @local.definition
+
 (opcode_statement
   (typed_identifier) @local.definition)
 
@@ -50,3 +54,26 @@
 (typed_identifier) @local.reference
 (opcode_name) @local.reference
 (struct_name) @local.reference
+
+(instrument_definition
+  name: (_) @local.definition)
+
+(modern_udo_inputs
+  (identifier) @local.definition)
+
+(modern_udo_inputs
+  (typed_identifier) @local.definition)
+
+(legacy_typed_assignment_statement
+  left: (_) @local.definition)
+
+(array_access) @local.reference
+
+(opcode_statement
+  (type_identifier_legacy) @local.definition)
+
+(macro_define
+  (identifier) @local.definition)
+
+(header_assignment
+  (header_identifier) @local.definition)
