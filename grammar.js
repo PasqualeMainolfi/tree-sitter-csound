@@ -226,7 +226,8 @@ module.exports = grammar({
             )
         )),
         field('op', $.opcode_name),
-        field('inputs', optional($.argument_list))
+        // field('inputs', optional($.argument_list))
+        field('inputs', $._expression)
     ),
 
     control_statement: $ => choice(
