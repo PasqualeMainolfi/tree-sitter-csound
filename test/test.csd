@@ -35,6 +35,9 @@ instr 1
     filter:a = butterbp(sig, freq, 50)
     filter2:a = poscil(1, 440)
 
+    asignal poscil 1, 330
+    afilter butbp noise(1), 300, 3000
+
     gambo:MyType init 8, 88
 
     ifreq = gambo.val0 > 300 ? 1000:5000

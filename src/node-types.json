@@ -529,12 +529,6 @@
     "fields": {}
   },
   {
-    "type": "comment",
-    "named": true,
-    "extra": true,
-    "fields": {}
-  },
-  {
     "type": "control_statement",
     "named": true,
     "fields": {},
@@ -2930,19 +2924,11 @@
     "named": false
   },
   {
-    "type": "//",
-    "named": false
-  },
-  {
     "type": "/=",
     "named": false
   },
   {
     "type": ":",
-    "named": false
-  },
-  {
-    "type": ";",
     "named": false
   },
   {
@@ -3000,6 +2986,11 @@
   {
     "type": "case",
     "named": false
+  },
+  {
+    "type": "comment",
+    "named": true,
+    "extra": true
   },
   {
     "type": "default",

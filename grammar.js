@@ -431,7 +431,12 @@ module.exports = grammar({
 
     number: $ => choice(/\d+/, /0[xX][0-9a-fA-F]+/, /\d+\.\d+([eE][+-]?\d+)?/, /\d+[eE][+-]?\d+/),
     string: $ => seq('"', repeat(choice(/[^"\\\n]+/, /\\./)), '"'),
-    comment: $ => choice(seq(';', /.*/), seq('//', /.*/)),
+    comment: $ => token(
+        choice(
+            seq(';', /[^\n]*/),
+            seq('//', /[^\n]*/)
+        )
+    ),
     block_comment: $ => seq('/*', /[^*]*\*+([^/*][^*]*\*+)*/, '/')
   }
 });
