@@ -847,33 +847,11 @@
       ]
     },
     "header_identifier": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "sr"
-        },
-        {
-          "type": "STRING",
-          "value": "kr"
-        },
-        {
-          "type": "STRING",
-          "value": "ksmps"
-        },
-        {
-          "type": "STRING",
-          "value": "nchnls"
-        },
-        {
-          "type": "STRING",
-          "value": "nchnls_i"
-        },
-        {
-          "type": "STRING",
-          "value": "0dbfs"
-        }
-      ]
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "(sr|kr|ksmps|nchnls|nchnls_i|0dbfs)"
+      }
     },
     "typed_assignment_statement": {
       "type": "PREC",

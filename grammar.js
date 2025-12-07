@@ -136,16 +136,6 @@ module.exports = grammar({
         $._void
     ),
 
-    // modern_udo_outputs: $ => choice(
-    //   seq(
-    //       '(',
-    //         choice($.type_identifier, $.legacy_udo_args),
-    //       ')'
-    //   ),
-    //   $._void,
-    //   $.type_identifier
-    // ),
-
     // --- STRUCT DEFINITION (Csound 7) ---
     struct_definition: $ => prec(2, seq(
         'struct',
@@ -188,7 +178,7 @@ module.exports = grammar({
     ),
 
     header_assignment: $ => seq($.header_identifier, '=', $._expression),
-    header_identifier: $ => choice('sr', 'kr', 'ksmps', 'nchnls', 'nchnls_i', '0dbfs'),
+    header_identifier: $ => token(/(sr|kr|ksmps|nchnls|nchnls_i|0dbfs)/),
 
     typed_assignment_statement: $ => prec(2, seq(
       field('left', sep1(choice($.typed_identifier, $.global_typed_identifier), ',')),

@@ -12,6 +12,7 @@
 
 (type_identifier) @type
 (typed_identifier type: (_) @type)
+(type_identifier_legacy) @type
 
 (typed_identifier name: (identifier) @variable)
 

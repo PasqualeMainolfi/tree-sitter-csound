@@ -1086,11 +1086,6 @@
     }
   },
   {
-    "type": "header_identifier",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "html_block",
     "named": true,
     "fields": {}
@@ -2931,10 +2926,6 @@
     "named": false
   },
   {
-    "type": "0dbfs",
-    "named": false
-  },
-  {
     "type": ":",
     "named": false
   },
@@ -3047,6 +3038,10 @@
     "named": false
   },
   {
+    "type": "header_identifier",
+    "named": true
+  },
+  {
     "type": "identifier",
     "named": true
   },
@@ -3075,28 +3070,12 @@
     "named": false
   },
   {
-    "type": "kr",
-    "named": false
-  },
-  {
-    "type": "ksmps",
-    "named": false
-  },
-  {
     "type": "kthen",
     "named": false
   },
   {
     "type": "legacy_udo_args",
     "named": true
-  },
-  {
-    "type": "nchnls",
-    "named": false
-  },
-  {
-    "type": "nchnls_i",
-    "named": false
   },
   {
     "type": "od",
@@ -3120,10 +3099,6 @@
   },
   {
     "type": "rireturn",
-    "named": false
-  },
-  {
-    "type": "sr",
     "named": false
   },
   {
