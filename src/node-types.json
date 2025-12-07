@@ -1952,17 +1952,7 @@
     "type": "struct_access",
     "named": true,
     "fields": {
-      "member": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "object": {
+      "called_struct": {
         "multiple": false,
         "required": true,
         "types": [
@@ -1976,6 +1966,16 @@
           },
           {
             "type": "struct_access",
+            "named": true
+          }
+        ]
+      },
+      "member": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "struct_member",
             "named": true
           }
         ]
@@ -2011,6 +2011,11 @@
         ]
       }
     }
+  },
+  {
+    "type": "struct_member",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "switch_end",
@@ -3103,6 +3108,10 @@
   },
   {
     "type": "struct",
+    "named": false
+  },
+  {
+    "type": "struct_member",
     "named": false
   },
   {

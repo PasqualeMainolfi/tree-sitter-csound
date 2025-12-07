@@ -8,9 +8,6 @@ ksmps = 1
 nchnls = 2
 0dbfs = 1
 
-// TODO: add 0 in udo args
-
-
 #define PIG # 21 #
 
 opcode print_value(value:i, value1:k):(ii)
@@ -39,6 +36,7 @@ instr 1
     filter2:a = poscil(1, 440)
 
     gambo:MyType init 8, 88
+    ifreq = gambo.val0
 
     v:i = 10
     ib = 10
