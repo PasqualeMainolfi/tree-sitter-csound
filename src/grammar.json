@@ -1285,8 +1285,16 @@
           "type": "FIELD",
           "name": "inputs",
           "content": {
-            "type": "SYMBOL",
-            "name": "_expression"
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "argument_list"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
           }
         }
       ]
@@ -1330,10 +1338,6 @@
         {
           "type": "CHOICE",
           "members": [
-            {
-              "type": "STRING",
-              "value": "if"
-            },
             {
               "type": "STRING",
               "value": "if"

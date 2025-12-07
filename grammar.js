@@ -240,7 +240,7 @@ module.exports = grammar({
     ),
 
     if_statement: $ => seq(
-      choice('if', 'if', 'tif'),
+      choice('if', 'tif'),
       field('condition', $._expression),
       choice(seq('goto', $.identifier),
         seq(choice('then', 'ithen', 'kthen'),
