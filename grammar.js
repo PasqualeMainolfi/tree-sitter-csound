@@ -146,13 +146,17 @@ module.exports = grammar({
 
     // STRUCT ACCESS (obj.prop)
     struct_access: $ => prec(10, seq(
-      field('called_struct', choice($.identifier, $.struct_access, $.array_access)),
+      field('called_struct', choice(
+          $.identifier,
+          $.struct_access,
+          $.array_access,
+          $.type_identifier_legacy
+      )),
       '.',
-      field('member', $.struct_member)
+      field('member', $.identifier)
     )),
 
     struct_name: $ => token(prec(5, /[a-zA-Z0-9_]+/)),
-    struct_member: $ => alias($.legacy_udo_args, 'struct_member'),
 
     // --- STATEMENTS ---
     _statement: $ => choice(
@@ -372,7 +376,18 @@ module.exports = grammar({
       prec.left(1, seq($._expression, '||', $._expression))
     ),
     ternary_expression: $ => prec.right(seq($._expression, '?', $._expression, ':', $._expression)),
-    array_access: $ => seq(field('array', choice($.identifier, $.array_access)), '[', $._expression, ']'),
+
+    array_access: $ => seq(
+        field('array', choice(
+            $.identifier,
+            $.array_access,
+            $.type_identifier_legacy,
+            $.struct_access
+        )),
+        '[',
+        $._expression,
+        ']'
+    ),
 
     score_body: $ => repeat1($._score_item),
     _score_item: $ => choice($.preprocessor_directive, $.score_statement, $.score_loop, $.score_carry),

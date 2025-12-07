@@ -709,6 +709,10 @@
                 {
                   "type": "SYMBOL",
                   "name": "array_access"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "type_identifier_legacy"
                 }
               ]
             }
@@ -722,7 +726,7 @@
             "name": "member",
             "content": {
               "type": "SYMBOL",
-              "name": "struct_member"
+              "name": "identifier"
             }
           }
         ]
@@ -738,15 +742,6 @@
           "value": "[a-zA-Z0-9_]+"
         }
       }
-    },
-    "struct_member": {
-      "type": "ALIAS",
-      "content": {
-        "type": "SYMBOL",
-        "name": "legacy_udo_args"
-      },
-      "named": false,
-      "value": "struct_member"
     },
     "_statement": {
       "type": "CHOICE",
@@ -2283,6 +2278,14 @@
               {
                 "type": "SYMBOL",
                 "name": "array_access"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "type_identifier_legacy"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "struct_access"
               }
             ]
           }

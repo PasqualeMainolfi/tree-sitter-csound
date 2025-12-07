@@ -73,6 +73,14 @@
           {
             "type": "identifier",
             "named": true
+          },
+          {
+            "type": "struct_access",
+            "named": true
+          },
+          {
+            "type": "type_identifier_legacy",
+            "named": true
           }
         ]
       }
@@ -1967,6 +1975,10 @@
           {
             "type": "struct_access",
             "named": true
+          },
+          {
+            "type": "type_identifier_legacy",
+            "named": true
           }
         ]
       },
@@ -1975,7 +1987,7 @@
         "required": true,
         "types": [
           {
-            "type": "struct_member",
+            "type": "identifier",
             "named": true
           }
         ]
@@ -2011,11 +2023,6 @@
         ]
       }
     }
-  },
-  {
-    "type": "struct_member",
-    "named": true,
-    "fields": {}
   },
   {
     "type": "switch_end",
@@ -3108,10 +3115,6 @@
   },
   {
     "type": "struct",
-    "named": false
-  },
-  {
-    "type": "struct_member",
     "named": false
   },
   {
