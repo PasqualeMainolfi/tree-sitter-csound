@@ -849,8 +849,12 @@
     "header_identifier": {
       "type": "TOKEN",
       "content": {
-        "type": "PATTERN",
-        "value": "(sr|kr|ksmps|nchnls|nchnls_i|0dbfs)"
+        "type": "PREC",
+        "value": 10,
+        "content": {
+          "type": "PATTERN",
+          "value": "(sr|kr|ksmps|nchnls|nchnls_i|0dbfs)"
+        }
       }
     },
     "typed_assignment_statement": {

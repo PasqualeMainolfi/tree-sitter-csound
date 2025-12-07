@@ -178,7 +178,7 @@ module.exports = grammar({
     ),
 
     header_assignment: $ => seq($.header_identifier, '=', $._expression),
-    header_identifier: $ => token(/(sr|kr|ksmps|nchnls|nchnls_i|0dbfs)/),
+    header_identifier: $ => token(prec(10, /(sr|kr|ksmps|nchnls|nchnls_i|0dbfs)/)),
 
     typed_assignment_statement: $ => prec(2, seq(
       field('left', sep1(choice($.typed_identifier, $.global_typed_identifier), ',')),
