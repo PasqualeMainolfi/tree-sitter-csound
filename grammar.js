@@ -220,11 +220,12 @@ module.exports = grammar({
 
     opcode_statement: $ => choice(
         prec(2, seq(
-            field('outputs', optional(
-                sep1(
-                    choice($.typed_identifier, $.type_identifier_legacy),
-                    ','
-                )
+            field('outputs', sep1(
+                choice(
+                    $.typed_identifier,
+                    $.type_identifier_legacy
+                ),
+            ','
             )),
             field('op', $.opcode_name),
             field('inputs', optional($.argument_list))

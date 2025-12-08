@@ -1228,53 +1228,45 @@
                 "type": "FIELD",
                 "name": "outputs",
                 "content": {
-                  "type": "CHOICE",
+                  "type": "SEQ",
                   "members": [
                     {
-                      "type": "SEQ",
+                      "type": "CHOICE",
                       "members": [
                         {
-                          "type": "CHOICE",
-                          "members": [
-                            {
-                              "type": "SYMBOL",
-                              "name": "typed_identifier"
-                            },
-                            {
-                              "type": "SYMBOL",
-                              "name": "type_identifier_legacy"
-                            }
-                          ]
+                          "type": "SYMBOL",
+                          "name": "typed_identifier"
                         },
                         {
-                          "type": "REPEAT",
-                          "content": {
-                            "type": "SEQ",
-                            "members": [
-                              {
-                                "type": "STRING",
-                                "value": ","
-                              },
-                              {
-                                "type": "CHOICE",
-                                "members": [
-                                  {
-                                    "type": "SYMBOL",
-                                    "name": "typed_identifier"
-                                  },
-                                  {
-                                    "type": "SYMBOL",
-                                    "name": "type_identifier_legacy"
-                                  }
-                                ]
-                              }
-                            ]
-                          }
+                          "type": "SYMBOL",
+                          "name": "type_identifier_legacy"
                         }
                       ]
                     },
                     {
-                      "type": "BLANK"
+                      "type": "REPEAT",
+                      "content": {
+                        "type": "SEQ",
+                        "members": [
+                          {
+                            "type": "STRING",
+                            "value": ","
+                          },
+                          {
+                            "type": "CHOICE",
+                            "members": [
+                              {
+                                "type": "SYMBOL",
+                                "name": "typed_identifier"
+                              },
+                              {
+                                "type": "SYMBOL",
+                                "name": "type_identifier_legacy"
+                              }
+                            ]
+                          }
+                        ]
+                      }
                     }
                   ]
                 }
