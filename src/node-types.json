@@ -1301,7 +1301,7 @@
     },
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "assignment_statement",
@@ -1317,6 +1317,14 @@
         },
         {
           "type": "header_assignment",
+          "named": true
+        },
+        {
+          "type": "kw_endin",
+          "named": true
+        },
+        {
+          "type": "kw_instr",
           "named": true
         },
         {
@@ -2016,6 +2024,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "kw_struct",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -2368,7 +2386,7 @@
     },
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "assignment_statement",
@@ -2384,6 +2402,14 @@
         },
         {
           "type": "header_assignment",
+          "named": true
+        },
+        {
+          "type": "kw_endop",
+          "named": true
+        },
+        {
+          "type": "kw_opcode",
           "named": true
         },
         {
@@ -2454,7 +2480,7 @@
     },
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "assignment_statement",
@@ -2470,6 +2496,14 @@
         },
         {
           "type": "header_assignment",
+          "named": true
+        },
+        {
+          "type": "kw_endop",
+          "named": true
+        },
+        {
+          "type": "kw_opcode",
           "named": true
         },
         {
@@ -3013,14 +3047,6 @@
     "named": false
   },
   {
-    "type": "endin",
-    "named": false
-  },
-  {
-    "type": "endop",
-    "named": false
-  },
-  {
     "type": "endsw",
     "named": false
   },
@@ -3061,10 +3087,6 @@
     "named": false
   },
   {
-    "type": "instr",
-    "named": false
-  },
-  {
     "type": "ithen",
     "named": false
   },
@@ -3077,15 +3099,31 @@
     "named": false
   },
   {
+    "type": "kw_endin",
+    "named": true
+  },
+  {
+    "type": "kw_endop",
+    "named": true
+  },
+  {
+    "type": "kw_instr",
+    "named": true
+  },
+  {
+    "type": "kw_opcode",
+    "named": true
+  },
+  {
+    "type": "kw_struct",
+    "named": true
+  },
+  {
     "type": "legacy_udo_args",
     "named": true
   },
   {
     "type": "od",
-    "named": false
-  },
-  {
-    "type": "opcode",
     "named": false
   },
   {
@@ -3102,10 +3140,6 @@
   },
   {
     "type": "rireturn",
-    "named": false
-  },
-  {
-    "type": "struct",
     "named": false
   },
   {

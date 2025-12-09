@@ -81,8 +81,14 @@ module.exports = grammar({
       $._statement
     ),
 
-    instrument_definition: $ => prec(3, seq(
-      'instr',
+    kw_instr: $ => token(prec(5, 'instr')),
+    kw_endin: $ => token(prec(5, 'endin')),
+    kw_struct: $ => token(prec(5, 'struct')),
+    kw_opcode: $ => token(prec(5, 'opcode')),
+    kw_endop: $ => token(prec(5, 'endop')),
+
+    instrument_definition: $ => seq(
+      $.kw_instr,
       field('name', sep1(choice(
           $.identifier,
           $.number,
@@ -90,8 +96,8 @@ module.exports = grammar({
         ), ','
       )),
       repeat($._statement),
-      'endin'
-    )),
+      $.kw_endin
+    ),
 
     // --- UDO DEFINITIONS ---
     udo_definition: $ => choice(
@@ -100,7 +106,7 @@ module.exports = grammar({
     ),
 
     udo_definition_legacy: $ => seq(
-      'opcode',
+      $.kw_opcode,
       field('name', $.opcode_name),
       optional(','),
       field('outputs', $.legacy_udo_args),
@@ -109,18 +115,18 @@ module.exports = grammar({
       optional($.xin_statement),
       repeat($._statement),
       optional($.xout_statement),
-      'endop'
+      $.kw_endop
     ),
 
     udo_definition_modern: $ => seq(
-      'opcode',
+      $.kw_opcode,
       field('name', $.opcode_name),
       field('inputs', $.modern_udo_inputs),
       ':',
       field('outputs', $.modern_udo_outputs),
       repeat($._statement),
       optional($.xout_statement),
-      'endop'
+      $.kw_endop
     ),
 
     legacy_udo_args: $ => token(/[a-zA-Z0-9_\[\]]+/),
@@ -143,7 +149,7 @@ module.exports = grammar({
 
     // --- STRUCT DEFINITION (Csound 7) ---
     struct_definition: $ => prec(2, seq(
-        'struct',
+        $.kw_struct,
         field('name', $.struct_name),
         field('fields', sep1($.typed_identifier, ','))
       )

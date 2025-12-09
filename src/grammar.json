@@ -300,84 +300,135 @@
         }
       ]
     },
-    "instrument_definition": {
-      "type": "PREC",
-      "value": 3,
+    "kw_instr": {
+      "type": "TOKEN",
       "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "STRING",
-            "value": "instr"
-          },
-          {
-            "type": "FIELD",
-            "name": "name",
-            "content": {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "CHOICE",
+        "type": "PREC",
+        "value": 5,
+        "content": {
+          "type": "STRING",
+          "value": "instr"
+        }
+      }
+    },
+    "kw_endin": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 5,
+        "content": {
+          "type": "STRING",
+          "value": "endin"
+        }
+      }
+    },
+    "kw_struct": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 5,
+        "content": {
+          "type": "STRING",
+          "value": "struct"
+        }
+      }
+    },
+    "kw_opcode": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 5,
+        "content": {
+          "type": "STRING",
+          "value": "opcode"
+        }
+      }
+    },
+    "kw_endop": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 5,
+        "content": {
+          "type": "STRING",
+          "value": "endop"
+        }
+      }
+    },
+    "instrument_definition": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "kw_instr"
+        },
+        {
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "SYMBOL",
+                    "name": "identifier"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "number"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "plus_identifier"
+                  }
+                ]
+              },
+              {
+                "type": "REPEAT",
+                "content": {
+                  "type": "SEQ",
                   "members": [
                     {
-                      "type": "SYMBOL",
-                      "name": "identifier"
+                      "type": "STRING",
+                      "value": ","
                     },
                     {
-                      "type": "SYMBOL",
-                      "name": "number"
-                    },
-                    {
-                      "type": "SYMBOL",
-                      "name": "plus_identifier"
+                      "type": "CHOICE",
+                      "members": [
+                        {
+                          "type": "SYMBOL",
+                          "name": "identifier"
+                        },
+                        {
+                          "type": "SYMBOL",
+                          "name": "number"
+                        },
+                        {
+                          "type": "SYMBOL",
+                          "name": "plus_identifier"
+                        }
+                      ]
                     }
                   ]
-                },
-                {
-                  "type": "REPEAT",
-                  "content": {
-                    "type": "SEQ",
-                    "members": [
-                      {
-                        "type": "STRING",
-                        "value": ","
-                      },
-                      {
-                        "type": "CHOICE",
-                        "members": [
-                          {
-                            "type": "SYMBOL",
-                            "name": "identifier"
-                          },
-                          {
-                            "type": "SYMBOL",
-                            "name": "number"
-                          },
-                          {
-                            "type": "SYMBOL",
-                            "name": "plus_identifier"
-                          }
-                        ]
-                      }
-                    ]
-                  }
                 }
-              ]
-            }
-          },
-          {
-            "type": "REPEAT",
-            "content": {
-              "type": "SYMBOL",
-              "name": "_statement"
-            }
-          },
-          {
-            "type": "STRING",
-            "value": "endin"
+              }
+            ]
           }
-        ]
-      }
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_statement"
+          }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kw_endin"
+        }
+      ]
     },
     "udo_definition": {
       "type": "CHOICE",
@@ -396,8 +447,8 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "opcode"
+          "type": "SYMBOL",
+          "name": "kw_opcode"
         },
         {
           "type": "FIELD",
@@ -471,8 +522,8 @@
           ]
         },
         {
-          "type": "STRING",
-          "value": "endop"
+          "type": "SYMBOL",
+          "name": "kw_endop"
         }
       ]
     },
@@ -480,8 +531,8 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "opcode"
+          "type": "SYMBOL",
+          "name": "kw_opcode"
         },
         {
           "type": "FIELD",
@@ -531,8 +582,8 @@
           ]
         },
         {
-          "type": "STRING",
-          "value": "endop"
+          "type": "SYMBOL",
+          "name": "kw_endop"
         }
       ]
     },
@@ -647,8 +698,8 @@
         "type": "SEQ",
         "members": [
           {
-            "type": "STRING",
-            "value": "struct"
+            "type": "SYMBOL",
+            "name": "kw_struct"
           },
           {
             "type": "FIELD",
