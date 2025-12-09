@@ -35,7 +35,7 @@
 (number) @constant.numeric
 
 [
-    "instr" "endin" "opcode" "endop" "struct"
+    (kw_instr) (kw_endin) (kw_opcode) (kw_endop) (kw_struct)
     "if" "then" "ithen" "kthen" "elseif" "else" "endif" "fi"
     "while" "until" "do" "od" "for" "in" "switch" "case" "default"
     "return" "goto" "kgoto" "igoto"

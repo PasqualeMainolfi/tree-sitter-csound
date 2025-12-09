@@ -27,6 +27,7 @@ gamp init 10
 instr 1
 
     struct MyType val0:i, val1:i
+    struct MyDog val:a
 
     ifreq = 400
     sig:a = poscil(1, 440)
@@ -60,12 +61,11 @@ instr 1
 endin
 
 instr 2
-
-
+    ifreq = 200
+    iamp = 300
 
 
 endin
-
 
 </CsInstruments>
 <CsScore>
