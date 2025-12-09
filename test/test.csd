@@ -20,6 +20,7 @@ opcode add, 0, ii
     xout(i1, i2)
 endop
 
+
 freq@global:i = 10
 gamp init 10
 
@@ -29,13 +30,13 @@ instr 1
 
     ifreq = 400
     sig:a = poscil(1, 440)
-    sig2:a[] = poscile(1, 3)
+    ; sig2:a[] = poscile(1, 3)
     sig3:a += poscil(1, 440)
     filter:a = butterbp(sig, freq, 50)
     filter2:a = poscil(1, 440)
 
     ; asignal poscil 1, 330
-    asignal[] poscil noise(1), 300
+    ; asignal[] poscil noise(1), 300
     afilter butbp noise(1), 3, 3000
 
     gambo:MyType init 8, 88
@@ -43,7 +44,6 @@ instr 1
     ifreq = gambo.val0 > 300 ? 1000:5000
     iamp = gambo.val0
 
-    v:i = 10
     ib = 10
     iv add 1, 2
 
@@ -57,6 +57,13 @@ instr 1
     endsw
 
     outs(sig2, sig2)
+endin
+
+instr 2
+
+
+
+
 endin
 
 
