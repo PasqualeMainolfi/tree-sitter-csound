@@ -9,7 +9,6 @@ module.exports = grammar({
   conflicts: $ => [
     [$._root_statement, $._score_item],
     [$._root_statement, $._statement],
-    [$.opcode_statement, $.opcode_name],
     [$.opcode_statement, $.typed_assignment_statement],
     [$.argument_list, $.parenthesized_expression],
     [$.parenthesized_expression, $.argument_list],
@@ -19,6 +18,7 @@ module.exports = grammar({
     [$.cabbage_statement],
     [$.opcode_statement],
     [$.macro_usage],
+    // [$.opcode_statement, $.opcode_name],
     // [$.opcode_statement, $._lvalue],
     // [$._lvalue]
     // [$.argument_list],
@@ -81,11 +81,22 @@ module.exports = grammar({
       $._statement
     ),
 
+    kw_instr: $ => token(prec(5, 'instr')),
+    kw_endin: $ => token(prec(5, 'endin')),
+    kw_struct: $ => token(prec(5, 'struct')),
+    kw_opcode: $ => token(prec(5, 'opcode')),
+    kw_endop: $ => token(prec(5, 'endop')),
+
     instrument_definition: $ => seq(
-      'instr',
-      field('name', sep1(choice($.identifier, $.number, $.plus_identifier), ',')),
+      $.kw_instr,
+      field('name', sep1(choice(
+          $.identifier,
+          $.number,
+          $.plus_identifier
+        ), ','
+      )),
       repeat($._statement),
-      'endin'
+      $.kw_endin
     ),
 
     // --- UDO DEFINITIONS ---
@@ -95,7 +106,7 @@ module.exports = grammar({
     ),
 
     udo_definition_legacy: $ => seq(
-      'opcode',
+      $.kw_opcode,
       field('name', $.opcode_name),
       optional(','),
       field('outputs', $.legacy_udo_args),
@@ -104,21 +115,21 @@ module.exports = grammar({
       optional($.xin_statement),
       repeat($._statement),
       optional($.xout_statement),
-      'endop'
+      $.kw_endop
     ),
 
     udo_definition_modern: $ => seq(
-      'opcode',
+      $.kw_opcode,
       field('name', $.opcode_name),
       field('inputs', $.modern_udo_inputs),
       ':',
       field('outputs', $.modern_udo_outputs),
       repeat($._statement),
       optional($.xout_statement),
-      'endop'
+      $.kw_endop
     ),
 
-    legacy_udo_args: $ => token(/[a-zA-Z_\[\]]+/),
+    legacy_udo_args: $ => token(/[a-zA-Z0-9_\[\]]+/),
     _void: $ => token('void'),
 
     modern_udo_inputs: $ => seq(
@@ -138,11 +149,23 @@ module.exports = grammar({
 
     // --- STRUCT DEFINITION (Csound 7) ---
     struct_definition: $ => prec(2, seq(
-        'struct',
+        $.kw_struct,
         field('name', $.struct_name),
         field('fields', sep1($.typed_identifier, ','))
       )
     ),
+
+    // STRUCT ACCESS (obj.prop)
+    struct_access: $ => prec(10, seq(
+      field('called_struct', choice(
+          $.identifier,
+          $.struct_access,
+          $.array_access,
+          $.type_identifier_legacy
+      )),
+      '.',
+      field('member', $.identifier)
+    )),
 
     struct_name: $ => token(prec(5, /[a-zA-Z0-9_]+/)),
 
@@ -206,15 +229,22 @@ module.exports = grammar({
       $.identifier
     ),
 
-    opcode_statement: $ => seq(
-        field('outputs', optional(
-            sep1(
-                choice($.typed_identifier, $.type_identifier_legacy),
-                ','
-            )
+    opcode_statement: $ => choice(
+        prec(2, seq(
+            field('outputs', sep1(
+                choice(
+                    $.typed_identifier,
+                    $.type_identifier_legacy
+                ),
+            ','
+            )),
+            field('op', $.opcode_name),
+            field('inputs', optional($.argument_list))
         )),
-        field('op', $.opcode_name),
-        field('inputs', optional($.argument_list))
+        prec(1, seq(
+            field('op', $.opcode_name),
+            field('inputs', optional($.argument_list))
+        ))
     ),
 
     control_statement: $ => choice(
@@ -228,7 +258,7 @@ module.exports = grammar({
     ),
 
     if_statement: $ => seq(
-      choice('if', 'if', 'tif'),
+      choice('if', 'tif'),
       field('condition', $._expression),
       choice(seq('goto', $.identifier),
         seq(choice('then', 'ithen', 'kthen'),
@@ -364,14 +394,18 @@ module.exports = grammar({
       prec.left(1, seq($._expression, '||', $._expression))
     ),
     ternary_expression: $ => prec.right(seq($._expression, '?', $._expression, ':', $._expression)),
-    array_access: $ => seq(field('array', choice($.identifier, $.array_access)), '[', $._expression, ']'),
 
-    // STRUCT ACCESS (obj.prop)
-    struct_access: $ => prec(10, seq(
-      field('object', choice($.identifier, $.struct_access, $.array_access)),
-      '.',
-      field('member', $.identifier)
-    )),
+    array_access: $ => seq(
+        field('array', choice(
+            $.identifier,
+            $.array_access,
+            $.type_identifier_legacy,
+            $.struct_access
+        )),
+        '[',
+        $._expression,
+        ']'
+    ),
 
     score_body: $ => repeat1($._score_item),
     _score_item: $ => choice($.preprocessor_directive, $.score_statement, $.score_loop, $.score_carry),
@@ -415,7 +449,12 @@ module.exports = grammar({
 
     number: $ => choice(/\d+/, /0[xX][0-9a-fA-F]+/, /\d+\.\d+([eE][+-]?\d+)?/, /\d+[eE][+-]?\d+/),
     string: $ => seq('"', repeat(choice(/[^"\\\n]+/, /\\./)), '"'),
-    comment: $ => choice(seq(';', /.*/), seq('//', /.*/)),
+    comment: $ => token(
+        choice(
+            seq(';', /[^\n]*/),
+            seq('//', /[^\n]*/)
+        )
+    ),
     block_comment: $ => seq('/*', /[^*]*\*+([^/*][^*]*\*+)*/, '/')
   }
 });

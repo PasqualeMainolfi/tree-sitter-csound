@@ -73,6 +73,14 @@
           {
             "type": "identifier",
             "named": true
+          },
+          {
+            "type": "struct_access",
+            "named": true
+          },
+          {
+            "type": "type_identifier_legacy",
+            "named": true
           }
         ]
       }
@@ -518,12 +526,6 @@
   {
     "type": "case_key",
     "named": true,
-    "fields": {}
-  },
-  {
-    "type": "comment",
-    "named": true,
-    "extra": true,
     "fields": {}
   },
   {
@@ -1299,7 +1301,7 @@
     },
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "assignment_statement",
@@ -1315,6 +1317,14 @@
         },
         {
           "type": "header_assignment",
+          "named": true
+        },
+        {
+          "type": "kw_endin",
+          "named": true
+        },
+        {
+          "type": "kw_instr",
           "named": true
         },
         {
@@ -1952,17 +1962,7 @@
     "type": "struct_access",
     "named": true,
     "fields": {
-      "member": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "object": {
+      "called_struct": {
         "multiple": false,
         "required": true,
         "types": [
@@ -1976,6 +1976,20 @@
           },
           {
             "type": "struct_access",
+            "named": true
+          },
+          {
+            "type": "type_identifier_legacy",
+            "named": true
+          }
+        ]
+      },
+      "member": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
             "named": true
           }
         ]
@@ -2010,6 +2024,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "kw_struct",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -2362,7 +2386,7 @@
     },
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "assignment_statement",
@@ -2378,6 +2402,14 @@
         },
         {
           "type": "header_assignment",
+          "named": true
+        },
+        {
+          "type": "kw_endop",
+          "named": true
+        },
+        {
+          "type": "kw_opcode",
           "named": true
         },
         {
@@ -2448,7 +2480,7 @@
     },
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "assignment_statement",
@@ -2464,6 +2496,14 @@
         },
         {
           "type": "header_assignment",
+          "named": true
+        },
+        {
+          "type": "kw_endop",
+          "named": true
+        },
+        {
+          "type": "kw_opcode",
           "named": true
         },
         {
@@ -2918,19 +2958,11 @@
     "named": false
   },
   {
-    "type": "//",
-    "named": false
-  },
-  {
     "type": "/=",
     "named": false
   },
   {
     "type": ":",
-    "named": false
-  },
-  {
-    "type": ";",
     "named": false
   },
   {
@@ -2990,6 +3022,11 @@
     "named": false
   },
   {
+    "type": "comment",
+    "named": true,
+    "extra": true
+  },
+  {
     "type": "default",
     "named": false
   },
@@ -3007,14 +3044,6 @@
   },
   {
     "type": "endif",
-    "named": false
-  },
-  {
-    "type": "endin",
-    "named": false
-  },
-  {
-    "type": "endop",
     "named": false
   },
   {
@@ -3058,10 +3087,6 @@
     "named": false
   },
   {
-    "type": "instr",
-    "named": false
-  },
-  {
     "type": "ithen",
     "named": false
   },
@@ -3074,15 +3099,31 @@
     "named": false
   },
   {
+    "type": "kw_endin",
+    "named": true
+  },
+  {
+    "type": "kw_endop",
+    "named": true
+  },
+  {
+    "type": "kw_instr",
+    "named": true
+  },
+  {
+    "type": "kw_opcode",
+    "named": true
+  },
+  {
+    "type": "kw_struct",
+    "named": true
+  },
+  {
     "type": "legacy_udo_args",
     "named": true
   },
   {
     "type": "od",
-    "named": false
-  },
-  {
-    "type": "opcode",
     "named": false
   },
   {
@@ -3099,10 +3140,6 @@
   },
   {
     "type": "rireturn",
-    "named": false
-  },
-  {
-    "type": "struct",
     "named": false
   },
   {

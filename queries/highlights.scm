@@ -35,7 +35,7 @@
 (number) @constant.numeric
 
 [
-    "instr" "endin" "opcode" "endop" "struct"
+    (kw_instr) (kw_endin) (kw_opcode) (kw_endop) (kw_struct)
     "if" "then" "ithen" "kthen" "elseif" "else" "endif" "fi"
     "while" "until" "do" "od" "for" "in" "switch" "case" "default"
     "return" "goto" "kgoto" "igoto"
@@ -47,7 +47,9 @@
 (struct_name) @type
 (struct_definition fields: (typed_identifier
     name: (identifier) @variable))
+
 (struct_access
+    called_struct: (_) @variable
     member: (identifier) @property)
 
 (tag_synthesizer_start) @tag
@@ -62,7 +64,7 @@
 (tag_cabbage_end) @tag
 
 ["=" "+" "-" "*" "/" "%" "^" "?" ":"] @operator
-["," ";"] @punctuation.delimiter
+[","] @punctuation.delimiter
 ["(" ")" "[" "]" "{" "}"] @punctuation.bracket
 
 (cabbage_statement . (identifier) @type)

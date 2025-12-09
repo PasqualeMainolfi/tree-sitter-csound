@@ -1,11 +1,11 @@
 (instrument_definition) @indent
-(instrument_definition "endin" @outdent)
+(instrument_definition (kw_endin) @outdent)
 
 (udo_definition_legacy) @indent
-(udo_definition_legacy "endop" @outdent)
+(udo_definition_legacy (kw_endop) @outdent)
 
 (udo_definition_modern) @indent
-(udo_definition_modern "endop" @outdent)
+(udo_definition_modern (kw_endop) @outdent)
 
 
 (if_statement) @indent

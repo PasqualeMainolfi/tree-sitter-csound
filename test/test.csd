@@ -8,28 +8,45 @@ ksmps = 1
 nchnls = 2
 0dbfs = 1
 
+#define PIG # 21 #
 
-opcode print_value(value:i):(void)
-    print(value)
+opcode print_value(value:i, value1:k):(ii)
+    print(value, value1)
+    xout(10, $PIG)
 endop
 
 opcode add, 0, ii
     i1, i2 xin
-    xout(i1 + i2)
+    xout(i1, i2)
 endop
 
+
+freq@global:i = 10
+gamp init 10
 
 instr 1
 
     struct MyType val0:i, val1:i
+    struct MyDog val:a
 
+    ifreq = 400
     sig:a = poscil(1, 440)
-    asignal poscil 1, 440
-    sig2:b = poscile(1, 3)
-    filter:b = butterbp(sig, 300, 50)
-    filter2:b = poscil(1, 440)
+    ; sig2:a[] = poscile(1, 3)
+    sig3:a += poscil(1, 440)
+    filter:a = butterbp(sig, freq, 50)
+    filter2:a = poscil(1, 440)
+
+    ; asignal poscil 1, 330
+    ; asignal[] poscil noise(1), 300
+    afilter butbp noise(1), 3, 3000
 
     gambo:MyType init 8, 88
+
+    ifreq = gambo.val0 > 300 ? 1000:5000
+    iamp = gambo.val0
+
+    ib = 10
+    iv add 1, 2
 
     switch p4
         case 1
@@ -40,8 +57,15 @@ instr 1
             print(3)
     endsw
 
+    outs(sig2, sig2)
 endin
 
+instr 2
+    ifreq = 200
+    iamp = 300
+
+
+endin
 
 </CsInstruments>
 <CsScore>

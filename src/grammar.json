@@ -300,12 +300,67 @@
         }
       ]
     },
+    "kw_instr": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 5,
+        "content": {
+          "type": "STRING",
+          "value": "instr"
+        }
+      }
+    },
+    "kw_endin": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 5,
+        "content": {
+          "type": "STRING",
+          "value": "endin"
+        }
+      }
+    },
+    "kw_struct": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 5,
+        "content": {
+          "type": "STRING",
+          "value": "struct"
+        }
+      }
+    },
+    "kw_opcode": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 5,
+        "content": {
+          "type": "STRING",
+          "value": "opcode"
+        }
+      }
+    },
+    "kw_endop": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 5,
+        "content": {
+          "type": "STRING",
+          "value": "endop"
+        }
+      }
+    },
     "instrument_definition": {
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "instr"
+          "type": "SYMBOL",
+          "name": "kw_instr"
         },
         {
           "type": "FIELD",
@@ -370,8 +425,8 @@
           }
         },
         {
-          "type": "STRING",
-          "value": "endin"
+          "type": "SYMBOL",
+          "name": "kw_endin"
         }
       ]
     },
@@ -392,8 +447,8 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "opcode"
+          "type": "SYMBOL",
+          "name": "kw_opcode"
         },
         {
           "type": "FIELD",
@@ -467,8 +522,8 @@
           ]
         },
         {
-          "type": "STRING",
-          "value": "endop"
+          "type": "SYMBOL",
+          "name": "kw_endop"
         }
       ]
     },
@@ -476,8 +531,8 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "opcode"
+          "type": "SYMBOL",
+          "name": "kw_opcode"
         },
         {
           "type": "FIELD",
@@ -527,8 +582,8 @@
           ]
         },
         {
-          "type": "STRING",
-          "value": "endop"
+          "type": "SYMBOL",
+          "name": "kw_endop"
         }
       ]
     },
@@ -536,7 +591,7 @@
       "type": "TOKEN",
       "content": {
         "type": "PATTERN",
-        "value": "[a-zA-Z_\\[\\]]+"
+        "value": "[a-zA-Z0-9_\\[\\]]+"
       }
     },
     "_void": {
@@ -643,8 +698,8 @@
         "type": "SEQ",
         "members": [
           {
-            "type": "STRING",
-            "value": "struct"
+            "type": "SYMBOL",
+            "name": "kw_struct"
           },
           {
             "type": "FIELD",
@@ -681,6 +736,52 @@
                   }
                 }
               ]
+            }
+          }
+        ]
+      }
+    },
+    "struct_access": {
+      "type": "PREC",
+      "value": 10,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "FIELD",
+            "name": "called_struct",
+            "content": {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "identifier"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "struct_access"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "array_access"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "type_identifier_legacy"
+                }
+              ]
+            }
+          },
+          {
+            "type": "STRING",
+            "value": "."
+          },
+          {
+            "type": "FIELD",
+            "name": "member",
+            "content": {
+              "type": "SYMBOL",
+              "name": "identifier"
             }
           }
         ]
@@ -1170,83 +1271,117 @@
       ]
     },
     "opcode_statement": {
-      "type": "SEQ",
+      "type": "CHOICE",
       "members": [
         {
-          "type": "FIELD",
-          "name": "outputs",
+          "type": "PREC",
+          "value": 2,
           "content": {
-            "type": "CHOICE",
+            "type": "SEQ",
             "members": [
               {
-                "type": "SEQ",
-                "members": [
-                  {
-                    "type": "CHOICE",
-                    "members": [
-                      {
-                        "type": "SYMBOL",
-                        "name": "typed_identifier"
-                      },
-                      {
-                        "type": "SYMBOL",
-                        "name": "type_identifier_legacy"
-                      }
-                    ]
-                  },
-                  {
-                    "type": "REPEAT",
-                    "content": {
-                      "type": "SEQ",
+                "type": "FIELD",
+                "name": "outputs",
+                "content": {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "CHOICE",
                       "members": [
                         {
-                          "type": "STRING",
-                          "value": ","
+                          "type": "SYMBOL",
+                          "name": "typed_identifier"
                         },
                         {
-                          "type": "CHOICE",
-                          "members": [
-                            {
-                              "type": "SYMBOL",
-                              "name": "typed_identifier"
-                            },
-                            {
-                              "type": "SYMBOL",
-                              "name": "type_identifier_legacy"
-                            }
-                          ]
+                          "type": "SYMBOL",
+                          "name": "type_identifier_legacy"
                         }
                       ]
+                    },
+                    {
+                      "type": "REPEAT",
+                      "content": {
+                        "type": "SEQ",
+                        "members": [
+                          {
+                            "type": "STRING",
+                            "value": ","
+                          },
+                          {
+                            "type": "CHOICE",
+                            "members": [
+                              {
+                                "type": "SYMBOL",
+                                "name": "typed_identifier"
+                              },
+                              {
+                                "type": "SYMBOL",
+                                "name": "type_identifier_legacy"
+                              }
+                            ]
+                          }
+                        ]
+                      }
                     }
-                  }
-                ]
+                  ]
+                }
               },
               {
-                "type": "BLANK"
+                "type": "FIELD",
+                "name": "op",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "opcode_name"
+                }
+              },
+              {
+                "type": "FIELD",
+                "name": "inputs",
+                "content": {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "argument_list"
+                    },
+                    {
+                      "type": "BLANK"
+                    }
+                  ]
+                }
               }
             ]
           }
         },
         {
-          "type": "FIELD",
-          "name": "op",
+          "type": "PREC",
+          "value": 1,
           "content": {
-            "type": "SYMBOL",
-            "name": "opcode_name"
-          }
-        },
-        {
-          "type": "FIELD",
-          "name": "inputs",
-          "content": {
-            "type": "CHOICE",
+            "type": "SEQ",
             "members": [
               {
-                "type": "SYMBOL",
-                "name": "argument_list"
+                "type": "FIELD",
+                "name": "op",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "opcode_name"
+                }
               },
               {
-                "type": "BLANK"
+                "type": "FIELD",
+                "name": "inputs",
+                "content": {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "argument_list"
+                    },
+                    {
+                      "type": "BLANK"
+                    }
+                  ]
+                }
               }
             ]
           }
@@ -1292,10 +1427,6 @@
         {
           "type": "CHOICE",
           "members": [
-            {
-              "type": "STRING",
-              "value": "if"
-            },
             {
               "type": "STRING",
               "value": "if"
@@ -2232,6 +2363,14 @@
               {
                 "type": "SYMBOL",
                 "name": "array_access"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "type_identifier_legacy"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "struct_access"
               }
             ]
           }
@@ -2249,48 +2388,6 @@
           "value": "]"
         }
       ]
-    },
-    "struct_access": {
-      "type": "PREC",
-      "value": 10,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "FIELD",
-            "name": "object",
-            "content": {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "identifier"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "struct_access"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "array_access"
-                }
-              ]
-            }
-          },
-          {
-            "type": "STRING",
-            "value": "."
-          },
-          {
-            "type": "FIELD",
-            "name": "member",
-            "content": {
-              "type": "SYMBOL",
-              "name": "identifier"
-            }
-          }
-        ]
-      }
     },
     "score_body": {
       "type": "REPEAT1",
@@ -2907,35 +3004,38 @@
       ]
     },
     "comment": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "STRING",
-              "value": ";"
-            },
-            {
-              "type": "PATTERN",
-              "value": ".*"
-            }
-          ]
-        },
-        {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "STRING",
-              "value": "//"
-            },
-            {
-              "type": "PATTERN",
-              "value": ".*"
-            }
-          ]
-        }
-      ]
+      "type": "TOKEN",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "STRING",
+                "value": ";"
+              },
+              {
+                "type": "PATTERN",
+                "value": "[^\\n]*"
+              }
+            ]
+          },
+          {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "STRING",
+                "value": "//"
+              },
+              {
+                "type": "PATTERN",
+                "value": "[^\\n]*"
+              }
+            ]
+          }
+        ]
+      }
     },
     "block_comment": {
       "type": "SEQ",
@@ -2977,10 +3077,6 @@
     [
       "_root_statement",
       "_statement"
-    ],
-    [
-      "opcode_statement",
-      "opcode_name"
     ],
     [
       "opcode_statement",
