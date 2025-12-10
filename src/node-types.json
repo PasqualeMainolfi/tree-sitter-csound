@@ -28,6 +28,10 @@
           "named": true
         },
         {
+          "type": "internal_code_block",
+          "named": true
+        },
+        {
           "type": "macro_usage",
           "named": true
         },
@@ -107,6 +111,10 @@
         },
         {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "internal_code_block",
           "named": true
         },
         {
@@ -241,6 +249,10 @@
             "named": true
           },
           {
+            "type": "internal_code_block",
+            "named": true
+          },
+          {
             "type": "macro_usage",
             "named": true
           },
@@ -298,6 +310,10 @@
         },
         {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "internal_code_block",
           "named": true
         },
         {
@@ -427,6 +443,10 @@
             "named": true
           },
           {
+            "type": "internal_code_block",
+            "named": true
+          },
+          {
             "type": "label_statement",
             "named": true
           },
@@ -490,6 +510,10 @@
         },
         {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "internal_code_block",
           "named": true
         },
         {
@@ -650,6 +674,10 @@
             "named": true
           },
           {
+            "type": "internal_code_block",
+            "named": true
+          },
+          {
             "type": "label_statement",
             "named": true
           },
@@ -728,6 +756,10 @@
           "named": true
         },
         {
+          "type": "internal_code_block",
+          "named": true
+        },
+        {
           "type": "label_statement",
           "named": true
         },
@@ -788,6 +820,10 @@
         },
         {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "internal_code_block",
           "named": true
         },
         {
@@ -879,6 +915,10 @@
         },
         {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "internal_code_block",
           "named": true
         },
         {
@@ -1057,6 +1097,10 @@
           "named": true
         },
         {
+          "type": "internal_code_block",
+          "named": true
+        },
+        {
           "type": "macro_usage",
           "named": true
         },
@@ -1118,6 +1162,10 @@
           },
           {
             "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "internal_code_block",
             "named": true
           },
           {
@@ -1184,6 +1232,10 @@
           "named": true
         },
         {
+          "type": "internal_code_block",
+          "named": true
+        },
+        {
           "type": "label_statement",
           "named": true
         },
@@ -1232,6 +1284,10 @@
         },
         {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "internal_code_block",
           "named": true
         },
         {
@@ -1320,6 +1376,10 @@
           "named": true
         },
         {
+          "type": "internal_code_block",
+          "named": true
+        },
+        {
           "type": "kw_endin",
           "named": true
         },
@@ -1368,6 +1428,57 @@
         },
         {
           "type": "tag_instruments_start",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "internal_code_block",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "assignment_statement",
+          "named": true
+        },
+        {
+          "type": "control_statement",
+          "named": true
+        },
+        {
+          "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "header_assignment",
+          "named": true
+        },
+        {
+          "type": "internal_code_block",
+          "named": true
+        },
+        {
+          "type": "label_statement",
+          "named": true
+        },
+        {
+          "type": "legacy_typed_assignment_statement",
+          "named": true
+        },
+        {
+          "type": "opcode_statement",
+          "named": true
+        },
+        {
+          "type": "struct_definition",
+          "named": true
+        },
+        {
+          "type": "typed_assignment_statement",
           "named": true
         }
       ]
@@ -1470,6 +1581,10 @@
           },
           {
             "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "internal_code_block",
             "named": true
           },
           {
@@ -1678,6 +1793,10 @@
           "named": true
         },
         {
+          "type": "internal_code_block",
+          "named": true
+        },
+        {
           "type": "label_statement",
           "named": true
         },
@@ -1738,6 +1857,10 @@
         },
         {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "internal_code_block",
           "named": true
         },
         {
@@ -2083,6 +2206,10 @@
           "named": true
         },
         {
+          "type": "internal_code_block",
+          "named": true
+        },
+        {
           "type": "macro_usage",
           "named": true
         },
@@ -2147,6 +2274,10 @@
         },
         {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "internal_code_block",
           "named": true
         },
         {
@@ -2266,6 +2397,10 @@
           },
           {
             "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "internal_code_block",
             "named": true
           },
           {
@@ -2405,6 +2540,10 @@
           "named": true
         },
         {
+          "type": "internal_code_block",
+          "named": true
+        },
+        {
           "type": "kw_endop",
           "named": true
         },
@@ -2499,6 +2638,10 @@
           "named": true
         },
         {
+          "type": "internal_code_block",
+          "named": true
+        },
+        {
           "type": "kw_endop",
           "named": true
         },
@@ -2559,6 +2702,10 @@
         },
         {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "internal_code_block",
           "named": true
         },
         {
@@ -2645,6 +2792,10 @@
         },
         {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "internal_code_block",
           "named": true
         },
         {
@@ -2736,6 +2887,10 @@
         },
         {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "internal_code_block",
           "named": true
         },
         {
@@ -3231,6 +3386,10 @@
     "named": false
   },
   {
+    "type": "{{",
+    "named": false
+  },
+  {
     "type": "|",
     "named": false
   },
@@ -3240,6 +3399,10 @@
   },
   {
     "type": "}",
+    "named": false
+  },
+  {
+    "type": "}}",
     "named": false
   },
   {

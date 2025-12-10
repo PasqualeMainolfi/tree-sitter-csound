@@ -185,7 +185,8 @@ module.exports = grammar({
       $.opcode_statement,
       $.control_statement,
       $.label_statement,
-      $.struct_definition
+      $.struct_definition,
+      $.internal_code_block
     ),
 
     _xin: $ => token('xin'),
@@ -360,7 +361,8 @@ module.exports = grammar({
       alias(choice($.identifier, $.type_identifier_legacy), $.identifier),
       $.array_access,
       $.struct_access,
-      $.macro_usage
+      $.macro_usage,
+      $.internal_code_block
     ),
 
     parenthesized_expression: $ => prec.left(

@@ -856,6 +856,10 @@
         {
           "type": "SYMBOL",
           "name": "struct_definition"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "internal_code_block"
         }
       ]
     },
@@ -1959,6 +1963,10 @@
         {
           "type": "SYMBOL",
           "name": "macro_usage"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "internal_code_block"
         }
       ]
     },
