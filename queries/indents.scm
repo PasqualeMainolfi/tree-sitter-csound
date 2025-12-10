@@ -20,14 +20,13 @@
   ] @indent
 )
 
-(if_statement
-  [
+[
     (kw_endif)
     (kw_fi)
     (else_block)
     (elseif_block)
-  ] @outdent
-)
+] @outdent
+
 
 (else_block) @indent
 (elseif_block) @indent
