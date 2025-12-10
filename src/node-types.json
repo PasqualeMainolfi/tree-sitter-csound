@@ -1469,6 +1469,22 @@
           "named": true
         },
         {
+          "type": "kw_elsedef",
+          "named": true
+        },
+        {
+          "type": "kw_end",
+          "named": true
+        },
+        {
+          "type": "kw_ifdef",
+          "named": true
+        },
+        {
+          "type": "kw_ifndef",
+          "named": true
+        },
+        {
           "type": "legacy_typed_assignment_statement",
           "named": true
         },
@@ -1492,9 +1508,13 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "kw_include",
+          "named": true
+        },
         {
           "type": "string",
           "named": true
@@ -1807,11 +1827,15 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "kw_define",
           "named": true
         }
       ]
@@ -2967,11 +2991,15 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "kw_undef",
           "named": true
         }
       ]
@@ -3284,34 +3312,6 @@
     "named": false
   },
   {
-    "type": "#define",
-    "named": false
-  },
-  {
-    "type": "#else",
-    "named": false
-  },
-  {
-    "type": "#end",
-    "named": false
-  },
-  {
-    "type": "#ifdef",
-    "named": false
-  },
-  {
-    "type": "#ifndef",
-    "named": false
-  },
-  {
-    "type": "#include",
-    "named": false
-  },
-  {
-    "type": "#undef",
-    "named": false
-  },
-  {
     "type": "$",
     "named": false
   },
@@ -3473,6 +3473,10 @@
     "named": true
   },
   {
+    "type": "kw_define",
+    "named": true
+  },
+  {
     "type": "kw_do",
     "named": true
   },
@@ -3481,7 +3485,15 @@
     "named": true
   },
   {
+    "type": "kw_elsedef",
+    "named": true
+  },
+  {
     "type": "kw_elseif",
+    "named": true
+  },
+  {
+    "type": "kw_end",
     "named": true
   },
   {
@@ -3513,11 +3525,23 @@
     "named": true
   },
   {
+    "type": "kw_ifdef",
+    "named": true
+  },
+  {
+    "type": "kw_ifndef",
+    "named": true
+  },
+  {
     "type": "kw_igoto",
     "named": true
   },
   {
     "type": "kw_in",
+    "named": true
+  },
+  {
+    "type": "kw_include",
     "named": true
   },
   {
@@ -3566,6 +3590,10 @@
   },
   {
     "type": "kw_tif",
+    "named": true
+  },
+  {
+    "type": "kw_undef",
     "named": true
   },
   {

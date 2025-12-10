@@ -29,7 +29,7 @@ struct MyDog val:a
 instr 1
 
 
-    ; ifreq = 400
+    ifreq = 400
     sig:a = poscil(1, 440)
     ; sig2:a[] = poscile(1, 3)
     sig3:a += poscil(1, 440)
@@ -42,6 +42,9 @@ instr 1
 
     gambo:MyType init 8, 88
 
+    loop:
+        ifreq = 500
+
     ifreq = gambo.val0 > 300 ? 1000:5000
     iamp = gambo.val0
 
@@ -51,6 +54,7 @@ instr 1
     switch p4
         case 1
             print_value(1)
+            goto loop
         case 2
             print(2)
         default

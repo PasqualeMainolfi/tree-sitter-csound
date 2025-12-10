@@ -36,8 +36,8 @@ instr 1
         goto highnote
 
     lownote:
-        ifreq = 1000
-        sig:a = poscil(1, ifreq)
+    ifreq = 1000
+    sig:a = poscil(1, ifreq)
 
 
     while p4 > 10 do

@@ -29,37 +29,57 @@ module.exports = grammar({
             choice($.csd_file, $.orchestra_body, $.score_body)
         ),
 
-        // --- CSD ---
-        csd_file: $ => seq($.tag_synthesizer_start, repeat($.csd_element), $.tag_synthesizer_end),
-        csd_element: $ => choice($.options_block, $.instruments_block, $.score_block, $.cabbage_block, $.html_block, $.generic_tag_block),
-
-        tag_synthesizer_start: $ => /<CsoundSynthesi[sz]er>/,
-        tag_synthesizer_end: $ => /<\/CsoundSynthesi[sz]er>/,
-        tag_options_start: $ => /<CsOptions>/,
-        tag_options_end: $ => /<\/CsOptions>/,
-        tag_instruments_start: $ => /<CsInstruments>/,
-        tag_instruments_end: $ => /<\/CsInstruments>/,
-        tag_score_start: $ => /<CsScore>/,
-        tag_score_end: $ => /<\/CsScore>/,
-        tag_cabbage_start: $ => /<Cabbage>/,
-        tag_cabbage_end: $ => /<\/Cabbage>/,
-
-        options_block: $ => seq($.tag_options_start, repeat($._text_content), $.tag_options_end),
-        instruments_block: $ => seq($.tag_instruments_start, optional($.orchestra_body), $.tag_instruments_end),
-        score_block: $ => seq($.tag_score_start, optional($.score_body), $.tag_score_end),
-        cabbage_block: $ => seq($.tag_cabbage_start, repeat($.cabbage_statement), $.tag_cabbage_end),
-
-        html_block: $ => seq(
-            /<html>/,
-            repeat(/.|\s/),
-            /<\/html>/
+        _statement: $ => choice(
+            $.header_assignment,
+            $.typed_assignment_statement,
+            $.assignment_statement,
+            $.legacy_typed_assignment_statement,
+            $.function_call,
+            $.opcode_statement,
+            $.control_statement,
+            $.struct_definition,
+            $.internal_code_block
         ),
 
-        generic_tag_block: $ => seq(/<[a-zA-Z0-9]+>/, repeat(choice($._text_content, $.generic_tag_block)), /<\/[a-zA-Z0-9]+>/),
-        _text_content: $ => /[^<]+/,
+        _lvalue: $ => choice(
+            $.typed_identifier,
+            $.global_typed_identifier,
+            $.array_access,
+            $.struct_access,
+            $.identifier
+        ),
 
-        // --- ORCHESTRA ---
-        orchestra_body: $ => repeat1($._root_statement),
+        control_statement: $ => choice(
+            $.if_statement,
+            $.while_loop,
+            $.until_loop,
+            $.for_loop,
+            $.switch_statement,
+            $.goto_statement,
+            $.return_statement
+        ),
+
+        _expression: $ => choice(
+            $.function_call,
+            $.unary_expression,
+            $.binary_expression,
+            $.ternary_expression,
+            $.parenthesized_expression,
+            $.header_identifier,
+            $.number,
+            $.string,
+            alias(choice(
+                    $.identifier,
+                    $.type_identifier_legacy
+                ),
+                $.identifier
+            ),
+            $.array_access,
+            $.struct_access,
+            $.macro_usage,
+            $.array_data,
+            $.internal_code_block
+        ),
         _root_statement: $ => choice(
             $.preprocessor_directive,
             $.instrument_definition,
@@ -68,11 +88,132 @@ module.exports = grammar({
             $._statement
         ),
 
-        kw_instr: $ => token(prec(5, 'instr')),
-        kw_endin: $ => token(prec(5, 'endin')),
-        kw_struct: $ => token(prec(5, 'struct')),
-        kw_opcode: $ => token(prec(5, 'opcode')),
-        kw_endop: $ => token(prec(5, 'endop')),
+        preprocessor_directive: $ => choice(
+            $.macro_define,
+            $.include_directive,
+            $.undef_directive,
+            $.ifdef_directive
+        ),
+
+        kw_instr:                   $ => token(prec(5, 'instr')),
+        kw_endin:                   $ => token(prec(5, 'endin')),
+        kw_struct:                  $ => token(prec(5, 'struct')),
+        kw_opcode:                  $ => token(prec(5, 'opcode')),
+        kw_endop:                   $ => token(prec(5, 'endop')),
+        kw_open_code_block:         $ => token('{{'),
+        kw_close_code_block:        $ => token('}}'),
+        kw_void:                    $ => token(prec(5, 'void')),
+        kw_xin:                     $ => token('xin'),
+        kw_xout:                    $ => token('xout'),
+        kw_if:                      $ => token(prec(5, 'if')),
+        kw_tif:                     $ => token(prec(5, 'tif')),
+        kw_endif:                   $ => token(prec(5, 'endif')),
+        kw_fi:                      $ => token(prec(5, 'fi')),
+        kw_then:                    $ => token(prec(5, 'then')),
+        kw_ithen:                   $ => token(prec(5, 'ithen')),
+        kw_kthen:                   $ => token(prec(5, 'kthen')),
+        kw_elseif:                  $ => token(prec(5, 'elseif')),
+        kw_else:                    $ => token(prec(5, 'else')),
+        kw_while:                   $ => token(prec(5, 'while')),
+        kw_until:                   $ => token(prec(5, 'until')),
+        kw_do:                      $ => token(prec(5, 'do')),
+        kw_od:                      $ => token(prec(5, 'od')),
+        kw_for:                     $ => token(prec(5, 'for')),
+        kw_in:                      $ => token(prec(5, 'in')),
+        kw_switch_start:            $ => prec(5, token('switch')),
+        kw_switch_end:              $ => prec(5, token('endsw')),
+        kw_case_key:                $ => prec(5, token('case')),
+        kw_default_key:             $ => prec(5, token('default')),
+        kw_goto:                    $ => token(prec(5, 'goto')),
+        kw_kgoto:                   $ => token(prec(5, 'kgoto')),
+        kw_igoto:                   $ => token(prec(5, 'igoto')),
+        kw_return:                  $ => token(prec(5, 'return')),
+        kw_rireturn:                $ => token(prec(5, 'rireturn')),
+        kw_include:                 $ => token(prec(5, '#include')),
+        kw_define :                 $ => token(prec(5, '#define')),
+        kw_ifdef:                   $ => token(prec(5, '#ifdef')),
+        kw_undef:                   $ => token(prec(5, '#undef')),
+        kw_end:                     $ => token(prec(5, '#end')),
+        kw_ifndef:                  $ => token(prec(5, '#ifndef')),
+        kw_elsedef:                 $ => token(prec(5, '#else')),
+        legacy_udo_args:            $ => token(/[a-zA-Z0-9_\[\]]+/),
+        struct_name:                $ => token(prec(5, /[a-zA-Z0-9_]+/)),
+        header_identifier:          $ => token(prec(10, /(sr|kr|ksmps|nchnls|nchnls_i|0dbfs)/)),
+        score_carry:                $ => '.',
+        identifier:                 $ => /[a-zA-Z_]\w*/,
+        plus_identifier:            $ => /\+[a-zA-Z_]\w*/,
+        global_keyword:             $ => token('@global'),
+        type_identifier:            $ => token(prec(1, /(InstrDef|Instr|Opcode|Complex|[aikbSfw])(\[\])*/)),
+        type_identifier_legacy:     $ => token(prec(1, /g?[aikbSfw][a-zA-Z0-9_\[\]]*/)),
+        number:                     $ => choice(/\d+/, /0[xX][0-9a-fA-F]+/, /\d+\.\d+([eE][+-]?\d+)?/, /\d+[eE][+-]?\d+/),
+        string:                     $ => seq('"', repeat(choice(/[^"\\\n]+/, /\\./)), '"'),
+        comment:                    $ => token(choice(seq(';', /[^\n]*/), seq('//', /[^\n]*/))),
+        block_comment:              $ => seq('/*', /[^*]*\*+([^/*][^*]*\*+)*/, '/'),
+        tag_synthesizer_start:      $ => /<CsoundSynthesi[sz]er>/,
+        tag_synthesizer_end:        $ => /<\/CsoundSynthesi[sz]er>/,
+        tag_options_start:          $ => /<CsOptions>/,
+        tag_options_end:            $ => /<\/CsOptions>/,
+        tag_instruments_start:      $ => /<CsInstruments>/,
+        tag_instruments_end:        $ => /<\/CsInstruments>/,
+        tag_score_start:            $ => /<CsScore>/,
+        tag_score_end:              $ => /<\/CsScore>/,
+        tag_cabbage_start:          $ => /<Cabbage>/,
+        tag_cabbage_end:            $ => /<\/Cabbage>/,
+        html_block:                 $ => seq(/<html>/, repeat(/.|\s/), /<\/html>/),
+        _text_content:              $ => /[^<]+/,
+
+
+        csd_file: $ => seq(
+            $.tag_synthesizer_start,
+            repeat($.csd_element),
+            $.tag_synthesizer_end
+        ),
+
+        csd_element: $ => choice(
+            $.options_block,
+            $.instruments_block,
+            $.score_block,
+            $.cabbage_block,
+            $.html_block,
+            $.generic_tag_block
+        ),
+
+        options_block: $ => seq(
+            $.tag_options_start,
+            repeat($._text_content),
+            $.tag_options_end
+        ),
+
+        instruments_block: $ => seq(
+            $.tag_instruments_start,
+            optional($.orchestra_body),
+            $.tag_instruments_end
+        ),
+
+        score_block: $ => seq(
+            $.tag_score_start,
+            optional($.score_body),
+            $.tag_score_end
+        ),
+
+        cabbage_block: $ => seq(
+            $.tag_cabbage_start,
+            repeat($.cabbage_statement),
+            $.tag_cabbage_end
+        ),
+
+        generic_tag_block: $ => seq(
+            /<[a-zA-Z0-9]+>/,
+            repeat(choice(
+                $._text_content,
+                $.generic_tag_block
+            )),
+            /<\/[a-zA-Z0-9]+>/
+        ),
+
+        // --- ORCHESTRA ---
+        orchestra_body: $ => repeat1($._root_statement),
+        header_assignment: $ => seq($.header_identifier, '=', $._expression),
 
         instrument_definition: $ => seq(
             $.kw_instr,
@@ -86,16 +227,12 @@ module.exports = grammar({
             $.kw_endin
         ),
 
-        kw_open_code_block: $ => token('{{'),
-        kw_close_code_block: $ => token('}}'),
-
         internal_code_block: $ => seq(
             $.kw_open_code_block,
             repeat($._statement),
             $.kw_close_code_block
         ),
 
-        // --- UDO DEFINITIONS ---
         udo_definition: $ => choice(
             $.udo_definition_legacy,
             $.udo_definition_modern
@@ -125,12 +262,14 @@ module.exports = grammar({
             $.kw_endop
         ),
 
-        legacy_udo_args: $ => token(/[a-zA-Z0-9_\[\]]+/),
-        kw_void: $ => token(prec(5, 'void')),
-
         modern_udo_inputs: $ => seq(
             '(',
-            optional(sep1(choice($.typed_identifier, $.identifier), ',')),
+            optional(sep1(
+                choice(
+                    $.typed_identifier,
+                    $.identifier
+                ),
+            ',')),
             ')'
         ),
 
@@ -163,28 +302,11 @@ module.exports = grammar({
             field('member', $.identifier)
         )),
 
-        struct_name: $ => token(prec(5, /[a-zA-Z0-9_]+/)),
-
-        // --- STATEMENTS ---
-        _statement: $ => choice(
-            $.header_assignment,
-            $.typed_assignment_statement,
-            $.assignment_statement,
-            $.legacy_typed_assignment_statement,
-            $.function_call,
-            $.opcode_statement,
-            $.control_statement,
-            $.struct_definition,
-            $.internal_code_block
-        ),
-
-        kw_xin: $ => token('xin'),
         xin_statement: $ => seq(
             field('outputs', sep1($.type_identifier_legacy, ',')),
             $.kw_xin
         ),
 
-        kw_xout: $ => token('xout'),
         xout_statement: $ => choice(
             seq(
                 $.kw_xout,
@@ -195,9 +317,6 @@ module.exports = grammar({
                 field('inputs', $.argument_list),
             )
         ),
-
-        header_assignment: $ => seq($.header_identifier, '=', $._expression),
-        header_identifier: $ => token(prec(10, /(sr|kr|ksmps|nchnls|nchnls_i|0dbfs)/)),
 
         typed_assignment_statement: $ => prec(2, seq(
             field('left', sep1(choice($.typed_identifier, $.global_typed_identifier), ',')),
@@ -217,14 +336,6 @@ module.exports = grammar({
             field('right', $._expression)
         )),
 
-        _lvalue: $ => choice(
-            $.typed_identifier,
-            $.global_typed_identifier,
-            $.array_access,
-            $.struct_access,
-            $.identifier
-        ),
-
         opcode_statement: $ => choice(
             prec(2, seq(
                 field('outputs', sep1(
@@ -243,32 +354,6 @@ module.exports = grammar({
             )),
             prec(2, field('label_statement', $.typed_identifier))
         ),
-
-        control_statement: $ => choice(
-            $.if_statement,
-            $.while_loop,
-            $.until_loop,
-            $.for_loop,
-            $.switch_statement,
-            $.goto_statement,
-            $.return_statement
-        ),
-
-        kw_if: $ => token(prec(5, 'if')),
-        kw_tif: $ => token(prec(5, 'tif')),
-        kw_endif: $ => token(prec(5, 'endif')),
-        kw_fi: $ => token(prec(5, 'fi')),
-        kw_then: $ => token(prec(5, 'then')),
-        kw_ithen: $ => token(prec(5, 'ithen')),
-        kw_kthen: $ => token(prec(5, 'kthen')),
-        kw_elseif: $ => token(prec(5, 'elseif')),
-        kw_else: $ => token(prec(5, 'else')),
-        kw_while: $ => token(prec(5, 'while')),
-        kw_until: $ => token(prec(5, 'until')),
-        kw_do: $ => token(prec(5, 'do')),
-        kw_od: $ => token(prec(5, 'od')),
-        kw_for: $ => token(prec(5, 'for')),
-        kw_in: $ => token(prec(5, 'in')),
 
         endif_block: $ => choice(
             $.kw_endif,
@@ -352,11 +437,6 @@ module.exports = grammar({
             $.kw_od
         ),
 
-        kw_switch_start: $ => prec(5, token('switch')),
-        kw_switch_end: $ => prec(5, token('endsw')),
-        kw_case_key: $ => prec(5, token('case')),
-        kw_default_key: $ => prec(5, token('default')),
-
         case_header: $ => seq(
             $.kw_case_key,
             $._expression,
@@ -381,36 +461,6 @@ module.exports = grammar({
             field('default_header', $.default_header),
             field('default_body', repeat($._statement))
         )),
-
-
-        kw_goto: $ => token(prec(5, 'goto')),
-        kw_kgoto: $ => token(prec(5, 'kgoto')),
-        kw_igoto: $ => token(prec(5, 'igoto')),
-        kw_return: $ => token(prec(5, 'return')),
-        kw_rireturn: $ => token(prec(5, 'rireturn')),
-
-        // --- EXPRESSIONS ---
-        _expression: $ => choice(
-            $.function_call,
-            $.unary_expression,
-            $.binary_expression,
-            $.ternary_expression,
-            $.parenthesized_expression,
-            $.header_identifier,
-            $.number,
-            $.string,
-            alias(choice(
-                    $.identifier,
-                    $.type_identifier_legacy
-                ),
-                $.identifier
-            ),
-            $.array_access,
-            $.struct_access,
-            $.macro_usage,
-            $.array_data,
-            $.internal_code_block
-        ),
 
         parenthesized_expression: $ => prec.left(
             seq(
@@ -471,23 +521,64 @@ module.exports = grammar({
 
         score_body: $ => repeat1($._score_item),
         _score_item: $ => choice($.preprocessor_directive, $.score_statement, $.score_loop, $.score_carry),
-        score_statement: $ => seq(field('opcode', /[a-zA-Z]/), repeat(choice($.number, $.string, $.macro_usage, $.identifier))),
-        score_carry: $ => '.',
-        score_loop: $ => seq('{', field('count', $.number), field('macro_name', $.identifier), repeat(choice($.score_statement, $.score_carry)), '}'),
+
+        score_statement: $ => seq(
+            field('opcode', /[a-zA-Z]/),
+            repeat(choice(
+                $.number,
+                $.string,
+                $.macro_usage,
+                $.identifier
+            ))
+        ),
+
+        score_loop: $ => seq(
+            '{',
+            field('count', $.number),
+            field('macro_name', $.identifier),
+            repeat(choice(
+                $.score_statement,
+                $.score_carry
+            )),
+            '}'
+        ),
 
         cabbage_statement: $ => seq(field('widget', $.identifier), repeat($.cabbage_property)),
         cabbage_property: $ => seq(field('key', $.identifier), '(', field('value', /[^)]*/), ')'),
 
-        preprocessor_directive: $ => choice($.macro_define, $.include_directive, $.undef_directive, $.ifdef_directive),
-        macro_define: $ => seq('#define', $.identifier, '#', repeat(choice(/[^#]/, '\\#')), '#'),
-        include_directive: $ => seq('#include', $.string),
-        undef_directive: $ => seq('#undef', $.identifier),
-        ifdef_directive: $ => seq(choice('#ifdef', '#ifndef'), $.identifier, repeat($._statement), optional(seq('#else', repeat($._statement))), '#end'),
-        macro_usage: $ => seq('$', $.identifier, optional('.'), optional(seq('(', sep1(choice($.number, $.string, $.identifier), "'"), ')'))),
+        include_directive: $ => seq($.kw_include, $.string),
+        undef_directive: $ => seq($.kw_undef, $.identifier),
+        macro_define: $ => seq($.kw_define, $.identifier, '#', repeat(choice(/[^#]/, '\\#')), '#'),
 
-        // --- PRIMITIVES ---
-        identifier: $ => /[a-zA-Z_]\w*/,
-        plus_identifier: $ => /\+[a-zA-Z_]\w*/,
+        ifdef_directive: $ => seq(
+            choice(
+                $.kw_ifdef,
+                $.kw_ifndef
+            ),
+            $.identifier,
+            repeat($._statement),
+            optional(seq(
+                $.kw_elsedef,
+                repeat($._statement)
+            )),
+            $.kw_end
+        ),
+
+        macro_usage: $ => seq(
+            '$',
+            $.identifier,
+            optional('.'),
+            optional(seq(
+                '(',
+                sep1(choice(
+                    $.number,
+                    $.string,
+                    $.identifier
+                ),
+                "'"),
+                ')'
+            ))
+        ),
 
         typed_identifier: $ => choice(
             prec(3, seq(
@@ -502,28 +593,22 @@ module.exports = grammar({
         ),
 
         global_typed_identifier: $ => prec(2, seq(
-            field('name', alias(choice($.identifier, $.type_identifier_legacy), $.identifier)),
+            field('name', alias(choice(
+                    $.identifier,
+                    $.type_identifier_legacy
+                ),
+                $.identifier)
+            ),
             $.global_keyword,
             ':',
-            field('type', choice($.type_identifier, $.identifier))
+            field('type', choice(
+                $.type_identifier,
+                $.identifier
+            ))
         )),
-
-        global_keyword: $ => token('@global'),
 
         opcode_name: $ => alias(choice($.type_identifier_legacy, $.identifier), 'opcode_name'),
 
-        type_identifier: $ => token(prec(1, /(InstrDef|Instr|Opcode|Complex|[aikbSfw])(\[\])*/)),
-        type_identifier_legacy: $ => token(prec(1, /g?[aikbSfw][a-zA-Z0-9_\[\]]*/)),
-
-        number: $ => choice(/\d+/, /0[xX][0-9a-fA-F]+/, /\d+\.\d+([eE][+-]?\d+)?/, /\d+[eE][+-]?\d+/),
-        string: $ => seq('"', repeat(choice(/[^"\\\n]+/, /\\./)), '"'),
-        comment: $ => token(
-            choice(
-                seq(';', /[^\n]*/),
-                seq('//', /[^\n]*/)
-            )
-        ),
-        block_comment: $ => seq('/*', /[^*]*\*+([^/*][^*]*\*+)*/, '/')
     }
 });
 
