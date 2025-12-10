@@ -139,7 +139,7 @@ module.exports = grammar({
     ),
 
     legacy_udo_args: $ => token(/[a-zA-Z0-9_\[\]]+/),
-    _void: $ => token('void'),
+    kw_void: $ => token('void'),
 
     modern_udo_inputs: $ => seq(
       '(',
@@ -153,7 +153,7 @@ module.exports = grammar({
             $.legacy_udo_args,
             ')'
         ),
-        $._void
+        $.kw_void
     ),
 
     // --- STRUCT DEFINITION (Csound 7) ---
@@ -192,20 +192,20 @@ module.exports = grammar({
       $.internal_code_block
     ),
 
-    _xin: $ => token('xin'),
+    kw_xin: $ => token('xin'),
     xin_statement: $ => seq(
       field('outputs', sep1($.type_identifier_legacy, ',')),
-      $._xin
+      $.kw_xin
     ),
 
-    _xout: $ => token('xout'),
+    kw_xout: $ => token('xout'),
     xout_statement: $ => choice(
         seq(
-            $._xout,
+            $.kw_xout,
             field('inputs', $.parenthesized_expression),
         ),
         seq(
-            $._xout,
+            $.kw_xout,
             field('inputs', $.argument_list),
         )
     ),
@@ -267,73 +267,89 @@ module.exports = grammar({
       $.return_statement
     ),
 
+    kw_if: $ => token('if'),
+    kw_tif: $ => token('tif'),
+    kw_endif: $ => token('endif'),
+    kw_fi: $ => token('fi'),
+    kw_then: $ => token('then'),
+    kw_ithen: $ => token('ithen'),
+    kw_kthen: $ => token('kthen'),
+    kw_elseif: $ => token('elseif'),
+    kw_else: $ => token('else'),
+    kw_while: $ => token('while'),
+    kw_until: $ => token('until'),
+    kw_do: $ => token('do'),
+    kw_od: $ => token('od'),
+    kw_for: $ => token('for'),
+    kw_in: $ => token('in'),
+
     if_statement: $ => seq(
-      choice('if', 'tif'),
+      choice($.kw_if, $.kw_tif),
       field('condition', $._expression),
       choice(seq('goto', $.identifier),
-        seq(choice('then', 'ithen', 'kthen'),
+        seq(choice($.kw_then, $.kw_ithen, $.kw_kthen),
           repeat($._statement),
           optional($.elseif_block),
           optional($.else_block),
-          choice('endif', 'fi')
+          choice($.kw_endif, $.kw_fi),
         )
       )
     ),
 
     elseif_block: $ => repeat1(
-      seq('elseif', $._expression, 'then', repeat($._statement)
+      seq($.kw_elseif, $._expression, $.kw_then, repeat($._statement)
       )
     ),
 
     else_block: $ => seq(
-      'else',
+      $.kw_else,
       repeat($._statement)
     ),
 
     while_loop: $ => seq(
-      'while',
+      $.kw_while,
       $._expression,
-      'do',
+      $.kw_do,
       repeat($._statement),
-      'od'
+      $.kw_od
     ),
 
     until_loop: $ => seq(
-      'until',
+      $.kw_until,
       $._expression,
-      'do',
+      $.kw_do,
       repeat($._statement),
-      'od'
+      $.kw_od
     ),
 
     for_loop: $ => seq(
-      'for',
+      $.kw_for,
       $.identifier,
-      'in',
+      $.kw_in,
       $._expression,
-      'do',
+      $.kw_do,
       repeat($._statement),
-      'od'
+      $.kw_od
     ),
 
-    switch_start: $ => prec(1, token('switch')),
-    switch_end: $ => prec(1, token('endsw')),
-    case_key: $ => prec(1, token('case')),
-    default_key: $ => prec(1, token('default')),
+    kw_switch_start: $ => prec(1, token('switch')),
+    kw_switch_end: $ => prec(1, token('endsw')),
+    kw_case_key: $ => prec(1, token('case')),
+    kw_default_key: $ => prec(1, token('default')),
 
     case_header: $ => seq(
-      $.case_key,
+      $.kw_case_key,
       $._expression,
     ),
 
-    default_header: $ => $.default_key,
+    default_header: $ => $.kw_default_key,
 
     switch_statement: $ => seq(
-      $.switch_start,
+      $.kw_switch_start,
       $._expression,
       repeat($.case_block),
       optional($.default_block),
-      $.switch_end
+      $.kw_switch_end
     ),
 
     case_block: $ => prec.left(1, seq(
@@ -346,8 +362,22 @@ module.exports = grammar({
       field('default_body', repeat($._statement))
     )),
 
-    goto_statement: $ => seq(choice('goto', 'kgoto', 'igoto'), $.identifier),
-    return_statement: $ => choice('return', 'rireturn'),
+
+    kw_goto: $ => token('goto'),
+    kw_kgoto: $ => token('kgoto'),
+    kw_igoto: $ => token('igoto'),
+    kw_return: $ => token('return'),
+    kw_rireturn: $ => token('rireturn'),
+
+    goto_statement: $ => seq(choice(
+            $.kw_goto,
+            $.kw_igoto,
+            $.kw_kgoto
+        ),
+        $.identifier
+    ),
+
+    return_statement: $ => choice($.kw_return, $.kw_rireturn),
 
     label_statement: $ => prec(-1, seq($.identifier, ':')),
 

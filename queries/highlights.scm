@@ -36,10 +36,10 @@
 
 [
     (kw_instr) (kw_endin) (kw_opcode) (kw_endop) (kw_struct)
-    "if" "then" "ithen" "kthen" "elseif" "else" "endif" "fi"
-    "while" "until" "do" "od" "for" "in" "switch" "case" "default"
-    "return" "goto" "kgoto" "igoto"
-    "xin" "xout" "void" (switch_end)
+    (kw_if ) (kw_then) (kw_ithen) (kw_kthen) (kw_elseif) (kw_else) (kw_endif) (kw_fi)
+    (kw_while) (kw_until) (kw_do) (kw_od) (kw_for)  (kw_in) (kw_switch_start) (kw_case_key) (kw_default_key)
+    (kw_return) (kw_rireturn) (kw_goto) (kw_kgoto) (kw_igoto)
+    (kw_xin) (kw_xout) (kw_void) (kw_switch_end)
 ] @keyword
 
 (identifier) @variable

@@ -18,7 +18,15 @@ instr 1
 
     obj:InstrDef = create({{
         out(poscil(1, 440))
-        }})
+    }})
+
+    switch p4 > 3
+        case 1
+            print(1)
+        default
+            print(0)
+    endsw
+
 
 endin
 
