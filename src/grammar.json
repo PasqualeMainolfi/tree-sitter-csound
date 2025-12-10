@@ -3130,11 +3130,8 @@
       "value": "\\+[a-zA-Z_]\\w*"
     },
     "label_statement": {
-      "type": "TOKEN",
-      "content": {
-        "type": "PATTERN",
-        "value": "[a-zA-Z_]\\w*:"
-      }
+      "type": "PATTERN",
+      "value": "[a-zA-Z_]\\w*:"
     },
     "typed_identifier": {
       "type": "PREC",

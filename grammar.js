@@ -489,7 +489,7 @@ module.exports = grammar({
         identifier: $ => /[a-zA-Z_]\w*/,
         plus_identifier: $ => /\+[a-zA-Z_]\w*/,
 
-        label_statement: $ => token(/[a-zA-Z_]\w*:/),
+        label_statement: $ => /[a-zA-Z_]\w*:/,
 
         typed_identifier: $ => prec(3, seq(
             field('name', alias(choice($.identifier, $.type_identifier_legacy), $.identifier)),
