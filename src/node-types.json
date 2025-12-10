@@ -1350,7 +1350,7 @@
           }
         ]
       },
-      "goto_block": {
+      "else_goto": {
         "multiple": true,
         "required": false,
         "types": [
@@ -1402,6 +1402,16 @@
           },
           {
             "type": "typed_assignment_statement",
+            "named": true
+          }
+        ]
+      },
+      "then_goto": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "goto_statement",
             "named": true
           }
         ]

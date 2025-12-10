@@ -1834,14 +1834,30 @@
               "members": [
                 {
                   "type": "FIELD",
-                  "name": "goto_block",
+                  "name": "then_goto",
                   "content": {
-                    "type": "REPEAT",
-                    "content": {
-                      "type": "SYMBOL",
-                      "name": "goto_statement"
-                    }
+                    "type": "SYMBOL",
+                    "name": "goto_statement"
                   }
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "FIELD",
+                      "name": "else_goto",
+                      "content": {
+                        "type": "REPEAT",
+                        "content": {
+                          "type": "SYMBOL",
+                          "name": "goto_statement"
+                        }
+                      }
+                    },
+                    {
+                      "type": "BLANK"
+                    }
+                  ]
                 },
                 {
                   "type": "CHOICE",

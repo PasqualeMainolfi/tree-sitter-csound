@@ -11,6 +11,11 @@ nchnls = 2
 struct Foo val0:i, val1:i
 freq@global:i = 400
 
+
+obj_out:InstrDef = create({{
+    out(poscil(1, 440))
+}})
+
 instr 1
 
     bar:Foo init 8, 88
@@ -27,6 +32,12 @@ instr 1
         print(1)
     endif
 
+    if p5 > 10 goto highnote
+        goto lownote
+
+
+
+
     while p4 > 10 do
         print(9)
     od
@@ -34,6 +45,8 @@ instr 1
     for i in [1, 2, 3] do
         print(1)
     od
+
+    sig:a = poscil(1, 440)
 
     switch p4 > 3
         case 1

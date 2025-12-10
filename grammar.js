@@ -320,7 +320,8 @@ module.exports = grammar({
                 $.endif_block
             ),
             seq(
-                field("goto_block", repeat($.goto_statement)),
+                field('then_goto', $.goto_statement),
+                optional(field('else_goto', repeat($.goto_statement))),
                 optional($.return_statement)
             )
         )
