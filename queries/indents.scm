@@ -20,11 +20,15 @@
   ] @indent
 )
 
+(if_statement
+    then_goto: (goto_statement) @indent)
+
 [
     (kw_endif)
     (kw_fi)
     (else_block)
     (elseif_block)
+    (return_statement)
 ] @outdent
 
 
@@ -61,8 +65,6 @@
 (cabbage_block (tag_cabbage_end) @outdent)
 
 (html_block) @indent
-
-;;; 6. LISTS & EXPRESSIONS
 
 (parenthesized_expression) @indent
 ; (parenthesized_expression ")" @outdent)

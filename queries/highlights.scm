@@ -20,6 +20,8 @@
 (function_call function: (opcode_name) @function)
 (opcode_statement op: (opcode_name) @function)
 
+(label_statement) @label
+
 (udo_definition_legacy name: (opcode_name) @entity.name.function)
 (udo_definition_modern name: (opcode_name) @entity.name.function)
 

@@ -367,7 +367,7 @@ module.exports = grammar({
                 $.kw_igoto,
                 $.kw_kgoto
             ),
-            $.identifier
+            $.label_statement
         ),
 
         return_statement: $ => choice(
@@ -584,7 +584,7 @@ module.exports = grammar({
         label_statement: $ => prec(1,
             seq(
                 field('label_name', choice($.type_identifier, $.identifier)),
-                ':'
+                optional(':')
             )
         ),
 

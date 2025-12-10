@@ -2086,7 +2086,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "identifier"
+          "name": "label_statement"
         }
       ]
     },
@@ -3368,8 +3368,16 @@
             }
           },
           {
-            "type": "STRING",
-            "value": ":"
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "STRING",
+                "value": ":"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
           }
         ]
       }

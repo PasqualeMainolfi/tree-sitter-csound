@@ -1194,10 +1194,6 @@
       "required": true,
       "types": [
         {
-          "type": "identifier",
-          "named": true
-        },
-        {
           "type": "kw_goto",
           "named": true
         },
@@ -1207,6 +1203,10 @@
         },
         {
           "type": "kw_kgoto",
+          "named": true
+        },
+        {
+          "type": "label_statement",
           "named": true
         }
       ]
