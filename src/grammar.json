@@ -66,6 +66,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "label_statement"
+        },
+        {
+          "type": "SYMBOL",
           "name": "control_statement"
         },
         {
@@ -2041,12 +2045,8 @@
           "type": "PREC",
           "value": 2,
           "content": {
-            "type": "FIELD",
-            "name": "label_statement",
-            "content": {
-              "type": "SYMBOL",
-              "name": "typed_identifier"
-            }
+            "type": "SYMBOL",
+            "name": "label_statement"
           }
         }
       ]
@@ -3344,92 +3344,87 @@
         }
       ]
     },
+    "label_statement": {
+      "type": "PREC",
+      "value": 1,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "FIELD",
+            "name": "label_name",
+            "content": {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "type_identifier"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "identifier"
+                }
+              ]
+            }
+          },
+          {
+            "type": "STRING",
+            "value": ":"
+          }
+        ]
+      }
+    },
     "typed_identifier": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "PREC",
-          "value": 3,
-          "content": {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "FIELD",
-                "name": "name",
-                "content": {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "CHOICE",
-                    "members": [
-                      {
-                        "type": "SYMBOL",
-                        "name": "identifier"
-                      },
-                      {
-                        "type": "SYMBOL",
-                        "name": "type_identifier_legacy"
-                      }
-                    ]
+      "type": "PREC",
+      "value": 3,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "FIELD",
+            "name": "name",
+            "content": {
+              "type": "ALIAS",
+              "content": {
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "SYMBOL",
+                    "name": "identifier"
                   },
-                  "named": true,
-                  "value": "identifier"
-                }
+                  {
+                    "type": "SYMBOL",
+                    "name": "type_identifier_legacy"
+                  }
+                ]
               },
-              {
-                "type": "STRING",
-                "value": ":"
-              },
-              {
-                "type": "FIELD",
-                "name": "type",
-                "content": {
-                  "type": "CHOICE",
-                  "members": [
-                    {
-                      "type": "SYMBOL",
-                      "name": "type_identifier"
-                    },
-                    {
-                      "type": "SYMBOL",
-                      "name": "identifier"
-                    }
-                  ]
+              "named": true,
+              "value": "identifier"
+            }
+          },
+          {
+            "type": "STRING",
+            "value": ":"
+          },
+          {
+            "type": "FIELD",
+            "name": "type",
+            "content": {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "type_identifier"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "identifier"
                 }
-              }
-            ]
+              ]
+            }
           }
-        },
-        {
-          "type": "PREC",
-          "value": 1,
-          "content": {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "FIELD",
-                "name": "label",
-                "content": {
-                  "type": "CHOICE",
-                  "members": [
-                    {
-                      "type": "SYMBOL",
-                      "name": "type_identifier"
-                    },
-                    {
-                      "type": "SYMBOL",
-                      "name": "identifier"
-                    }
-                  ]
-                }
-              },
-              {
-                "type": "STRING",
-                "value": ":"
-              }
-            ]
-          }
-        }
-      ]
+        ]
+      }
     },
     "global_typed_identifier": {
       "type": "PREC",

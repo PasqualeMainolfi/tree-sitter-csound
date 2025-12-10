@@ -29,8 +29,7 @@
 (assignment_statement
   left: (typed_identifier) @local.definition)
 
-(label_statement
-  (identifier) @local.definition)
+(label_statement) @local.definition
 
 (macro_define
   (identifier) @local.definition)

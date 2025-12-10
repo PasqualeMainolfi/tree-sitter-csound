@@ -36,6 +36,7 @@ module.exports = grammar({
             $.legacy_typed_assignment_statement,
             $.function_call,
             $.opcode_statement,
+            $.label_statement,
             $.control_statement,
             $.struct_definition,
             $.internal_code_block
@@ -352,7 +353,7 @@ module.exports = grammar({
                 field('op', $.opcode_name),
                 field('inputs', optional($.argument_list))
             )),
-            prec(2, field('label_statement', $.typed_identifier))
+            prec(2, $.label_statement)
         ),
 
         endif_block: $ => choice(
@@ -580,16 +581,19 @@ module.exports = grammar({
             ))
         ),
 
-        typed_identifier: $ => choice(
-            prec(3, seq(
+        label_statement: $ => prec(1,
+            seq(
+                field('label_name', choice($.type_identifier, $.identifier)),
+                ':'
+            )
+        ),
+
+        typed_identifier: $ => prec(3,
+            seq(
                 field('name', alias(choice($.identifier, $.type_identifier_legacy), $.identifier)),
                 ':',
                 field('type', choice($.type_identifier, $.identifier))
-            )),
-            prec(1, seq(
-                field('label', choice($.type_identifier, $.identifier)),
-                ':',
-            )),
+            )
         ),
 
         global_typed_identifier: $ => prec(2, seq(
