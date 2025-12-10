@@ -36,10 +36,10 @@ module.exports = grammar({
     // [$.xout_statement, $.header_assignment]
   ],
 
-  rules: {
+    rules: {
     source_file: $ => seq(
-      optional($.cabbage_block),
-      choice($.csd_file, $.orchestra_body, $.score_body)
+        optional($.cabbage_block),
+        choice($.csd_file, $.orchestra_body, $.score_body)
     ),
 
     // --- CSD ---
@@ -63,9 +63,9 @@ module.exports = grammar({
     cabbage_block: $ => seq($.tag_cabbage_start, repeat($.cabbage_statement), $.tag_cabbage_end),
 
     html_block: $ => seq(
-      /<html>/,
-      repeat(/.|\s/),
-      /<\/html>/
+        /<html>/,
+        repeat(/.|\s/),
+        /<\/html>/
     ),
 
     generic_tag_block: $ => seq(/<[a-zA-Z0-9]+>/, repeat(choice($._text_content, $.generic_tag_block)), /<\/[a-zA-Z0-9]+>/),
@@ -74,11 +74,11 @@ module.exports = grammar({
     // --- ORCHESTRA ---
     orchestra_body: $ => repeat1($._root_statement),
     _root_statement: $ => choice(
-      $.preprocessor_directive,
-      $.instrument_definition,
-      $.udo_definition,
-      $.struct_definition, // STRUCT
-      $._statement
+        $.preprocessor_directive,
+        $.instrument_definition,
+        $.udo_definition,
+        $.struct_definition, // STRUCT
+        $._statement
     ),
 
     kw_instr: $ => token(prec(5, 'instr')),
@@ -88,15 +88,21 @@ module.exports = grammar({
     kw_endop: $ => token(prec(5, 'endop')),
 
     instrument_definition: $ => seq(
-      $.kw_instr,
-      field('name', sep1(choice(
-          $.identifier,
-          $.number,
-          $.plus_identifier
+        $.kw_instr,
+        field('name', sep1(choice(
+            $.identifier,
+            $.number,
+            $.plus_identifier
         ), ','
-      )),
-      repeat($._statement),
-      $.kw_endin
+        )),
+        repeat($._statement),
+        $.kw_endin
+    ),
+
+    internal_code_block: $ => seq(
+        '{{',
+        repeat($._statement),
+        '}}'
     ),
 
     // --- UDO DEFINITIONS ---
