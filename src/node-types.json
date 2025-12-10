@@ -1715,21 +1715,6 @@
     "fields": {}
   },
   {
-    "type": "label_statement",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "identifier",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "legacy_typed_assignment_statement",
     "named": true,
     "fields": {
@@ -3633,6 +3618,10 @@
   },
   {
     "type": "kw_xout",
+    "named": true
+  },
+  {
+    "type": "label_statement",
     "named": true
   },
   {

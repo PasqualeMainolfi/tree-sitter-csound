@@ -32,11 +32,11 @@ instr 1
         print(1)
     endif
 
-    if p5 > 10 goto highnote
-        goto lownote
+    if p5 > 10 goto lownote
+        goto highnote
 
-
-
+    lownote:
+        poscil(1, 4400)
 
     while p4 > 10 do
         print(9)

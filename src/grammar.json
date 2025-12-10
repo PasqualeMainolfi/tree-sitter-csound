@@ -1724,23 +1724,6 @@
         }
       ]
     },
-    "label_statement": {
-      "type": "PREC",
-      "value": -1,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "SYMBOL",
-            "name": "identifier"
-          },
-          {
-            "type": "STRING",
-            "value": ":"
-          }
-        ]
-      }
-    },
     "if_statement": {
       "type": "SEQ",
       "members": [
@@ -3145,6 +3128,13 @@
     "plus_identifier": {
       "type": "PATTERN",
       "value": "\\+[a-zA-Z_]\\w*"
+    },
+    "label_statement": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "[a-zA-Z_]\\w*:"
+      }
     },
     "typed_identifier": {
       "type": "PREC",
