@@ -521,10 +521,10 @@
       }
     },
     "kw_switch_start": {
-      "type": "PREC",
-      "value": 5,
+      "type": "TOKEN",
       "content": {
-        "type": "TOKEN",
+        "type": "PREC",
+        "value": 5,
         "content": {
           "type": "STRING",
           "value": "switch"
@@ -532,10 +532,10 @@
       }
     },
     "kw_switch_end": {
-      "type": "PREC",
-      "value": 5,
+      "type": "TOKEN",
       "content": {
-        "type": "TOKEN",
+        "type": "PREC",
+        "value": 5,
         "content": {
           "type": "STRING",
           "value": "endsw"
@@ -543,10 +543,10 @@
       }
     },
     "kw_case_key": {
-      "type": "PREC",
-      "value": 5,
+      "type": "TOKEN",
       "content": {
-        "type": "TOKEN",
+        "type": "PREC",
+        "value": 5,
         "content": {
           "type": "STRING",
           "value": "case"
@@ -554,10 +554,10 @@
       }
     },
     "kw_default_key": {
-      "type": "PREC",
-      "value": 5,
+      "type": "TOKEN",
       "content": {
-        "type": "TOKEN",
+        "type": "PREC",
+        "value": 5,
         "content": {
           "type": "STRING",
           "value": "default"

@@ -1715,26 +1715,6 @@
     }
   },
   {
-    "type": "kw_case_key",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "kw_default_key",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "kw_switch_end",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "kw_switch_start",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "label_statement",
     "named": true,
     "fields": {
@@ -3502,21 +3482,9 @@
     "named": false
   },
   {
-    "type": "case",
-    "named": false
-  },
-  {
     "type": "comment",
     "named": true,
     "extra": true
-  },
-  {
-    "type": "default",
-    "named": false
-  },
-  {
-    "type": "endsw",
-    "named": false
   },
   {
     "type": "global_keyword",
@@ -3531,7 +3499,15 @@
     "named": true
   },
   {
+    "type": "kw_case_key",
+    "named": true
+  },
+  {
     "type": "kw_close_code_block",
+    "named": true
+  },
+  {
+    "type": "kw_default_key",
     "named": true
   },
   {
@@ -3647,6 +3623,14 @@
     "named": true
   },
   {
+    "type": "kw_switch_end",
+    "named": true
+  },
+  {
+    "type": "kw_switch_start",
+    "named": true
+  },
+  {
     "type": "kw_then",
     "named": true
   },
@@ -3693,10 +3677,6 @@
   {
     "type": "struct_name",
     "named": true
-  },
-  {
-    "type": "switch",
-    "named": false
   },
   {
     "type": "tag_cabbage_end",
