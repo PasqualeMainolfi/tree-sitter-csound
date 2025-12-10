@@ -870,10 +870,6 @@
         },
         {
           "type": "SYMBOL",
-          "name": "label_statement"
-        },
-        {
-          "type": "SYMBOL",
           "name": "struct_definition"
         },
         {
@@ -1427,6 +1423,18 @@
                 }
               }
             ]
+          }
+        },
+        {
+          "type": "PREC",
+          "value": 2,
+          "content": {
+            "type": "FIELD",
+            "name": "label_statement",
+            "content": {
+              "type": "SYMBOL",
+              "name": "typed_identifier"
+            }
           }
         }
       ]
@@ -3129,61 +3137,92 @@
       "type": "PATTERN",
       "value": "\\+[a-zA-Z_]\\w*"
     },
-    "label_statement": {
-      "type": "PATTERN",
-      "value": "[a-zA-Z_]\\w*:"
-    },
     "typed_identifier": {
-      "type": "PREC",
-      "value": 3,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "FIELD",
-            "name": "name",
-            "content": {
-              "type": "ALIAS",
-              "content": {
-                "type": "CHOICE",
-                "members": [
-                  {
-                    "type": "SYMBOL",
-                    "name": "identifier"
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "PREC",
+          "value": 3,
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "FIELD",
+                "name": "name",
+                "content": {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "CHOICE",
+                    "members": [
+                      {
+                        "type": "SYMBOL",
+                        "name": "identifier"
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "type_identifier_legacy"
+                      }
+                    ]
                   },
-                  {
-                    "type": "SYMBOL",
-                    "name": "type_identifier_legacy"
-                  }
-                ]
-              },
-              "named": true,
-              "value": "identifier"
-            }
-          },
-          {
-            "type": "STRING",
-            "value": ":"
-          },
-          {
-            "type": "FIELD",
-            "name": "type",
-            "content": {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "type_identifier"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "identifier"
+                  "named": true,
+                  "value": "identifier"
                 }
-              ]
-            }
+              },
+              {
+                "type": "STRING",
+                "value": ":"
+              },
+              {
+                "type": "FIELD",
+                "name": "type",
+                "content": {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "type_identifier"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "identifier"
+                    }
+                  ]
+                }
+              }
+            ]
           }
-        ]
-      }
+        },
+        {
+          "type": "PREC",
+          "value": 1,
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "FIELD",
+                "name": "label",
+                "content": {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "type_identifier"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "identifier"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "STRING",
+                "value": ":"
+              }
+            ]
+          }
+        }
+      ]
     },
     "global_typed_identifier": {
       "type": "PREC",

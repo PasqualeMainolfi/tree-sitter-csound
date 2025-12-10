@@ -174,7 +174,6 @@ module.exports = grammar({
             $.function_call,
             $.opcode_statement,
             $.control_statement,
-            $.label_statement,
             $.struct_definition,
             $.internal_code_block
         ),
@@ -241,7 +240,8 @@ module.exports = grammar({
             prec(1, seq(
                 field('op', $.opcode_name),
                 field('inputs', optional($.argument_list))
-            ))
+            )),
+            prec(2, field('label_statement', $.typed_identifier))
         ),
 
         control_statement: $ => choice(
@@ -489,13 +489,17 @@ module.exports = grammar({
         identifier: $ => /[a-zA-Z_]\w*/,
         plus_identifier: $ => /\+[a-zA-Z_]\w*/,
 
-        label_statement: $ => /[a-zA-Z_]\w*:/,
-
-        typed_identifier: $ => prec(3, seq(
-            field('name', alias(choice($.identifier, $.type_identifier_legacy), $.identifier)),
-            ':',
-            field('type', choice($.type_identifier, $.identifier))
-        )),
+        typed_identifier: $ => choice(
+            prec(3, seq(
+                field('name', alias(choice($.identifier, $.type_identifier_legacy), $.identifier)),
+                ':',
+                field('type', choice($.type_identifier, $.identifier))
+            )),
+            prec(1, seq(
+                field('label', choice($.type_identifier, $.identifier)),
+                ':',
+            )),
+        ),
 
         global_typed_identifier: $ => prec(2, seq(
             field('name', alias(choice($.identifier, $.type_identifier_legacy), $.identifier)),

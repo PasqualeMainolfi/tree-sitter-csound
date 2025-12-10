@@ -530,10 +530,6 @@
             "named": true
           },
           {
-            "type": "label_statement",
-            "named": true
-          },
-          {
             "type": "legacy_typed_assignment_statement",
             "named": true
           },
@@ -760,10 +756,6 @@
             "named": true
           },
           {
-            "type": "label_statement",
-            "named": true
-          },
-          {
             "type": "legacy_typed_assignment_statement",
             "named": true
           },
@@ -841,10 +833,6 @@
           "named": true
         },
         {
-          "type": "label_statement",
-          "named": true
-        },
-        {
           "type": "legacy_typed_assignment_statement",
           "named": true
         },
@@ -917,10 +905,6 @@
         },
         {
           "type": "kw_then",
-          "named": true
-        },
-        {
-          "type": "label_statement",
           "named": true
         },
         {
@@ -1051,10 +1035,6 @@
         },
         {
           "type": "kw_od",
-          "named": true
-        },
-        {
-          "type": "label_statement",
           "named": true
         },
         {
@@ -1385,10 +1365,6 @@
             "named": true
           },
           {
-            "type": "label_statement",
-            "named": true
-          },
-          {
             "type": "legacy_typed_assignment_statement",
             "named": true
           },
@@ -1493,10 +1469,6 @@
           "named": true
         },
         {
-          "type": "label_statement",
-          "named": true
-        },
-        {
           "type": "legacy_typed_assignment_statement",
           "named": true
         },
@@ -1590,10 +1562,6 @@
           "named": true
         },
         {
-          "type": "label_statement",
-          "named": true
-        },
-        {
           "type": "legacy_typed_assignment_statement",
           "named": true
         },
@@ -1669,10 +1637,6 @@
         },
         {
           "type": "kw_open_code_block",
-          "named": true
-        },
-        {
-          "type": "label_statement",
           "named": true
         },
         {
@@ -1938,9 +1902,19 @@
           }
         ]
       },
+      "label_statement": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "typed_identifier",
+            "named": true
+          }
+        ]
+      },
       "op": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "opcode_name",
@@ -2017,10 +1991,6 @@
         },
         {
           "type": "internal_code_block",
-          "named": true
-        },
-        {
-          "type": "label_statement",
           "named": true
         },
         {
@@ -2682,9 +2652,23 @@
     "type": "typed_identifier",
     "named": true,
     "fields": {
+      "label": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "type_identifier",
+            "named": true
+          }
+        ]
+      },
       "name": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "identifier",
@@ -2694,7 +2678,7 @@
       },
       "type": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "identifier",
@@ -2795,10 +2779,6 @@
           "named": true
         },
         {
-          "type": "label_statement",
-          "named": true
-        },
-        {
           "type": "legacy_typed_assignment_statement",
           "named": true
         },
@@ -2890,10 +2870,6 @@
         },
         {
           "type": "kw_opcode",
-          "named": true
-        },
-        {
-          "type": "label_statement",
           "named": true
         },
         {
@@ -3062,10 +3038,6 @@
           "named": true
         },
         {
-          "type": "label_statement",
-          "named": true
-        },
-        {
           "type": "legacy_typed_assignment_statement",
           "named": true
         },
@@ -3170,10 +3142,6 @@
         },
         {
           "type": "kw_while",
-          "named": true
-        },
-        {
-          "type": "label_statement",
           "named": true
         },
         {
@@ -3618,10 +3586,6 @@
   },
   {
     "type": "kw_xout",
-    "named": true
-  },
-  {
-    "type": "label_statement",
     "named": true
   },
   {
