@@ -631,8 +631,12 @@
     "kw_void": {
       "type": "TOKEN",
       "content": {
-        "type": "STRING",
-        "value": "void"
+        "type": "PREC",
+        "value": 5,
+        "content": {
+          "type": "STRING",
+          "value": "void"
+        }
       }
     },
     "modern_udo_inputs": {
@@ -727,7 +731,7 @@
     },
     "struct_definition": {
       "type": "PREC",
-      "value": 2,
+      "value": 5,
       "content": {
         "type": "SEQ",
         "members": [
@@ -880,8 +884,12 @@
     "kw_xin": {
       "type": "TOKEN",
       "content": {
-        "type": "STRING",
-        "value": "xin"
+        "type": "PREC",
+        "value": 5,
+        "content": {
+          "type": "STRING",
+          "value": "xin"
+        }
       }
     },
     "xin_statement": {
@@ -925,8 +933,12 @@
     "kw_xout": {
       "type": "TOKEN",
       "content": {
-        "type": "STRING",
-        "value": "xout"
+        "type": "PREC",
+        "value": 5,
+        "content": {
+          "type": "STRING",
+          "value": "xout"
+        }
       }
     },
     "xout_statement": {
@@ -1462,217 +1474,294 @@
     "kw_if": {
       "type": "TOKEN",
       "content": {
-        "type": "STRING",
-        "value": "if"
+        "type": "PREC",
+        "value": 5,
+        "content": {
+          "type": "STRING",
+          "value": "if"
+        }
       }
     },
     "kw_tif": {
       "type": "TOKEN",
       "content": {
-        "type": "STRING",
-        "value": "tif"
+        "type": "PREC",
+        "value": 5,
+        "content": {
+          "type": "STRING",
+          "value": "tif"
+        }
       }
     },
     "kw_endif": {
       "type": "TOKEN",
       "content": {
-        "type": "STRING",
-        "value": "endif"
+        "type": "PREC",
+        "value": 5,
+        "content": {
+          "type": "STRING",
+          "value": "endif"
+        }
       }
     },
     "kw_fi": {
       "type": "TOKEN",
       "content": {
-        "type": "STRING",
-        "value": "fi"
+        "type": "PREC",
+        "value": 5,
+        "content": {
+          "type": "STRING",
+          "value": "fi"
+        }
       }
     },
     "kw_then": {
       "type": "TOKEN",
       "content": {
-        "type": "STRING",
-        "value": "then"
+        "type": "PREC",
+        "value": 5,
+        "content": {
+          "type": "STRING",
+          "value": "then"
+        }
       }
     },
     "kw_ithen": {
       "type": "TOKEN",
       "content": {
-        "type": "STRING",
-        "value": "ithen"
+        "type": "PREC",
+        "value": 5,
+        "content": {
+          "type": "STRING",
+          "value": "ithen"
+        }
       }
     },
     "kw_kthen": {
       "type": "TOKEN",
       "content": {
-        "type": "STRING",
-        "value": "kthen"
+        "type": "PREC",
+        "value": 5,
+        "content": {
+          "type": "STRING",
+          "value": "kthen"
+        }
       }
     },
     "kw_elseif": {
       "type": "TOKEN",
       "content": {
-        "type": "STRING",
-        "value": "elseif"
+        "type": "PREC",
+        "value": 5,
+        "content": {
+          "type": "STRING",
+          "value": "elseif"
+        }
       }
     },
     "kw_else": {
       "type": "TOKEN",
       "content": {
-        "type": "STRING",
-        "value": "else"
+        "type": "PREC",
+        "value": 5,
+        "content": {
+          "type": "STRING",
+          "value": "else"
+        }
       }
     },
     "kw_while": {
       "type": "TOKEN",
       "content": {
-        "type": "STRING",
-        "value": "while"
+        "type": "PREC",
+        "value": 5,
+        "content": {
+          "type": "STRING",
+          "value": "while"
+        }
       }
     },
     "kw_until": {
       "type": "TOKEN",
       "content": {
-        "type": "STRING",
-        "value": "until"
+        "type": "PREC",
+        "value": 5,
+        "content": {
+          "type": "STRING",
+          "value": "until"
+        }
       }
     },
     "kw_do": {
       "type": "TOKEN",
       "content": {
-        "type": "STRING",
-        "value": "do"
+        "type": "PREC",
+        "value": 5,
+        "content": {
+          "type": "STRING",
+          "value": "do"
+        }
       }
     },
     "kw_od": {
       "type": "TOKEN",
       "content": {
-        "type": "STRING",
-        "value": "od"
+        "type": "PREC",
+        "value": 5,
+        "content": {
+          "type": "STRING",
+          "value": "od"
+        }
       }
     },
     "kw_for": {
       "type": "TOKEN",
       "content": {
-        "type": "STRING",
-        "value": "for"
+        "type": "PREC",
+        "value": 5,
+        "content": {
+          "type": "STRING",
+          "value": "for"
+        }
       }
     },
     "kw_in": {
       "type": "TOKEN",
       "content": {
-        "type": "STRING",
-        "value": "in"
+        "type": "PREC",
+        "value": 5,
+        "content": {
+          "type": "STRING",
+          "value": "in"
+        }
       }
     },
     "if_statement": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "CHOICE",
-          "members": [
-            {
+      "type": "PREC",
+      "value": 5,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "kw_if"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "kw_tif"
+              }
+            ]
+          },
+          {
+            "type": "FIELD",
+            "name": "condition",
+            "content": {
               "type": "SYMBOL",
-              "name": "kw_if"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "kw_tif"
+              "name": "_expression"
             }
-          ]
-        },
-        {
-          "type": "FIELD",
-          "name": "condition",
-          "content": {
-            "type": "SYMBOL",
-            "name": "_expression"
-          }
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "STRING",
-                  "value": "goto"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "identifier"
-                }
-              ]
-            },
-            {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "CHOICE",
-                  "members": [
-                    {
-                      "type": "SYMBOL",
-                      "name": "kw_then"
-                    },
-                    {
-                      "type": "SYMBOL",
-                      "name": "kw_ithen"
-                    },
-                    {
-                      "type": "SYMBOL",
-                      "name": "kw_kthen"
-                    }
-                  ]
-                },
-                {
-                  "type": "REPEAT",
-                  "content": {
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "CHOICE",
+                    "members": [
+                      {
+                        "type": "SYMBOL",
+                        "name": "kw_goto"
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "kw_igoto"
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "kw_kgoto"
+                      }
+                    ]
+                  },
+                  {
                     "type": "SYMBOL",
-                    "name": "_statement"
+                    "name": "identifier"
                   }
-                },
-                {
-                  "type": "CHOICE",
-                  "members": [
-                    {
+                ]
+              },
+              {
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "CHOICE",
+                    "members": [
+                      {
+                        "type": "SYMBOL",
+                        "name": "kw_then"
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "kw_ithen"
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "kw_kthen"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "REPEAT",
+                    "content": {
                       "type": "SYMBOL",
-                      "name": "elseif_block"
-                    },
-                    {
-                      "type": "BLANK"
+                      "name": "_statement"
                     }
-                  ]
-                },
-                {
-                  "type": "CHOICE",
-                  "members": [
-                    {
-                      "type": "SYMBOL",
-                      "name": "else_block"
-                    },
-                    {
-                      "type": "BLANK"
-                    }
-                  ]
-                },
-                {
-                  "type": "CHOICE",
-                  "members": [
-                    {
-                      "type": "SYMBOL",
-                      "name": "kw_endif"
-                    },
-                    {
-                      "type": "SYMBOL",
-                      "name": "kw_fi"
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      ]
+                  },
+                  {
+                    "type": "CHOICE",
+                    "members": [
+                      {
+                        "type": "SYMBOL",
+                        "name": "elseif_block"
+                      },
+                      {
+                        "type": "BLANK"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "CHOICE",
+                    "members": [
+                      {
+                        "type": "SYMBOL",
+                        "name": "else_block"
+                      },
+                      {
+                        "type": "BLANK"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "CHOICE",
+                    "members": [
+                      {
+                        "type": "SYMBOL",
+                        "name": "kw_endif"
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "kw_fi"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
     },
     "elseif_block": {
       "type": "REPEAT1",
@@ -1718,100 +1807,112 @@
       ]
     },
     "while_loop": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "kw_while"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_expression"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "kw_do"
-        },
-        {
-          "type": "REPEAT",
-          "content": {
+      "type": "PREC",
+      "value": 5,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
             "type": "SYMBOL",
-            "name": "_statement"
+            "name": "kw_while"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "_expression"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "kw_do"
+          },
+          {
+            "type": "REPEAT",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_statement"
+            }
+          },
+          {
+            "type": "SYMBOL",
+            "name": "kw_od"
           }
-        },
-        {
-          "type": "SYMBOL",
-          "name": "kw_od"
-        }
-      ]
+        ]
+      }
     },
     "until_loop": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "kw_until"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_expression"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "kw_do"
-        },
-        {
-          "type": "REPEAT",
-          "content": {
+      "type": "PREC",
+      "value": 5,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
             "type": "SYMBOL",
-            "name": "_statement"
+            "name": "kw_until"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "_expression"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "kw_do"
+          },
+          {
+            "type": "REPEAT",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_statement"
+            }
+          },
+          {
+            "type": "SYMBOL",
+            "name": "kw_od"
           }
-        },
-        {
-          "type": "SYMBOL",
-          "name": "kw_od"
-        }
-      ]
+        ]
+      }
     },
     "for_loop": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "kw_for"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "identifier"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "kw_in"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_expression"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "kw_do"
-        },
-        {
-          "type": "REPEAT",
-          "content": {
+      "type": "PREC",
+      "value": 5,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
             "type": "SYMBOL",
-            "name": "_statement"
+            "name": "kw_for"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "identifier"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "kw_in"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "_expression"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "kw_do"
+          },
+          {
+            "type": "REPEAT",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_statement"
+            }
+          },
+          {
+            "type": "SYMBOL",
+            "name": "kw_od"
           }
-        },
-        {
-          "type": "SYMBOL",
-          "name": "kw_od"
-        }
-      ]
+        ]
+      }
     },
     "kw_switch_start": {
       "type": "PREC",
-      "value": 1,
+      "value": 5,
       "content": {
         "type": "TOKEN",
         "content": {
@@ -1822,7 +1923,7 @@
     },
     "kw_switch_end": {
       "type": "PREC",
-      "value": 1,
+      "value": 5,
       "content": {
         "type": "TOKEN",
         "content": {
@@ -1833,7 +1934,7 @@
     },
     "kw_case_key": {
       "type": "PREC",
-      "value": 1,
+      "value": 5,
       "content": {
         "type": "TOKEN",
         "content": {
@@ -1844,7 +1945,7 @@
     },
     "kw_default_key": {
       "type": "PREC",
-      "value": 1,
+      "value": 5,
       "content": {
         "type": "TOKEN",
         "content": {
@@ -1871,40 +1972,44 @@
       "name": "kw_default_key"
     },
     "switch_statement": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "kw_switch_start"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_expression"
-        },
-        {
-          "type": "REPEAT",
-          "content": {
+      "type": "PREC",
+      "value": 5,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
             "type": "SYMBOL",
-            "name": "case_block"
-          }
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
+            "name": "kw_switch_start"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "_expression"
+          },
+          {
+            "type": "REPEAT",
+            "content": {
               "type": "SYMBOL",
-              "name": "default_block"
-            },
-            {
-              "type": "BLANK"
+              "name": "case_block"
             }
-          ]
-        },
-        {
-          "type": "SYMBOL",
-          "name": "kw_switch_end"
-        }
-      ]
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "default_block"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          },
+          {
+            "type": "SYMBOL",
+            "name": "kw_switch_end"
+          }
+        ]
+      }
     },
     "case_block": {
       "type": "PREC_LEFT",
@@ -1998,43 +2103,51 @@
       }
     },
     "goto_statement": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "kw_goto"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "kw_igoto"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "kw_kgoto"
-            }
-          ]
-        },
-        {
-          "type": "SYMBOL",
-          "name": "identifier"
-        }
-      ]
+      "type": "PREC",
+      "value": 5,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "kw_goto"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "kw_igoto"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "kw_kgoto"
+              }
+            ]
+          },
+          {
+            "type": "SYMBOL",
+            "name": "identifier"
+          }
+        ]
+      }
     },
     "return_statement": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "kw_return"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "kw_rireturn"
-        }
-      ]
+      "type": "PREC",
+      "value": 5,
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "kw_return"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "kw_rireturn"
+          }
+        ]
+      }
     },
     "label_statement": {
       "type": "PREC",

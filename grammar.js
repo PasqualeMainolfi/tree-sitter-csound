@@ -3,7 +3,6 @@
 
 module.exports = grammar({
   name: 'csound',
-
   extras: $ => [/\s/, $.comment, $.block_comment],
 
   conflicts: $ => [
@@ -139,7 +138,7 @@ module.exports = grammar({
     ),
 
     legacy_udo_args: $ => token(/[a-zA-Z0-9_\[\]]+/),
-    kw_void: $ => token('void'),
+    kw_void: $ => token(prec(5, 'void')),
 
     modern_udo_inputs: $ => seq(
       '(',
@@ -157,7 +156,7 @@ module.exports = grammar({
     ),
 
     // --- STRUCT DEFINITION (Csound 7) ---
-    struct_definition: $ => prec(2, seq(
+    struct_definition: $ => prec(5, seq(
         $.kw_struct,
         field('name', $.struct_name),
         field('fields', sep1($.typed_identifier, ','))
@@ -192,13 +191,13 @@ module.exports = grammar({
       $.internal_code_block
     ),
 
-    kw_xin: $ => token('xin'),
+    kw_xin: $ => token(prec(5, 'xin')),
     xin_statement: $ => seq(
       field('outputs', sep1($.type_identifier_legacy, ',')),
       $.kw_xin
     ),
 
-    kw_xout: $ => token('xout'),
+    kw_xout: $ => token(prec(5, 'xout')),
     xout_statement: $ => choice(
         seq(
             $.kw_xout,
@@ -267,37 +266,53 @@ module.exports = grammar({
       $.return_statement
     ),
 
-    kw_if: $ => token('if'),
-    kw_tif: $ => token('tif'),
-    kw_endif: $ => token('endif'),
-    kw_fi: $ => token('fi'),
-    kw_then: $ => token('then'),
-    kw_ithen: $ => token('ithen'),
-    kw_kthen: $ => token('kthen'),
-    kw_elseif: $ => token('elseif'),
-    kw_else: $ => token('else'),
-    kw_while: $ => token('while'),
-    kw_until: $ => token('until'),
-    kw_do: $ => token('do'),
-    kw_od: $ => token('od'),
-    kw_for: $ => token('for'),
-    kw_in: $ => token('in'),
+    kw_if: $ => token(prec(5, 'if')),
+    kw_tif: $ => token(prec(5, 'tif')),
+    kw_endif: $ => token(prec(5, 'endif')),
+    kw_fi: $ => token(prec(5, 'fi')),
+    kw_then: $ => token(prec(5, 'then')),
+    kw_ithen: $ => token(prec(5, 'ithen')),
+    kw_kthen: $ => token(prec(5, 'kthen')),
+    kw_elseif: $ => token(prec(5, 'elseif')),
+    kw_else: $ => token(prec(5, 'else')),
+    kw_while: $ => token(prec(5, 'while')),
+    kw_until: $ => token(prec(5, 'until')),
+    kw_do: $ => token(prec(5, 'do')),
+    kw_od: $ => token(prec(5, 'od')),
+    kw_for: $ => token(prec(5, 'for')),
+    kw_in: $ => token(prec(5, 'in')),
 
-    if_statement: $ => seq(
-      choice($.kw_if, $.kw_tif),
-      field('condition', $._expression),
-      choice(seq('goto', $.identifier),
-        seq(choice($.kw_then, $.kw_ithen, $.kw_kthen),
-          repeat($._statement),
-          optional($.elseif_block),
-          optional($.else_block),
-          choice($.kw_endif, $.kw_fi),
+    if_statement: $ => prec(5, seq(
+        choice($.kw_if, $.kw_tif),
+        field('condition', $._expression),
+        choice(
+            seq(
+                choice(
+                    $.kw_goto,
+                    $.kw_igoto,
+                    $.kw_kgoto
+                ),
+                $.identifier
+            ),
+            seq(choice(
+                $.kw_then,
+                $.kw_ithen,
+                $.kw_kthen
+            ),
+            repeat($._statement),
+            optional($.elseif_block),
+            optional($.else_block),
+            choice($.kw_endif, $.kw_fi),
         )
       )
-    ),
+    )),
 
     elseif_block: $ => repeat1(
-      seq($.kw_elseif, $._expression, $.kw_then, repeat($._statement)
+      seq(
+          $.kw_elseif,
+          $._expression,
+          $.kw_then,
+          repeat($._statement)
       )
     ),
 
@@ -306,23 +321,23 @@ module.exports = grammar({
       repeat($._statement)
     ),
 
-    while_loop: $ => seq(
+    while_loop: $ => prec(5, seq(
       $.kw_while,
       $._expression,
       $.kw_do,
       repeat($._statement),
       $.kw_od
-    ),
+    )),
 
-    until_loop: $ => seq(
+    until_loop: $ => prec(5, seq(
       $.kw_until,
       $._expression,
       $.kw_do,
       repeat($._statement),
       $.kw_od
-    ),
+    )),
 
-    for_loop: $ => seq(
+    for_loop: $ => prec(5, seq(
       $.kw_for,
       $.identifier,
       $.kw_in,
@@ -330,12 +345,12 @@ module.exports = grammar({
       $.kw_do,
       repeat($._statement),
       $.kw_od
-    ),
+    )),
 
-    kw_switch_start: $ => prec(1, token('switch')),
-    kw_switch_end: $ => prec(1, token('endsw')),
-    kw_case_key: $ => prec(1, token('case')),
-    kw_default_key: $ => prec(1, token('default')),
+    kw_switch_start: $ => prec(5, token('switch')),
+    kw_switch_end: $ => prec(5, token('endsw')),
+    kw_case_key: $ => prec(5, token('case')),
+    kw_default_key: $ => prec(5, token('default')),
 
     case_header: $ => seq(
       $.kw_case_key,
@@ -344,13 +359,13 @@ module.exports = grammar({
 
     default_header: $ => $.kw_default_key,
 
-    switch_statement: $ => seq(
+    switch_statement: $ => prec(5, seq(
       $.kw_switch_start,
       $._expression,
       repeat($.case_block),
       optional($.default_block),
       $.kw_switch_end
-    ),
+    )),
 
     case_block: $ => prec.left(1, seq(
       field('case_header', $.case_header),
@@ -369,15 +384,15 @@ module.exports = grammar({
     kw_return: $ => token('return'),
     kw_rireturn: $ => token('rireturn'),
 
-    goto_statement: $ => seq(choice(
+    goto_statement: $ => prec(5, seq(choice(
             $.kw_goto,
             $.kw_igoto,
             $.kw_kgoto
         ),
         $.identifier
-    ),
+    )),
 
-    return_statement: $ => choice($.kw_return, $.kw_rireturn),
+    return_statement: $ => prec(5, choice($.kw_return, $.kw_rireturn)),
 
     label_statement: $ => prec(-1, seq($.identifier, ':')),
 

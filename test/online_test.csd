@@ -20,6 +20,10 @@ instr 1
         out(poscil(1, 440))
     }})
 
+    if p4 > 3 then
+        print(1)
+    endif
+
     switch p4 > 3
         case 1
             print(1)
