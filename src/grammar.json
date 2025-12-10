@@ -2228,6 +2228,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "array_data"
+        },
+        {
+          "type": "SYMBOL",
           "name": "internal_code_block"
         }
       ]
@@ -2672,6 +2676,44 @@
         {
           "type": "SYMBOL",
           "name": "_expression"
+        },
+        {
+          "type": "STRING",
+          "value": "]"
+        }
+      ]
+    },
+    "array_data": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "["
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_expression"
+            },
+            {
+              "type": "REPEAT",
+              "content": {
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "STRING",
+                    "value": ","
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "_expression"
+                  }
+                ]
+              }
+            }
+          ]
         },
         {
           "type": "STRING",
@@ -3392,6 +3434,10 @@
     [
       "xout_statement",
       "_expression"
+    ],
+    [
+      "array_access",
+      "opcode_name"
     ],
     [
       "if_statement"

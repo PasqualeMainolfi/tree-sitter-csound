@@ -27,6 +27,14 @@ instr 1
         print(1)
     endif
 
+    while p4 > 10 do
+        print(9)
+    od
+
+    for i in [1, 2, 3] do
+        print(1)
+    od
+
     switch p4 > 3
         case 1
             print(1)

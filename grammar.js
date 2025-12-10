@@ -15,6 +15,7 @@ module.exports = grammar({
     [$.legacy_typed_assignment_statement, $.opcode_statement],
     [$.xin_statement, $.opcode_statement, $.legacy_typed_assignment_statement],
     [$.xout_statement, $._expression],
+    [$.array_access, $.opcode_name],
     [$.if_statement],
     [$.cabbage_statement],
     [$.opcode_statement],
@@ -402,6 +403,7 @@ module.exports = grammar({
       $.array_access,
       $.struct_access,
       $.macro_usage,
+      $.array_data,
       $.internal_code_block
     ),
 
@@ -453,6 +455,12 @@ module.exports = grammar({
         '[',
         $._expression,
         ']'
+    ),
+
+    array_data: $ => seq(
+      '[',
+      sep1($._expression, ','),
+      ']'
     ),
 
     score_body: $ => repeat1($._score_item),
