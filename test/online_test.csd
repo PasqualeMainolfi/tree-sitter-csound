@@ -20,6 +20,9 @@ instr 1
         out(poscil(1, 440))
     }})
 
+    ifreq = 400
+    wfreq = 500
+
     if p4 > 3 then
         print(1)
     endif

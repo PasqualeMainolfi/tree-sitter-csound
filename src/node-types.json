@@ -880,6 +880,25 @@
     }
   },
   {
+    "type": "endif_block",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "kw_endif",
+          "named": true
+        },
+        {
+          "type": "kw_fi",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "for_loop",
     "named": true,
     "fields": {},
@@ -1167,7 +1186,7 @@
     "fields": {}
   },
   {
-    "type": "if_conditional_block",
+    "type": "if_statement",
     "named": true,
     "fields": {
       "condition": {
@@ -1227,6 +1246,62 @@
             "named": true
           }
         ]
+      },
+      "goto_block": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "goto_statement",
+            "named": true
+          }
+        ]
+      },
+      "then_block": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "assignment_statement",
+            "named": true
+          },
+          {
+            "type": "control_statement",
+            "named": true
+          },
+          {
+            "type": "function_call",
+            "named": true
+          },
+          {
+            "type": "header_assignment",
+            "named": true
+          },
+          {
+            "type": "internal_code_block",
+            "named": true
+          },
+          {
+            "type": "label_statement",
+            "named": true
+          },
+          {
+            "type": "legacy_typed_assignment_statement",
+            "named": true
+          },
+          {
+            "type": "opcode_statement",
+            "named": true
+          },
+          {
+            "type": "struct_definition",
+            "named": true
+          },
+          {
+            "type": "typed_assignment_statement",
+            "named": true
+          }
+        ]
       }
     },
     "children": {
@@ -1234,11 +1309,15 @@
       "required": true,
       "types": [
         {
-          "type": "identifier",
+          "type": "else_block",
           "named": true
         },
         {
-          "type": "kw_goto",
+          "type": "elseif_block",
+          "named": true
+        },
+        {
+          "type": "endif_block",
           "named": true
         },
         {
@@ -1246,15 +1325,7 @@
           "named": true
         },
         {
-          "type": "kw_igoto",
-          "named": true
-        },
-        {
           "type": "kw_ithen",
-          "named": true
-        },
-        {
-          "type": "kw_kgoto",
           "named": true
         },
         {
@@ -1268,83 +1339,9 @@
         {
           "type": "kw_tif",
           "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "if_statement",
-    "named": true,
-    "fields": {
-      "conditional_block": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "if_conditional_block",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "assignment_statement",
-          "named": true
         },
         {
-          "type": "control_statement",
-          "named": true
-        },
-        {
-          "type": "else_block",
-          "named": true
-        },
-        {
-          "type": "elseif_block",
-          "named": true
-        },
-        {
-          "type": "function_call",
-          "named": true
-        },
-        {
-          "type": "header_assignment",
-          "named": true
-        },
-        {
-          "type": "internal_code_block",
-          "named": true
-        },
-        {
-          "type": "kw_endif",
-          "named": true
-        },
-        {
-          "type": "kw_fi",
-          "named": true
-        },
-        {
-          "type": "label_statement",
-          "named": true
-        },
-        {
-          "type": "legacy_typed_assignment_statement",
-          "named": true
-        },
-        {
-          "type": "opcode_statement",
-          "named": true
-        },
-        {
-          "type": "struct_definition",
-          "named": true
-        },
-        {
-          "type": "typed_assignment_statement",
+          "type": "return_statement",
           "named": true
         }
       ]

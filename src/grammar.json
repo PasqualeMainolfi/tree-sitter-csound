@@ -1629,134 +1629,55 @@
         }
       }
     },
-    "if_conditional_block": {
-      "type": "SEQ",
+    "endif_block": {
+      "type": "CHOICE",
       "members": [
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "kw_if"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "kw_tif"
-            }
-          ]
+          "type": "SYMBOL",
+          "name": "kw_endif"
         },
         {
-          "type": "FIELD",
-          "name": "condition",
-          "content": {
-            "type": "SYMBOL",
-            "name": "_expression"
-          }
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "CHOICE",
-                  "members": [
-                    {
-                      "type": "SYMBOL",
-                      "name": "kw_goto"
-                    },
-                    {
-                      "type": "SYMBOL",
-                      "name": "kw_igoto"
-                    },
-                    {
-                      "type": "SYMBOL",
-                      "name": "kw_kgoto"
-                    }
-                  ]
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "identifier"
-                }
-              ]
-            },
-            {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "kw_then"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "kw_ithen"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "kw_kthen"
-                }
-              ]
-            }
-          ]
+          "type": "SYMBOL",
+          "name": "kw_fi"
         }
       ]
     },
-    "if_statement": {
+    "goto_statement": {
       "type": "SEQ",
       "members": [
         {
-          "type": "FIELD",
-          "name": "conditional_block",
-          "content": {
-            "type": "SYMBOL",
-            "name": "if_conditional_block"
-          }
-        },
-        {
-          "type": "REPEAT",
-          "content": {
-            "type": "SYMBOL",
-            "name": "_statement"
-          }
-        },
-        {
           "type": "CHOICE",
           "members": [
             {
               "type": "SYMBOL",
-              "name": "elseif_block"
+              "name": "kw_goto"
             },
             {
-              "type": "BLANK"
+              "type": "SYMBOL",
+              "name": "kw_igoto"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "kw_kgoto"
             }
           ]
         },
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "else_block"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
+          "type": "SYMBOL",
+          "name": "identifier"
+        }
+      ]
+    },
+    "return_statement": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "kw_return"
         },
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "kw_endif"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "kw_fi"
-            }
-          ]
+          "type": "SYMBOL",
+          "name": "kw_rireturn"
         }
       ]
     },
@@ -1800,6 +1721,143 @@
             "type": "SYMBOL",
             "name": "_statement"
           }
+        }
+      ]
+    },
+    "label_statement": {
+      "type": "PREC",
+      "value": -1,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "identifier"
+          },
+          {
+            "type": "STRING",
+            "value": ":"
+          }
+        ]
+      }
+    },
+    "if_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "kw_if"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "kw_tif"
+            }
+          ]
+        },
+        {
+          "type": "FIELD",
+          "name": "condition",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_expression"
+          }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "kw_then"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "kw_ithen"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "kw_kthen"
+                    }
+                  ]
+                },
+                {
+                  "type": "FIELD",
+                  "name": "then_block",
+                  "content": {
+                    "type": "REPEAT",
+                    "content": {
+                      "type": "SYMBOL",
+                      "name": "_statement"
+                    }
+                  }
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "elseif_block"
+                    },
+                    {
+                      "type": "BLANK"
+                    }
+                  ]
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "else_block"
+                    },
+                    {
+                      "type": "BLANK"
+                    }
+                  ]
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "endif_block"
+                }
+              ]
+            },
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "FIELD",
+                  "name": "goto_block",
+                  "content": {
+                    "type": "REPEAT",
+                    "content": {
+                      "type": "SYMBOL",
+                      "name": "goto_statement"
+                    }
+                  }
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "return_statement"
+                    },
+                    {
+                      "type": "BLANK"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
         }
       ]
     },
@@ -2101,62 +2159,6 @@
           "type": "STRING",
           "value": "rireturn"
         }
-      }
-    },
-    "goto_statement": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "kw_goto"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "kw_igoto"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "kw_kgoto"
-            }
-          ]
-        },
-        {
-          "type": "SYMBOL",
-          "name": "identifier"
-        }
-      ]
-    },
-    "return_statement": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "kw_return"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "kw_rireturn"
-        }
-      ]
-    },
-    "label_statement": {
-      "type": "PREC",
-      "value": -1,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "SYMBOL",
-            "name": "identifier"
-          },
-          {
-            "type": "STRING",
-            "value": ":"
-          }
-        ]
       }
     },
     "_expression": {
@@ -3390,6 +3392,9 @@
     [
       "xout_statement",
       "_expression"
+    ],
+    [
+      "if_statement"
     ],
     [
       "cabbage_statement"
