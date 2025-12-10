@@ -2045,8 +2045,12 @@
           "type": "PREC",
           "value": 2,
           "content": {
-            "type": "SYMBOL",
-            "name": "label_statement"
+            "type": "FIELD",
+            "name": "label_block",
+            "content": {
+              "type": "SYMBOL",
+              "name": "label_statement"
+            }
           }
         }
       ]

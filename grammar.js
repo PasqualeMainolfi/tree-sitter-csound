@@ -353,7 +353,7 @@ module.exports = grammar({
                 field('op', $.opcode_name),
                 field('inputs', optional($.argument_list))
             )),
-            prec(2, $.label_statement)
+            prec(2, field('label_block', $.label_statement))
         ),
 
         endif_block: $ => choice(
