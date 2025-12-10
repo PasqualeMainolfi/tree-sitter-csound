@@ -3,6 +3,7 @@
 
 module.exports = grammar({
   name: 'csound',
+  word: $ => $.type_identifier_legacy,
   extras: $ => [/\s/, $.comment, $.block_comment],
 
   conflicts: $ => [
@@ -191,13 +192,13 @@ module.exports = grammar({
       $.internal_code_block
     ),
 
-    kw_xin: $ => token(prec(5, 'xin')),
+    kw_xin: $ => token('xin'),
     xin_statement: $ => seq(
       field('outputs', sep1($.type_identifier_legacy, ',')),
       $.kw_xin
     ),
 
-    kw_xout: $ => token(prec(5, 'xout')),
+    kw_xout: $ => token('xout'),
     xout_statement: $ => choice(
         seq(
             $.kw_xout,
@@ -282,30 +283,61 @@ module.exports = grammar({
     kw_for: $ => token(prec(5, 'for')),
     kw_in: $ => token(prec(5, 'in')),
 
-    if_statement: $ => prec(5, seq(
+    if_conditional_block: $ => seq(
         choice($.kw_if, $.kw_tif),
         field('condition', $._expression),
         choice(
-            seq(
-                choice(
-                    $.kw_goto,
-                    $.kw_igoto,
-                    $.kw_kgoto
+                seq(
+                    choice(
+                        $.kw_goto,
+                        $.kw_igoto,
+                        $.kw_kgoto
+                    ),
+                    $.identifier
                 ),
-                $.identifier
-            ),
-            seq(choice(
-                $.kw_then,
-                $.kw_ithen,
-                $.kw_kthen
-            ),
-            repeat($._statement),
-            optional($.elseif_block),
-            optional($.else_block),
-            choice($.kw_endif, $.kw_fi),
+                choice(
+                    $.kw_then,
+                    $.kw_ithen,
+                    $.kw_kthen
+                )
         )
-      )
-    )),
+    ),
+
+    if_statement: $ => seq(
+        field('conditional_block', $.if_conditional_block),
+        repeat($._statement),
+        optional($.elseif_block),
+        optional($.else_block),
+        choice(
+            $.kw_endif,
+            $.kw_fi
+        )
+    ),
+
+    // if_statement: $ => seq(
+    //     choice($.kw_if, $.kw_tif),
+    //     field('condition', $._expression),
+    //     choice(
+    //         seq(
+    //             choice(
+    //                 $.kw_goto,
+    //                 $.kw_igoto,
+    //                 $.kw_kgoto
+    //             ),
+    //             $.identifier
+    //         ),
+    //         seq(choice(
+    //             $.kw_then,
+    //             $.kw_ithen,
+    //             $.kw_kthen
+    //         ),
+    //         repeat($._statement),
+    //         optional($.elseif_block),
+    //         optional($.else_block),
+    //         choice($.kw_endif, $.kw_fi),
+    //     )
+    //   )
+    // ),
 
     elseif_block: $ => repeat1(
       seq(
@@ -321,23 +353,23 @@ module.exports = grammar({
       repeat($._statement)
     ),
 
-    while_loop: $ => prec(5, seq(
+    while_loop: $ => seq(
       $.kw_while,
       $._expression,
       $.kw_do,
       repeat($._statement),
       $.kw_od
-    )),
+    ),
 
-    until_loop: $ => prec(5, seq(
+    until_loop: $ => seq(
       $.kw_until,
       $._expression,
       $.kw_do,
       repeat($._statement),
       $.kw_od
-    )),
+    ),
 
-    for_loop: $ => prec(5, seq(
+    for_loop: $ => seq(
       $.kw_for,
       $.identifier,
       $.kw_in,
@@ -345,7 +377,7 @@ module.exports = grammar({
       $.kw_do,
       repeat($._statement),
       $.kw_od
-    )),
+    ),
 
     kw_switch_start: $ => prec(5, token('switch')),
     kw_switch_end: $ => prec(5, token('endsw')),
@@ -359,13 +391,13 @@ module.exports = grammar({
 
     default_header: $ => $.kw_default_key,
 
-    switch_statement: $ => prec(5, seq(
+    switch_statement: $ => seq(
       $.kw_switch_start,
       $._expression,
       repeat($.case_block),
       optional($.default_block),
       $.kw_switch_end
-    )),
+    ),
 
     case_block: $ => prec.left(1, seq(
       field('case_header', $.case_header),
@@ -378,21 +410,21 @@ module.exports = grammar({
     )),
 
 
-    kw_goto: $ => token('goto'),
-    kw_kgoto: $ => token('kgoto'),
-    kw_igoto: $ => token('igoto'),
-    kw_return: $ => token('return'),
-    kw_rireturn: $ => token('rireturn'),
+    kw_goto: $ => token(prec(5, 'goto')),
+    kw_kgoto: $ => token(prec(5, 'kgoto')),
+    kw_igoto: $ => token(prec(5, 'igoto')),
+    kw_return: $ => token(prec(5, 'return')),
+    kw_rireturn: $ => token(prec(5, 'rireturn')),
 
-    goto_statement: $ => prec(5, seq(choice(
+    goto_statement: $ => seq(choice(
             $.kw_goto,
             $.kw_igoto,
             $.kw_kgoto
         ),
         $.identifier
-    )),
+    ),
 
-    return_statement: $ => prec(5, choice($.kw_return, $.kw_rireturn)),
+    return_statement: $ => choice($.kw_return, $.kw_rireturn),
 
     label_statement: $ => prec(-1, seq($.identifier, ':')),
 

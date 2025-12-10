@@ -29,7 +29,7 @@ struct MyDog val:a
 instr 1
 
 
-    ifreq = 400
+    ; ifreq = 400
     sig:a = poscil(1, 440)
     ; sig2:a[] = poscile(1, 3)
     sig3:a += poscil(1, 440)

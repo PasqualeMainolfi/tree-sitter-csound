@@ -1167,7 +1167,7 @@
     "fields": {}
   },
   {
-    "type": "if_statement",
+    "type": "if_conditional_block",
     "named": true,
     "fields": {
       "condition": {
@@ -1234,43 +1234,7 @@
       "required": true,
       "types": [
         {
-          "type": "assignment_statement",
-          "named": true
-        },
-        {
-          "type": "control_statement",
-          "named": true
-        },
-        {
-          "type": "else_block",
-          "named": true
-        },
-        {
-          "type": "elseif_block",
-          "named": true
-        },
-        {
-          "type": "function_call",
-          "named": true
-        },
-        {
-          "type": "header_assignment",
-          "named": true
-        },
-        {
           "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "internal_code_block",
-          "named": true
-        },
-        {
-          "type": "kw_endif",
-          "named": true
-        },
-        {
-          "type": "kw_fi",
           "named": true
         },
         {
@@ -1303,6 +1267,64 @@
         },
         {
           "type": "kw_tif",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "if_statement",
+    "named": true,
+    "fields": {
+      "conditional_block": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "if_conditional_block",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "assignment_statement",
+          "named": true
+        },
+        {
+          "type": "control_statement",
+          "named": true
+        },
+        {
+          "type": "else_block",
+          "named": true
+        },
+        {
+          "type": "elseif_block",
+          "named": true
+        },
+        {
+          "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "header_assignment",
+          "named": true
+        },
+        {
+          "type": "internal_code_block",
+          "named": true
+        },
+        {
+          "type": "kw_endif",
+          "named": true
+        },
+        {
+          "type": "kw_fi",
           "named": true
         },
         {
