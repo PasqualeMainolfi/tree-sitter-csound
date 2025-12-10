@@ -1439,7 +1439,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "assignment_statement",
@@ -1459,6 +1459,14 @@
         },
         {
           "type": "internal_code_block",
+          "named": true
+        },
+        {
+          "type": "kw_close_code_block",
+          "named": true
+        },
+        {
+          "type": "kw_open_code_block",
           "named": true
         },
         {
@@ -3254,6 +3262,10 @@
     "named": false
   },
   {
+    "type": "kw_close_code_block",
+    "named": true
+  },
+  {
     "type": "kw_endin",
     "named": true
   },
@@ -3267,6 +3279,10 @@
   },
   {
     "type": "kw_opcode",
+    "named": true
+  },
+  {
+    "type": "kw_open_code_block",
     "named": true
   },
   {
@@ -3386,10 +3402,6 @@
     "named": false
   },
   {
-    "type": "{{",
-    "named": false
-  },
-  {
     "type": "|",
     "named": false
   },
@@ -3399,10 +3411,6 @@
   },
   {
     "type": "}",
-    "named": false
-  },
-  {
-    "type": "}}",
     "named": false
   },
   {

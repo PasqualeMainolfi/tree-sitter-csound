@@ -99,10 +99,13 @@ module.exports = grammar({
         $.kw_endin
     ),
 
+    kw_open_code_block: $ => token('{{'),
+    kw_close_code_block: $ => token('}}'),
+
     internal_code_block: $ => seq(
-        '{{',
+        $.kw_open_code_block,
         repeat($._statement),
-        '}}'
+        $.kw_close_code_block
     ),
 
     // --- UDO DEFINITIONS ---

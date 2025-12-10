@@ -430,12 +430,26 @@
         }
       ]
     },
+    "kw_open_code_block": {
+      "type": "TOKEN",
+      "content": {
+        "type": "STRING",
+        "value": "{{"
+      }
+    },
+    "kw_close_code_block": {
+      "type": "TOKEN",
+      "content": {
+        "type": "STRING",
+        "value": "}}"
+      }
+    },
     "internal_code_block": {
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "{{"
+          "type": "SYMBOL",
+          "name": "kw_open_code_block"
         },
         {
           "type": "REPEAT",
@@ -445,8 +459,8 @@
           }
         },
         {
-          "type": "STRING",
-          "value": "}}"
+          "type": "SYMBOL",
+          "name": "kw_close_code_block"
         }
       ]
     },
