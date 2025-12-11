@@ -12,6 +12,10 @@
           "named": true
         },
         {
+          "type": "array_data",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
@@ -25,6 +29,10 @@
         },
         {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "internal_code_block",
           "named": true
         },
         {
@@ -94,6 +102,10 @@
           "named": true
         },
         {
+          "type": "array_data",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
@@ -107,6 +119,77 @@
         },
         {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "internal_code_block",
+          "named": true
+        },
+        {
+          "type": "macro_usage",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        },
+        {
+          "type": "struct_access",
+          "named": true
+        },
+        {
+          "type": "ternary_expression",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "array_data",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "array_access",
+          "named": true
+        },
+        {
+          "type": "array_data",
+          "named": true
+        },
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "header_identifier",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "internal_code_block",
           "named": true
         },
         {
@@ -225,6 +308,10 @@
             "named": true
           },
           {
+            "type": "array_data",
+            "named": true
+          },
+          {
             "type": "binary_expression",
             "named": true
           },
@@ -238,6 +325,10 @@
           },
           {
             "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "internal_code_block",
             "named": true
           },
           {
@@ -285,6 +376,10 @@
           "named": true
         },
         {
+          "type": "array_data",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
@@ -298,6 +393,10 @@
         },
         {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "internal_code_block",
           "named": true
         },
         {
@@ -427,6 +526,10 @@
             "named": true
           },
           {
+            "type": "internal_code_block",
+            "named": true
+          },
+          {
             "type": "label_statement",
             "named": true
           },
@@ -473,11 +576,11 @@
           "named": true
         },
         {
-          "type": "binary_expression",
+          "type": "array_data",
           "named": true
         },
         {
-          "type": "case_key",
+          "type": "binary_expression",
           "named": true
         },
         {
@@ -490,6 +593,14 @@
         },
         {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "internal_code_block",
+          "named": true
+        },
+        {
+          "type": "kw_case_key",
           "named": true
         },
         {
@@ -522,11 +633,6 @@
         }
       ]
     }
-  },
-  {
-    "type": "case_key",
-    "named": true,
-    "fields": {}
   },
   {
     "type": "control_statement",
@@ -650,6 +756,10 @@
             "named": true
           },
           {
+            "type": "internal_code_block",
+            "named": true
+          },
+          {
             "type": "label_statement",
             "named": true
           },
@@ -692,16 +802,11 @@
       "required": true,
       "types": [
         {
-          "type": "default_key",
+          "type": "kw_default_key",
           "named": true
         }
       ]
     }
-  },
-  {
-    "type": "default_key",
-    "named": true,
-    "fields": {}
   },
   {
     "type": "else_block",
@@ -709,7 +814,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "assignment_statement",
@@ -725,6 +830,14 @@
         },
         {
           "type": "header_assignment",
+          "named": true
+        },
+        {
+          "type": "internal_code_block",
+          "named": true
+        },
+        {
+          "type": "kw_else",
           "named": true
         },
         {
@@ -763,6 +876,10 @@
           "named": true
         },
         {
+          "type": "array_data",
+          "named": true
+        },
+        {
           "type": "assignment_statement",
           "named": true
         },
@@ -788,6 +905,18 @@
         },
         {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "internal_code_block",
+          "named": true
+        },
+        {
+          "type": "kw_elseif",
+          "named": true
+        },
+        {
+          "type": "kw_then",
           "named": true
         },
         {
@@ -842,6 +971,25 @@
     }
   },
   {
+    "type": "endif_block",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "kw_endif",
+          "named": true
+        },
+        {
+          "type": "kw_fi",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "for_loop",
     "named": true,
     "fields": {},
@@ -851,6 +999,10 @@
       "types": [
         {
           "type": "array_access",
+          "named": true
+        },
+        {
+          "type": "array_data",
           "named": true
         },
         {
@@ -879,6 +1031,26 @@
         },
         {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "internal_code_block",
+          "named": true
+        },
+        {
+          "type": "kw_do",
+          "named": true
+        },
+        {
+          "type": "kw_for",
+          "named": true
+        },
+        {
+          "type": "kw_in",
+          "named": true
+        },
+        {
+          "type": "kw_od",
           "named": true
         },
         {
@@ -1018,11 +1190,23 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
-          "type": "identifier",
+          "type": "kw_goto",
+          "named": true
+        },
+        {
+          "type": "kw_igoto",
+          "named": true
+        },
+        {
+          "type": "kw_kgoto",
+          "named": true
+        },
+        {
+          "type": "label_statement",
           "named": true
         }
       ]
@@ -1041,6 +1225,10 @@
           "named": true
         },
         {
+          "type": "array_data",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
@@ -1054,6 +1242,10 @@
         },
         {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "internal_code_block",
           "named": true
         },
         {
@@ -1105,6 +1297,10 @@
             "named": true
           },
           {
+            "type": "array_data",
+            "named": true
+          },
+          {
             "type": "binary_expression",
             "named": true
           },
@@ -1118,6 +1314,10 @@
           },
           {
             "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "internal_code_block",
             "named": true
           },
           {
@@ -1149,20 +1349,78 @@
             "named": true
           }
         ]
+      },
+      "else_goto": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "goto_statement",
+            "named": true
+          }
+        ]
+      },
+      "then_block": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "assignment_statement",
+            "named": true
+          },
+          {
+            "type": "control_statement",
+            "named": true
+          },
+          {
+            "type": "function_call",
+            "named": true
+          },
+          {
+            "type": "header_assignment",
+            "named": true
+          },
+          {
+            "type": "internal_code_block",
+            "named": true
+          },
+          {
+            "type": "label_statement",
+            "named": true
+          },
+          {
+            "type": "legacy_typed_assignment_statement",
+            "named": true
+          },
+          {
+            "type": "opcode_statement",
+            "named": true
+          },
+          {
+            "type": "struct_definition",
+            "named": true
+          },
+          {
+            "type": "typed_assignment_statement",
+            "named": true
+          }
+        ]
+      },
+      "then_goto": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "goto_statement",
+            "named": true
+          }
+        ]
       }
     },
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
-        {
-          "type": "assignment_statement",
-          "named": true
-        },
-        {
-          "type": "control_statement",
-          "named": true
-        },
         {
           "type": "else_block",
           "named": true
@@ -1172,35 +1430,31 @@
           "named": true
         },
         {
-          "type": "function_call",
+          "type": "endif_block",
           "named": true
         },
         {
-          "type": "header_assignment",
+          "type": "kw_if",
           "named": true
         },
         {
-          "type": "identifier",
+          "type": "kw_ithen",
           "named": true
         },
         {
-          "type": "label_statement",
+          "type": "kw_kthen",
           "named": true
         },
         {
-          "type": "legacy_typed_assignment_statement",
+          "type": "kw_then",
           "named": true
         },
         {
-          "type": "opcode_statement",
+          "type": "kw_tif",
           "named": true
         },
         {
-          "type": "struct_definition",
-          "named": true
-        },
-        {
-          "type": "typed_assignment_statement",
+          "type": "return_statement",
           "named": true
         }
       ]
@@ -1235,6 +1489,26 @@
           "named": true
         },
         {
+          "type": "internal_code_block",
+          "named": true
+        },
+        {
+          "type": "kw_elsedef",
+          "named": true
+        },
+        {
+          "type": "kw_end",
+          "named": true
+        },
+        {
+          "type": "kw_ifdef",
+          "named": true
+        },
+        {
+          "type": "kw_ifndef",
+          "named": true
+        },
+        {
           "type": "label_statement",
           "named": true
         },
@@ -1262,9 +1536,13 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "kw_include",
+          "named": true
+        },
         {
           "type": "string",
           "named": true
@@ -1317,6 +1595,10 @@
         },
         {
           "type": "header_assignment",
+          "named": true
+        },
+        {
+          "type": "internal_code_block",
           "named": true
         },
         {
@@ -1374,18 +1656,82 @@
     }
   },
   {
-    "type": "label_statement",
+    "type": "internal_code_block",
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
-          "type": "identifier",
+          "type": "assignment_statement",
+          "named": true
+        },
+        {
+          "type": "control_statement",
+          "named": true
+        },
+        {
+          "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "header_assignment",
+          "named": true
+        },
+        {
+          "type": "internal_code_block",
+          "named": true
+        },
+        {
+          "type": "kw_close_code_block",
+          "named": true
+        },
+        {
+          "type": "kw_open_code_block",
+          "named": true
+        },
+        {
+          "type": "label_statement",
+          "named": true
+        },
+        {
+          "type": "legacy_typed_assignment_statement",
+          "named": true
+        },
+        {
+          "type": "opcode_statement",
+          "named": true
+        },
+        {
+          "type": "struct_definition",
+          "named": true
+        },
+        {
+          "type": "typed_assignment_statement",
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "label_statement",
+    "named": true,
+    "fields": {
+      "label_name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "type_identifier",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -1457,6 +1803,10 @@
             "named": true
           },
           {
+            "type": "array_data",
+            "named": true
+          },
+          {
             "type": "binary_expression",
             "named": true
           },
@@ -1470,6 +1820,10 @@
           },
           {
             "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "internal_code_block",
             "named": true
           },
           {
@@ -1509,11 +1863,15 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "kw_define",
           "named": true
         }
       ]
@@ -1567,8 +1925,12 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": false,
+      "required": true,
       "types": [
+        {
+          "type": "kw_void",
+          "named": true
+        },
         {
           "type": "legacy_udo_args",
           "named": true
@@ -1600,9 +1962,19 @@
           }
         ]
       },
+      "label_block": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "label_statement",
+            "named": true
+          }
+        ]
+      },
       "op": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "opcode_name",
@@ -1678,6 +2050,10 @@
           "named": true
         },
         {
+          "type": "internal_code_block",
+          "named": true
+        },
+        {
           "type": "label_statement",
           "named": true
         },
@@ -1725,6 +2101,10 @@
           "named": true
         },
         {
+          "type": "array_data",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
@@ -1738,6 +2118,10 @@
         },
         {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "internal_code_block",
           "named": true
         },
         {
@@ -1801,7 +2185,21 @@
   {
     "type": "return_statement",
     "named": true,
-    "fields": {}
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "kw_return",
+          "named": true
+        },
+        {
+          "type": "kw_rireturn",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "score_block",
@@ -2037,16 +2435,6 @@
     }
   },
   {
-    "type": "switch_end",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "switch_start",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "switch_statement",
     "named": true,
     "fields": {},
@@ -2056,6 +2444,10 @@
       "types": [
         {
           "type": "array_access",
+          "named": true
+        },
+        {
+          "type": "array_data",
           "named": true
         },
         {
@@ -2083,6 +2475,18 @@
           "named": true
         },
         {
+          "type": "internal_code_block",
+          "named": true
+        },
+        {
+          "type": "kw_switch_end",
+          "named": true
+        },
+        {
+          "type": "kw_switch_start",
+          "named": true
+        },
+        {
           "type": "macro_usage",
           "named": true
         },
@@ -2100,14 +2504,6 @@
         },
         {
           "type": "struct_access",
-          "named": true
-        },
-        {
-          "type": "switch_end",
-          "named": true
-        },
-        {
-          "type": "switch_start",
           "named": true
         },
         {
@@ -2134,6 +2530,10 @@
           "named": true
         },
         {
+          "type": "array_data",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
@@ -2147,6 +2547,10 @@
         },
         {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "internal_code_block",
           "named": true
         },
         {
@@ -2253,6 +2657,10 @@
             "named": true
           },
           {
+            "type": "array_data",
+            "named": true
+          },
+          {
             "type": "binary_expression",
             "named": true
           },
@@ -2266,6 +2674,10 @@
           },
           {
             "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "internal_code_block",
             "named": true
           },
           {
@@ -2405,6 +2817,10 @@
           "named": true
         },
         {
+          "type": "internal_code_block",
+          "named": true
+        },
+        {
           "type": "kw_endop",
           "named": true
         },
@@ -2499,6 +2915,10 @@
           "named": true
         },
         {
+          "type": "internal_code_block",
+          "named": true
+        },
+        {
           "type": "kw_endop",
           "named": true
         },
@@ -2546,6 +2966,10 @@
           "named": true
         },
         {
+          "type": "array_data",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
@@ -2559,6 +2983,10 @@
         },
         {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "internal_code_block",
           "named": true
         },
         {
@@ -2597,11 +3025,15 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "kw_undef",
           "named": true
         }
       ]
@@ -2617,6 +3049,10 @@
       "types": [
         {
           "type": "array_access",
+          "named": true
+        },
+        {
+          "type": "array_data",
           "named": true
         },
         {
@@ -2645,6 +3081,22 @@
         },
         {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "internal_code_block",
+          "named": true
+        },
+        {
+          "type": "kw_do",
+          "named": true
+        },
+        {
+          "type": "kw_od",
+          "named": true
+        },
+        {
+          "type": "kw_until",
           "named": true
         },
         {
@@ -2711,6 +3163,10 @@
           "named": true
         },
         {
+          "type": "array_data",
+          "named": true
+        },
+        {
           "type": "assignment_statement",
           "named": true
         },
@@ -2736,6 +3192,22 @@
         },
         {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "internal_code_block",
+          "named": true
+        },
+        {
+          "type": "kw_do",
+          "named": true
+        },
+        {
+          "type": "kw_od",
+          "named": true
+        },
+        {
+          "type": "kw_while",
           "named": true
         },
         {
@@ -2807,6 +3279,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "kw_xin",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -2827,6 +3309,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "kw_xout",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -2859,34 +3351,6 @@
   },
   {
     "type": "##subin",
-    "named": false
-  },
-  {
-    "type": "#define",
-    "named": false
-  },
-  {
-    "type": "#else",
-    "named": false
-  },
-  {
-    "type": "#end",
-    "named": false
-  },
-  {
-    "type": "#ifdef",
-    "named": false
-  },
-  {
-    "type": "#ifndef",
-    "named": false
-  },
-  {
-    "type": "#include",
-    "named": false
-  },
-  {
-    "type": "#undef",
     "named": false
   },
   {
@@ -3018,53 +3482,13 @@
     "named": false
   },
   {
-    "type": "case",
-    "named": false
-  },
-  {
     "type": "comment",
     "named": true,
     "extra": true
   },
   {
-    "type": "default",
-    "named": false
-  },
-  {
-    "type": "do",
-    "named": false
-  },
-  {
-    "type": "else",
-    "named": false
-  },
-  {
-    "type": "elseif",
-    "named": false
-  },
-  {
-    "type": "endif",
-    "named": false
-  },
-  {
-    "type": "endsw",
-    "named": false
-  },
-  {
-    "type": "fi",
-    "named": false
-  },
-  {
-    "type": "for",
-    "named": false
-  },
-  {
     "type": "global_keyword",
     "named": true
-  },
-  {
-    "type": "goto",
-    "named": false
   },
   {
     "type": "header_identifier",
@@ -3075,28 +3499,44 @@
     "named": true
   },
   {
-    "type": "if",
-    "named": false
+    "type": "kw_case_key",
+    "named": true
   },
   {
-    "type": "igoto",
-    "named": false
+    "type": "kw_close_code_block",
+    "named": true
   },
   {
-    "type": "in",
-    "named": false
+    "type": "kw_default_key",
+    "named": true
   },
   {
-    "type": "ithen",
-    "named": false
+    "type": "kw_define",
+    "named": true
   },
   {
-    "type": "kgoto",
-    "named": false
+    "type": "kw_do",
+    "named": true
   },
   {
-    "type": "kthen",
-    "named": false
+    "type": "kw_else",
+    "named": true
+  },
+  {
+    "type": "kw_elsedef",
+    "named": true
+  },
+  {
+    "type": "kw_elseif",
+    "named": true
+  },
+  {
+    "type": "kw_end",
+    "named": true
+  },
+  {
+    "type": "kw_endif",
+    "named": true
   },
   {
     "type": "kw_endin",
@@ -3107,7 +3547,59 @@
     "named": true
   },
   {
+    "type": "kw_fi",
+    "named": true
+  },
+  {
+    "type": "kw_for",
+    "named": true
+  },
+  {
+    "type": "kw_goto",
+    "named": true
+  },
+  {
+    "type": "kw_if",
+    "named": true
+  },
+  {
+    "type": "kw_ifdef",
+    "named": true
+  },
+  {
+    "type": "kw_ifndef",
+    "named": true
+  },
+  {
+    "type": "kw_igoto",
+    "named": true
+  },
+  {
+    "type": "kw_in",
+    "named": true
+  },
+  {
+    "type": "kw_include",
+    "named": true
+  },
+  {
     "type": "kw_instr",
+    "named": true
+  },
+  {
+    "type": "kw_ithen",
+    "named": true
+  },
+  {
+    "type": "kw_kgoto",
+    "named": true
+  },
+  {
+    "type": "kw_kthen",
+    "named": true
+  },
+  {
+    "type": "kw_od",
     "named": true
   },
   {
@@ -3115,16 +3607,64 @@
     "named": true
   },
   {
+    "type": "kw_open_code_block",
+    "named": true
+  },
+  {
+    "type": "kw_return",
+    "named": true
+  },
+  {
+    "type": "kw_rireturn",
+    "named": true
+  },
+  {
     "type": "kw_struct",
+    "named": true
+  },
+  {
+    "type": "kw_switch_end",
+    "named": true
+  },
+  {
+    "type": "kw_switch_start",
+    "named": true
+  },
+  {
+    "type": "kw_then",
+    "named": true
+  },
+  {
+    "type": "kw_tif",
+    "named": true
+  },
+  {
+    "type": "kw_undef",
+    "named": true
+  },
+  {
+    "type": "kw_until",
+    "named": true
+  },
+  {
+    "type": "kw_void",
+    "named": true
+  },
+  {
+    "type": "kw_while",
+    "named": true
+  },
+  {
+    "type": "kw_xin",
+    "named": true
+  },
+  {
+    "type": "kw_xout",
     "named": true
   },
   {
     "type": "legacy_udo_args",
     "named": true
-  },
-  {
-    "type": "od",
-    "named": false
   },
   {
     "type": "opcode_name",
@@ -3135,20 +3675,8 @@
     "named": true
   },
   {
-    "type": "return",
-    "named": false
-  },
-  {
-    "type": "rireturn",
-    "named": false
-  },
-  {
     "type": "struct_name",
     "named": true
-  },
-  {
-    "type": "switch",
-    "named": false
   },
   {
     "type": "tag_cabbage_end",
@@ -3191,40 +3719,12 @@
     "named": true
   },
   {
-    "type": "then",
-    "named": false
-  },
-  {
-    "type": "tif",
-    "named": false
-  },
-  {
     "type": "type_identifier",
     "named": true
   },
   {
     "type": "type_identifier_legacy",
     "named": true
-  },
-  {
-    "type": "until",
-    "named": false
-  },
-  {
-    "type": "void",
-    "named": false
-  },
-  {
-    "type": "while",
-    "named": false
-  },
-  {
-    "type": "xin",
-    "named": false
-  },
-  {
-    "type": "xout",
-    "named": false
   },
   {
     "type": "{",

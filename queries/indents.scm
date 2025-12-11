@@ -7,24 +7,30 @@
 (udo_definition_modern) @indent
 (udo_definition_modern (kw_endop) @outdent)
 
+(internal_code_block
+    (kw_close_code_block) @outdent)
+
 
 (if_statement) @indent
 (if_statement
   [
-    "then"
-    "ithen"
-    "kthen"
+    (kw_then)
+    (kw_ithen)
+    (kw_kthen)
   ] @indent
 )
 
 (if_statement
-  [
-    "endif"
-    "fi"
+    then_goto: (goto_statement) @indent)
+
+[
+    (kw_endif)
+    (kw_fi)
     (else_block)
     (elseif_block)
-  ] @outdent
-)
+    (return_statement)
+] @outdent
+
 
 (else_block) @indent
 (elseif_block) @indent
@@ -41,16 +47,16 @@
   default_body: (opcode_statement) @indent)
 (default_block
   default_body: (assignment_statement) @indent)
-(switch_end) @outdent
+(kw_switch_end) @outdent
 
 (while_loop) @indent
-(while_loop "od" @outdent)
+(while_loop (kw_od) @outdent)
 
 (until_loop) @indent
-(until_loop "od" @outdent)
+(until_loop (kw_od) @outdent)
 
 (for_loop) @indent
-(for_loop "od" @outdent)
+(for_loop (kw_od) @outdent)
 
 (score_loop) @indent
 (score_loop "}" @outdent)
@@ -59,8 +65,6 @@
 (cabbage_block (tag_cabbage_end) @outdent)
 
 (html_block) @indent
-
-;;; 6. LISTS & EXPRESSIONS
 
 (parenthesized_expression) @indent
 ; (parenthesized_expression ")" @outdent)
