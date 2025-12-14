@@ -15,4 +15,4 @@
 (for_loop) @fold
 (switch_statement) @fold
 
-(score_loop) @fold
+(score_nestable_loop) @fold

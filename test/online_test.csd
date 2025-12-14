@@ -26,6 +26,7 @@ instr 1
     }})
 
     ifreq = 400
+    iamp = 1
     sig:a = poscil(1, ifreq)
 
     if p4 > 3 then
@@ -37,7 +38,7 @@ instr 1
 
     lownote:
     ifreq = 1000
-    sig:a = poscil(1, ifreq)
+    sig:a = poscil(iamp, freq)
 
 
     while p4 > 10 do

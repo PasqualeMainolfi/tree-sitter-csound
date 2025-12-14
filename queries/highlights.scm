@@ -5,8 +5,7 @@
 ; ((identifier) @variable.builtin (#match? @variable.builtin "^g"))
 ; ((identifier) @variable.parameter (#match? @variable.parameter "^p[0-9]+$"))
 
-(header_identifier) @keyword
-(global_keyword) @keyword
+(macro_usage) @macro
 
 (global_typed_identifier name: (identifier) @variable)
 
@@ -37,11 +36,44 @@
 (number) @constant.numeric
 
 [
-    (kw_instr) (kw_endin) (kw_opcode) (kw_endop) (kw_struct)
-    (kw_if ) (kw_then) (kw_ithen) (kw_kthen) (kw_elseif) (kw_else) (kw_endif) (kw_fi)
-    (kw_while) (kw_until) (kw_do) (kw_od) (kw_for)  (kw_in) (kw_switch_start) (kw_case_key) (kw_default_key)
-    (kw_return) (kw_rireturn) (kw_goto) (kw_kgoto) (kw_igoto)
-    (kw_xin) (kw_xout) (kw_void) (kw_switch_end)
+  (kw_instr)
+  (kw_endin)
+  (kw_opcode)
+  (kw_endop)
+  (kw_struct)
+  (kw_if )
+  (kw_then)
+  (kw_ithen)
+  (kw_kthen)
+  (kw_elseif)
+  (kw_else)
+  (kw_endif)
+  (kw_fi)
+  (kw_while)
+  (kw_until)
+  (kw_do)
+  (kw_od)
+  (kw_for)
+  (kw_in)
+  (kw_switch_start)
+  (kw_case_key)
+  (kw_default_key)
+  (kw_return)
+  (kw_rireturn)
+  (kw_goto)
+  (kw_kgoto)
+  (kw_igoto)
+  (kw_xin)
+  (kw_xout)
+  (kw_void)
+  (kw_switch_end)
+  (pfield)
+  (header_identifier)
+  (global_keyword)
+  (score_statement_i)
+  (score_statement_group)
+  (score_carry)
+  (score_plus)
 ] @keyword
 
 (identifier) @variable
@@ -54,22 +86,41 @@
     called_struct: (_) @variable
     member: (identifier) @property)
 
-(tag_synthesizer_start) @tag
-(tag_synthesizer_end) @tag
-(tag_instruments_start) @tag
-(tag_instruments_end) @tag
-(tag_options_start) @tag
-(tag_options_end) @tag
-(tag_score_start) @tag
-(tag_score_end) @tag
-(tag_cabbage_start) @tag
-(tag_cabbage_end) @tag
+[
+  (tag_synthesizer_start)
+  (tag_synthesizer_end)
+  (tag_instruments_start)
+  (tag_instruments_end)
+  (tag_options_start)
+  (tag_options_end)
+  (tag_score_start)
+  (tag_score_end)
+  (tag_cabbage_start)
+  (tag_cabbage_end)
+] @tag
 
-["=" "+" "-" "*" "/" "%" "^" "?" ":"] @operator
+[
+  "="
+  "+"
+  "-"
+  "*"
+  "/"
+  "%"
+  "^"
+  "?"
+  ":"
+] @operator
+
 [","] @punctuation.delimiter
-["(" ")" "[" "]" "{" "}"] @punctuation.bracket
+
+[
+  "("
+  ")"
+  "["
+  "]"
+  "{"
+  "}"
+] @punctuation.bracket
 
 (cabbage_statement . (identifier) @type)
 (cabbage_property . (identifier) @property)
-(score_statement . (_) @keyword)
-(score_carry) @operator

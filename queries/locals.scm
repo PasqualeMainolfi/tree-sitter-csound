@@ -12,6 +12,8 @@
     (argument_list
         (identifier) @local.reference)))
 
+(pfield) @local.reference
+
 (type_identifier_legacy) @local.reference
 
 (global_typed_identifier) @local.definition
@@ -31,23 +33,22 @@
 
 (label_statement) @local.definition
 
+(macro_usage) @local.definition
+
 (macro_define
-  (identifier) @local.definition)
+  (macro_name) @local.definition)
 
 (argument_list
   (identifier) @local.reference)
 
-(score_statement
-  (identifier)+ @local.definition)
+(score_statement_instr
+  isntr: (identifier) @local.reference)
 
-(score_statement
-  (number)+ @local.definition)
+(score_statement_group) @local.definition
+(score_statement_i) @local.definition
 
-(score_statement
-  (string)+ @local.definition)
-
-(score_statement
-  (macro_usage)+ @local.definition)
+(score_nestable_loop
+  count: (number) @local.definition)
 
 (identifier) @local.reference
 (typed_identifier) @local.reference
@@ -70,9 +71,6 @@
 
 (opcode_statement
   (type_identifier_legacy) @local.definition)
-
-(macro_define
-  (identifier) @local.definition)
 
 (header_assignment
   (header_identifier) @local.definition)

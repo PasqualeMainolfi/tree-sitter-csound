@@ -48,6 +48,10 @@
           "named": true
         },
         {
+          "type": "pfield",
+          "named": true
+        },
+        {
           "type": "string",
           "named": true
         },
@@ -138,6 +142,10 @@
           "named": true
         },
         {
+          "type": "pfield",
+          "named": true
+        },
+        {
           "type": "string",
           "named": true
         },
@@ -205,6 +213,10 @@
           "named": true
         },
         {
+          "type": "pfield",
+          "named": true
+        },
+        {
           "type": "string",
           "named": true
         },
@@ -245,6 +257,10 @@
           },
           {
             "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "pfield",
             "named": true
           },
           {
@@ -344,6 +360,10 @@
             "named": true
           },
           {
+            "type": "pfield",
+            "named": true
+          },
+          {
             "type": "string",
             "named": true
           },
@@ -409,6 +429,10 @@
         },
         {
           "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "pfield",
           "named": true
         },
         {
@@ -613,6 +637,10 @@
         },
         {
           "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "pfield",
           "named": true
         },
         {
@@ -944,6 +972,10 @@
           "named": true
         },
         {
+          "type": "pfield",
+          "named": true
+        },
+        {
           "type": "string",
           "named": true
         },
@@ -1075,6 +1107,10 @@
         },
         {
           "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "pfield",
           "named": true
         },
         {
@@ -1261,6 +1297,10 @@
           "named": true
         },
         {
+          "type": "pfield",
+          "named": true
+        },
+        {
           "type": "string",
           "named": true
         },
@@ -1330,6 +1370,10 @@
           },
           {
             "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "pfield",
             "named": true
           },
           {
@@ -1839,6 +1883,10 @@
             "named": true
           },
           {
+            "type": "pfield",
+            "named": true
+          },
+          {
             "type": "string",
             "named": true
           },
@@ -1861,20 +1909,63 @@
   {
     "type": "macro_define",
     "named": true,
-    "fields": {},
+    "fields": {
+      "macro_name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "macro_name",
+            "named": true
+          }
+        ]
+      },
+      "macro_values": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "macro_value",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
-        {
-          "type": "identifier",
-          "named": true
-        },
         {
           "type": "kw_define",
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "macro_name",
+    "named": true,
+    "fields": {
+      "arg": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "id": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -2137,6 +2228,10 @@
           "named": true
         },
         {
+          "type": "pfield",
+          "named": true
+        },
+        {
           "type": "string",
           "named": true
         },
@@ -2150,6 +2245,49 @@
         },
         {
           "type": "unary_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "parenthesized_score_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "macro_usage",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "parenthesized_score_expression",
+          "named": true
+        },
+        {
+          "type": "score_binary_expression",
+          "named": true
+        },
+        {
+          "type": "score_random_operator",
+          "named": true
+        },
+        {
+          "type": "score_unary_expression",
+          "named": true
+        },
+        {
+          "type": "string",
           "named": true
         }
       ]
@@ -2202,6 +2340,49 @@
     }
   },
   {
+    "type": "score_binary_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "macro_usage",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "parenthesized_score_expression",
+          "named": true
+        },
+        {
+          "type": "score_binary_expression",
+          "named": true
+        },
+        {
+          "type": "score_random_operator",
+          "named": true
+        },
+        {
+          "type": "score_unary_expression",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "score_block",
     "named": true,
     "fields": {},
@@ -2241,23 +2422,81 @@
           "named": true
         },
         {
-          "type": "score_loop",
+          "type": "score_nestable_loop",
+          "named": true
+        },
+        {
+          "type": "score_plus",
           "named": true
         },
         {
           "type": "score_statement",
+          "named": true
+        },
+        {
+          "type": "score_statement_instr",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "score_carry",
+    "type": "score_field",
     "named": true,
-    "fields": {}
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "macro_usage",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "parenthesized_score_expression",
+          "named": true
+        },
+        {
+          "type": "score_binary_expression",
+          "named": true
+        },
+        {
+          "type": "score_carry",
+          "named": true
+        },
+        {
+          "type": "score_operation",
+          "named": true
+        },
+        {
+          "type": "score_plus",
+          "named": true
+        },
+        {
+          "type": "score_random_operator",
+          "named": true
+        },
+        {
+          "type": "score_unary_expression",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        }
+      ]
+    }
   },
   {
-    "type": "score_loop",
+    "type": "score_nestable_loop",
     "named": true,
     "fields": {
       "count": {
@@ -2270,7 +2509,7 @@
           }
         ]
       },
-      "macro_name": {
+      "macro_loop_name": {
         "multiple": false,
         "required": true,
         "types": [
@@ -2279,30 +2518,38 @@
             "named": true
           }
         ]
+      },
+      "score_loop_body": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "score_carry",
+            "named": true
+          },
+          {
+            "type": "score_nestable_loop",
+            "named": true
+          },
+          {
+            "type": "score_plus",
+            "named": true
+          },
+          {
+            "type": "score_statement_instr",
+            "named": true
+          }
+        ]
       }
-    },
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "score_carry",
-          "named": true
-        },
-        {
-          "type": "score_statement",
-          "named": true
-        }
-      ]
     }
   },
   {
-    "type": "score_statement",
+    "type": "score_operation",
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
-      "required": false,
+      "multiple": false,
+      "required": true,
       "types": [
         {
           "type": "identifier",
@@ -2314,6 +2561,131 @@
         },
         {
           "type": "number",
+          "named": true
+        },
+        {
+          "type": "parenthesized_score_expression",
+          "named": true
+        },
+        {
+          "type": "score_binary_expression",
+          "named": true
+        },
+        {
+          "type": "score_random_operator",
+          "named": true
+        },
+        {
+          "type": "score_unary_expression",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "score_statement",
+    "named": true,
+    "fields": {
+      "pfield": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "score_field",
+            "named": true
+          }
+        ]
+      },
+      "statement": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "score_statement_group",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "score_statement_instr",
+    "named": true,
+    "fields": {
+      "isntr": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "number",
+            "named": true
+          }
+        ]
+      },
+      "pfield": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "score_field",
+            "named": true
+          }
+        ]
+      },
+      "statement": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "score_statement_i",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "score_unary_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "macro_usage",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "parenthesized_score_expression",
+          "named": true
+        },
+        {
+          "type": "score_binary_expression",
+          "named": true
+        },
+        {
+          "type": "score_random_operator",
+          "named": true
+        },
+        {
+          "type": "score_unary_expression",
           "named": true
         },
         {
@@ -2499,6 +2871,10 @@
           "named": true
         },
         {
+          "type": "pfield",
+          "named": true
+        },
+        {
           "type": "string",
           "named": true
         },
@@ -2563,6 +2939,10 @@
         },
         {
           "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "pfield",
           "named": true
         },
         {
@@ -2690,6 +3070,10 @@
           },
           {
             "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "pfield",
             "named": true
           },
           {
@@ -3002,6 +3386,10 @@
           "named": true
         },
         {
+          "type": "pfield",
+          "named": true
+        },
+        {
           "type": "string",
           "named": true
         },
@@ -3124,6 +3512,10 @@
           "named": true
         },
         {
+          "type": "pfield",
+          "named": true
+        },
+        {
           "type": "string",
           "named": true
         },
@@ -3232,6 +3624,10 @@
         },
         {
           "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "pfield",
           "named": true
         },
         {
@@ -3466,11 +3862,15 @@
     "named": false
   },
   {
-    "type": "[",
+    "type": "@",
     "named": false
   },
   {
-    "type": "\\#",
+    "type": "@@",
+    "named": false
+  },
+  {
+    "type": "[",
     "named": false
   },
   {
@@ -3667,11 +4067,39 @@
     "named": true
   },
   {
+    "type": "macro_value",
+    "named": true
+  },
+  {
     "type": "opcode_name",
     "named": false
   },
   {
+    "type": "pfield",
+    "named": true
+  },
+  {
     "type": "plus_identifier",
+    "named": true
+  },
+  {
+    "type": "score_carry",
+    "named": true
+  },
+  {
+    "type": "score_plus",
+    "named": true
+  },
+  {
+    "type": "score_random_operator",
+    "named": true
+  },
+  {
+    "type": "score_statement_group",
+    "named": true
+  },
+  {
+    "type": "score_statement_i",
     "named": true
   },
   {
