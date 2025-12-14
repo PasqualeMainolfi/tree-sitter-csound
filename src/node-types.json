@@ -2434,6 +2434,10 @@
           "named": true
         },
         {
+          "type": "score_statement_func",
+          "named": true
+        },
+        {
           "type": "score_statement_instr",
           "named": true
         }
@@ -2613,9 +2617,85 @@
     }
   },
   {
+    "type": "score_statement_func",
+    "named": true,
+    "fields": {
+      "action_time": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "score_field",
+            "named": true
+          }
+        ]
+      },
+      "gen_id": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "score_field",
+            "named": true
+          }
+        ]
+      },
+      "n_points": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "score_field",
+            "named": true
+          }
+        ]
+      },
+      "pfield": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "score_field",
+            "named": true
+          }
+        ]
+      },
+      "statement": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "score_statement_f",
+            "named": true
+          }
+        ]
+      },
+      "table_number": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "number",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "score_statement_instr",
     "named": true,
     "fields": {
+      "duration": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "score_field",
+            "named": true
+          }
+        ]
+      },
       "isntr": {
         "multiple": false,
         "required": true,
@@ -2633,6 +2713,16 @@
       "pfield": {
         "multiple": true,
         "required": false,
+        "types": [
+          {
+            "type": "score_field",
+            "named": true
+          }
+        ]
+      },
+      "start_time": {
+        "multiple": false,
+        "required": true,
         "types": [
           {
             "type": "score_field",
@@ -4092,6 +4182,10 @@
   },
   {
     "type": "score_random_operator",
+    "named": true
+  },
+  {
+    "type": "score_statement_f",
     "named": true
   },
   {

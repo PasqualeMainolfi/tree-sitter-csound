@@ -3239,6 +3239,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "score_statement_func"
+        },
+        {
+          "type": "SYMBOL",
           "name": "score_statement"
         }
       ]
@@ -3368,6 +3372,17 @@
         }
       }
     },
+    "score_statement_f": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 5,
+        "content": {
+          "type": "STRING",
+          "value": "f"
+        }
+      }
+    },
     "score_statement": {
       "type": "SEQ",
       "members": [
@@ -3488,6 +3503,82 @@
                 "name": "identifier"
               }
             ]
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "start_time",
+          "content": {
+            "type": "SYMBOL",
+            "name": "score_field"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "duration",
+          "content": {
+            "type": "SYMBOL",
+            "name": "score_field"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "pfield",
+          "content": {
+            "type": "REPEAT",
+            "content": {
+              "type": "SYMBOL",
+              "name": "score_field"
+            }
+          }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_new_line"
+        }
+      ]
+    },
+    "score_statement_func": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "statement",
+          "content": {
+            "type": "SYMBOL",
+            "name": "score_statement_f"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "table_number",
+          "content": {
+            "type": "SYMBOL",
+            "name": "number"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "action_time",
+          "content": {
+            "type": "SYMBOL",
+            "name": "score_field"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "n_points",
+          "content": {
+            "type": "SYMBOL",
+            "name": "score_field"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "gen_id",
+          "content": {
+            "type": "SYMBOL",
+            "name": "score_field"
           }
         },
         {
