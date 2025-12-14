@@ -71,6 +71,7 @@
   (header_identifier)
   (global_keyword)
   (score_statement_i)
+  (score_statement_f)
   (score_statement_group)
   (score_carry)
   (score_plus)

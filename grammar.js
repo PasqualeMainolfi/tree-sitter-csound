@@ -541,6 +541,7 @@ module.exports = grammar({
         $.score_plus,
         $.score_nestable_loop,
         $.score_statement_instr,
+        $.score_statement_func,
         $.score_statement
       ),
 
@@ -579,6 +580,7 @@ module.exports = grammar({
 
       score_statement_group: $ => token(prec(5, /[aqrtesxybBCvmn]/)),
       score_statement_i: $ => token(prec(5, 'i')),
+      score_statement_f: $ => token(prec(5, 'f')),
 
       score_statement: $ => seq(
         field('statement', $.score_statement_group),
@@ -603,6 +605,18 @@ module.exports = grammar({
       score_statement_instr: $ => seq(
         field('statement', $.score_statement_i),
         field('isntr', choice($.number, $.identifier)),
+        field('start_time', $.score_field),
+        field('duration', $.score_field),
+        field('pfield', repeat($.score_field)),
+        $._new_line
+      ),
+
+      score_statement_func: $ => seq(
+        field('statement', $.score_statement_f),
+        field('table_number', $.number),
+        field('action_time', $.score_field),
+        field('n_points', $.score_field),
+        field('gen_id', $.score_field),
         field('pfield', repeat($.score_field)),
         $._new_line
       ),
