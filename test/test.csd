@@ -11,6 +11,7 @@ nchnls = 2
 #define PIG # 21 #
 #define OSCMACRO(VOLUME'FREQ'TABLE) # oscil $VOLUME, $FREQ, $TABLE #
 
+
 opcode print_value(value:i, value1:i):(ii)
     print(value, value1)
     xout(value, $PIG) // add error with only $
@@ -75,6 +76,9 @@ endin
 
 </CsInstruments>
 <CsScore>
+
+f 0 0 4097 10 1 1 1
+f 0 0 4097 10 1 1 1
 
 a 0 0 1
 
