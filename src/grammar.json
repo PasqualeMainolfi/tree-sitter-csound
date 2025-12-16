@@ -23,15 +23,15 @@
           "members": [
             {
               "type": "SYMBOL",
+              "name": "score_body"
+            },
+            {
+              "type": "SYMBOL",
               "name": "csd_file"
             },
             {
               "type": "SYMBOL",
               "name": "orchestra_body"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "score_body"
             }
           ]
         }
@@ -40,10 +40,6 @@
     "_statement": {
       "type": "CHOICE",
       "members": [
-        {
-          "type": "SYMBOL",
-          "name": "header_assignment"
-        },
         {
           "type": "SYMBOL",
           "name": "typed_assignment_statement"
@@ -228,6 +224,10 @@
       "members": [
         {
           "type": "SYMBOL",
+          "name": "header_assignment"
+        },
+        {
+          "type": "SYMBOL",
           "name": "preprocessor_directive"
         },
         {
@@ -237,10 +237,6 @@
         {
           "type": "SYMBOL",
           "name": "udo_definition"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "struct_definition"
         },
         {
           "type": "SYMBOL",
@@ -635,6 +631,17 @@
         "content": {
           "type": "STRING",
           "value": "#include"
+        }
+      }
+    },
+    "kw_includestr": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 5,
+        "content": {
+          "type": "STRING",
+          "value": "#includestr"
         }
       }
     },
@@ -1154,13 +1161,6 @@
         }
       ]
     },
-    "orchestra_body": {
-      "type": "REPEAT1",
-      "content": {
-        "type": "SYMBOL",
-        "name": "_root_statement"
-      }
-    },
     "header_assignment": {
       "type": "SEQ",
       "members": [
@@ -1177,6 +1177,13 @@
           "name": "_expression"
         }
       ]
+    },
+    "orchestra_body": {
+      "type": "REPEAT1",
+      "content": {
+        "type": "SYMBOL",
+        "name": "_root_statement"
+      }
     },
     "instrument_definition": {
       "type": "SEQ",
@@ -3219,6 +3226,10 @@
       "members": [
         {
           "type": "SYMBOL",
+          "name": "score_statement_func"
+        },
+        {
+          "type": "SYMBOL",
           "name": "preprocessor_directive"
         },
         {
@@ -3236,10 +3247,6 @@
         {
           "type": "SYMBOL",
           "name": "score_statement_instr"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "score_statement_func"
         },
         {
           "type": "SYMBOL",
@@ -3357,7 +3364,7 @@
         "value": 5,
         "content": {
           "type": "PATTERN",
-          "value": "[aqrtesxybBCvmn]"
+          "value": "\\s*[aqrtesxybBCvmn]"
         }
       }
     },
@@ -3367,8 +3374,8 @@
         "type": "PREC",
         "value": 5,
         "content": {
-          "type": "STRING",
-          "value": "i"
+          "type": "PATTERN",
+          "value": "\\s*i"
         }
       }
     },
@@ -3378,8 +3385,8 @@
         "type": "PREC",
         "value": 5,
         "content": {
-          "type": "STRING",
-          "value": "f"
+          "type": "PATTERN",
+          "value": "\\s*f"
         }
       }
     },
@@ -3497,6 +3504,10 @@
               {
                 "type": "SYMBOL",
                 "name": "number"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "string"
               },
               {
                 "type": "SYMBOL",
@@ -3651,8 +3662,17 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "kw_include"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "kw_include"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "kw_includestr"
+            }
+          ]
         },
         {
           "type": "SYMBOL",
@@ -4129,10 +4149,6 @@
     [
       "_root_statement",
       "_score_item"
-    ],
-    [
-      "_root_statement",
-      "_statement"
     ],
     [
       "opcode_statement",

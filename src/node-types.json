@@ -546,10 +546,6 @@
             "named": true
           },
           {
-            "type": "header_assignment",
-            "named": true
-          },
-          {
             "type": "internal_code_block",
             "named": true
           },
@@ -780,10 +776,6 @@
             "named": true
           },
           {
-            "type": "header_assignment",
-            "named": true
-          },
-          {
             "type": "internal_code_block",
             "named": true
           },
@@ -857,10 +849,6 @@
           "named": true
         },
         {
-          "type": "header_assignment",
-          "named": true
-        },
-        {
           "type": "internal_code_block",
           "named": true
         },
@@ -921,10 +909,6 @@
         },
         {
           "type": "function_call",
-          "named": true
-        },
-        {
-          "type": "header_assignment",
           "named": true
         },
         {
@@ -1051,10 +1035,6 @@
         },
         {
           "type": "function_call",
-          "named": true
-        },
-        {
-          "type": "header_assignment",
           "named": true
         },
         {
@@ -1421,10 +1401,6 @@
             "named": true
           },
           {
-            "type": "header_assignment",
-            "named": true
-          },
-          {
             "type": "internal_code_block",
             "named": true
           },
@@ -1525,10 +1501,6 @@
           "named": true
         },
         {
-          "type": "header_assignment",
-          "named": true
-        },
-        {
           "type": "identifier",
           "named": true
         },
@@ -1588,6 +1560,10 @@
           "named": true
         },
         {
+          "type": "kw_includestr",
+          "named": true
+        },
+        {
           "type": "string",
           "named": true
         }
@@ -1635,10 +1611,6 @@
         },
         {
           "type": "function_call",
-          "named": true
-        },
-        {
-          "type": "header_assignment",
           "named": true
         },
         {
@@ -1717,10 +1689,6 @@
         },
         {
           "type": "function_call",
-          "named": true
-        },
-        {
-          "type": "header_assignment",
           "named": true
         },
         {
@@ -2707,6 +2675,10 @@
           {
             "type": "number",
             "named": true
+          },
+          {
+            "type": "string",
+            "named": true
           }
         ]
       },
@@ -3287,10 +3259,6 @@
           "named": true
         },
         {
-          "type": "header_assignment",
-          "named": true
-        },
-        {
           "type": "internal_code_block",
           "named": true
         },
@@ -3382,10 +3350,6 @@
         },
         {
           "type": "function_call",
-          "named": true
-        },
-        {
-          "type": "header_assignment",
           "named": true
         },
         {
@@ -3550,10 +3514,6 @@
           "named": true
         },
         {
-          "type": "header_assignment",
-          "named": true
-        },
-        {
           "type": "header_identifier",
           "named": true
         },
@@ -3662,10 +3622,6 @@
         },
         {
           "type": "function_call",
-          "named": true
-        },
-        {
-          "type": "header_assignment",
           "named": true
         },
         {
@@ -4070,6 +4026,10 @@
   },
   {
     "type": "kw_include",
+    "named": true
+  },
+  {
+    "type": "kw_includestr",
     "named": true
   },
   {

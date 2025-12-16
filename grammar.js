@@ -8,7 +8,6 @@ module.exports = grammar({
 
     conflicts: $ => [
       [$._root_statement, $._score_item],
-      [$._root_statement, $._statement],
       [$.opcode_statement, $.typed_assignment_statement],
       [$.argument_list, $.parenthesized_expression],
       [$.parenthesized_expression, $.argument_list],
@@ -19,17 +18,20 @@ module.exports = grammar({
       [$.if_statement],
       [$.cabbage_statement],
       [$.opcode_statement],
-      [$.macro_usage],
+      [$.macro_usage]
     ],
 
     rules: {
       source_file: $ => seq(
         optional($.cabbage_block),
-        choice($.csd_file, $.orchestra_body, $.score_body)
+        choice(
+          $.score_body,
+          $.csd_file,
+          $.orchestra_body,
+        )
       ),
 
       _statement: $ => choice(
-        $.header_assignment,
         $.typed_assignment_statement,
         $.assignment_statement,
         $.legacy_typed_assignment_statement,
@@ -82,11 +84,12 @@ module.exports = grammar({
         $.internal_code_block,
         $.pfield
       ),
+
       _root_statement: $ => choice(
+        $.header_assignment,
         $.preprocessor_directive,
         $.instrument_definition,
         $.udo_definition,
-        $.struct_definition, // STRUCT
         $._statement
       ),
 
@@ -132,6 +135,7 @@ module.exports = grammar({
       kw_return:                  $ => token(prec(5, 'return')),
       kw_rireturn:                $ => token(prec(5, 'rireturn')),
       kw_include:                 $ => token(prec(5, '#include')),
+      kw_includestr:              $ => token(prec(5, '#includestr')),
       kw_define :                 $ => token(prec(5, '#define')),
       kw_ifdef:                   $ => token(prec(5, '#ifdef')),
       kw_undef:                   $ => token(prec(5, '#undef')),
@@ -218,8 +222,8 @@ module.exports = grammar({
       ),
 
       // --- ORCHESTRA ---
-      orchestra_body: $ => repeat1($._root_statement),
       header_assignment: $ => seq($.header_identifier, '=', $._expression),
+      orchestra_body: $ => repeat1($._root_statement),
 
       instrument_definition: $ => seq(
         $.kw_instr,
@@ -536,12 +540,12 @@ module.exports = grammar({
       ),
 
       _score_item: $ => choice(
+        $.score_statement_func,
         $.preprocessor_directive,
         $.score_carry,
         $.score_plus,
         $.score_nestable_loop,
         $.score_statement_instr,
-        $.score_statement_func,
         $.score_statement
       ),
 
@@ -578,9 +582,9 @@ module.exports = grammar({
         ']'
       ),
 
-      score_statement_group: $ => token(prec(5, /[aqrtesxybBCvmn]/)),
-      score_statement_i: $ => token(prec(5, 'i')),
-      score_statement_f: $ => token(prec(5, 'f')),
+      score_statement_group: $ => token(prec(5, /\s*[aqrtesxybBCvmn]/)),
+      score_statement_i: $ => token(prec(5, /\s*i/)),
+      score_statement_f: $ => token(prec(5, /\s*f/)),
 
       score_statement: $ => seq(
         field('statement', $.score_statement_group),
@@ -604,7 +608,7 @@ module.exports = grammar({
 
       score_statement_instr: $ => seq(
         field('statement', $.score_statement_i),
-        field('isntr', choice($.number, $.identifier)),
+        field('isntr', choice($.number, $.string, $.identifier)),
         field('start_time', $.score_field),
         field('duration', $.score_field),
         field('pfield', repeat($.score_field)),
@@ -624,7 +628,7 @@ module.exports = grammar({
       cabbage_statement: $ => seq(field('widget', $.identifier), repeat($.cabbage_property)),
       cabbage_property: $ => seq(field('key', $.identifier), '(', field('value', /[^)]*/), ')'),
 
-      include_directive: $ => seq($.kw_include, $.string),
+      include_directive: $ => seq(choice($.kw_include, $.kw_includestr), $.string),
       undef_directive: $ => seq($.kw_undef, $.identifier),
 
       macro_name: $ => seq(
