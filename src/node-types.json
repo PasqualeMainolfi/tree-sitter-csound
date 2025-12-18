@@ -312,6 +312,10 @@
           {
             "type": "=",
             "named": false
+          },
+          {
+            "type": "mod_equal",
+            "named": true
           }
         ]
       },
@@ -1000,6 +1004,301 @@
         },
         {
           "type": "kw_fi",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "file_score_body",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "file_score_nestable_loop",
+          "named": true
+        },
+        {
+          "type": "file_score_statement",
+          "named": true
+        },
+        {
+          "type": "file_score_statement_func",
+          "named": true
+        },
+        {
+          "type": "file_score_statement_instr",
+          "named": true
+        },
+        {
+          "type": "preprocessor_directive",
+          "named": true
+        },
+        {
+          "type": "score_carry",
+          "named": true
+        },
+        {
+          "type": "score_plus",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "file_score_nestable_loop",
+    "named": true,
+    "fields": {
+      "count": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "number",
+            "named": true
+          }
+        ]
+      },
+      "macro_loop_name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "score_loop_body": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "file_score_nestable_loop",
+            "named": true
+          },
+          {
+            "type": "file_score_statement_instr",
+            "named": true
+          },
+          {
+            "type": "score_carry",
+            "named": true
+          },
+          {
+            "type": "score_plus",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "file_score_statement",
+    "named": true,
+    "fields": {
+      "pfield": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "score_field",
+            "named": true
+          }
+        ]
+      },
+      "statement": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "file_score_statement_group",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "file_score_statement_func",
+    "named": true,
+    "fields": {
+      "action_time": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "score_field",
+            "named": true
+          }
+        ]
+      },
+      "gen_id": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "score_field",
+            "named": true
+          }
+        ]
+      },
+      "n_points": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "score_field",
+            "named": true
+          }
+        ]
+      },
+      "pfield": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "score_field",
+            "named": true
+          }
+        ]
+      },
+      "statement": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "file_score_statement_f",
+            "named": true
+          }
+        ]
+      },
+      "table_number": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "number",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "file_score_statement_instr",
+    "named": true,
+    "fields": {
+      "duration": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "score_field",
+            "named": true
+          }
+        ]
+      },
+      "isntr": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "number",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          }
+        ]
+      },
+      "pfield": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "score_field",
+            "named": true
+          }
+        ]
+      },
+      "start_time": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "score_field",
+            "named": true
+          }
+        ]
+      },
+      "statement": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "file_score_statement_i",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "flag_content",
+    "named": true,
+    "fields": {
+      "flag_type": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "number",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          }
+        ]
+      },
+      "flag_value": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "number",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "flag_identifier",
           "named": true
         }
       ]
@@ -1803,6 +2102,10 @@
           {
             "type": "=",
             "named": false
+          },
+          {
+            "type": "mod_equal",
+            "named": true
           }
         ]
       },
@@ -1960,6 +2263,11 @@
     }
   },
   {
+    "type": "mod_equal",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "modern_udo_inputs",
     "named": true,
     "fields": {},
@@ -2069,6 +2377,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "flag_content",
+          "named": true
+        },
         {
           "type": "tag_options_end",
           "named": true
@@ -2775,11 +3087,11 @@
           "named": true
         },
         {
-          "type": "orchestra_body",
+          "type": "file_score_body",
           "named": true
         },
         {
-          "type": "score_body",
+          "type": "orchestra_body",
           "named": true
         }
       ]
@@ -3087,6 +3399,10 @@
           {
             "type": "=",
             "named": false
+          },
+          {
+            "type": "mod_equal",
+            "named": true
           }
         ]
       },
@@ -3931,6 +4247,22 @@
     "type": "comment",
     "named": true,
     "extra": true
+  },
+  {
+    "type": "file_score_statement_f",
+    "named": true
+  },
+  {
+    "type": "file_score_statement_group",
+    "named": true
+  },
+  {
+    "type": "file_score_statement_i",
+    "named": true
+  },
+  {
+    "type": "flag_identifier",
+    "named": true
   },
   {
     "type": "global_keyword",
