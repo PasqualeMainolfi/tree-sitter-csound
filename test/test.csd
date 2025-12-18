@@ -1,5 +1,6 @@
 <CsoundSynthesizer>
 <CsOptions>
+-o dac
 </CsOptions>
 <CsInstruments>
 
@@ -10,7 +11,6 @@ nchnls = 2
 
 #define PIG # 21 #
 #define OSCMACRO(VOLUME'FREQ'TABLE) # oscil $VOLUME, $FREQ, $TABLE #
-
 
 opcode print_value(value:i, value1:i):(ii)
     print(value, value1)
@@ -33,10 +33,10 @@ instr 1
     ifreq = 400
     icall = 10
     sig:a = poscil(1, 440)
-    ; sig2:a[] = poscile(1, 3)
+    sig2:a[] = poscile(1, 3)
     sig3:a += poscil(1, 440 * 3)
     filter2:a = poscil(1, givalue)
-    filter2 += gamp
+    filter2 -= gamp
 
     ; asignal poscil 1, 330
     ; asignal[] poscil noise(1), 300
@@ -49,7 +49,7 @@ instr 1
     ifreq = 500
 
     ifreq = gambo.val0 > 300 ? 1000:5000
-    iamp = gambo.val1
+    iamp = gambo.val0
 
     ib = ifreq
     iv add 1, iamp
@@ -84,7 +84,7 @@ a 0 0 1
 
 { 4 CNT
     { 8 PARTIAL
-        i 1 [0.5 * $CNT.]  [@@3 + ($CNT * 0.2)]  [500 + (~ * 200)]  [800 + (200 * $CNT.) + ($PARTIAL. * 20)]
+        i 1 [0.5 * $CNT.] [@@3 + ($CNT * 0.2)]  [500 + (~ * 200)]  [800 + (200 * $CNT.) + ($PARTIAL. * 20)]
     }
 
 }
@@ -100,6 +100,5 @@ i 1  +   .  [ 110 | 220 ]
 i 1  +   .  [ 110 # 220 ]
 
 e
-
 </CsScore>
 </CsoundSynthesizer>

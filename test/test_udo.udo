@@ -12,5 +12,5 @@ endop
 
 opcode add, ii, ii
     i1, i2 xin
-    xout(i1, i2) 
+    xout(i1, i2)
 endop

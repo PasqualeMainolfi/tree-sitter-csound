@@ -9,6 +9,10 @@
 
 (global_typed_identifier name: (identifier) @variable)
 
+(flag_identifier) @constant.builtin
+(flag_content flag_type: (_) @constant.builtin)
+(flag_content flag_value: (_) @variable)
+
 (type_identifier) @type
 (typed_identifier type: (_) @type)
 (type_identifier_legacy) @type
@@ -81,6 +85,9 @@
   (score_statement_i)
   (score_statement_f)
   (score_statement_group)
+  (file_score_statement_i)
+  (file_score_statement_f)
+  (file_score_statement_group)
   (score_carry)
   (score_plus)
 ] @keyword
@@ -116,8 +123,21 @@
   "/"
   "%"
   "^"
+  "&"
+  "|"
+  "<"
+  ">"
+  "@"
+  "!"
+  "#"
   "?"
   ":"
+  "+="
+  "-="
+  "*="
+  "/="
+  (score_random_operator)
+  (mod_equal)
 ] @operator
 
 [","] @punctuation.delimiter
