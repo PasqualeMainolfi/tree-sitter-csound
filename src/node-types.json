@@ -1299,7 +1299,18 @@
   {
     "type": "for_loop",
     "named": true,
-    "fields": {},
+    "fields": {
+      "iterator": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": true,

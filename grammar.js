@@ -543,7 +543,7 @@ module.exports = grammar({
 
       for_loop: $ => seq(
         $.kw_for,
-        $.identifier,
+        field('iterator', $.identifier),
         $.kw_in,
         $._expression,
         $.kw_do,
