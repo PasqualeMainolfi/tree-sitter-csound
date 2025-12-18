@@ -10,7 +10,7 @@ opcode print_value(value:i, value1:i):(ii)
     xout(value, $PIG) // add error with only $
 endop
 
-opcode add, ii, ii
+opcode add, ii, ii 
     i1, i2 xin
     xout(i1, i2)
 endop
