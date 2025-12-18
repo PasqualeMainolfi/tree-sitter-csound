@@ -71,7 +71,6 @@ instr 2
     ifreq = 200
     iamp = 300
 
-
 endin
 
 </CsInstruments>

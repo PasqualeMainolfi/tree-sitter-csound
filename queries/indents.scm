@@ -64,8 +64,6 @@
 (cabbage_block) @indent
 (cabbage_block (tag_cabbage_end) @outdent)
 
-(html_block) @indent
-
 (parenthesized_expression) @indent
 
 (function_call) @indent

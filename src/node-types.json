@@ -714,14 +714,6 @@
           "named": true
         },
         {
-          "type": "generic_tag_block",
-          "named": true
-        },
-        {
-          "type": "html_block",
-          "named": true
-        },
-        {
           "type": "instruments_block",
           "named": true
         },
@@ -1077,15 +1069,15 @@
         "required": true,
         "types": [
           {
-            "type": "file_score_nestable_loop",
-            "named": true
-          },
-          {
             "type": "file_score_statement_instr",
             "named": true
           },
           {
             "type": "score_carry",
+            "named": true
+          },
+          {
+            "type": "score_nestable_loop",
             "named": true
           },
           {
@@ -1446,21 +1438,6 @@
     }
   },
   {
-    "type": "generic_tag_block",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "generic_tag_block",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "global_typed_identifier",
     "named": true,
     "fields": {
@@ -1597,11 +1574,6 @@
         }
       ]
     }
-  },
-  {
-    "type": "html_block",
-    "named": true,
-    "fields": {}
   },
   {
     "type": "if_statement",
