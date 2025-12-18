@@ -770,7 +770,7 @@ module.exports = grammar({
 
       typed_identifier: $ => prec(3,
         seq(
-          field('name', alias(choice($.identifier, $.type_identifier_legacy), $.identifier)),
+          field('name', alias(choice($.identifier, $.type_identifier_legacy), 'identifier')),
           ':',
           field('type', choice($.type_identifier, $.identifier))
         )
