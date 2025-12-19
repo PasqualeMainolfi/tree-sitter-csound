@@ -45,8 +45,8 @@ instr 1
         print(9)
     od
 
-    for i in [1, 2, 3] do
-        print(i)
+    for j in [1, 2, 3] do 
+        print(j)
     od
 
     sig:a = poscil(1, 440)

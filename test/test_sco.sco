@@ -1,3 +1,5 @@
+#define MACRO # 21 #
+
 i "master" 1 3
 
 f 0 0 4097 10 1 1 1
