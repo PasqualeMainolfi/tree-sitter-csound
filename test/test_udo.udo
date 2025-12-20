@@ -1,5 +1,4 @@
-#define PIG # 21 #
-#define OSCMACRO(VOLUME'FREQ'TABLE) # oscil $VOLUME, $FREQ, $TABLE #
+#define MACRO # 21 #
 
 freq@global:i = init($M_LN2)
 gamp init 0
@@ -10,7 +9,7 @@ opcode print_value(value:i, value1:i):(ii)
     xout(value, $PIG) // add error with only $
 endop
 
-opcode add, ii, ii 
+opcode add, ii, ii
     i1, i2 xin
     xout(i1, i2)
 endop

@@ -88,6 +88,11 @@
   (file_score_statement_i)
   (file_score_statement_f)
   (file_score_statement_group)
+  (kw_score_includestr)
+  (kw_score_ifndef)
+  (kw_score_ifdef)
+  (kw_score_include)
+  (kw_score_define)
   (score_carry)
   (score_plus)
 ] @keyword
@@ -137,6 +142,7 @@
   "*="
   "/="
   (score_random_operator)
+  (score_ramping)
   (mod_equal)
 ] @operator
 

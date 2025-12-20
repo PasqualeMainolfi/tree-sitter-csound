@@ -23,13 +23,17 @@ module.exports = grammar({
 
       // --- GENERAL SECTION ---
 
-      source_file: $ => seq(
-        optional($.cabbage_block),
+      source_file: $ => choice(
+        $.cs_legacy_file,
+        $.csd_file
+      ),
+
+      cs_legacy_file: $ => alias(
         choice(
-          $.file_score_body,
-          $.csd_file,
-          $.orchestra_body,
-        )
+          $.orchestra_file,
+          $.score_file
+        ),
+        'cs_legacy_file'
       ),
 
       _statement: $ => choice(
@@ -45,8 +49,8 @@ module.exports = grammar({
       ),
 
       _lvalue: $ => choice(
-        $.typed_identifier,
         $.global_typed_identifier,
+        $.typed_identifier,
         $.array_access,
         $.struct_access,
         $.identifier,
@@ -63,10 +67,10 @@ module.exports = grammar({
         $.number,
         $.string,
         alias(choice(
-                $.identifier,
-                $.type_identifier_legacy
-            ),
-            $.identifier
+              $.identifier,
+              $.type_identifier_legacy
+          ),
+          $.identifier
         ),
         $.array_access,
         $.struct_access,
@@ -86,10 +90,10 @@ module.exports = grammar({
         $.return_statement
       ),
 
-      _root_statement: $ => choice(
+      _orchestra_statement: $ => choice(
         $.header_assignment,
-        $.preprocessor_directive,
         $.instrument_definition,
+        $.preprocessor_directive,
         $.udo_definition,
         $._statement
       ),
@@ -135,11 +139,12 @@ module.exports = grammar({
         repeat(seq(',', $._expression))
       ),
 
-      include_directive: $ => seq(choice(
-        $.kw_include,
-        $.kw_includestr
-      ),
-      $.string
+      include_directive: $ => seq(
+        choice(
+          $.kw_include,
+          $.kw_includestr
+        ),
+        $.string
       ),
 
       undef_directive: $ => seq(
@@ -212,7 +217,8 @@ module.exports = grammar({
 
       cabbage_property: $ => seq(
         field('key', $.identifier),
-        '(', field('value', /[^)]*/),
+        '(',
+        field('value', /[^)]*/),
         ')'
       ),
 
@@ -249,7 +255,7 @@ module.exports = grammar({
 
       instruments_block: $ => seq(
         $.tag_instruments_start,
-        optional($.orchestra_body),
+        optional($.orchestra_file),
         $.tag_instruments_end,
         $._new_line
       ),
@@ -261,7 +267,10 @@ module.exports = grammar({
         $._new_line
       ),
 
-      orchestra_body: $ => repeat1($._root_statement),
+      orchestra_file: $ => repeat1(
+        $._orchestra_statement
+      ),
+
       header_assignment: $ => seq(
         $.header_identifier,
         '=',
@@ -374,6 +383,13 @@ module.exports = grammar({
         field('right', $._expression)
       )),
 
+      udo_typed_assignment_statement: $ => prec(2, seq(
+        optional($._whitespace),
+        field('left', sep1(choice($.typed_identifier, $.global_typed_identifier), ',')),
+        field('operator', choice('=', '+=', '-=', '*=', '/=', $.mod_equal, '##addin', '##subin', '##mulin', '##divin')),
+        field('right', $._expression)
+      )),
+
       assignment_statement: $ => seq(
         field('left', sep1($._lvalue, ',')),
         field('operator', choice('=', '+=', '-=', '*=', '/=', $.mod_equal, '##addin', '##subin', '##mulin', '##divin')),
@@ -395,14 +411,19 @@ module.exports = grammar({
             ),
             ','
           )),
-          field('op', $.opcode_name),
-          field('inputs', optional($.argument_list))
+          choice(
+            seq(
+              field('op', $.opcode_name),
+              field('inputs', optional($.argument_list))
+            ),
+            field('op_macro', $.macro_usage)
+          )
         )),
         prec(1, seq(
           field('op', $.opcode_name),
           field('inputs', optional($.argument_list))
         )),
-        prec(2, field('label_block', $.label_statement))
+        prec(1, field('label_block', $.label_statement))
       ),
 
       label_statement: $ => prec(1,
@@ -603,6 +624,43 @@ module.exports = grammar({
 
       // --- SCORE SECTION ---
 
+      file_score_preprocessor_directive: $ => choice(
+        $.score_macro_define,
+        $.score_include_directive,
+        $.score_ifdef_directive,
+        $.undef_directive
+      ),
+
+      score_macro_define: $ => seq(
+        $.kw_score_define,
+        field('macro_name', $.macro_name),
+        '#',
+        field('macro_values', $.macro_value),
+        '#',
+      ),
+
+      score_include_directive: $ => seq(
+        choice(
+          $.kw_score_include,
+          $.kw_score_includestr
+        ),
+        $.string
+      ),
+
+      score_ifdef_directive: $ => seq(
+        choice(
+          $.kw_score_ifdef,
+          $.kw_score_ifndef
+        ),
+        $.identifier,
+        repeat($._statement),
+        optional(seq(
+          $.kw_elsedef,
+          repeat($._statement)
+        )),
+        $.kw_end
+      ),
+
       score_unary_expression: $ => prec.left(7, seq(
         choice(
           '-',
@@ -627,8 +685,12 @@ module.exports = grammar({
         $._new_line
       )),
 
-      file_score_body: $ => repeat1(seq(
-        $._file_score_item,
+      score_file: $ => repeat1(seq(
+        choice(
+          $._file_score_item,
+          $.udo_definition,
+          $._statement
+        ),
         $._new_line
       )),
 
@@ -636,40 +698,38 @@ module.exports = grammar({
         $.tag_score_start,
         optional($.score_body),
         $.tag_score_end,
-        $._new_line
-      ),
-
-      _score_item_body: $ => choice(
-        $.preprocessor_directive,
-        $.score_carry,
-        $.score_plus
+        optional($._new_line)
       ),
 
       _score_item: $ => choice(
+        $.preprocessor_directive,
         $.score_statement_func,
         $.score_nestable_loop,
         $.score_statement_instr,
-        $.score_statement,
-        $._score_item_body
+        $.score_statement
       ),
 
       _file_score_item: $ => choice(
+        $.file_score_preprocessor_directive,
         $.file_score_statement_func,
         $.file_score_nestable_loop,
         $.file_score_statement_instr,
-        $.file_score_statement,
-        $._score_item_body
+        $.file_score_statement
       ),
 
       _score_expression: $ => choice(
         $.score_unary_expression,
         $.score_binary_expression,
         $.parenthesized_score_expression,
+        $.score_operation,
         $.number,
         $.string,
         $.identifier,
         $.macro_usage,
-        $.score_random_operator
+        $.score_random_operator,
+        $.score_carry,
+        $.score_plus,
+        $.score_ramping
       ),
 
       parenthesized_score_expression: $ => prec.left(
@@ -680,13 +740,6 @@ module.exports = grammar({
         )
       ),
 
-      score_field: $ => choice(
-        $.score_carry,
-        $.score_plus,
-        $._score_expression,
-        $.score_operation
-      ),
-
       score_operation: $ => seq(
         '[',
         $._score_expression,
@@ -694,18 +747,17 @@ module.exports = grammar({
       ),
 
       _score_statement_instr: $ => seq(
-        field('isntr', choice($.number, $.string, $.identifier)),
-        field('start_time', $.score_field),
-        field('duration', $.score_field),
-        field('pfield', repeat($.score_field)),
+        field('start_time', $._score_expression),
+        field('duration', $._score_expression),
+        field('pfield', repeat($._score_expression)),
       ),
 
       _score_statement_func: $ => seq(
         field('table_number', $.number),
-        field('action_time', $.score_field),
-        field('n_points', $.score_field),
-        field('gen_id', $.score_field),
-        field('pfield', repeat($.score_field)),
+        field('action_time', $._score_expression),
+        field('n_points', $._score_expression),
+        field('gen_id', $._score_expression),
+        field('pfield', repeat($._score_expression)),
       ),
 
       _score_loop_body: $ => choice(
@@ -716,7 +768,7 @@ module.exports = grammar({
 
       score_statement: $ => seq(
         field('statement', $.score_statement_group),
-        field('pfield', repeat($.score_field)),
+        field('pfield', repeat($._score_expression)),
       ),
 
       score_nestable_loop: $ => seq(
@@ -731,7 +783,13 @@ module.exports = grammar({
       ),
 
       score_statement_instr: $ => seq(
-        field('statement', $.score_statement_i),
+        choice(
+          seq(
+            field('statement', $.score_statement_i),
+            field('isntr', choice($.number, $.string, $.identifier))
+          ),
+          field('macro_instr', $.macro_usage)
+        ),
         $._score_statement_instr,
       ),
 
@@ -742,7 +800,7 @@ module.exports = grammar({
 
       file_score_statement: $ => seq(
         field('statement', $.file_score_statement_group),
-        field('pfield', repeat($.score_field)),
+        field('pfield', repeat($._score_expression)),
       ),
 
       file_score_nestable_loop: $ => seq(
@@ -757,8 +815,14 @@ module.exports = grammar({
       ),
 
       file_score_statement_instr: $ => seq(
-        field('statement', $.file_score_statement_i),
-        $._score_statement_instr
+        choice(
+          seq(
+            field('statement', $.file_score_statement_i),
+            field('isntr', choice($.number, $.string, $.identifier))
+          ),
+          field('macro_instr', $.macro_usage)
+        ),
+        $._score_statement_instr,
       ),
 
       file_score_statement_func: $ => seq(
@@ -819,16 +883,24 @@ module.exports = grammar({
       score_carry:                $ => token(prec(5, '.')),
       score_plus:                 $ => token(prec(5, '+')),
       score_random_operator:      $ => token(prec(5, '~')),
+      score_ramping:              $ => token('<'),
       identifier:                 $ => /[a-zA-Z_]\w*/,
       plus_identifier:            $ => /\+[a-zA-Z_]\w*/,
       mod_equal:                  $ => seq('%', '='),
       flag_identifier:            $ => token(prec(5, '-')),
-      file_score_statement_group: $ => token(prec(5, /\s*[aqrtesxybBCvmn]/)),
-      file_score_statement_i:     $ => token(prec(5, /\s*i/)),
-      file_score_statement_f:     $ => token(prec(5, /\s*f/)),
+
+      kw_score_includestr:        $ => token(prec(6, /\s*#includestr/)),
+      kw_score_ifndef:            $ => token(prec(6, /\s*#ifndef/)),
+      kw_score_ifdef:             $ => token(prec(6, /\s*#ifdef/)),
+      kw_score_include:           $ => token(prec(6, /\s*#include/)),
+      kw_score_define:            $ => token(prec(6, /\s*#define/)),
+      file_score_statement_group: $ => token(prec(5, /\s*[aqrtesxybBCvmn][\d\s*]/)),
+      file_score_statement_i:     $ => token(prec(5, /\s*i[\d\s*]/)),
+      file_score_statement_f:     $ => token(prec(5, /\s*f[\d\s*]/)),
       score_statement_group:      $ => token(prec(5, /[aqrtesxybBCvmn]/)),
       score_statement_i:          $ => token(prec(5, 'i')),
       score_statement_f:          $ => token(prec(5, 'f')),
+
       global_keyword:             $ => token('@global'),
       type_identifier:            $ => token(prec(1, /(InstrDef|Instr|Opcode|Complex|[aikbSfw])(\[\])*/)),
       type_identifier_legacy:     $ => token(prec(1, /g?[aikbSfw][a-zA-Z0-9_\[\]]*/)),
@@ -836,16 +908,16 @@ module.exports = grammar({
       string:                     $ => seq('"', repeat(choice(/[^"\\\n]+/, /\\./)), '"'),
       comment:                    $ => token(choice(seq(';', /[^\n]*/), seq('//', /[^\n]*/))),
       block_comment:              $ => seq('/*', /[^*]*\*+([^/*][^*]*\*+)*/, '/'),
-      tag_synthesizer_start:      $ => /<CsoundSynthesi[sz]er>/,
-      tag_synthesizer_end:        $ => /<\/CsoundSynthesi[sz]er>/,
-      tag_options_start:          $ => /<CsOptions>/,
-      tag_options_end:            $ => /<\/CsOptions>/,
-      tag_instruments_start:      $ => /<CsInstruments>/,
-      tag_instruments_end:        $ => /<\/CsInstruments>/,
-      tag_score_start:            $ => /<CsScore>/,
-      tag_score_end:              $ => /<\/CsScore>/,
-      tag_cabbage_start:          $ => /<Cabbage>/,
-      tag_cabbage_end:            $ => /<\/Cabbage>/,
+      tag_synthesizer_start:      $ => token(/<CsoundSynthesi[sz]er>/),
+      tag_synthesizer_end:        $ => token(/<\/CsoundSynthesi[sz]er>/),
+      tag_options_start:          $ => token(/<CsOptions>/),
+      tag_options_end:            $ => token(/<\/CsOptions>/),
+      tag_instruments_start:      $ => token(/<CsInstruments>/),
+      tag_instruments_end:        $ => token(/<\/CsInstruments>/),
+      tag_score_start:            $ => token(/<CsScore>/),
+      tag_score_end:              $ => token(/<\/CsScore>/),
+      tag_cabbage_start:          $ => token(/<Cabbage>/),
+      tag_cabbage_end:            $ => token(/<\/Cabbage>/),
       _new_line:                  $ => token(/\r?\n/),
       _whitespace:                $ => /\s+/,
 

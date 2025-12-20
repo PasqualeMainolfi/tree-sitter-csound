@@ -38,6 +38,9 @@
 (macro_define
   (macro_name) @local.definition)
 
+(score_macro_define
+  (macro_name) @local.definition)
+
 (argument_list
   (identifier) @local.reference)
 

@@ -4,6 +4,7 @@ import re
 import html
 
 PATH_TO_OPCODES_ROOT: str = "../csound_manual/docs/opcodes"
+PATH_TO_FLAGS_ROOT: str = "../csound_manual/docs/invoke/cs-options-alphabetically.md"
 TEMPLATE_OPCODE_ADDRESS = "https://csound.com/manual/opcodes/"
 
 TEMPLATE = {
@@ -126,6 +127,47 @@ def get_snippet(opnames, opcode_body, types):
     body = f"{opnames}{opcode_body_args}"
     print(body)
     return body
+
+FLAG_NO_CS7 = ["--expression-opt"]
+FLAG_ROW = "####"
+FLAG_TEMPLATE = { "prefix": "", "body": "", "description": "" }
+BODY_MARK = r'(^-[-+a-zA-Z0-9_&#]+)'
+def generate_flags():
+    flags = {}
+    with open(PATH_TO_FLAGS_ROOT, "r") as f:
+        lines = f.readlines()
+        for i in range(len(lines)):
+            line = lines[i]
+            if line.startswith(FLAG_ROW):
+                split_line = line.split(FLAG_ROW)
+                flag = split_line[1].strip()
+                if flag not in flags:
+                    flags[flag] = FLAG_TEMPLATE.copy()
+                    if flag != FLAG_NO_CS7:
+                        flags[flag]["prefix"] = flag
+                        body = flag.split(",")[0]
+                        body = re.findall(BODY_MARK, body)
+                        if body:
+                            flags[flag]["body"] = body[0]
+
+
+                        count = i + 1
+                        while count < len(lines) and not lines[count].startswith(FLAG_ROW):
+                            count += 1
+
+                        description = ""
+                        for j in range(i + 1, count):
+                            description += f"{lines[j]}"
+
+                        flags[flag]["description"] = description
+
+                        print(flag)
+                        print(body)
+                        print(description)
+                        i = count - 1
+
+    with open("flags.json", "w") as fout:
+        json.dump(flags, fout, ensure_ascii=True, indent=4)
 
 def main() -> None:
     opcodes_files = os.listdir(PATH_TO_OPCODES_ROOT)
@@ -256,5 +298,7 @@ def main() -> None:
         json.dump(opcode_indexes, m, ensure_ascii=True, indent=4)
 
 
+
 if __name__ == "__main__":
-    main()
+    # main()
+    generate_flags()
