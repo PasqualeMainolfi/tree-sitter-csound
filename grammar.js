@@ -291,7 +291,7 @@ module.exports = grammar({
 
       internal_code_block: $ => seq(
         $.kw_open_code_block,
-        repeat($._statement),
+        repeat($.raw_code_script),
         $.kw_close_code_block
       ),
 
@@ -456,7 +456,10 @@ module.exports = grammar({
         ))
       )),
 
-      opcode_name: $ => alias(choice($.type_identifier_legacy, $.identifier), 'opcode_name'),
+      opcode_name: $ => choice(
+        field('opcode_typed_name', $.typed_identifier),
+        alias(choice($.type_identifier_legacy, $.identifier), 'opcode_name')
+      ),
 
       unary_expression: $ => prec.left(10, seq(
         choice(
@@ -665,8 +668,7 @@ module.exports = grammar({
         choice(
           '-',
           '@',
-          '@@',
-          '!'
+          '@@'
         ),
         $._score_expression
       )),
@@ -694,11 +696,22 @@ module.exports = grammar({
         $._new_line
       )),
 
-      score_block: $ => seq(
+      _score_block: $ => seq(
         $.tag_score_start,
         optional($.score_body),
         $.tag_score_end,
         optional($._new_line)
+      ),
+
+      score_block: $ => choice(
+        $._score_block,
+        $._score_script_block
+      ),
+
+      _score_script_block: $ => seq(
+        $.tag_score_start_bin,
+        repeat($.raw_score_script),
+        $.tag_score_end
       ),
 
       _score_item: $ => choice(
@@ -729,7 +742,12 @@ module.exports = grammar({
         $.score_random_operator,
         $.score_carry,
         $.score_plus,
-        $.score_ramping
+        $.score_plus_p,
+        $.score_minus_p,
+        $.score_exclamation,
+        $.score_ramping,
+        $.score_np,
+        $.score_pp
       ),
 
       parenthesized_score_expression: $ => prec.left(
@@ -882,7 +900,12 @@ module.exports = grammar({
       header_identifier:          $ => token(prec(10, /(sr|kr|ksmps|nchnls|nchnls_i|0dbfs)/)),
       score_carry:                $ => token(prec(5, '.')),
       score_plus:                 $ => token(prec(5, '+')),
+      score_plus_p:               $ => token(prec(5, /\^\+\d+(\.[\d]+)?/)),
+      score_minus_p:              $ => token(prec(5, /\^-\d+(\.[\d]+)?/)),
+      score_exclamation:          $ => token(prec(5, '!')),
       score_random_operator:      $ => token(prec(5, '~')),
+      score_np:                   $ => token(prec(5, /np\d+(\.[\d]+)?/)),
+      score_pp:                   $ => token(prec(5, /pp\d+(\.[\d]+)?/)),
       score_ramping:              $ => token('<'),
       identifier:                 $ => /[a-zA-Z_]\w*/,
       plus_identifier:            $ => /\+[a-zA-Z_]\w*/,
@@ -915,9 +938,12 @@ module.exports = grammar({
       tag_instruments_start:      $ => token(/<CsInstruments>/),
       tag_instruments_end:        $ => token(/<\/CsInstruments>/),
       tag_score_start:            $ => token(/<CsScore>/),
+      tag_score_start_bin:        $ => token(/<CsScore(\s+[^>]*)?>/),
       tag_score_end:              $ => token(/<\/CsScore>/),
       tag_cabbage_start:          $ => token(/<Cabbage>/),
       tag_cabbage_end:            $ => token(/<\/Cabbage>/),
+      raw_score_script:           $ => choice(/[^<]+/, seq('<', /[^/]/)),
+      raw_code_script:            $ => choice(/[^}]+/, seq('}', /[^}]/)),
       _new_line:                  $ => token(/\r?\n/),
       _whitespace:                $ => /\s+/,
 

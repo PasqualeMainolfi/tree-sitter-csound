@@ -45,7 +45,7 @@ instr 1
         print(9)
     od
 
-    for j in [1, 2, 3] do 
+    for j in [1, 2, 3] do
         print(j)
     od
 
@@ -68,7 +68,11 @@ endin
 </CsInstruments>
 <CsScore>
 
-i 1 0 1
+i 1 0.5   1
+i 1 + 1 !
+i 1 . 1 !
+i 1 ^+2.56 1
+i 1 ^-1.0 1 !
 
 </CsScore>
 </CsoundSynthesizer>

@@ -40,7 +40,7 @@ instr 1
 
     ; asignal poscil 1, 330
     ; asignal[] poscil noise(1), 300
-    filter:a = butterbp:a(sig, freq, iamp)
+    filter:a = butterbp(sig, freq, iamp)
     afilter butbp:a filter, iamp, givalue
 
     gambo:MyType init 8, 88
@@ -74,32 +74,11 @@ instr 2
 endin
 
 </CsInstruments>
-<CsScore>
+<CsScore bin="python3">
 
-#define MACROINSTR # i1 #
+from sys import argv
+print("File to read = '%s'" % argv[0])
+print("File to write = '%s'" % argv[1])
 
-f 0 0 4097 10 1 1 1
-f 0 0 4097 10 1 1 1
-
-a 0 0 1
-
-{ 4 CNT
-    { 8 PARTIAL
-        i 1 [0.5 * $CNT.] [@@3 + ($CNT * 0.2)]  [500 + (~ * 200)]  [800 + (200 * $CNT.) + ($PARTIAL. * 20)]
-    }
-
-}
-
-$MACROINSTR.  0   1  [ 110 + 220 ]
-$MACROINSTR.  +   .  [ 330 - 55 ]
-i 1  +   .  [ 44 * 10 ]
-i 1  +   .  [ 1100 + 2 ]
-i 1  +   <  [ 5 ^ 4 ]
-i 1  +   .  [ 5660 % 1000 ]
-i 1  +   .  [ 110 & 220 ]
-i 1  +   .  [ 110 | 220 ]
-i 1  +   .  [ 110 # 220 ]
-
-e
 </CsScore>
 </CsoundSynthesizer>

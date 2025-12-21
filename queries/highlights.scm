@@ -1,27 +1,17 @@
-; ((identifier) @variable (#match? @variable "^a"))
-; ((identifier) @variable.parameter (#match? @variable.parameter "^k"))
-; ((identifier) @constant (#match? @constant "^i"))
-; ((identifier) @string.special (#match? @string.special "^S"))
-; ((identifier) @variable.builtin (#match? @variable.builtin "^g"))
-; ((identifier) @variable.parameter (#match? @variable.parameter "^p[0-9]+$"))
-
 (macro_usage) @macro
 
 (global_typed_identifier name: (identifier) @variable)
 
-(flag_identifier) @constant.builtin
+(typed_identifier
+    name: (identifier) @variable)
+
+(flag_identifier) @tag
 (flag_content flag_type: (_) @constant.builtin)
 (flag_content flag_value: (_) @variable)
 
 (type_identifier) @type
 (typed_identifier type: (_) @type)
 (type_identifier_legacy) @type
-
-(typed_identifier name: (identifier) @variable)
-
-(opcode_name) @function
-(function_call function: (opcode_name) @function)
-(opcode_statement op: (opcode_name) @function)
 
 (label_statement) @label
 
@@ -38,6 +28,8 @@
 (block_comment) @comment
 (string) @string
 (number) @constant.numeric
+(raw_score_script) @comment
+(raw_code_script) @comment
 
 [
   (kw_instr)
@@ -95,6 +87,9 @@
   (kw_score_define)
   (score_carry)
   (score_plus)
+  (score_exclamation)
+  (score_np)
+  (score_pp)
 ] @keyword
 
 (identifier) @variable
@@ -115,6 +110,7 @@
   (tag_options_start)
   (tag_options_end)
   (tag_score_start)
+  (tag_score_start_bin)
   (tag_score_end)
   (tag_cabbage_start)
   (tag_cabbage_end)
@@ -143,6 +139,8 @@
   "/="
   (score_random_operator)
   (score_ramping)
+  (score_plus_p)
+  (score_minus_p)
   (mod_equal)
 ] @operator
 
@@ -159,3 +157,11 @@
 
 (cabbage_statement . (identifier) @type)
 (cabbage_property . (identifier) @property)
+
+((opcode_name) @function
+ (#not-has-child? @function "typed_identifier"))
+
+(opcode_name
+    (typed_identifier
+        name: (_) @function
+        type: (_) @type))
