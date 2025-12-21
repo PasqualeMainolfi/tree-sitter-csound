@@ -1192,11 +1192,31 @@
             "named": true
           },
           {
+            "type": "score_exclamation",
+            "named": true
+          },
+          {
+            "type": "score_minus_p",
+            "named": true
+          },
+          {
+            "type": "score_np",
+            "named": true
+          },
+          {
             "type": "score_operation",
             "named": true
           },
           {
             "type": "score_plus",
+            "named": true
+          },
+          {
+            "type": "score_plus_p",
+            "named": true
+          },
+          {
+            "type": "score_pp",
             "named": true
           },
           {
@@ -1262,11 +1282,31 @@
             "named": true
           },
           {
+            "type": "score_exclamation",
+            "named": true
+          },
+          {
+            "type": "score_minus_p",
+            "named": true
+          },
+          {
+            "type": "score_np",
+            "named": true
+          },
+          {
             "type": "score_operation",
             "named": true
           },
           {
             "type": "score_plus",
+            "named": true
+          },
+          {
+            "type": "score_plus_p",
+            "named": true
+          },
+          {
+            "type": "score_pp",
             "named": true
           },
           {
@@ -1316,11 +1356,31 @@
             "named": true
           },
           {
+            "type": "score_exclamation",
+            "named": true
+          },
+          {
+            "type": "score_minus_p",
+            "named": true
+          },
+          {
+            "type": "score_np",
+            "named": true
+          },
+          {
             "type": "score_operation",
             "named": true
           },
           {
             "type": "score_plus",
+            "named": true
+          },
+          {
+            "type": "score_plus_p",
+            "named": true
+          },
+          {
+            "type": "score_pp",
             "named": true
           },
           {
@@ -1370,11 +1430,31 @@
             "named": true
           },
           {
+            "type": "score_exclamation",
+            "named": true
+          },
+          {
+            "type": "score_minus_p",
+            "named": true
+          },
+          {
+            "type": "score_np",
+            "named": true
+          },
+          {
             "type": "score_operation",
             "named": true
           },
           {
             "type": "score_plus",
+            "named": true
+          },
+          {
+            "type": "score_plus_p",
+            "named": true
+          },
+          {
+            "type": "score_pp",
             "named": true
           },
           {
@@ -1424,11 +1504,31 @@
             "named": true
           },
           {
+            "type": "score_exclamation",
+            "named": true
+          },
+          {
+            "type": "score_minus_p",
+            "named": true
+          },
+          {
+            "type": "score_np",
+            "named": true
+          },
+          {
             "type": "score_operation",
             "named": true
           },
           {
             "type": "score_plus",
+            "named": true
+          },
+          {
+            "type": "score_plus_p",
+            "named": true
+          },
+          {
+            "type": "score_pp",
             "named": true
           },
           {
@@ -1504,11 +1604,31 @@
             "named": true
           },
           {
+            "type": "score_exclamation",
+            "named": true
+          },
+          {
+            "type": "score_minus_p",
+            "named": true
+          },
+          {
+            "type": "score_np",
+            "named": true
+          },
+          {
             "type": "score_operation",
             "named": true
           },
           {
             "type": "score_plus",
+            "named": true
+          },
+          {
+            "type": "score_plus_p",
+            "named": true
+          },
+          {
+            "type": "score_pp",
             "named": true
           },
           {
@@ -1586,11 +1706,31 @@
             "named": true
           },
           {
+            "type": "score_exclamation",
+            "named": true
+          },
+          {
+            "type": "score_minus_p",
+            "named": true
+          },
+          {
+            "type": "score_np",
+            "named": true
+          },
+          {
             "type": "score_operation",
             "named": true
           },
           {
             "type": "score_plus",
+            "named": true
+          },
+          {
+            "type": "score_plus_p",
+            "named": true
+          },
+          {
+            "type": "score_pp",
             "named": true
           },
           {
@@ -1640,11 +1780,31 @@
             "named": true
           },
           {
+            "type": "score_exclamation",
+            "named": true
+          },
+          {
+            "type": "score_minus_p",
+            "named": true
+          },
+          {
+            "type": "score_np",
+            "named": true
+          },
+          {
             "type": "score_operation",
             "named": true
           },
           {
             "type": "score_plus",
+            "named": true
+          },
+          {
+            "type": "score_plus_p",
+            "named": true
+          },
+          {
+            "type": "score_pp",
             "named": true
           },
           {
@@ -2395,22 +2555,6 @@
       "required": true,
       "types": [
         {
-          "type": "assignment_statement",
-          "named": true
-        },
-        {
-          "type": "control_statement",
-          "named": true
-        },
-        {
-          "type": "function_call",
-          "named": true
-        },
-        {
-          "type": "internal_code_block",
-          "named": true
-        },
-        {
           "type": "kw_close_code_block",
           "named": true
         },
@@ -2419,23 +2563,7 @@
           "named": true
         },
         {
-          "type": "label_statement",
-          "named": true
-        },
-        {
-          "type": "legacy_typed_assignment_statement",
-          "named": true
-        },
-        {
-          "type": "opcode_statement",
-          "named": true
-        },
-        {
-          "type": "struct_definition",
-          "named": true
-        },
-        {
-          "type": "typed_assignment_statement",
+          "type": "raw_code_script",
           "named": true
         }
       ]
@@ -2729,7 +2857,18 @@
   {
     "type": "opcode_name",
     "named": true,
-    "fields": {}
+    "fields": {
+      "opcode_typed_name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "typed_identifier",
+            "named": true
+          }
+        ]
+      }
+    }
   },
   {
     "type": "opcode_statement",
@@ -2989,11 +3128,31 @@
           "named": true
         },
         {
+          "type": "score_exclamation",
+          "named": true
+        },
+        {
+          "type": "score_minus_p",
+          "named": true
+        },
+        {
+          "type": "score_np",
+          "named": true
+        },
+        {
           "type": "score_operation",
           "named": true
         },
         {
           "type": "score_plus",
+          "named": true
+        },
+        {
+          "type": "score_plus_p",
+          "named": true
+        },
+        {
+          "type": "score_pp",
           "named": true
         },
         {
@@ -3041,6 +3200,16 @@
         }
       ]
     }
+  },
+  {
+    "type": "raw_code_script",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "raw_score_script",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "return_statement",
@@ -3094,11 +3263,31 @@
           "named": true
         },
         {
+          "type": "score_exclamation",
+          "named": true
+        },
+        {
+          "type": "score_minus_p",
+          "named": true
+        },
+        {
+          "type": "score_np",
+          "named": true
+        },
+        {
           "type": "score_operation",
           "named": true
         },
         {
           "type": "score_plus",
+          "named": true
+        },
+        {
+          "type": "score_plus_p",
+          "named": true
+        },
+        {
+          "type": "score_pp",
           "named": true
         },
         {
@@ -3129,6 +3318,10 @@
       "required": true,
       "types": [
         {
+          "type": "raw_score_script",
+          "named": true
+        },
+        {
           "type": "score_body",
           "named": true
         },
@@ -3138,6 +3331,10 @@
         },
         {
           "type": "tag_score_start",
+          "named": true
+        },
+        {
+          "type": "tag_score_start_bin",
           "named": true
         }
       ]
@@ -3381,11 +3578,31 @@
           "named": true
         },
         {
+          "type": "score_exclamation",
+          "named": true
+        },
+        {
+          "type": "score_minus_p",
+          "named": true
+        },
+        {
+          "type": "score_np",
+          "named": true
+        },
+        {
           "type": "score_operation",
           "named": true
         },
         {
           "type": "score_plus",
+          "named": true
+        },
+        {
+          "type": "score_plus_p",
+          "named": true
+        },
+        {
+          "type": "score_pp",
           "named": true
         },
         {
@@ -3445,11 +3662,31 @@
             "named": true
           },
           {
+            "type": "score_exclamation",
+            "named": true
+          },
+          {
+            "type": "score_minus_p",
+            "named": true
+          },
+          {
+            "type": "score_np",
+            "named": true
+          },
+          {
             "type": "score_operation",
             "named": true
           },
           {
             "type": "score_plus",
+            "named": true
+          },
+          {
+            "type": "score_plus_p",
+            "named": true
+          },
+          {
+            "type": "score_pp",
             "named": true
           },
           {
@@ -3515,11 +3752,31 @@
             "named": true
           },
           {
+            "type": "score_exclamation",
+            "named": true
+          },
+          {
+            "type": "score_minus_p",
+            "named": true
+          },
+          {
+            "type": "score_np",
+            "named": true
+          },
+          {
             "type": "score_operation",
             "named": true
           },
           {
             "type": "score_plus",
+            "named": true
+          },
+          {
+            "type": "score_plus_p",
+            "named": true
+          },
+          {
+            "type": "score_pp",
             "named": true
           },
           {
@@ -3569,11 +3826,31 @@
             "named": true
           },
           {
+            "type": "score_exclamation",
+            "named": true
+          },
+          {
+            "type": "score_minus_p",
+            "named": true
+          },
+          {
+            "type": "score_np",
+            "named": true
+          },
+          {
             "type": "score_operation",
             "named": true
           },
           {
             "type": "score_plus",
+            "named": true
+          },
+          {
+            "type": "score_plus_p",
+            "named": true
+          },
+          {
+            "type": "score_pp",
             "named": true
           },
           {
@@ -3623,11 +3900,31 @@
             "named": true
           },
           {
+            "type": "score_exclamation",
+            "named": true
+          },
+          {
+            "type": "score_minus_p",
+            "named": true
+          },
+          {
+            "type": "score_np",
+            "named": true
+          },
+          {
             "type": "score_operation",
             "named": true
           },
           {
             "type": "score_plus",
+            "named": true
+          },
+          {
+            "type": "score_plus_p",
+            "named": true
+          },
+          {
+            "type": "score_pp",
             "named": true
           },
           {
@@ -3677,11 +3974,31 @@
             "named": true
           },
           {
+            "type": "score_exclamation",
+            "named": true
+          },
+          {
+            "type": "score_minus_p",
+            "named": true
+          },
+          {
+            "type": "score_np",
+            "named": true
+          },
+          {
             "type": "score_operation",
             "named": true
           },
           {
             "type": "score_plus",
+            "named": true
+          },
+          {
+            "type": "score_plus_p",
+            "named": true
+          },
+          {
+            "type": "score_pp",
             "named": true
           },
           {
@@ -3757,11 +4074,31 @@
             "named": true
           },
           {
+            "type": "score_exclamation",
+            "named": true
+          },
+          {
+            "type": "score_minus_p",
+            "named": true
+          },
+          {
+            "type": "score_np",
+            "named": true
+          },
+          {
             "type": "score_operation",
             "named": true
           },
           {
             "type": "score_plus",
+            "named": true
+          },
+          {
+            "type": "score_plus_p",
+            "named": true
+          },
+          {
+            "type": "score_pp",
             "named": true
           },
           {
@@ -3839,11 +4176,31 @@
             "named": true
           },
           {
+            "type": "score_exclamation",
+            "named": true
+          },
+          {
+            "type": "score_minus_p",
+            "named": true
+          },
+          {
+            "type": "score_np",
+            "named": true
+          },
+          {
             "type": "score_operation",
             "named": true
           },
           {
             "type": "score_plus",
+            "named": true
+          },
+          {
+            "type": "score_plus_p",
+            "named": true
+          },
+          {
+            "type": "score_pp",
             "named": true
           },
           {
@@ -3893,11 +4250,31 @@
             "named": true
           },
           {
+            "type": "score_exclamation",
+            "named": true
+          },
+          {
+            "type": "score_minus_p",
+            "named": true
+          },
+          {
+            "type": "score_np",
+            "named": true
+          },
+          {
             "type": "score_operation",
             "named": true
           },
           {
             "type": "score_plus",
+            "named": true
+          },
+          {
+            "type": "score_plus_p",
+            "named": true
+          },
+          {
+            "type": "score_pp",
             "named": true
           },
           {
@@ -3963,11 +4340,31 @@
           "named": true
         },
         {
+          "type": "score_exclamation",
+          "named": true
+        },
+        {
+          "type": "score_minus_p",
+          "named": true
+        },
+        {
+          "type": "score_np",
+          "named": true
+        },
+        {
           "type": "score_operation",
           "named": true
         },
         {
           "type": "score_plus",
+          "named": true
+        },
+        {
+          "type": "score_plus_p",
+          "named": true
+        },
+        {
+          "type": "score_pp",
           "named": true
         },
         {
@@ -5401,7 +5798,27 @@
     "named": true
   },
   {
+    "type": "score_exclamation",
+    "named": true
+  },
+  {
+    "type": "score_minus_p",
+    "named": true
+  },
+  {
+    "type": "score_np",
+    "named": true
+  },
+  {
     "type": "score_plus",
+    "named": true
+  },
+  {
+    "type": "score_plus_p",
+    "named": true
+  },
+  {
+    "type": "score_pp",
     "named": true
   },
   {
@@ -5454,6 +5871,10 @@
   },
   {
     "type": "tag_score_start",
+    "named": true
+  },
+  {
+    "type": "tag_score_start_bin",
     "named": true
   },
   {
