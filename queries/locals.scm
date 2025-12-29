@@ -38,17 +38,12 @@
 (macro_define
   (macro_name) @local.definition)
 
-(score_macro_define
-  (macro_name) @local.definition)
-
 (argument_list
   (identifier) @local.reference)
 
-(score_statement_instr
-  isntr: (identifier) @local.reference)
-
 (score_statement_group) @local.definition
 (score_statement_i) @local.definition
+(score_statement_f) @local.definition
 
 (score_nestable_loop
   count: (number) @local.definition)

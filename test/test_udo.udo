@@ -6,7 +6,7 @@ givalue = 10
 
 opcode print_value(value:i, value1:i):(ii)
     print(value, value1)
-    xout(value, $PIG) // add error with only $
+    xout(value, $MACRO) // add error with only $
 endop
 
 opcode add, ii, ii

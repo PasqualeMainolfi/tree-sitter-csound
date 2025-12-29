@@ -1,0 +1,56 @@
+((html_block
+    [(raw_script) (generic_closing_tag)] @injection.content)
+    (#set! injection.language "html"))
+
+((python_block
+    [(raw_script) (generic_closing_tag)] @injection.content)
+    (#set! injection.language "python"))
+
+((opcode_statement
+    (opcode_name) @_name
+    (argument_list
+        (internal_code_block
+            (raw_code_script) @injection.content)))
+    (#match? @_name "^pyruni$")
+    (#set! injection.language "python"))
+
+((opcode_statement
+    (opcode_name) @_name
+    (argument_list
+        (parenthesized_expression
+            (internal_code_block
+                (raw_code_script) @injection.content))))
+    (#match? @_name "^pyruni$")
+    (#set! injection.language "python"))
+
+((opcode_statement
+    (opcode_name) @_name
+    (argument_list
+        (internal_code_block
+            (raw_code_script) @injection.content)))
+    (#match? @_name "^system$")
+    (#set! injection.language "bash"))
+
+((function_call
+    (opcode_name) @_name
+    (argument_list
+        (internal_code_block
+            (raw_code_script) @injection.content)))
+    (#match? @_name "^system")
+    (#set! injection.language "bash"))
+
+((opcode_statement
+    (opcode_name) @_name
+    (argument_list
+        (internal_code_block
+            (raw_code_script) @injection.content)))
+    (#not-match? @_name "^(pyruni|system)")
+    (#set! injection.language "csound"))
+
+((function_call
+    (opcode_name) @_name
+    (argument_list
+        (internal_code_block
+            (raw_code_script) @injection.content)))
+    (#not-match? @_name "^(pyruni|system)")
+    (#set! injection.language "csound"))

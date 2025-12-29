@@ -40,7 +40,6 @@ instr 1
     ifreq = 1000
     sig:a = poscil(iamp, freq)
 
-
     while p4 > 10 do
         print(9)
     od
@@ -58,11 +57,13 @@ instr 1
             print(0)
     endsw
 
+    scoreline_i {{
+        i 2  0  3
+        i 2  1  3
+    }}
+
 
 endin
-
-
-
 
 
 </CsInstruments>

@@ -29,6 +29,18 @@ givalue = 10
 struct MyType val0:i, val1:i
 struct MyDog val:a
 
+pyruni({{
+import random
+
+pool = [(1 + i/10.0) ** 1.2 for i in range(100)]
+
+def get_number_from_pool(n, p):
+    if random.random() < p:
+        i = int(random.random() * len(pool))
+        pool[i] = n
+    return random.choice(pool)
+}})
+
 instr 1
     ifreq = 400
     icall = 10
@@ -38,9 +50,18 @@ instr 1
     filter2:a = poscil(1, givalue)
     filter2 -= gamp
 
+    ires = system(1, {{
+        ps
+        date
+        cd ~/Desktop
+        pwd
+        ls -l
+        whois csounds.com
+    }})
+
     ; asignal poscil 1, 330
     ; asignal[] poscil noise(1), 300
-    filter:a = butterbp(sig, freq, iamp)
+    filter:a = butterbp(sig, freq, iamp) 
     afilter butbp:a filter, iamp, givalue
 
     gambo:MyType init 8, 88
