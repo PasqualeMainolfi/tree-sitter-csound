@@ -157,7 +157,7 @@ def generate_flags():
 
                         description = ""
                         for j in range(i + 1, count):
-                            description += f"{lines[j]}"
+                            description += f"{html.unescape(lines[j])}"
 
                         flags[flag]["description"] = description
 
@@ -215,7 +215,7 @@ def main() -> None:
                         while not description:
                             count_descr += 1
                             description = lines[count_descr]
-                        description = html.escape(description)
+                        description = html.unescape(description)
                         if regex.search(description):
                             description = regex.sub("", description)
                         opcodes_dict[opnames]["description"] = escape_dollar(prefix=description)
