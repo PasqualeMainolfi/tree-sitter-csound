@@ -278,22 +278,6 @@
         "required": true,
         "types": [
           {
-            "type": "##addin",
-            "named": false
-          },
-          {
-            "type": "##divin",
-            "named": false
-          },
-          {
-            "type": "##mulin",
-            "named": false
-          },
-          {
-            "type": "##subin",
-            "named": false
-          },
-          {
             "type": "*=",
             "named": false
           },
@@ -550,10 +534,6 @@
             "named": true
           },
           {
-            "type": "internal_code_block",
-            "named": true
-          },
-          {
             "type": "label_statement",
             "named": true
           },
@@ -702,12 +682,12 @@
     }
   },
   {
-    "type": "cs_legacy_file",
-    "named": true,
+    "type": "cs_legacy_common_instructions",
+    "named": false,
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "assignment_statement",
@@ -718,23 +698,55 @@
           "named": true
         },
         {
-          "type": "file_score_nestable_loop",
+          "type": "function_call",
           "named": true
         },
         {
-          "type": "file_score_preprocessor_directive",
+          "type": "label_statement",
           "named": true
         },
         {
-          "type": "file_score_statement",
+          "type": "legacy_typed_assignment_statement",
           "named": true
         },
         {
-          "type": "file_score_statement_func",
+          "type": "opcode_statement",
           "named": true
         },
         {
-          "type": "file_score_statement_instr",
+          "type": "preprocessor_directive",
+          "named": true
+        },
+        {
+          "type": "struct_definition",
+          "named": true
+        },
+        {
+          "type": "typed_assignment_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "cs_legacy_file",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "cs_orchestra_udo",
+    "named": false,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "assignment_statement",
+          "named": true
+        },
+        {
+          "type": "control_statement",
           "named": true
         },
         {
@@ -747,10 +759,6 @@
         },
         {
           "type": "instrument_definition",
-          "named": true
-        },
-        {
-          "type": "internal_code_block",
           "named": true
         },
         {
@@ -785,6 +793,77 @@
     }
   },
   {
+    "type": "cs_score",
+    "named": false,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "preprocessor_directive",
+          "named": true
+        },
+        {
+          "type": "score_nestable_loop",
+          "named": true
+        },
+        {
+          "type": "score_statement",
+          "named": true
+        },
+        {
+          "type": "score_statement_func",
+          "named": true
+        },
+        {
+          "type": "score_statement_instr",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "csbeats_block",
+    "named": true,
+    "fields": {
+      "content": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "generic_closing_tag",
+            "named": true
+          },
+          {
+            "type": "raw_script",
+            "named": true
+          }
+        ]
+      },
+      "csbeats_score_tag_end": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "tag_score_end",
+            "named": true
+          }
+        ]
+      },
+      "csbeats_score_tag_start": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "tag_score_start_csbeats",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "csd_element",
     "named": true,
     "fields": {},
@@ -798,6 +877,10 @@
         },
         {
           "type": "instruments_block",
+          "named": true
+        },
+        {
+          "type": "optional_tag_block",
           "named": true
         },
         {
@@ -852,10 +935,6 @@
           },
           {
             "type": "function_call",
-            "named": true
-          },
-          {
-            "type": "internal_code_block",
             "named": true
           },
           {
@@ -925,10 +1004,6 @@
         },
         {
           "type": "function_call",
-          "named": true
-        },
-        {
-          "type": "internal_code_block",
           "named": true
         },
         {
@@ -1082,759 +1157,6 @@
           "named": true
         }
       ]
-    }
-  },
-  {
-    "type": "file_score_nestable_loop",
-    "named": true,
-    "fields": {
-      "count": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "number",
-            "named": true
-          }
-        ]
-      },
-      "macro_loop_name": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "score_loop_body": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "file_score_statement_instr",
-            "named": true
-          },
-          {
-            "type": "score_carry",
-            "named": true
-          },
-          {
-            "type": "score_nestable_loop",
-            "named": true
-          },
-          {
-            "type": "score_plus",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "file_score_preprocessor_directive",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "score_ifdef_directive",
-          "named": true
-        },
-        {
-          "type": "score_include_directive",
-          "named": true
-        },
-        {
-          "type": "score_macro_define",
-          "named": true
-        },
-        {
-          "type": "undef_directive",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "file_score_statement",
-    "named": true,
-    "fields": {
-      "pfield": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          },
-          {
-            "type": "macro_usage",
-            "named": true
-          },
-          {
-            "type": "number",
-            "named": true
-          },
-          {
-            "type": "parenthesized_score_expression",
-            "named": true
-          },
-          {
-            "type": "score_binary_expression",
-            "named": true
-          },
-          {
-            "type": "score_carry",
-            "named": true
-          },
-          {
-            "type": "score_exclamation",
-            "named": true
-          },
-          {
-            "type": "score_minus_p",
-            "named": true
-          },
-          {
-            "type": "score_np",
-            "named": true
-          },
-          {
-            "type": "score_operation",
-            "named": true
-          },
-          {
-            "type": "score_plus",
-            "named": true
-          },
-          {
-            "type": "score_plus_p",
-            "named": true
-          },
-          {
-            "type": "score_pp",
-            "named": true
-          },
-          {
-            "type": "score_ramping",
-            "named": true
-          },
-          {
-            "type": "score_random_operator",
-            "named": true
-          },
-          {
-            "type": "score_unary_expression",
-            "named": true
-          },
-          {
-            "type": "string",
-            "named": true
-          }
-        ]
-      },
-      "statement": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "file_score_statement_group",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "file_score_statement_func",
-    "named": true,
-    "fields": {
-      "action_time": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          },
-          {
-            "type": "macro_usage",
-            "named": true
-          },
-          {
-            "type": "number",
-            "named": true
-          },
-          {
-            "type": "parenthesized_score_expression",
-            "named": true
-          },
-          {
-            "type": "score_binary_expression",
-            "named": true
-          },
-          {
-            "type": "score_carry",
-            "named": true
-          },
-          {
-            "type": "score_exclamation",
-            "named": true
-          },
-          {
-            "type": "score_minus_p",
-            "named": true
-          },
-          {
-            "type": "score_np",
-            "named": true
-          },
-          {
-            "type": "score_operation",
-            "named": true
-          },
-          {
-            "type": "score_plus",
-            "named": true
-          },
-          {
-            "type": "score_plus_p",
-            "named": true
-          },
-          {
-            "type": "score_pp",
-            "named": true
-          },
-          {
-            "type": "score_ramping",
-            "named": true
-          },
-          {
-            "type": "score_random_operator",
-            "named": true
-          },
-          {
-            "type": "score_unary_expression",
-            "named": true
-          },
-          {
-            "type": "string",
-            "named": true
-          }
-        ]
-      },
-      "gen_id": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          },
-          {
-            "type": "macro_usage",
-            "named": true
-          },
-          {
-            "type": "number",
-            "named": true
-          },
-          {
-            "type": "parenthesized_score_expression",
-            "named": true
-          },
-          {
-            "type": "score_binary_expression",
-            "named": true
-          },
-          {
-            "type": "score_carry",
-            "named": true
-          },
-          {
-            "type": "score_exclamation",
-            "named": true
-          },
-          {
-            "type": "score_minus_p",
-            "named": true
-          },
-          {
-            "type": "score_np",
-            "named": true
-          },
-          {
-            "type": "score_operation",
-            "named": true
-          },
-          {
-            "type": "score_plus",
-            "named": true
-          },
-          {
-            "type": "score_plus_p",
-            "named": true
-          },
-          {
-            "type": "score_pp",
-            "named": true
-          },
-          {
-            "type": "score_ramping",
-            "named": true
-          },
-          {
-            "type": "score_random_operator",
-            "named": true
-          },
-          {
-            "type": "score_unary_expression",
-            "named": true
-          },
-          {
-            "type": "string",
-            "named": true
-          }
-        ]
-      },
-      "n_points": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          },
-          {
-            "type": "macro_usage",
-            "named": true
-          },
-          {
-            "type": "number",
-            "named": true
-          },
-          {
-            "type": "parenthesized_score_expression",
-            "named": true
-          },
-          {
-            "type": "score_binary_expression",
-            "named": true
-          },
-          {
-            "type": "score_carry",
-            "named": true
-          },
-          {
-            "type": "score_exclamation",
-            "named": true
-          },
-          {
-            "type": "score_minus_p",
-            "named": true
-          },
-          {
-            "type": "score_np",
-            "named": true
-          },
-          {
-            "type": "score_operation",
-            "named": true
-          },
-          {
-            "type": "score_plus",
-            "named": true
-          },
-          {
-            "type": "score_plus_p",
-            "named": true
-          },
-          {
-            "type": "score_pp",
-            "named": true
-          },
-          {
-            "type": "score_ramping",
-            "named": true
-          },
-          {
-            "type": "score_random_operator",
-            "named": true
-          },
-          {
-            "type": "score_unary_expression",
-            "named": true
-          },
-          {
-            "type": "string",
-            "named": true
-          }
-        ]
-      },
-      "pfield": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          },
-          {
-            "type": "macro_usage",
-            "named": true
-          },
-          {
-            "type": "number",
-            "named": true
-          },
-          {
-            "type": "parenthesized_score_expression",
-            "named": true
-          },
-          {
-            "type": "score_binary_expression",
-            "named": true
-          },
-          {
-            "type": "score_carry",
-            "named": true
-          },
-          {
-            "type": "score_exclamation",
-            "named": true
-          },
-          {
-            "type": "score_minus_p",
-            "named": true
-          },
-          {
-            "type": "score_np",
-            "named": true
-          },
-          {
-            "type": "score_operation",
-            "named": true
-          },
-          {
-            "type": "score_plus",
-            "named": true
-          },
-          {
-            "type": "score_plus_p",
-            "named": true
-          },
-          {
-            "type": "score_pp",
-            "named": true
-          },
-          {
-            "type": "score_ramping",
-            "named": true
-          },
-          {
-            "type": "score_random_operator",
-            "named": true
-          },
-          {
-            "type": "score_unary_expression",
-            "named": true
-          },
-          {
-            "type": "string",
-            "named": true
-          }
-        ]
-      },
-      "statement": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "file_score_statement_f",
-            "named": true
-          }
-        ]
-      },
-      "table_number": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "number",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "file_score_statement_instr",
-    "named": true,
-    "fields": {
-      "duration": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          },
-          {
-            "type": "macro_usage",
-            "named": true
-          },
-          {
-            "type": "number",
-            "named": true
-          },
-          {
-            "type": "parenthesized_score_expression",
-            "named": true
-          },
-          {
-            "type": "score_binary_expression",
-            "named": true
-          },
-          {
-            "type": "score_carry",
-            "named": true
-          },
-          {
-            "type": "score_exclamation",
-            "named": true
-          },
-          {
-            "type": "score_minus_p",
-            "named": true
-          },
-          {
-            "type": "score_np",
-            "named": true
-          },
-          {
-            "type": "score_operation",
-            "named": true
-          },
-          {
-            "type": "score_plus",
-            "named": true
-          },
-          {
-            "type": "score_plus_p",
-            "named": true
-          },
-          {
-            "type": "score_pp",
-            "named": true
-          },
-          {
-            "type": "score_ramping",
-            "named": true
-          },
-          {
-            "type": "score_random_operator",
-            "named": true
-          },
-          {
-            "type": "score_unary_expression",
-            "named": true
-          },
-          {
-            "type": "string",
-            "named": true
-          }
-        ]
-      },
-      "isntr": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          },
-          {
-            "type": "number",
-            "named": true
-          },
-          {
-            "type": "string",
-            "named": true
-          }
-        ]
-      },
-      "macro_instr": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "macro_usage",
-            "named": true
-          }
-        ]
-      },
-      "pfield": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          },
-          {
-            "type": "macro_usage",
-            "named": true
-          },
-          {
-            "type": "number",
-            "named": true
-          },
-          {
-            "type": "parenthesized_score_expression",
-            "named": true
-          },
-          {
-            "type": "score_binary_expression",
-            "named": true
-          },
-          {
-            "type": "score_carry",
-            "named": true
-          },
-          {
-            "type": "score_exclamation",
-            "named": true
-          },
-          {
-            "type": "score_minus_p",
-            "named": true
-          },
-          {
-            "type": "score_np",
-            "named": true
-          },
-          {
-            "type": "score_operation",
-            "named": true
-          },
-          {
-            "type": "score_plus",
-            "named": true
-          },
-          {
-            "type": "score_plus_p",
-            "named": true
-          },
-          {
-            "type": "score_pp",
-            "named": true
-          },
-          {
-            "type": "score_ramping",
-            "named": true
-          },
-          {
-            "type": "score_random_operator",
-            "named": true
-          },
-          {
-            "type": "score_unary_expression",
-            "named": true
-          },
-          {
-            "type": "string",
-            "named": true
-          }
-        ]
-      },
-      "start_time": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          },
-          {
-            "type": "macro_usage",
-            "named": true
-          },
-          {
-            "type": "number",
-            "named": true
-          },
-          {
-            "type": "parenthesized_score_expression",
-            "named": true
-          },
-          {
-            "type": "score_binary_expression",
-            "named": true
-          },
-          {
-            "type": "score_carry",
-            "named": true
-          },
-          {
-            "type": "score_exclamation",
-            "named": true
-          },
-          {
-            "type": "score_minus_p",
-            "named": true
-          },
-          {
-            "type": "score_np",
-            "named": true
-          },
-          {
-            "type": "score_operation",
-            "named": true
-          },
-          {
-            "type": "score_plus",
-            "named": true
-          },
-          {
-            "type": "score_plus_p",
-            "named": true
-          },
-          {
-            "type": "score_pp",
-            "named": true
-          },
-          {
-            "type": "score_ramping",
-            "named": true
-          },
-          {
-            "type": "score_random_operator",
-            "named": true
-          },
-          {
-            "type": "score_unary_expression",
-            "named": true
-          },
-          {
-            "type": "string",
-            "named": true
-          }
-        ]
-      },
-      "statement": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "file_score_statement_i",
-            "named": true
-          }
-        ]
-      }
     }
   },
   {
@@ -2028,17 +1350,57 @@
             "named": true
           }
         ]
+      },
+      "inputs": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "argument_list",
+            "named": true
+          }
+        ]
       }
-    },
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "argument_list",
-          "named": true
-        }
-      ]
+    }
+  },
+  {
+    "type": "generic_tag_block",
+    "named": true,
+    "fields": {
+      "content": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "generic_closing_tag",
+            "named": true
+          },
+          {
+            "type": "raw_script",
+            "named": true
+          }
+        ]
+      },
+      "optional_end_tag": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "optional_tag_end",
+            "named": true
+          }
+        ]
+      },
+      "optional_start_tag": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "optional_tag_start",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -2180,6 +1542,46 @@
     }
   },
   {
+    "type": "html_block",
+    "named": true,
+    "fields": {
+      "content": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "generic_closing_tag",
+            "named": true
+          },
+          {
+            "type": "raw_script",
+            "named": true
+          }
+        ]
+      },
+      "html_start_tag": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "tag_html_start",
+            "named": true
+          }
+        ]
+      },
+      "optional_end_tag": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "tag_html_end",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "if_statement",
     "named": true,
     "fields": {
@@ -2273,10 +1675,6 @@
           },
           {
             "type": "function_call",
-            "named": true
-          },
-          {
-            "type": "internal_code_block",
             "named": true
           },
           {
@@ -2377,10 +1775,6 @@
         },
         {
           "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "internal_code_block",
           "named": true
         },
         {
@@ -2486,10 +1880,6 @@
         },
         {
           "type": "function_call",
-          "named": true
-        },
-        {
-          "type": "internal_code_block",
           "named": true
         },
         {
@@ -2612,22 +2002,6 @@
         "required": true,
         "types": [
           {
-            "type": "##addin",
-            "named": false
-          },
-          {
-            "type": "##divin",
-            "named": false
-          },
-          {
-            "type": "##mulin",
-            "named": false
-          },
-          {
-            "type": "##subin",
-            "named": false
-          },
-          {
             "type": "*=",
             "named": false
           },
@@ -2722,6 +2096,22 @@
     }
   },
   {
+    "type": "macro_args",
+    "named": true,
+    "fields": {
+      "arg": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "macro_define",
     "named": true,
     "fields": {
@@ -2761,16 +2151,6 @@
     "type": "macro_name",
     "named": true,
     "fields": {
-      "arg": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
       "id": {
         "multiple": false,
         "required": true,
@@ -2780,16 +2160,47 @@
             "named": true
           }
         ]
+      },
+      "macro_args": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "macro_args",
+            "named": true
+          }
+        ]
       }
     }
   },
   {
     "type": "macro_usage",
     "named": true,
-    "fields": {},
+    "fields": {
+      "id": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "macro_symbol": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "$",
+            "named": false
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "identifier",
@@ -2884,16 +2295,6 @@
           }
         ]
       },
-      "label_block": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "label_statement",
-            "named": true
-          }
-        ]
-      },
       "op": {
         "multiple": false,
         "required": false,
@@ -2932,6 +2333,87 @@
           }
         ]
       }
+    }
+  },
+  {
+    "type": "optional_tag_block",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "generic_tag_block",
+          "named": true
+        },
+        {
+          "type": "html_block",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "optional_tag_end",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "tag_csfile_end",
+          "named": true
+        },
+        {
+          "type": "tag_csfileb_end",
+          "named": true
+        },
+        {
+          "type": "tag_licence_end",
+          "named": true
+        },
+        {
+          "type": "tag_short_licence_end",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "optional_tag_start",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "tag_csfile_start",
+          "named": true
+        },
+        {
+          "type": "tag_csfileb_start",
+          "named": true
+        },
+        {
+          "type": "tag_csmidifileb",
+          "named": true
+        },
+        {
+          "type": "tag_cssamplefileb",
+          "named": true
+        },
+        {
+          "type": "tag_licence_start",
+          "named": true
+        },
+        {
+          "type": "tag_short_licence_start",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -2983,10 +2465,6 @@
         },
         {
           "type": "instrument_definition",
-          "named": true
-        },
-        {
-          "type": "internal_code_block",
           "named": true
         },
         {
@@ -3202,12 +2680,52 @@
     }
   },
   {
+    "type": "python_block",
+    "named": true,
+    "fields": {
+      "content": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "generic_closing_tag",
+            "named": true
+          },
+          {
+            "type": "raw_script",
+            "named": true
+          }
+        ]
+      },
+      "python_score_tag_end": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "tag_score_end",
+            "named": true
+          }
+        ]
+      },
+      "python_score_tag_start": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "tag_score_start_python",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "raw_code_script",
     "named": true,
     "fields": {}
   },
   {
-    "type": "raw_score_script",
+    "type": "raw_script",
     "named": true,
     "fields": {}
   },
@@ -3312,17 +2830,28 @@
   {
     "type": "score_block",
     "named": true,
-    "fields": {},
+    "fields": {
+      "content": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "score_body",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": true,
       "types": [
         {
-          "type": "raw_score_script",
+          "type": "csbeats_block",
           "named": true
         },
         {
-          "type": "score_body",
+          "type": "python_block",
           "named": true
         },
         {
@@ -3331,10 +2860,6 @@
         },
         {
           "type": "tag_score_start",
-          "named": true
-        },
-        {
-          "type": "tag_score_start_bin",
           "named": true
         }
       ]
@@ -3372,7 +2897,7 @@
     }
   },
   {
-    "type": "score_ifdef_directive",
+    "type": "score_minus_p",
     "named": true,
     "fields": {},
     "children": {
@@ -3380,118 +2905,11 @@
       "required": true,
       "types": [
         {
-          "type": "assignment_statement",
+          "type": "number",
           "named": true
         },
         {
-          "type": "control_statement",
-          "named": true
-        },
-        {
-          "type": "function_call",
-          "named": true
-        },
-        {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "internal_code_block",
-          "named": true
-        },
-        {
-          "type": "kw_elsedef",
-          "named": true
-        },
-        {
-          "type": "kw_end",
-          "named": true
-        },
-        {
-          "type": "kw_score_ifdef",
-          "named": true
-        },
-        {
-          "type": "kw_score_ifndef",
-          "named": true
-        },
-        {
-          "type": "label_statement",
-          "named": true
-        },
-        {
-          "type": "legacy_typed_assignment_statement",
-          "named": true
-        },
-        {
-          "type": "opcode_statement",
-          "named": true
-        },
-        {
-          "type": "struct_definition",
-          "named": true
-        },
-        {
-          "type": "typed_assignment_statement",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "score_include_directive",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "kw_score_include",
-          "named": true
-        },
-        {
-          "type": "kw_score_includestr",
-          "named": true
-        },
-        {
-          "type": "string",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "score_macro_define",
-    "named": true,
-    "fields": {
-      "macro_name": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "macro_name",
-            "named": true
-          }
-        ]
-      },
-      "macro_values": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "macro_value",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "kw_score_define",
+          "type": "score_minus_p_operator",
           "named": true
         }
       ]
@@ -3543,6 +2961,25 @@
           }
         ]
       }
+    }
+  },
+  {
+    "type": "score_np",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "score_np_operator",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -3619,6 +3056,44 @@
         },
         {
           "type": "string",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "score_plus_p",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "score_plus_p_operator",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "score_pp",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "score_pp_operator",
           "named": true
         }
       ]
@@ -4021,7 +3496,7 @@
       },
       "statement": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "score_statement_f",
@@ -4029,9 +3504,29 @@
           }
         ]
       },
+      "statement_func": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "func_p1",
+            "named": true
+          }
+        ]
+      },
+      "statement_macro_func": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "macro_usage",
+            "named": true
+          }
+        ]
+      },
       "table_number": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "number",
@@ -4119,30 +3614,16 @@
           }
         ]
       },
-      "isntr": {
+      "instr": {
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "identifier",
-            "named": true
-          },
           {
             "type": "number",
             "named": true
           },
           {
             "type": "string",
-            "named": true
-          }
-        ]
-      },
-      "macro_instr": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "macro_usage",
             "named": true
           }
         ]
@@ -4304,6 +3785,26 @@
             "named": true
           }
         ]
+      },
+      "statement_instr": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "instr_p1",
+            "named": true
+          }
+        ]
+      },
+      "statement_macro_instr": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "macro_usage",
+            "named": true
+          }
+        ]
       }
     }
   },
@@ -4437,7 +3938,7 @@
           }
         ]
       },
-      "member": {
+      "struct_member": {
         "multiple": false,
         "required": true,
         "types": [
@@ -4453,7 +3954,7 @@
     "type": "struct_definition",
     "named": true,
     "fields": {
-      "fields": {
+      "struct_field": {
         "multiple": true,
         "required": true,
         "types": [
@@ -4467,7 +3968,7 @@
           }
         ]
       },
-      "name": {
+      "struct_name": {
         "multiple": false,
         "required": true,
         "types": [
@@ -4674,22 +4175,6 @@
         "required": true,
         "types": [
           {
-            "type": "##addin",
-            "named": false
-          },
-          {
-            "type": "##divin",
-            "named": false
-          },
-          {
-            "type": "##mulin",
-            "named": false
-          },
-          {
-            "type": "##subin",
-            "named": false
-          },
-          {
             "type": "*=",
             "named": false
           },
@@ -4884,10 +4369,6 @@
           "named": true
         },
         {
-          "type": "internal_code_block",
-          "named": true
-        },
-        {
           "type": "kw_endop",
           "named": true
         },
@@ -4975,10 +4456,6 @@
         },
         {
           "type": "function_call",
-          "named": true
-        },
-        {
-          "type": "internal_code_block",
           "named": true
         },
         {
@@ -5405,22 +4882,6 @@
     "named": false
   },
   {
-    "type": "##addin",
-    "named": false
-  },
-  {
-    "type": "##divin",
-    "named": false
-  },
-  {
-    "type": "##mulin",
-    "named": false
-  },
-  {
-    "type": "##subin",
-    "named": false
-  },
-  {
     "type": "$",
     "named": false
   },
@@ -5558,19 +5019,15 @@
     "extra": true
   },
   {
-    "type": "file_score_statement_f",
-    "named": true
-  },
-  {
-    "type": "file_score_statement_group",
-    "named": true
-  },
-  {
-    "type": "file_score_statement_i",
-    "named": true
-  },
-  {
     "type": "flag_identifier",
+    "named": true
+  },
+  {
+    "type": "func_p1",
+    "named": true
+  },
+  {
+    "type": "generic_closing_tag",
     "named": true
   },
   {
@@ -5583,6 +5040,10 @@
   },
   {
     "type": "identifier",
+    "named": true
+  },
+  {
+    "type": "instr_p1",
     "named": true
   },
   {
@@ -5710,26 +5171,6 @@
     "named": true
   },
   {
-    "type": "kw_score_define",
-    "named": true
-  },
-  {
-    "type": "kw_score_ifdef",
-    "named": true
-  },
-  {
-    "type": "kw_score_ifndef",
-    "named": true
-  },
-  {
-    "type": "kw_score_include",
-    "named": true
-  },
-  {
-    "type": "kw_score_includestr",
-    "named": true
-  },
-  {
     "type": "kw_struct",
     "named": true
   },
@@ -5802,11 +5243,11 @@
     "named": true
   },
   {
-    "type": "score_minus_p",
+    "type": "score_minus_p_operator",
     "named": true
   },
   {
-    "type": "score_np",
+    "type": "score_np_operator",
     "named": true
   },
   {
@@ -5814,11 +5255,11 @@
     "named": true
   },
   {
-    "type": "score_plus_p",
+    "type": "score_plus_p_operator",
     "named": true
   },
   {
-    "type": "score_pp",
+    "type": "score_pp_operator",
     "named": true
   },
   {
@@ -5850,11 +5291,51 @@
     "named": true
   },
   {
+    "type": "tag_csfile_end",
+    "named": true
+  },
+  {
+    "type": "tag_csfile_start",
+    "named": true
+  },
+  {
+    "type": "tag_csfileb_end",
+    "named": true
+  },
+  {
+    "type": "tag_csfileb_start",
+    "named": true
+  },
+  {
+    "type": "tag_csmidifileb",
+    "named": true
+  },
+  {
+    "type": "tag_cssamplefileb",
+    "named": true
+  },
+  {
+    "type": "tag_html_end",
+    "named": true
+  },
+  {
+    "type": "tag_html_start",
+    "named": true
+  },
+  {
     "type": "tag_instruments_end",
     "named": true
   },
   {
     "type": "tag_instruments_start",
+    "named": true
+  },
+  {
+    "type": "tag_licence_end",
+    "named": true
+  },
+  {
+    "type": "tag_licence_start",
     "named": true
   },
   {
@@ -5874,7 +5355,19 @@
     "named": true
   },
   {
-    "type": "tag_score_start_bin",
+    "type": "tag_score_start_csbeats",
+    "named": true
+  },
+  {
+    "type": "tag_score_start_python",
+    "named": true
+  },
+  {
+    "type": "tag_short_licence_end",
+    "named": true
+  },
+  {
+    "type": "tag_short_licence_start",
     "named": true
   },
   {
