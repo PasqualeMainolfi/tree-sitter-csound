@@ -1,9 +1,0 @@
-[submodule "csound_manual"]
-	path = csound_manual
-	url = https://github.com/csound/manual.git
-[submodule "manual"]
-	path = manual
-	url = https://github.com/csound/manual.git
-[submodule "csound-plugins"]
-	path = csound-plugins
-	url = https://github.com/csound-plugins/csound-plugins.git
