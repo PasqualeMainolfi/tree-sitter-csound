@@ -117,7 +117,7 @@ perf:
   ; the same but with goto
 loop:
   Skey, kvalue, kidx dict_iter idict
-  if kidx == -1 goto break
+    if kidx == -1 goto break
   printf "loop) %s -> %f \n", kidx+kt*1000, Skey, kvalue
   kgoto loop
 break:

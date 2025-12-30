@@ -61,7 +61,7 @@ instr 1
 
     ; asignal poscil 1, 330
     ; asignal[] poscil noise(1), 300
-    filter:a = butterbp(sig, freq, iamp) 
+    filter:a = butterbp(sig, freq, iamp)
     afilter butbp:a filter, iamp, givalue
 
     gambo:MyType init 8, 88

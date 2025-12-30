@@ -73,6 +73,7 @@ module.exports = grammar({
         $.parenthesized_expression,
         $.header_identifier,
         $.number,
+        $.boolean_var,
         $.string,
         alias(choice(
               $.identifier,
@@ -507,13 +508,13 @@ module.exports = grammar({
         ))
       )),
 
-      label_statement: $ => prec(1,
+      label_statement: $ => prec.dynamic(10, prec(1,
         seq(
-          field('label_name', choice($.type_identifier, $.identifier)),
+          field('label_name', alias(choice($.identifier, $.type_identifier_legacy), $.identifier)),
           optional(':'),
           $._new_line
         )
-      ),
+      )),
 
       opcode_name: $ => choice(
         field('opcode_typed_name', $.typed_identifier),
@@ -879,6 +880,8 @@ module.exports = grammar({
       kw_open_code_block:         $ => token('{{'),
       kw_close_code_block:        $ => token('}}'),
       kw_void:                    $ => token(prec(5, 'void')),
+      kw_true:                    $ => token(prec(5, 'true')),
+      kw_false:                   $ => token(prec(5, 'false')),
       kw_xin:                     $ => token('xin'),
       kw_xout:                    $ => token('xout'),
       kw_if:                      $ => token(prec(5, 'if')),
@@ -946,6 +949,7 @@ module.exports = grammar({
       type_identifier_legacy:     $ => token(prec(2, /g?[aikbSfw][a-zA-Z0-9_\[\]]*/)),
       number:                     $ => choice(/\d+/, /0[xX][0-9a-fA-F]+/, /\d+\.\d+([eE][+-]?\d+)?/, /\d+[eE][+-]?\d+/),
       string:                     $ => seq('"', repeat(choice(/[^"\\\n]+/, /\\./)), '"'),
+      boolean_var:                $ => choice($.kw_true, $.kw_false),
       comment:                    $ => token(choice(seq(';', /[^\n]*/), seq('//', /[^\n]*/))),
       block_comment:              $ => seq('/*', /[^*]*\*+([^/*][^*]*\*+)*/, '/'),
       tag_synthesizer_start:      $ => token(prec(10, /<CsoundSynthesi[sz]er>/)),

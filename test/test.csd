@@ -18,7 +18,7 @@ opcode print_value(value:i, value1:i):(ii)
 endop
 
 opcode add, ii, ii
-    i1, i2 xin
+    i1, Skey, i2 xin
     klast init 0
     xout(i1, i2)
 endop
@@ -50,7 +50,7 @@ instr 1
 
     gambo:MyType init 8, 88
 
-    loop:
+    bloop:
     ifreq = 500
 
     if p4 > 10 goto loop
@@ -58,7 +58,7 @@ instr 1
     ifreq = gambo.val0 > 300 ? 1000:5000
     iamp = gambo.val0
 
-    ; ib = ifreq
+    var:b = true
     iv add 1, iamp
 
     switch p4

@@ -86,6 +86,7 @@
     (score_exclamation)
     (score_np_operator)
     (score_pp_operator)
+    (boolean_var)
 ] @keyword
 
 (identifier) @variable
