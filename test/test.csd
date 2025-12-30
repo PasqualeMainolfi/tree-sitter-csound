@@ -53,7 +53,7 @@ instr 1
     loop:
     ifreq = 500
 
-    if p4 > 10 goto loop
+    if p4 > 10 goto oop
 
     ifreq = gambo.val0 > 300 ? 1000:5000
     iamp = gambo.val0
@@ -86,7 +86,7 @@ endin
 #define MACROINSTR # i1 #
 
 f 0 0 4097 10 1 1 1
-f 0 0 4097 10 1 1 1
+f 1 0 4097 10 1 1 1
 
 a 0 0 1
 
