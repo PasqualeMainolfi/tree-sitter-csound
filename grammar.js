@@ -31,14 +31,6 @@ module.exports = grammar({
         $.csd_file
       ),
 
-      // cs_legacy_file: $ => alias(
-      //   choice(
-      //     $.orchestra_file,
-      //     $.score_file,
-      //   ),
-      //   'cs_legacy_file'
-      // ),
-
       cs_legacy_file: $ => seq(
         alias(repeat(
           choice(
@@ -370,7 +362,7 @@ module.exports = grammar({
       udo_definition_legacy: $ => seq(
         $.kw_opcode,
         field('name', $.opcode_name),
-        optional(','),
+        ',',
         field('outputs', $.legacy_udo_args),
         ',',
         field('inputs', $.legacy_udo_args),
@@ -428,10 +420,10 @@ module.exports = grammar({
         field('struct_member', $.identifier)
       )),
 
-      xin_statement: $ => seq(
+      xin_statement: $ => prec.dynamic(10, seq(
         field('outputs', sep1($.type_identifier_legacy, ',')),
-        $.kw_xin
-      ),
+        $.kw_xin,
+      )),
 
       xout_statement: $ => choice(
         seq(
@@ -470,7 +462,7 @@ module.exports = grammar({
       )),
 
       opcode_statement: $ => choice(
-        prec(3, seq(
+        prec.dynamic(0, prec(3, seq(
           field('outputs', sep1(
             choice(
               $.typed_identifier,
@@ -485,11 +477,11 @@ module.exports = grammar({
             ),
             field('op_macro', $.macro_usage)
           )
-        )),
-        prec(2, seq(
+        ))),
+        prec.dynamic(0, prec(2, seq(
           field('op', $.opcode_name),
           field('inputs', optional($.argument_list))
-        ))
+        )))
       ),
 
       typed_identifier: $ => prec(5,
@@ -869,7 +861,10 @@ module.exports = grammar({
           field('statement_func', $.func_p1),
           field('statement_macro_func', $.macro_usage),
         ),
-        $._score_statement_func,
+        choice(
+          $._score_statement_func,
+          field('action_time', $._score_expression)
+        )
       ),
 
       // --- END SCORE SECTION ---

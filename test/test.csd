@@ -19,6 +19,7 @@ endop
 
 opcode add, ii, ii
     i1, i2 xin
+    klast init 0
     xout(i1, i2)
 endop
 

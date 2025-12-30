@@ -61,9 +61,6 @@
 (score_nestable_loop) @indent
 (score_nestable_loop "}" @outdent)
 
-(cabbage_block) @indent
-(cabbage_block (tag_cabbage_end) @outdent)
-
 (parenthesized_expression) @indent
 
 (function_call) @indent

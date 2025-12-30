@@ -3274,7 +3274,7 @@
       },
       "gen_id": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "identifier",
@@ -3348,7 +3348,7 @@
       },
       "n_points": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "identifier",
