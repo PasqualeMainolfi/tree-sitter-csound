@@ -14,6 +14,7 @@ autoexamples = false
 build = "bindings/rust/build.rs"
 include = [
   "bindings/rust/*",
+  "csound_data_parse/json_data/*",
   "grammar.js",
   "queries/*",
   "src/*",

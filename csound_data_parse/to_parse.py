@@ -134,9 +134,10 @@ FLAG_TEMPLATE = { "prefix": "", "body": "", "description": "" }
 BODY_MARK = r'(^-[-+a-zA-Z0-9_&#]+)'
 def generate_flags():
     flags = {}
-    with open(PATH_TO_FLAGS_ROOT, "r") as f:
+    with open(PATH_TO_FLAGS_ROOT, "r", encoding="utf-8") as f:
         lines = f.readlines()
-        for i in range(len(lines)):
+        i = 0
+        while i < len(lines):
             line = lines[i]
             if line.startswith(FLAG_ROW):
                 split_line = line.split(FLAG_ROW)
@@ -144,30 +145,33 @@ def generate_flags():
                 if flag not in flags:
                     flags[flag] = FLAG_TEMPLATE.copy()
                     if flag != FLAG_NO_CS7:
-                        flags[flag]["prefix"] = flag
+                        flags[flag]["prefix"] = html.unescape(flag.strip())
                         body = flag.split(",")[0]
                         body = re.findall(BODY_MARK, body)
-                        if body:
-                            flags[flag]["body"] = body[0]
 
+                        if body:
+                            flags[flag]["body"] = body[0].strip()
 
                         count = i + 1
+                        descr = []
                         while count < len(lines) and not lines[count].startswith(FLAG_ROW):
+                            line_content = lines[count]
+                            if line_content:
+                                descr.append(line_content)
                             count += 1
 
-                        description = ""
-                        for j in range(i + 1, count):
-                            description += f"{html.unescape(lines[j])}"
-
+                        description = " ".join(descr)
                         flags[flag]["description"] = description
 
                         print(flag)
                         print(body)
                         print(description)
                         i = count - 1
+                        continue
+            i += 1
 
-    with open("flags.json", "w") as fout:
-        json.dump(flags, fout, ensure_ascii=True, indent=4)
+    with open("json_data/flags.json", "w", encoding="utf-8") as fout:
+        json.dump(flags, fout, ensure_ascii=False, indent=4)
 
 def main() -> None:
     opcodes_files = os.listdir(PATH_TO_OPCODES_ROOT)
@@ -184,7 +188,7 @@ def main() -> None:
                 op = TEMPLATE.copy()
                 for i, line in enumerate(lines):
                     if line.startswith(NAME_FLAG):
-                        opnames = html.unescape(line.split(" ")[1])
+                        opnames = f"{html.unescape(line.split(' ')[1])}"
                         opnames = escape_dollar(prefix=opnames)
                         if opnames not in opcodes_dict:
                             name_line = i
@@ -215,7 +219,7 @@ def main() -> None:
                         while not description:
                             count_descr += 1
                             description = lines[count_descr]
-                        description = html.unescape(description)
+                        description = f"{html.unescape(description)}"
                         if regex.search(description):
                             description = regex.sub("", description)
                         opcodes_dict[opnames]["description"] = escape_dollar(prefix=description)
@@ -292,9 +296,9 @@ def main() -> None:
             else:
                 opcodes_dict[snippet] = value
 
-    with open("csound.json", "w", encoding="utf-8") as f:
+    with open("json_data/csound.json", "w", encoding="utf-8") as f:
         json.dump(opcodes_dict, f, ensure_ascii=True, indent=4)
-    with open("manual_indexes.json", "w", encoding="utf-8") as m:
+    with open("json_data/manual_indexes.json", "w", encoding="utf-8") as m:
         json.dump(opcode_indexes, m, ensure_ascii=True, indent=4)
 
 

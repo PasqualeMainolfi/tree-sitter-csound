@@ -13,7 +13,7 @@ nchnls = 2
 #define OSCMACRO(VOLUME' FREQ) # poscil($VOLUME, $FREQ) #
 
 opcode print_value(value:i, value1:i):(ii)
-    print(value, value1)
+     print(value, value1)
     xout(value, $PIG)
 endop
 
@@ -50,7 +50,7 @@ instr 1
 
     gambo:MyType init 8, 88
 
-    bloop:
+    loop:
     ifreq = 500
 
     if p4 > 10 goto loop
