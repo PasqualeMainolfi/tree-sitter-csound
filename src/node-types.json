@@ -20,6 +20,10 @@
           "named": true
         },
         {
+          "type": "boolean_var",
+          "named": true
+        },
+        {
           "type": "function_call",
           "named": true
         },
@@ -114,6 +118,10 @@
           "named": true
         },
         {
+          "type": "boolean_var",
+          "named": true
+        },
+        {
           "type": "function_call",
           "named": true
         },
@@ -182,6 +190,10 @@
         },
         {
           "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "boolean_var",
           "named": true
         },
         {
@@ -320,6 +332,10 @@
             "named": true
           },
           {
+            "type": "boolean_var",
+            "named": true
+          },
+          {
             "type": "function_call",
             "named": true
           },
@@ -392,6 +408,10 @@
           "named": true
         },
         {
+          "type": "boolean_var",
+          "named": true
+        },
+        {
           "type": "function_call",
           "named": true
         },
@@ -447,6 +467,25 @@
     "named": true,
     "extra": true,
     "fields": {}
+  },
+  {
+    "type": "boolean_var",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "kw_false",
+          "named": true
+        },
+        {
+          "type": "kw_true",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "cabbage_block",
@@ -585,6 +624,10 @@
         },
         {
           "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "boolean_var",
           "named": true
         },
         {
@@ -1058,6 +1101,10 @@
           "named": true
         },
         {
+          "type": "boolean_var",
+          "named": true
+        },
+        {
           "type": "control_statement",
           "named": true
         },
@@ -1244,6 +1291,10 @@
         },
         {
           "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "boolean_var",
           "named": true
         },
         {
@@ -1491,6 +1542,10 @@
           "named": true
         },
         {
+          "type": "boolean_var",
+          "named": true
+        },
+        {
           "type": "function_call",
           "named": true
         },
@@ -1599,6 +1654,10 @@
           },
           {
             "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "boolean_var",
             "named": true
           },
           {
@@ -1970,10 +2029,6 @@
           {
             "type": "identifier",
             "named": true
-          },
-          {
-            "type": "type_identifier",
-            "named": true
           }
         ]
       }
@@ -2041,6 +2096,10 @@
           },
           {
             "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "boolean_var",
             "named": true
           },
           {
@@ -2520,6 +2579,10 @@
         },
         {
           "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "boolean_var",
           "named": true
         },
         {
@@ -4011,6 +4074,10 @@
           "named": true
         },
         {
+          "type": "boolean_var",
+          "named": true
+        },
+        {
           "type": "case_block",
           "named": true
         },
@@ -4095,6 +4162,10 @@
         },
         {
           "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "boolean_var",
           "named": true
         },
         {
@@ -4214,6 +4285,10 @@
           },
           {
             "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "boolean_var",
             "named": true
           },
           {
@@ -4514,6 +4589,10 @@
           "named": true
         },
         {
+          "type": "boolean_var",
+          "named": true
+        },
+        {
           "type": "function_call",
           "named": true
         },
@@ -4605,6 +4684,10 @@
         },
         {
           "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "boolean_var",
           "named": true
         },
         {
@@ -4716,6 +4799,10 @@
         },
         {
           "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "boolean_var",
           "named": true
         },
         {
@@ -5095,6 +5182,10 @@
     "named": true
   },
   {
+    "type": "kw_false",
+    "named": true
+  },
+  {
     "type": "kw_fi",
     "named": true
   },
@@ -5188,6 +5279,10 @@
   },
   {
     "type": "kw_tif",
+    "named": true
+  },
+  {
+    "type": "kw_true",
     "named": true
   },
   {
