@@ -36,6 +36,9 @@ pub const NODE_TYPES: &str = include_str!("../../src/node-types.json");
 
 pub const HIGHLIGHTS_QUERY: &str = include_str!("../../queries/highlights.scm");
 pub const INJECTIONS_QUERY: &str = include_str!("../../queries/injections.scm");
+pub const CSOUND_OPCODES_QUERY: &str = include_str!("../../csound_data_parse/csound.json");
+pub const CSOUND_FLAGS_QUERY: &str = include_str!("../../csound_data_parse/flags.json");
+pub const CSOUND_MACRO_QUERY: &str = include_str!("../../csound_data_parse/macros.json");
 // pub const LOCALS_QUERY: &str = include_str!("../../queries/locals.scm");
 // pub const TAGS_QUERY: &str = include_str!("../../queries/tags.scm");
 
