@@ -136,7 +136,7 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "internal_code_block"
+          "name": "internal_raw_block"
         },
         {
           "type": "SYMBOL",
@@ -191,6 +191,10 @@
           },
           "named": true,
           "value": "identifier"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "typed_identifier"
         },
         {
           "type": "SYMBOL",
@@ -445,8 +449,12 @@
           ]
         },
         {
-          "type": "SYMBOL",
-          "name": "string"
+          "type": "FIELD",
+          "name": "included_file",
+          "content": {
+            "type": "SYMBOL",
+            "name": "string"
+          }
         }
       ]
     },
@@ -1231,23 +1239,23 @@
         }
       ]
     },
-    "internal_code_block": {
+    "internal_raw_block": {
       "type": "SEQ",
       "members": [
         {
           "type": "SYMBOL",
-          "name": "kw_open_code_block"
+          "name": "kw_open_raw_string"
         },
         {
           "type": "REPEAT",
           "content": {
             "type": "SYMBOL",
-            "name": "raw_code_script"
+            "name": "raw_text"
           }
         },
         {
           "type": "SYMBOL",
-          "name": "kw_close_code_block"
+          "name": "kw_close_raw_string"
         }
       ]
     },
@@ -2674,6 +2682,23 @@
         }
       ]
     },
+    "control_loop_body": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "break_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "continue_statement"
+        }
+      ]
+    },
     "endif_block": {
       "type": "CHOICE",
       "members": [
@@ -2747,7 +2772,7 @@
             "type": "REPEAT",
             "content": {
               "type": "SYMBOL",
-              "name": "_statement"
+              "name": "control_loop_body"
             }
           }
         ]
@@ -2764,7 +2789,7 @@
           "type": "REPEAT",
           "content": {
             "type": "SYMBOL",
-            "name": "_statement"
+            "name": "control_loop_body"
           }
         }
       ]
@@ -2823,7 +2848,7 @@
                     "type": "REPEAT",
                     "content": {
                       "type": "SYMBOL",
-                      "name": "_statement"
+                      "name": "control_loop_body"
                     }
                   }
                 },
@@ -2924,7 +2949,7 @@
           "type": "REPEAT",
           "content": {
             "type": "SYMBOL",
-            "name": "_statement"
+            "name": "control_loop_body"
           }
         },
         {
@@ -2952,7 +2977,7 @@
           "type": "REPEAT",
           "content": {
             "type": "SYMBOL",
-            "name": "_statement"
+            "name": "control_loop_body"
           }
         },
         {
@@ -2992,7 +3017,7 @@
           "type": "REPEAT",
           "content": {
             "type": "SYMBOL",
-            "name": "_statement"
+            "name": "control_loop_body"
           }
         },
         {
@@ -4079,19 +4104,43 @@
         }
       }
     },
-    "kw_open_code_block": {
-      "type": "TOKEN",
-      "content": {
-        "type": "STRING",
-        "value": "{{"
-      }
+    "kw_open_raw_string": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "TOKEN",
+          "content": {
+            "type": "STRING",
+            "value": "{{"
+          }
+        },
+        {
+          "type": "TOKEN",
+          "content": {
+            "type": "STRING",
+            "value": "R{"
+          }
+        }
+      ]
     },
-    "kw_close_code_block": {
-      "type": "TOKEN",
-      "content": {
-        "type": "STRING",
-        "value": "}}"
-      }
+    "kw_close_raw_string": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "TOKEN",
+          "content": {
+            "type": "STRING",
+            "value": "}}"
+          }
+        },
+        {
+          "type": "TOKEN",
+          "content": {
+            "type": "STRING",
+            "value": "}R"
+          }
+        }
+      ]
     },
     "kw_void": {
       "type": "TOKEN",
@@ -4302,6 +4351,28 @@
         "content": {
           "type": "STRING",
           "value": "in"
+        }
+      }
+    },
+    "break_statement": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 5,
+        "content": {
+          "type": "STRING",
+          "value": "break"
+        }
+      }
+    },
+    "continue_statement": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 5,
+        "content": {
+          "type": "STRING",
+          "value": "continue"
         }
       }
     },
@@ -4780,7 +4851,7 @@
         "value": 1,
         "content": {
           "type": "PATTERN",
-          "value": "(InstrDef|Instr|Opcode|Complex|[aikbSfw])(\\[\\])*"
+          "value": "(InstrDef|Instr|Opcode|OpcodeDef|Complex|[aikbSfw])(\\[\\])*"
         }
       }
     },
@@ -4893,21 +4964,24 @@
       }
     },
     "block_comment": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "/*"
-        },
-        {
-          "type": "PATTERN",
-          "value": "[^*]*\\*+([^/*][^*]*\\*+)*"
-        },
-        {
-          "type": "STRING",
-          "value": "/"
-        }
-      ]
+      "type": "TOKEN",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "PATTERN",
+            "value": "\\/\\*+"
+          },
+          {
+            "type": "PATTERN",
+            "value": "[\\s\\S]*?"
+          },
+          {
+            "type": "STRING",
+            "value": "*/"
+          }
+        ]
+      }
     },
     "tag_synthesizer_start": {
       "type": "TOKEN",
@@ -5206,7 +5280,7 @@
         }
       ]
     },
-    "raw_code_script": {
+    "raw_text": {
       "type": "CHOICE",
       "members": [
         {

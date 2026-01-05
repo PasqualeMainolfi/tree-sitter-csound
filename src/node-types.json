@@ -36,7 +36,7 @@
           "named": true
         },
         {
-          "type": "internal_code_block",
+          "type": "internal_raw_block",
           "named": true
         },
         {
@@ -65,6 +65,10 @@
         },
         {
           "type": "ternary_expression",
+          "named": true
+        },
+        {
+          "type": "typed_identifier",
           "named": true
         },
         {
@@ -134,7 +138,7 @@
           "named": true
         },
         {
-          "type": "internal_code_block",
+          "type": "internal_raw_block",
           "named": true
         },
         {
@@ -163,6 +167,10 @@
         },
         {
           "type": "ternary_expression",
+          "named": true
+        },
+        {
+          "type": "typed_identifier",
           "named": true
         },
         {
@@ -209,7 +217,7 @@
           "named": true
         },
         {
-          "type": "internal_code_block",
+          "type": "internal_raw_block",
           "named": true
         },
         {
@@ -238,6 +246,10 @@
         },
         {
           "type": "ternary_expression",
+          "named": true
+        },
+        {
+          "type": "typed_identifier",
           "named": true
         },
         {
@@ -348,7 +360,7 @@
             "named": true
           },
           {
-            "type": "internal_code_block",
+            "type": "internal_raw_block",
             "named": true
           },
           {
@@ -377,6 +389,10 @@
           },
           {
             "type": "ternary_expression",
+            "named": true
+          },
+          {
+            "type": "typed_identifier",
             "named": true
           },
           {
@@ -424,7 +440,7 @@
           "named": true
         },
         {
-          "type": "internal_code_block",
+          "type": "internal_raw_block",
           "named": true
         },
         {
@@ -456,17 +472,15 @@
           "named": true
         },
         {
+          "type": "typed_identifier",
+          "named": true
+        },
+        {
           "type": "unary_expression",
           "named": true
         }
       ]
     }
-  },
-  {
-    "type": "block_comment",
-    "named": true,
-    "extra": true,
-    "fields": {}
   },
   {
     "type": "boolean_var",
@@ -643,7 +657,7 @@
           "named": true
         },
         {
-          "type": "internal_code_block",
+          "type": "internal_raw_block",
           "named": true
         },
         {
@@ -679,7 +693,62 @@
           "named": true
         },
         {
+          "type": "typed_identifier",
+          "named": true
+        },
+        {
           "type": "unary_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "control_loop_body",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "assignment_statement",
+          "named": true
+        },
+        {
+          "type": "break_statement",
+          "named": true
+        },
+        {
+          "type": "continue_statement",
+          "named": true
+        },
+        {
+          "type": "control_statement",
+          "named": true
+        },
+        {
+          "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "label_statement",
+          "named": true
+        },
+        {
+          "type": "legacy_typed_assignment_statement",
+          "named": true
+        },
+        {
+          "type": "opcode_statement",
+          "named": true
+        },
+        {
+          "type": "struct_definition",
+          "named": true
+        },
+        {
+          "type": "typed_assignment_statement",
           "named": true
         }
       ]
@@ -1038,39 +1107,11 @@
       "required": true,
       "types": [
         {
-          "type": "assignment_statement",
-          "named": true
-        },
-        {
-          "type": "control_statement",
-          "named": true
-        },
-        {
-          "type": "function_call",
+          "type": "control_loop_body",
           "named": true
         },
         {
           "type": "kw_else",
-          "named": true
-        },
-        {
-          "type": "label_statement",
-          "named": true
-        },
-        {
-          "type": "legacy_typed_assignment_statement",
-          "named": true
-        },
-        {
-          "type": "opcode_statement",
-          "named": true
-        },
-        {
-          "type": "struct_definition",
-          "named": true
-        },
-        {
-          "type": "typed_assignment_statement",
           "named": true
         }
       ]
@@ -1093,10 +1134,6 @@
           "named": true
         },
         {
-          "type": "assignment_statement",
-          "named": true
-        },
-        {
           "type": "binary_expression",
           "named": true
         },
@@ -1105,7 +1142,7 @@
           "named": true
         },
         {
-          "type": "control_statement",
+          "type": "control_loop_body",
           "named": true
         },
         {
@@ -1121,7 +1158,7 @@
           "named": true
         },
         {
-          "type": "internal_code_block",
+          "type": "internal_raw_block",
           "named": true
         },
         {
@@ -1133,23 +1170,11 @@
           "named": true
         },
         {
-          "type": "label_statement",
-          "named": true
-        },
-        {
-          "type": "legacy_typed_assignment_statement",
-          "named": true
-        },
-        {
           "type": "macro_usage",
           "named": true
         },
         {
           "type": "number",
-          "named": true
-        },
-        {
-          "type": "opcode_statement",
           "named": true
         },
         {
@@ -1169,15 +1194,11 @@
           "named": true
         },
         {
-          "type": "struct_definition",
-          "named": true
-        },
-        {
           "type": "ternary_expression",
           "named": true
         },
         {
-          "type": "typed_assignment_statement",
+          "type": "typed_identifier",
           "named": true
         },
         {
@@ -1286,10 +1307,6 @@
           "named": true
         },
         {
-          "type": "assignment_statement",
-          "named": true
-        },
-        {
           "type": "binary_expression",
           "named": true
         },
@@ -1298,7 +1315,7 @@
           "named": true
         },
         {
-          "type": "control_statement",
+          "type": "control_loop_body",
           "named": true
         },
         {
@@ -1314,7 +1331,7 @@
           "named": true
         },
         {
-          "type": "internal_code_block",
+          "type": "internal_raw_block",
           "named": true
         },
         {
@@ -1334,23 +1351,11 @@
           "named": true
         },
         {
-          "type": "label_statement",
-          "named": true
-        },
-        {
-          "type": "legacy_typed_assignment_statement",
-          "named": true
-        },
-        {
           "type": "macro_usage",
           "named": true
         },
         {
           "type": "number",
-          "named": true
-        },
-        {
-          "type": "opcode_statement",
           "named": true
         },
         {
@@ -1370,15 +1375,11 @@
           "named": true
         },
         {
-          "type": "struct_definition",
-          "named": true
-        },
-        {
           "type": "ternary_expression",
           "named": true
         },
         {
-          "type": "typed_assignment_statement",
+          "type": "typed_identifier",
           "named": true
         },
         {
@@ -1558,7 +1559,7 @@
           "named": true
         },
         {
-          "type": "internal_code_block",
+          "type": "internal_raw_block",
           "named": true
         },
         {
@@ -1587,6 +1588,10 @@
         },
         {
           "type": "ternary_expression",
+          "named": true
+        },
+        {
+          "type": "typed_identifier",
           "named": true
         },
         {
@@ -1673,7 +1678,7 @@
             "named": true
           },
           {
-            "type": "internal_code_block",
+            "type": "internal_raw_block",
             "named": true
           },
           {
@@ -1705,6 +1710,10 @@
             "named": true
           },
           {
+            "type": "typed_identifier",
+            "named": true
+          },
+          {
             "type": "unary_expression",
             "named": true
           }
@@ -1725,35 +1734,7 @@
         "required": false,
         "types": [
           {
-            "type": "assignment_statement",
-            "named": true
-          },
-          {
-            "type": "control_statement",
-            "named": true
-          },
-          {
-            "type": "function_call",
-            "named": true
-          },
-          {
-            "type": "label_statement",
-            "named": true
-          },
-          {
-            "type": "legacy_typed_assignment_statement",
-            "named": true
-          },
-          {
-            "type": "opcode_statement",
-            "named": true
-          },
-          {
-            "type": "struct_definition",
-            "named": true
-          },
-          {
-            "type": "typed_assignment_statement",
+            "type": "control_loop_body",
             "named": true
           }
         ]
@@ -1878,9 +1859,20 @@
   {
     "type": "include_directive",
     "named": true,
-    "fields": {},
+    "fields": {
+      "included_file": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "string",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
         {
@@ -1889,10 +1881,6 @@
         },
         {
           "type": "kw_includestr",
-          "named": true
-        },
-        {
-          "type": "string",
           "named": true
         }
       ]
@@ -1996,7 +1984,7 @@
     }
   },
   {
-    "type": "internal_code_block",
+    "type": "internal_raw_block",
     "named": true,
     "fields": {},
     "children": {
@@ -2004,19 +1992,29 @@
       "required": true,
       "types": [
         {
-          "type": "kw_close_code_block",
+          "type": "kw_close_raw_string",
           "named": true
         },
         {
-          "type": "kw_open_code_block",
+          "type": "kw_open_raw_string",
           "named": true
         },
         {
-          "type": "raw_code_script",
+          "type": "raw_text",
           "named": true
         }
       ]
     }
+  },
+  {
+    "type": "kw_close_raw_string",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "kw_open_raw_string",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "label_statement",
@@ -2115,7 +2113,7 @@
             "named": true
           },
           {
-            "type": "internal_code_block",
+            "type": "internal_raw_block",
             "named": true
           },
           {
@@ -2144,6 +2142,10 @@
           },
           {
             "type": "ternary_expression",
+            "named": true
+          },
+          {
+            "type": "typed_identifier",
             "named": true
           },
           {
@@ -2598,7 +2600,7 @@
           "named": true
         },
         {
-          "type": "internal_code_block",
+          "type": "internal_raw_block",
           "named": true
         },
         {
@@ -2627,6 +2629,10 @@
         },
         {
           "type": "ternary_expression",
+          "named": true
+        },
+        {
+          "type": "typed_identifier",
           "named": true
         },
         {
@@ -2783,12 +2789,12 @@
     }
   },
   {
-    "type": "raw_code_script",
+    "type": "raw_script",
     "named": true,
     "fields": {}
   },
   {
-    "type": "raw_script",
+    "type": "raw_text",
     "named": true,
     "fields": {}
   },
@@ -4098,7 +4104,7 @@
           "named": true
         },
         {
-          "type": "internal_code_block",
+          "type": "internal_raw_block",
           "named": true
         },
         {
@@ -4135,6 +4141,10 @@
         },
         {
           "type": "ternary_expression",
+          "named": true
+        },
+        {
+          "type": "typed_identifier",
           "named": true
         },
         {
@@ -4181,7 +4191,7 @@
           "named": true
         },
         {
-          "type": "internal_code_block",
+          "type": "internal_raw_block",
           "named": true
         },
         {
@@ -4210,6 +4220,10 @@
         },
         {
           "type": "ternary_expression",
+          "named": true
+        },
+        {
+          "type": "typed_identifier",
           "named": true
         },
         {
@@ -4304,7 +4318,7 @@
             "named": true
           },
           {
-            "type": "internal_code_block",
+            "type": "internal_raw_block",
             "named": true
           },
           {
@@ -4333,6 +4347,10 @@
           },
           {
             "type": "ternary_expression",
+            "named": true
+          },
+          {
+            "type": "typed_identifier",
             "named": true
           },
           {
@@ -4605,7 +4623,7 @@
           "named": true
         },
         {
-          "type": "internal_code_block",
+          "type": "internal_raw_block",
           "named": true
         },
         {
@@ -4634,6 +4652,10 @@
         },
         {
           "type": "ternary_expression",
+          "named": true
+        },
+        {
+          "type": "typed_identifier",
           "named": true
         },
         {
@@ -4679,10 +4701,6 @@
           "named": true
         },
         {
-          "type": "assignment_statement",
-          "named": true
-        },
-        {
           "type": "binary_expression",
           "named": true
         },
@@ -4691,7 +4709,7 @@
           "named": true
         },
         {
-          "type": "control_statement",
+          "type": "control_loop_body",
           "named": true
         },
         {
@@ -4707,7 +4725,7 @@
           "named": true
         },
         {
-          "type": "internal_code_block",
+          "type": "internal_raw_block",
           "named": true
         },
         {
@@ -4723,23 +4741,11 @@
           "named": true
         },
         {
-          "type": "label_statement",
-          "named": true
-        },
-        {
-          "type": "legacy_typed_assignment_statement",
-          "named": true
-        },
-        {
           "type": "macro_usage",
           "named": true
         },
         {
           "type": "number",
-          "named": true
-        },
-        {
-          "type": "opcode_statement",
           "named": true
         },
         {
@@ -4759,15 +4765,11 @@
           "named": true
         },
         {
-          "type": "struct_definition",
-          "named": true
-        },
-        {
           "type": "ternary_expression",
           "named": true
         },
         {
-          "type": "typed_assignment_statement",
+          "type": "typed_identifier",
           "named": true
         },
         {
@@ -4794,10 +4796,6 @@
           "named": true
         },
         {
-          "type": "assignment_statement",
-          "named": true
-        },
-        {
           "type": "binary_expression",
           "named": true
         },
@@ -4806,7 +4804,7 @@
           "named": true
         },
         {
-          "type": "control_statement",
+          "type": "control_loop_body",
           "named": true
         },
         {
@@ -4822,7 +4820,7 @@
           "named": true
         },
         {
-          "type": "internal_code_block",
+          "type": "internal_raw_block",
           "named": true
         },
         {
@@ -4838,23 +4836,11 @@
           "named": true
         },
         {
-          "type": "label_statement",
-          "named": true
-        },
-        {
-          "type": "legacy_typed_assignment_statement",
-          "named": true
-        },
-        {
           "type": "macro_usage",
           "named": true
         },
         {
           "type": "number",
-          "named": true
-        },
-        {
-          "type": "opcode_statement",
           "named": true
         },
         {
@@ -4874,15 +4860,11 @@
           "named": true
         },
         {
-          "type": "struct_definition",
-          "named": true
-        },
-        {
           "type": "ternary_expression",
           "named": true
         },
         {
-          "type": "typed_assignment_statement",
+          "type": "typed_identifier",
           "named": true
         },
         {
@@ -5033,10 +5015,6 @@
     "named": false
   },
   {
-    "type": "/*",
-    "named": false
-  },
-  {
     "type": "/=",
     "named": false
   },
@@ -5089,6 +5067,10 @@
     "named": false
   },
   {
+    "type": "R{",
+    "named": false
+  },
+  {
     "type": "[",
     "named": false
   },
@@ -5101,9 +5083,22 @@
     "named": false
   },
   {
+    "type": "block_comment",
+    "named": true,
+    "extra": true
+  },
+  {
+    "type": "break_statement",
+    "named": true
+  },
+  {
     "type": "comment",
     "named": true,
     "extra": true
+  },
+  {
+    "type": "continue_statement",
+    "named": true
   },
   {
     "type": "flag_identifier",
@@ -5135,10 +5130,6 @@
   },
   {
     "type": "kw_case_key",
-    "named": true
-  },
-  {
-    "type": "kw_close_code_block",
     "named": true
   },
   {
@@ -5247,10 +5238,6 @@
   },
   {
     "type": "kw_opcode",
-    "named": true
-  },
-  {
-    "type": "kw_open_code_block",
     "named": true
   },
   {
@@ -5486,6 +5473,10 @@
     "named": false
   },
   {
+    "type": "{{",
+    "named": false
+  },
+  {
     "type": "|",
     "named": false
   },
@@ -5495,6 +5486,14 @@
   },
   {
     "type": "}",
+    "named": false
+  },
+  {
+    "type": "}R",
+    "named": false
+  },
+  {
+    "type": "}}",
     "named": false
   },
   {
