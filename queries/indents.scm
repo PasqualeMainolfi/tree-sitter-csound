@@ -7,8 +7,8 @@
 (udo_definition_modern) @indent
 (udo_definition_modern (kw_endop) @outdent)
 
-(internal_code_block
-    (kw_close_code_block) @outdent)
+(internal_raw_block
+    (kw_close_raw_string) @outdent)
 
 
 (if_statement) @indent
@@ -60,6 +60,8 @@
 
 (score_nestable_loop) @indent
 (score_nestable_loop "}" @outdent)
+(kw_open_raw_string) @indent
+(kw_close_raw_string) @outdent
 
 (parenthesized_expression) @indent
 

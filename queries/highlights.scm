@@ -87,6 +87,8 @@
     (score_np_operator)
     (score_pp_operator)
     (boolean_var)
+    (break_statement)
+    (continue_statement)
 ] @keyword
 
 (identifier) @variable
@@ -172,6 +174,8 @@
     "]"
     "{"
     "}"
+    (kw_open_raw_string)
+    (kw_close_raw_string)
 ] @punctuation.bracket
 
 (cabbage_statement . (identifier) @type)

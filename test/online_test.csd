@@ -11,10 +11,9 @@ nchnls = 2
 struct Foo val0:i, val1:i
 freq@global:i = 400
 
-
-obj_out:InstrDef = create({{
+obj_out:InstrDef = create(R{
     out(poscil(1, 440))
-}})
+}R)
 
 instr 1
 
@@ -47,6 +46,8 @@ instr 1
     for j in [1, 2, 3] do
         print(j)
     od
+
+    opcodeinfo(opc:OpcodeDef)
 
     sig:a = poscil(1, 440)
 

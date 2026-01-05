@@ -18,7 +18,6 @@ endop
 instr 1
 
     sig:a = poscil(1, 440)
-    out(sig, sig)
 
     switch p4
         case 1
@@ -31,6 +30,7 @@ instr 1
             print(0)
     endsw
 
+    out(sig, sig)
 
 endin
 

@@ -9,6 +9,8 @@ ksmps = 1
 nchnls = 2
 0dbfs = 1
 
+#include "test_udo.udo"
+
 #define PIG # 21 #
 #define OSCMACRO(VOLUME' FREQ) # poscil($VOLUME, $FREQ) #
 
@@ -49,29 +51,42 @@ instr 1
     afilter butbp:a filter + sig_middle, iamp, givalue
 
     gambo:MyType init 8, 88
+    cat:Cat init 0, 0
 
     loop:
     ifreq = 500
 
-    if p4 > 10 goto oop
+    if p4 > 10 goto loop
 
     ifreq = gambo.val0 > 300 ? 1000:5000
-    iamp = gambo.val0
+    iamp = cat.
 
     var:b = true
     iv add 1, iamp
 
+    break:
+    print(1)
+
     switch p4
         case 1
             print_value(1, 100)
+            for i in [1, 2, 3] do
+                if i == 2 then
+                    value_from_udo_file(1, $MACRO)
+                    break
+                endif
+            od
+
             goto loop
+
+
         case 2
             print(2)
         default
             print(3)
     endsw
 
-    outs(sig, sig)
+    out(sig, sig)
 endin
 
 instr 2
@@ -86,7 +101,7 @@ endin
 #define MACROINSTR # i1 #
 
 f 0 0 4097 10 1 1 1
-f 1 0 4097 10 1 1 1
+f 0 0 4097 10 1 1 1
 
 a 0 0 1
 

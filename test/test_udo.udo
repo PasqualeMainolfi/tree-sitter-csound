@@ -4,9 +4,29 @@ freq@global:i = init($M_LN2)
 gamp init 0
 givalue = 10
 
-opcode print_value(value:i, value1:i):(ii)
+struct Cat voice:i, body:k
+
+/*******************
+@opcode
+    value_from_udo_file
+
+@description
+    testing opcode info
+
+@inputs
+    value1
+    value
+
+@outputs
+    i, i
+
+@example
+    first:i, second:i = value_from_udo_file(1, 10)
+*********************/
+
+opcode value_from_udo_file(value:i, value1:i):(ii)
     print(value, value1)
-    xout(value, $MACRO) // add error with only $
+    xout(value, $MACRO)
 endop
 
 opcode add, ii, ii

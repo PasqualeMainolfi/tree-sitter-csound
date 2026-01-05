@@ -39,9 +39,6 @@ pub const INJECTIONS_QUERY: &str = include_str!("../../queries/injections.scm");
 // pub const LOCALS_QUERY: &str = include_str!("../../queries/locals.scm");
 // pub const TAGS_QUERY: &str = include_str!("../../queries/tags.scm");
 
-pub const CSOUND_OPCODES_QUERY: &str = include_str!("../../csound_json_data/csound.json");
-pub const CSOUND_FLAGS_QUERY: &str = include_str!("../../csound_json_data/flags.json");
-pub const CSOUND_MACROS_QUERY: &str = include_str!("../../csound_json_data/macros.json");
 
 #[cfg(test)]
 mod tests {
