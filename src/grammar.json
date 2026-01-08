@@ -707,6 +707,18 @@
       "type": "SEQ",
       "members": [
         {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "cabbage_block"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
           "type": "SYMBOL",
           "name": "tag_synthesizer_start"
         },
@@ -738,10 +750,6 @@
     "csd_element": {
       "type": "CHOICE",
       "members": [
-        {
-          "type": "SYMBOL",
-          "name": "cabbage_block"
-        },
         {
           "type": "SYMBOL",
           "name": "optional_tag_block"

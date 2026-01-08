@@ -984,10 +984,6 @@
       "required": true,
       "types": [
         {
-          "type": "cabbage_block",
-          "named": true
-        },
-        {
           "type": "instruments_block",
           "named": true
         },
@@ -1014,6 +1010,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "cabbage_block",
+          "named": true
+        },
         {
           "type": "csd_element",
           "named": true
