@@ -59,7 +59,7 @@ instr 1
     if p4 > 10 goto loop
 
     ifreq = gambo.val0 > 300 ? 1000:5000
-    iamp = cat.
+    iamp = cat.body
 
     var:b = true
     iv add 1, iamp
