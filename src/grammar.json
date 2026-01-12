@@ -4812,8 +4812,8 @@
         "type": "PREC",
         "value": 5,
         "content": {
-          "type": "STRING",
-          "value": "."
+          "type": "PATTERN",
+          "value": "(\\s+\\.\\s+)"
         }
       }
     },

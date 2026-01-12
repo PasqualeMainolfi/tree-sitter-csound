@@ -35,7 +35,7 @@ struct MyDog val:a
 instr 1
     ifreq = 400
     icall = 10
-    sig:a = poscil(1, 440)
+    sig:a = poscil(.7, 440)
     sig2:a[] = poscile(1, 400)
     sig3:a += poscil(1, 440 * 3)
     filter2:a = poscil(1, givalue)
