@@ -2401,11 +2401,6 @@
     }
   },
   {
-    "type": "number",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "opcode_name",
     "named": true,
     "fields": {
@@ -5471,6 +5466,10 @@
   },
   {
     "type": "macro_value",
+    "named": true
+  },
+  {
+    "type": "number",
     "named": true
   },
   {

@@ -772,6 +772,51 @@
         }
       ]
     },
+    "comment": {
+      "type": "TOKEN",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "STRING",
+                "value": ";"
+              },
+              {
+                "type": "STRING",
+                "value": "//"
+              }
+            ]
+          },
+          {
+            "type": "PATTERN",
+            "value": "[^\\n]*"
+          }
+        ]
+      }
+    },
+    "block_comment": {
+      "type": "TOKEN",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "/*"
+          },
+          {
+            "type": "PATTERN",
+            "value": "[^*]*\\*+([^/*][^*]*\\*+)*"
+          },
+          {
+            "type": "STRING",
+            "value": "/"
+          }
+        ]
+      }
+    },
     "cabbage_statement": {
       "type": "SEQ",
       "members": [
@@ -4812,8 +4857,8 @@
         "type": "PREC",
         "value": 5,
         "content": {
-          "type": "PATTERN",
-          "value": "(\\s+\\.\\s+)"
+          "type": "STRING",
+          "value": "."
         }
       }
     },
@@ -5070,25 +5115,36 @@
       }
     },
     "number": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "PATTERN",
-          "value": "\\d+"
-        },
-        {
-          "type": "PATTERN",
-          "value": "0[xX][0-9a-fA-F]+"
-        },
-        {
-          "type": "PATTERN",
-          "value": "\\d+\\.\\d+([eE][+-]?\\d+)?"
-        },
-        {
-          "type": "PATTERN",
-          "value": "\\d+[eE][+-]?\\d+"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 10,
+        "content": {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "PATTERN",
+              "value": "\\d+\\.\\d*([eE][+-]?\\d+)?"
+            },
+            {
+              "type": "PATTERN",
+              "value": "\\.\\d+([eE][+-]?\\d+)?"
+            },
+            {
+              "type": "PATTERN",
+              "value": "\\d+[eE][+-]?\\d+"
+            },
+            {
+              "type": "PATTERN",
+              "value": "\\d+"
+            },
+            {
+              "type": "PATTERN",
+              "value": "0[xX][0-9a-fA-F]+"
+            }
+          ]
         }
-      ]
+      }
     },
     "string": {
       "type": "SEQ",
@@ -5131,60 +5187,6 @@
           "name": "kw_false"
         }
       ]
-    },
-    "comment": {
-      "type": "TOKEN",
-      "content": {
-        "type": "CHOICE",
-        "members": [
-          {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "STRING",
-                "value": ";"
-              },
-              {
-                "type": "PATTERN",
-                "value": "[^\\n]*"
-              }
-            ]
-          },
-          {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "STRING",
-                "value": "//"
-              },
-              {
-                "type": "PATTERN",
-                "value": "[^\\n]*"
-              }
-            ]
-          }
-        ]
-      }
-    },
-    "block_comment": {
-      "type": "TOKEN",
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "PATTERN",
-            "value": "\\/\\*+"
-          },
-          {
-            "type": "PATTERN",
-            "value": "[\\s\\S]*?"
-          },
-          {
-            "type": "STRING",
-            "value": "*/"
-          }
-        ]
-      }
     },
     "tag_synthesizer_start": {
       "type": "TOKEN",
