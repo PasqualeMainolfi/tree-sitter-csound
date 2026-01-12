@@ -10565,7 +10565,8 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       END_STATE();
     case 672:
       ACCEPT_TOKEN(sym_flag_identifier);
-      if (lookahead == '-') ADVANCE(671);
+      if (lookahead == '+' ||
+          lookahead == '-') ADVANCE(671);
       END_STATE();
     case 673:
       ACCEPT_TOKEN(sym_instr_p1);

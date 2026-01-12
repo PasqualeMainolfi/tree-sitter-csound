@@ -4981,7 +4981,7 @@
         "value": 5,
         "content": {
           "type": "PATTERN",
-          "value": "--?"
+          "value": "-[-\\+]?"
         }
       }
     },
