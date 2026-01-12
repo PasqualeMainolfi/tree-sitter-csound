@@ -66,11 +66,6 @@
     (kw_switch_start)
     (kw_case_key)
     (kw_default_key)
-    (kw_return)
-    (kw_rireturn)
-    (kw_goto)
-    (kw_kgoto)
-    (kw_igoto)
     (kw_xin)
     (kw_xout)
     (kw_void)
@@ -188,6 +183,15 @@
     (typed_identifier
         name: (_) @function
         type: (_) @type))
+
+[
+  (return_statement)
+  (kw_reinit)
+  (kw_rigoto)
+  (kw_kgoto)
+  (kw_igoto)
+  (kw_goto)
+] @function
 
 (macro_usage
     macro_symbol: "$" @macro.emphasis.strong

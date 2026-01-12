@@ -1,5 +1,6 @@
 (instrument_definition) @indent
-(instrument_definition (kw_endin) @outdent)
+(instrument_definition
+  (bounded_error (kw_endin) @outdent))
 
 (udo_definition_legacy) @indent
 (udo_definition_legacy (kw_endop) @outdent)
@@ -10,27 +11,16 @@
 (internal_raw_block
     (kw_close_raw_string) @outdent)
 
-
 (if_statement) @indent
 (if_statement
-  [
-    (kw_then)
-    (kw_ithen)
-    (kw_kthen)
-  ] @indent
-)
-
-(if_statement
-    then_goto: (goto_statement) @indent)
+    (then_block) @indent)
 
 [
     (kw_endif)
     (kw_fi)
     (else_block)
     (elseif_block)
-    (return_statement)
 ] @outdent
-
 
 (else_block) @indent
 (elseif_block) @indent

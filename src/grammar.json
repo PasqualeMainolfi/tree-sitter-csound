@@ -98,7 +98,15 @@
         },
         {
           "type": "SYMBOL",
+          "name": "rigoto_statement"
+        },
+        {
+          "type": "SYMBOL",
           "name": "struct_definition"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "return_statement"
         }
       ]
     },
@@ -244,10 +252,6 @@
         {
           "type": "SYMBOL",
           "name": "goto_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "return_statement"
         }
       ]
     },
@@ -1095,6 +1099,39 @@
         }
       ]
     },
+    "return_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "kw_return"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "("
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": ")"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
     "instruments_block": {
       "type": "SEQ",
       "members": [
@@ -1243,7 +1280,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "kw_endin"
+          "name": "bounded_error"
         }
       ]
     },
@@ -1351,8 +1388,17 @@
           ]
         },
         {
-          "type": "SYMBOL",
-          "name": "kw_endop"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "kw_endop"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "bounded_error"
+            }
+          ]
         }
       ]
     },
@@ -1411,8 +1457,17 @@
           ]
         },
         {
-          "type": "SYMBOL",
-          "name": "kw_endop"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "kw_endop"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "bounded_error"
+            }
+          ]
         }
       ]
     },
@@ -2741,21 +2796,78 @@
           ]
         },
         {
-          "type": "SYMBOL",
-          "name": "label_statement"
-        }
-      ]
-    },
-    "return_statement": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "kw_return"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "("
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         },
         {
           "type": "SYMBOL",
-          "name": "kw_rireturn"
+          "name": "label_statement"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": ")"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "rigoto_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "kw_rigoto"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "kw_reinit"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "("
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "label_statement"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": ")"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         }
       ]
     },
@@ -2802,6 +2914,23 @@
         }
       ]
     },
+    "then_block": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "kw_then"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kw_ithen"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kw_kthen"
+        }
+      ]
+    },
     "if_statement": {
       "type": "SEQ",
       "members": [
@@ -2833,60 +2962,61 @@
               "type": "SEQ",
               "members": [
                 {
-                  "type": "CHOICE",
-                  "members": [
-                    {
-                      "type": "SYMBOL",
-                      "name": "kw_then"
-                    },
-                    {
-                      "type": "SYMBOL",
-                      "name": "kw_ithen"
-                    },
-                    {
-                      "type": "SYMBOL",
-                      "name": "kw_kthen"
-                    }
-                  ]
-                },
-                {
-                  "type": "FIELD",
-                  "name": "then_block",
-                  "content": {
-                    "type": "REPEAT",
-                    "content": {
-                      "type": "SYMBOL",
-                      "name": "control_loop_body"
-                    }
-                  }
-                },
-                {
-                  "type": "CHOICE",
-                  "members": [
-                    {
-                      "type": "SYMBOL",
-                      "name": "elseif_block"
-                    },
-                    {
-                      "type": "BLANK"
-                    }
-                  ]
-                },
-                {
-                  "type": "CHOICE",
-                  "members": [
-                    {
-                      "type": "SYMBOL",
-                      "name": "else_block"
-                    },
-                    {
-                      "type": "BLANK"
-                    }
-                  ]
-                },
-                {
                   "type": "SYMBOL",
-                  "name": "endif_block"
+                  "name": "then_block"
+                },
+                {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "FIELD",
+                      "name": "then_body",
+                      "content": {
+                        "type": "REPEAT",
+                        "content": {
+                          "type": "SYMBOL",
+                          "name": "control_loop_body"
+                        }
+                      }
+                    },
+                    {
+                      "type": "CHOICE",
+                      "members": [
+                        {
+                          "type": "SYMBOL",
+                          "name": "elseif_block"
+                        },
+                        {
+                          "type": "BLANK"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "CHOICE",
+                      "members": [
+                        {
+                          "type": "SYMBOL",
+                          "name": "else_block"
+                        },
+                        {
+                          "type": "BLANK"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "CHOICE",
+                      "members": [
+                        {
+                          "type": "SYMBOL",
+                          "name": "endif_block"
+                        },
+                        {
+                          "type": "SYMBOL",
+                          "name": "bounded_error"
+                        }
+                      ]
+                    }
+                  ]
                 }
               ]
             },
@@ -2897,8 +3027,17 @@
                   "type": "FIELD",
                   "name": "then_goto",
                   "content": {
-                    "type": "SYMBOL",
-                    "name": "goto_statement"
+                    "type": "CHOICE",
+                    "members": [
+                      {
+                        "type": "SYMBOL",
+                        "name": "goto_statement"
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "rigoto_statement"
+                      }
+                    ]
                   }
                 },
                 {
@@ -2914,18 +3053,6 @@
                           "name": "goto_statement"
                         }
                       }
-                    },
-                    {
-                      "type": "BLANK"
-                    }
-                  ]
-                },
-                {
-                  "type": "CHOICE",
-                  "members": [
-                    {
-                      "type": "SYMBOL",
-                      "name": "return_statement"
                     },
                     {
                       "type": "BLANK"
@@ -2961,8 +3088,17 @@
           }
         },
         {
-          "type": "SYMBOL",
-          "name": "kw_od"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "kw_od"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "bounded_error"
+            }
+          ]
         }
       ]
     },
@@ -2989,8 +3125,17 @@
           }
         },
         {
-          "type": "SYMBOL",
-          "name": "kw_od"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "kw_od"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "bounded_error"
+            }
+          ]
         }
       ]
     },
@@ -3029,8 +3174,17 @@
           }
         },
         {
-          "type": "SYMBOL",
-          "name": "kw_od"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "kw_od"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "bounded_error"
+            }
+          ]
         }
       ]
     },
@@ -3082,8 +3236,17 @@
           ]
         },
         {
-          "type": "SYMBOL",
-          "name": "kw_switch_end"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "kw_switch_end"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "bounded_error"
+            }
+          ]
         }
       ]
     },
@@ -4057,6 +4220,27 @@
         }
       ]
     },
+    "bounded_error": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "kw_endin"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kw_instr"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kw_opcode"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "tag_instruments_end"
+        }
+      ]
+    },
     "kw_instr": {
       "type": "TOKEN",
       "content": {
@@ -4461,25 +4645,36 @@
         }
       }
     },
+    "kw_rigoto": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 5,
+        "content": {
+          "type": "STRING",
+          "value": "rigoto"
+        }
+      }
+    },
     "kw_return": {
       "type": "TOKEN",
       "content": {
         "type": "PREC",
         "value": 5,
         "content": {
-          "type": "STRING",
-          "value": "return"
+          "type": "PATTERN",
+          "value": "(return|rireturn)"
         }
       }
     },
-    "kw_rireturn": {
+    "kw_reinit": {
       "type": "TOKEN",
       "content": {
         "type": "PREC",
         "value": 5,
         "content": {
           "type": "STRING",
-          "value": "rireturn"
+          "value": "reinit"
         }
       }
     },
