@@ -992,7 +992,7 @@ module.exports = grammar({
     identifier:                 $ => /[a-zA-Z_]\w*/,
     plus_identifier:            $ => /\+[a-zA-Z_]\w*/,
     mod_equal:                  $ => seq('%', '='),
-    flag_identifier:            $ => token(prec(5, /--?/)),
+    flag_identifier:            $ => token(prec(5, /-[-\+]?/)),
     instr_p1:                   $ => token(prec(6, /i(?:\d+(?:\.\d+)?|"(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*')/)),
     func_p1:                    $ => token(prec(6, /f(?:\d+)/)),
 
