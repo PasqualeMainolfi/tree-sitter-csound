@@ -52,7 +52,9 @@ module.exports = grammar({
       $.opcode_statement,
       $.label_statement,
       $.control_statement,
+      $.rigoto_statement,
       $.struct_definition,
+      $.return_statement
     ),
 
     _lvalue: $ => choice(
@@ -76,11 +78,9 @@ module.exports = grammar({
       $.boolean_var,
       $.string,
       alias(choice(
-        $.identifier,
-        $.type_identifier_legacy,
-      ),
-        $.identifier
-      ),
+          $.identifier,
+          $.type_identifier_legacy,
+        ), $.identifier),
       $.typed_identifier,
       $.array_access,
       $.struct_access,
@@ -96,7 +96,6 @@ module.exports = grammar({
       $.for_loop,
       $.switch_statement,
       $.goto_statement,
-      $.return_statement
     ),
 
     _orchestra_statement: $ => choice(
@@ -314,6 +313,12 @@ module.exports = grammar({
 
     // --- ORCHESTRA BLOCK ---
 
+    return_statement: $ => seq(
+      $.kw_return,
+      optional('('),
+      optional(')'),
+    ),
+
     instruments_block: $ => seq(
       $.tag_instruments_start,
       optional($.orchestra_file),
@@ -340,14 +345,16 @@ module.exports = grammar({
 
     instrument_definition: $ => seq(
       $.kw_instr,
-      field('name', sep1(choice(
-        $.identifier,
-        $.number,
-        $.plus_identifier
-      ), ','
+      field('name', sep1(
+        choice(
+          $.identifier,
+          $.number,
+          $.plus_identifier
+        ),
+        ','
       )),
       repeat($._statement),
-      $.kw_endin
+      $.bounded_error
     ),
 
     internal_raw_block: $ => seq(
@@ -371,7 +378,10 @@ module.exports = grammar({
       optional($.xin_statement),
       repeat($._statement),
       optional($.xout_statement),
-      $.kw_endop
+      choice(
+        $.kw_endop,
+        $.bounded_error
+      )
     ),
 
     udo_definition_modern: $ => seq(
@@ -382,7 +392,10 @@ module.exports = grammar({
       field('outputs', $.modern_udo_outputs),
       repeat($._statement),
       optional($.xout_statement),
-      $.kw_endop
+      choice(
+        $.kw_endop,
+        $.bounded_error
+      )
     ),
 
     modern_udo_inputs: $ => seq(
@@ -571,12 +584,19 @@ module.exports = grammar({
         $.kw_igoto,
         $.kw_kgoto
       ),
-      $.label_statement
+      optional('('),
+      $.label_statement,
+      optional(')')
     ),
 
-    return_statement: $ => choice(
-      $.kw_return,
-      $.kw_rireturn
+    rigoto_statement: $ => seq(
+      choice(
+        $.kw_rigoto,
+        $.kw_reinit,
+      ),
+      optional('('),
+      $.label_statement,
+      optional(')')
     ),
 
     elseif_block: $ => repeat1(
@@ -593,25 +613,31 @@ module.exports = grammar({
       repeat($.control_loop_body)
     ),
 
+    then_block: $ => choice(
+        $.kw_then,
+        $.kw_ithen,
+        $.kw_kthen
+    ),
+
     if_statement: $ => seq(
       choice($.kw_if, $.kw_tif),
       field('condition', $._expression),
       choice(
         seq(
-          choice(
-              $.kw_then,
-              $.kw_ithen,
-              $.kw_kthen
-          ),
-          field('then_block', repeat($.control_loop_body)),
-          optional($.elseif_block),
-          optional($.else_block),
-          $.endif_block
+          $.then_block,
+          seq(
+            field('then_body', repeat($.control_loop_body)),
+            optional($.elseif_block),
+            optional($.else_block),
+            choice(
+              $.endif_block,
+              $.bounded_error
+            )
+          )
         ),
         seq(
-          field('then_goto', $.goto_statement),
-          optional(field('else_goto', repeat($.goto_statement))),
-          optional($.return_statement)
+          field('then_goto', choice($.goto_statement, $.rigoto_statement)),
+          optional(field('else_goto', repeat($.goto_statement)))
         )
       )
     ),
@@ -621,7 +647,10 @@ module.exports = grammar({
       $._expression,
       $.kw_do,
       repeat($.control_loop_body),
-      $.kw_od
+      choice(
+        $.kw_od,
+        $.bounded_error
+      )
     ),
 
     until_loop: $ => seq(
@@ -629,7 +658,10 @@ module.exports = grammar({
       $._expression,
       $.kw_do,
       repeat($.control_loop_body),
-      $.kw_od
+      choice(
+        $.kw_od,
+        $.bounded_error
+      )
     ),
 
     for_loop: $ => seq(
@@ -639,7 +671,10 @@ module.exports = grammar({
       $._expression,
       $.kw_do,
       repeat($.control_loop_body),
-      $.kw_od
+      choice(
+        $.kw_od,
+        $.bounded_error
+      )
     ),
 
     case_header: $ => seq(
@@ -654,7 +689,10 @@ module.exports = grammar({
       $._expression,
       repeat($.case_block),
       optional($.default_block),
-      $.kw_switch_end
+      choice(
+        $.kw_switch_end,
+        $.bounded_error
+      )
     ),
 
     case_block: $ => prec.left(1, seq(
@@ -877,7 +915,15 @@ module.exports = grammar({
 
     // --- END SCORE SECTION ---
 
+    bounded_error: $ => choice(
+      $.kw_endin,
+      $.kw_instr,
+      $.kw_opcode,
+      $.tag_instruments_end
+    ),
+
     // --- KEYWORDS ---
+
 
     kw_instr:                   $ => token(prec(5, 'instr')),
     kw_endin:                   $ => token(prec(5, 'endin')),
@@ -915,8 +961,9 @@ module.exports = grammar({
     kw_goto:                    $ => token(prec(5, 'goto')),
     kw_kgoto:                   $ => token(prec(5, 'kgoto')),
     kw_igoto:                   $ => token(prec(5, 'igoto')),
-    kw_return:                  $ => token(prec(5, 'return')),
-    kw_rireturn:                $ => token(prec(5, 'rireturn')),
+    kw_rigoto:                  $ => token(prec(5, 'rigoto')),
+    kw_return:                  $ => token(prec(5, /(return|rireturn)/)),
+    kw_reinit:                  $ => token(prec(5, 'reinit')),
     kw_include:                 $ => token(prec(5, '#include')),
     kw_includestr:              $ => token(prec(5, '#includestr')),
     kw_define :                 $ => token(prec(5, '#define')),

@@ -4,35 +4,36 @@
 </CsOptions>
 <CsInstruments>
 
-sr = 44100
-ksmps = 1
-nchnls = 2
-0dbfs = 1
+#include "test.orc"
+; sr = 44100
+; ksmps = 1
+; nchnls = 2
+; 0dbfs = 1
 
-opcode add, ii, ii
-    i1, Skey, i2 xin
-    klast init 0
-    xout(i1, i2)
-endop
+; opcode add, ii, ii
+;     i1, Skey, i2 xin
+;     klast init 0
+;     xout(i1, i2)
+; endop
 
-instr 1
+; instr 1
 
-    sig:a = poscil(1, 440)
+;     sig:a = poscil(1, 440)
 
-    switch p4
-        case 1
-            print(1)
-        case 2
-            print(2)
-        case 3
-            print(3)
-        default
-            print(0)
-    endsw
+;     switch p4
+;         case 1
+;             print(1)
+;         case 2
+;             print(2)
+;         case 3
+;             print(3)
+;         default
+;             print(0)
+;     endsw
 
-    out(sig, sig)
+;     out(sig, sig)
 
-endin
+; endin
 
 
 </CsInstruments>

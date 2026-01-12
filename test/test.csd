@@ -56,13 +56,18 @@ instr 1
     loop:
     ifreq = 500
 
-    if p4 > 10 goto loop
-
     ifreq = gambo.val0 > 300 ? 1000:5000
     iamp = cat.body
 
+
+    goto(label)
+
     var:b = true
     iv add 1, iamp
+
+    if p4 then
+        print(1)
+    endif
 
     break:
     print(1)
@@ -76,9 +81,7 @@ instr 1
                     break
                 endif
             od
-
             goto loop
-
 
         case 2
             print(2)
@@ -91,8 +94,7 @@ endin
 
 instr 2
     ifreq = 200
-    iamp = 300
-
+    iamp = 300 // controllare se non sono variabili globali lo scope non può essere globale
 endin
 
 </CsInstruments>
