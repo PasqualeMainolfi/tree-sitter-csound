@@ -57,7 +57,7 @@ instr 1
     ifreq = 500
 
     ifreq = gambo.val0 > 300 ? 1000:5000
-    iamp = cat.body
+    iamp = cat
 
 
     goto(label)
@@ -92,9 +92,20 @@ instr 1
     out(sig, sig)
 endin
 
+/**
+* multiline
+* multiline
+* multiline
+* multiline
+**/ 
+
+/* test */
+
+gi_chain = 0
+
 instr 2
     ifreq = 200
-    iamp = 300 // controllare se non sono variabili globali lo scope non può essere globale
+    iamp = 300 // ok test comment
 endin
 
 </CsInstruments>
@@ -118,7 +129,7 @@ $MACROINSTR.  0   1  [ 110 + 220 ]
 $MACROINSTR.  +   .  [ 330 - 55 ]
 i1  +   .  [ 44 * 10 ]
 i1  +   .  [ 1100 + 2 ]
-h 1  +   <  [ 5 ^ 4 ]
+h 1  +   <  [ 5 ^ 4 ] 
 i 1  +   .  [ 5660 % 1000 ]
 i 1  +   .  [ 110 & 220 ]
 i 1  +   .  [ 110 | 220 ]

@@ -56,10 +56,10 @@ endin
 
 instr 2
   ;; set and get
-  if timeinstk() > 1 kgoto perf    ;; this starts at 1
+  if timeinstk() > 1 kgoto perf    ; this starts at 1
 
   imaxcnt = 100
-  idict dict_new "ss"
+  idict dict_new "ss" 
 
   kcnt = 0
   while kcnt < imaxcnt do
@@ -153,7 +153,7 @@ instr 5
   ; dicts can be passed between instruments
   ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  if timeinstk() > 1 goto perf
+  if timeinstk() > 1 kgoto perf
 
   ; create a dict which survives this note
   idict1 dict_new "sf", 1

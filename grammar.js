@@ -217,6 +217,20 @@ module.exports = grammar({
       $.score_block
     ),
 
+    comment: $ => token(seq(
+      choice(
+        ';',
+        '//'
+      ),
+      /[^\n]*/,
+    )),
+
+    block_comment: $ => token(seq(
+      '/*',
+      /[^*]*\*+([^/*][^*]*\*+)*/,
+      '/')
+    ),
+
     // --- END GENERAL SECTION ---
 
     // --- CABBAGE SECTION ---
@@ -976,7 +990,7 @@ module.exports = grammar({
     legacy_udo_args:            $ => token(/[a-zA-Z0-9_\[\]]+/),
     struct_name:                $ => token(prec(5, /[a-zA-Z0-9_]+/)),
     header_identifier:          $ => token(prec(10, /(sr|kr|ksmps|nchnls|nchnls_i|0dbfs)/)),
-    score_carry:                $ => token(prec(5, /(\s+\.\s+)/)),
+    score_carry:                $ => token(prec(5, '.')),
     score_plus:                 $ => token(prec(5, '+')),
     score_plus_p_operator:      $ => token(prec(5, /\^\+/)),
     score_minus_p_operator:     $ => token(prec(5, /\^-/)),
@@ -1003,11 +1017,9 @@ module.exports = grammar({
     global_keyword:             $ => token('@global'),
     type_identifier:            $ => token(prec(1, /(InstrDef|Instr|Opcode|OpcodeDef|Complex|[aikbSfw])(\[\])*/)),
     type_identifier_legacy:     $ => token(prec(2, /g?[aikbSfw][a-zA-Z0-9_\[\]]*/)),
-    number:                     $ => choice(/\d+/, /0[xX][0-9a-fA-F]+/, /\d+\.\d+([eE][+-]?\d+)?/, /\d+[eE][+-]?\d+/),
+    number:                     $ => token(prec(10, choice(/\d+\.\d*([eE][+-]?\d+)?/, /\.\d+([eE][+-]?\d+)?/, /\d+[eE][+-]?\d+/, /\d+/, /0[xX][0-9a-fA-F]+/))),
     string:                     $ => seq('"', repeat(choice(/[^"\\\n]+/, /\\./)), '"'),
     boolean_var:                $ => choice($.kw_true, $.kw_false),
-    comment:                    $ => token(choice(seq(';', /[^\n]*/), seq('//', /[^\n]*/))),
-    block_comment:              $ => token(seq(/\/\*+/, /[\s\S]*?/, '*/')),
     tag_synthesizer_start:      $ => token(prec(10, /<CsoundSynthesi[sz]er>/)),
     tag_synthesizer_end:        $ => token(prec(10, /<\/CsoundSynthesi[sz]er>/)),
     tag_options_start:          $ => token(prec(10, /<CsOptions>/)),
