@@ -5517,6 +5517,26 @@
     "_whitespace": {
       "type": "PATTERN",
       "value": "\\s+"
+    },
+    "_line_continuation": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "\\"
+            },
+            {
+              "type": "PATTERN",
+              "value": "\\s*\\r?\\n"
+            }
+          ]
+        }
+      }
     }
   },
   "extras": [
@@ -5531,6 +5551,10 @@
     {
       "type": "SYMBOL",
       "name": "block_comment"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_line_continuation"
     }
   ],
   "conflicts": [

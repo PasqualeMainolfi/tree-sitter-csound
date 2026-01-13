@@ -4,7 +4,7 @@
 module.exports = grammar({
     name: 'csound',
     word: $ => $.type_identifier_legacy,
-    extras: $ => [/\s/, $.comment, $.block_comment],
+    extras: $ => [/\s/, $.comment, $.block_comment, $._line_continuation],
     conflicts: $ => [
       [$.xin_statement, $.opcode_statement, $.legacy_typed_assignment_statement],
       [$.legacy_typed_assignment_statement, $.opcode_statement],
@@ -1051,6 +1051,9 @@ module.exports = grammar({
 
     _new_line:                  $ => token(/\r?\n/),
     _whitespace:                $ => /\s+/,
+    _line_continuation:         $ => token(prec(1, seq('\\', /\s*\r?\n/))),
+
+
 
     // --- END KEYWORDS ---
 

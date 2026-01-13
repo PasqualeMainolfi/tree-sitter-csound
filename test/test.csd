@@ -14,6 +14,8 @@ nchnls = 2
 #define PIG # 21 #
 #define OSCMACRO(VOLUME' FREQ) # poscil($VOLUME, $FREQ) #
 
+osc_handle@global:i = OSCinit(8080)
+
 opcode print_value(value:i, value1:i):(ii)
      print(value, value1)
     xout(value, $PIG)
@@ -97,7 +99,7 @@ endin
 * multiline
 * multiline
 * multiline
-**/ 
+**/
 
 /* test */
 
@@ -106,6 +108,14 @@ gi_chain = 0
 instr 2
     ifreq = 200
     iamp = 300 // ok test comment
+
+    movement:k = init(0)
+    OSClisten(osc_handle, "/dev", "f", movement)
+
+    notes:i[] = fillarray(0, 2, 4, \
+        5, 6
+    )
+
 endin
 
 </CsInstruments>
@@ -129,7 +139,7 @@ $MACROINSTR.  0   1  [ 110 + 220 ]
 $MACROINSTR.  +   .  [ 330 - 55 ]
 i1  +   .  [ 44 * 10 ]
 i1  +   .  [ 1100 + 2 ]
-h 1  +   <  [ 5 ^ 4 ] 
+h 1  +   <  [ 5 ^ 4 ]
 i 1  +   .  [ 5660 % 1000 ]
 i 1  +   .  [ 110 & 220 ]
 i 1  +   .  [ 110 | 220 ]

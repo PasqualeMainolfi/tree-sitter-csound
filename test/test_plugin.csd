@@ -29,7 +29,7 @@ instr 1
   dict_free idict
 
   ; set key a key:value pair
-  dict_set idict, "bar", 123
+  dict_set idict, "bar", 123 
 
   ; retrieve teh value
   kbar dict_get idict, "bar"
