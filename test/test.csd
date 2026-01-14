@@ -17,7 +17,7 @@ nchnls = 2
 osc_handle@global:i = OSCinit(8080)
 
 opcode print_value(value:i, value1:i):(ii)
-     print(value, value1)
+    print(value, value1)
     xout(value, $PIG)
 endop
 
@@ -61,11 +61,13 @@ instr 1
     ifreq = gambo.val0 > 300 ? 1000:5000
     iamp = cat
 
-
     goto(label)
 
     var:b = true
+
     iv add 1, iamp
+    struct_name:i = poscil(40, 400)
+    instr_name:i = poscil(40, 400)
 
     if p4 then
         print(1)
@@ -105,7 +107,7 @@ endin
 
 gi_chain = 0
 
-instr 2
+instr S1 // resolve this
     ifreq = 200
     iamp = 300 // ok test comment
 
@@ -124,7 +126,6 @@ endin
 #define MACROINSTR # i1 #
 
 f 0 0 4097 10 1 1 1
-f 0 0 4097 10 1 1 1
 
 a 0 0 1
 
@@ -132,18 +133,19 @@ a 0 0 1
     { 8 PARTIAL
         i 1 [0.5 * $CNT.] [@@3 + ($CNT * 0.2)]  [500 + (~ * 200)]  [800 + (200 * $CNT.) + ($PARTIAL. * 20)]
     }
-
 }
 
-$MACROINSTR.  0   1  [ 110 + 220 ]
+$MACROINSTR.  0 1 [ 110 + 220 ]
 $MACROINSTR.  +   .  [ 330 - 55 ]
-i1  +   .  [ 44 * 10 ]
+i1.5  +   .  [ 44 * 10 ]
 i1  +   .  [ 1100 + 2 ]
 h 1  +   <  [ 5 ^ 4 ]
 i 1  +   .  [ 5660 % 1000 ]
 i 1  +   .  [ 110 & 220 ]
 i 1  +   .  [ 110 | 220 ]
 i 1  +   .  [ 110 # 220 ]
+
+i "S1" 10 1 10
 
 e
 </CsScore>

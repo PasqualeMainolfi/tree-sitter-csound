@@ -8,8 +8,8 @@ ksmps = 1
 nchnls = 2
 0dbfs = 1
 
-struct Foo val0:i, val1:i
 freq@global:i = 400
+struct Foo val0:i, val1:i
 
 obj_out:InstrDef = create(R{
     out(poscil(1, 440))

@@ -19,8 +19,16 @@
 (udo_definition_legacy inputs: (_) @type)
 (udo_definition_legacy outputs: (_) @type)
 (udo_definition_modern outputs: (_) @type)
+(udo_definition_legacy "opcode" @keyword)
+(udo_definition_modern "opcode" @keyword)
+(udo_definition_legacy "endop" @keyword)
+(udo_definition_modern "endop" @keyword)
 
+(instrument_definition "instr" @keyword.emphasis.strong)
 (instrument_definition name: (_) @entity.name.function)
+
+(instrument_definition
+  (bounded_error "endin" @keyword.emphasis.strong))
 
 (comment) @comment
 (block_comment) @comment
@@ -32,9 +40,8 @@
     (pfield)
 ] @constant.builtin.emphasis
 
+
 [
-    (kw_instr)
-    (kw_endin)
     (kw_include)
     (kw_includestr)
     (kw_define)
@@ -46,9 +53,6 @@
 ] @keyword.emphasis.strong
 
 [
-    (kw_opcode)
-    (kw_endop)
-    (kw_struct)
     (kw_if )
     (kw_then)
     (kw_ithen)
@@ -88,9 +92,14 @@
 
 (identifier) @variable
 
-(struct_name) @type
+(struct_definition
+  struct_name: (identifier) @type)
+
 (struct_definition struct_field: (typed_identifier
     name: (identifier) @variable))
+
+(struct_definition
+    "struct" @keyword)
 
 (struct_access
     called_struct: (_) @variable

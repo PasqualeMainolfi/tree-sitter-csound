@@ -29,7 +29,7 @@ instr 1
   dict_free idict
 
   ; set key a key:value pair
-  dict_set idict, "bar", 123 
+  dict_set idict, "bar", 123
 
   ; retrieve teh value
   kbar dict_get idict, "bar"
@@ -59,7 +59,7 @@ instr 2
   if timeinstk() > 1 kgoto perf    ; this starts at 1
 
   imaxcnt = 100
-  idict dict_new "ss" 
+  idict dict_new "ss"
 
   kcnt = 0
   while kcnt < imaxcnt do

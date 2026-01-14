@@ -507,20 +507,8 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": true,
+      "required": false,
       "types": [
-        {
-          "type": "kw_endin",
-          "named": true
-        },
-        {
-          "type": "kw_instr",
-          "named": true
-        },
-        {
-          "type": "kw_opcode",
-          "named": true
-        },
         {
           "type": "tag_instruments_end",
           "named": true
@@ -833,55 +821,27 @@
     }
   },
   {
-    "type": "cs_legacy_common_instructions",
+    "type": "cs_common_instructions",
     "named": false,
     "fields": {},
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
         {
-          "type": "assignment_statement",
+          "type": "ifdef_directive",
           "named": true
         },
         {
-          "type": "control_statement",
+          "type": "include_directive",
           "named": true
         },
         {
-          "type": "function_call",
+          "type": "macro_define",
           "named": true
         },
         {
-          "type": "label_statement",
-          "named": true
-        },
-        {
-          "type": "legacy_typed_assignment_statement",
-          "named": true
-        },
-        {
-          "type": "opcode_statement",
-          "named": true
-        },
-        {
-          "type": "preprocessor_directive",
-          "named": true
-        },
-        {
-          "type": "return_statement",
-          "named": true
-        },
-        {
-          "type": "rigoto_statement",
-          "named": true
-        },
-        {
-          "type": "struct_definition",
-          "named": true
-        },
-        {
-          "type": "typed_assignment_statement",
+          "type": "undef_directive",
           "named": true
         }
       ]
@@ -893,7 +853,7 @@
     "fields": {}
   },
   {
-    "type": "cs_orchestra_udo",
+    "type": "cs_orchestra",
     "named": false,
     "fields": {},
     "children": {
@@ -901,59 +861,7 @@
       "required": true,
       "types": [
         {
-          "type": "assignment_statement",
-          "named": true
-        },
-        {
-          "type": "control_statement",
-          "named": true
-        },
-        {
-          "type": "function_call",
-          "named": true
-        },
-        {
-          "type": "header_assignment",
-          "named": true
-        },
-        {
-          "type": "instrument_definition",
-          "named": true
-        },
-        {
-          "type": "label_statement",
-          "named": true
-        },
-        {
-          "type": "legacy_typed_assignment_statement",
-          "named": true
-        },
-        {
-          "type": "opcode_statement",
-          "named": true
-        },
-        {
-          "type": "preprocessor_directive",
-          "named": true
-        },
-        {
-          "type": "return_statement",
-          "named": true
-        },
-        {
-          "type": "rigoto_statement",
-          "named": true
-        },
-        {
-          "type": "struct_definition",
-          "named": true
-        },
-        {
-          "type": "typed_assignment_statement",
-          "named": true
-        },
-        {
-          "type": "udo_definition",
+          "type": "orchestra_statement",
           "named": true
         }
       ]
@@ -985,6 +893,21 @@
         },
         {
           "type": "score_statement_instr",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "cs_udo",
+    "named": false,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "udo_statement",
           "named": true
         }
       ]
@@ -1961,6 +1884,16 @@
     "type": "instrument_definition",
     "named": true,
     "fields": {
+      "instr": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "instr",
+            "named": false
+          }
+        ]
+      },
       "name": {
         "multiple": true,
         "required": true,
@@ -2002,10 +1935,6 @@
         },
         {
           "type": "function_call",
-          "named": true
-        },
-        {
-          "type": "kw_instr",
           "named": true
         },
         {
@@ -2583,6 +2512,21 @@
       "required": true,
       "types": [
         {
+          "type": "orchestra_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "orchestra_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
           "type": "assignment_statement",
           "named": true
         },
@@ -2732,10 +2676,6 @@
       "multiple": false,
       "required": true,
       "types": [
-        {
-          "type": "identifier",
-          "named": true
-        },
         {
           "type": "macro_usage",
           "named": true
@@ -2927,10 +2867,6 @@
       "required": true,
       "types": [
         {
-          "type": "identifier",
-          "named": true
-        },
-        {
           "type": "macro_usage",
           "named": true
         },
@@ -3002,11 +2938,27 @@
     "named": true,
     "fields": {
       "content": {
-        "multiple": false,
+        "multiple": true,
         "required": false,
         "types": [
           {
-            "type": "score_body",
+            "type": "preprocessor_directive",
+            "named": true
+          },
+          {
+            "type": "score_nestable_loop",
+            "named": true
+          },
+          {
+            "type": "score_statement",
+            "named": true
+          },
+          {
+            "type": "score_statement_func",
+            "named": true
+          },
+          {
+            "type": "score_statement_instr",
             "named": true
           }
         ]
@@ -3030,37 +2982,6 @@
         },
         {
           "type": "tag_score_start",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "score_body",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "preprocessor_directive",
-          "named": true
-        },
-        {
-          "type": "score_nestable_loop",
-          "named": true
-        },
-        {
-          "type": "score_statement",
-          "named": true
-        },
-        {
-          "type": "score_statement_func",
-          "named": true
-        },
-        {
-          "type": "score_statement_instr",
           "named": true
         }
       ]
@@ -3093,6 +3014,10 @@
         "multiple": false,
         "required": true,
         "types": [
+          {
+            "type": "macro_usage",
+            "named": true
+          },
           {
             "type": "number",
             "named": true
@@ -3160,10 +3085,6 @@
       "multiple": false,
       "required": true,
       "types": [
-        {
-          "type": "identifier",
-          "named": true
-        },
         {
           "type": "macro_usage",
           "named": true
@@ -3283,10 +3204,6 @@
         "required": false,
         "types": [
           {
-            "type": "identifier",
-            "named": true
-          },
-          {
             "type": "macro_usage",
             "named": true
           },
@@ -3357,6 +3274,10 @@
         "required": true,
         "types": [
           {
+            "type": "group_p1",
+            "named": true
+          },
+          {
             "type": "score_statement_group",
             "named": true
           }
@@ -3370,12 +3291,8 @@
     "fields": {
       "action_time": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
-          {
-            "type": "identifier",
-            "named": true
-          },
           {
             "type": "macro_usage",
             "named": true
@@ -3447,10 +3364,6 @@
         "required": false,
         "types": [
           {
-            "type": "identifier",
-            "named": true
-          },
-          {
             "type": "macro_usage",
             "named": true
           },
@@ -3521,10 +3434,6 @@
         "required": false,
         "types": [
           {
-            "type": "identifier",
-            "named": true
-          },
-          {
             "type": "macro_usage",
             "named": true
           },
@@ -3594,10 +3503,6 @@
         "multiple": true,
         "required": false,
         "types": [
-          {
-            "type": "identifier",
-            "named": true
-          },
           {
             "type": "macro_usage",
             "named": true
@@ -3704,6 +3609,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "score_line_error",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -3712,12 +3627,8 @@
     "fields": {
       "duration": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
-          {
-            "type": "identifier",
-            "named": true
-          },
           {
             "type": "macro_usage",
             "named": true
@@ -3803,10 +3714,6 @@
         "required": false,
         "types": [
           {
-            "type": "identifier",
-            "named": true
-          },
-          {
             "type": "macro_usage",
             "named": true
           },
@@ -3874,12 +3781,8 @@
       },
       "start_time": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
-          {
-            "type": "identifier",
-            "named": true
-          },
           {
             "type": "macro_usage",
             "named": true
@@ -3976,6 +3879,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "score_line_error",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -3986,10 +3899,6 @@
       "multiple": false,
       "required": true,
       "types": [
-        {
-          "type": "identifier",
-          "named": true
-        },
         {
           "type": "macro_usage",
           "named": true
@@ -4143,21 +4052,11 @@
         "required": true,
         "types": [
           {
-            "type": "struct_name",
+            "type": "identifier",
             "named": true
           }
         ]
       }
-    },
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "kw_struct",
-          "named": true
-        }
-      ]
     }
   },
   {
@@ -4575,7 +4474,7 @@
     },
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "assignment_statement",
@@ -4591,14 +4490,6 @@
         },
         {
           "type": "function_call",
-          "named": true
-        },
-        {
-          "type": "kw_endop",
-          "named": true
-        },
-        {
-          "type": "kw_opcode",
           "named": true
         },
         {
@@ -4677,7 +4568,7 @@
     },
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "assignment_statement",
@@ -4693,14 +4584,6 @@
         },
         {
           "type": "function_call",
-          "named": true
-        },
-        {
-          "type": "kw_endop",
-          "named": true
-        },
-        {
-          "type": "kw_opcode",
           "named": true
         },
         {
@@ -4733,6 +4616,65 @@
         },
         {
           "type": "xout_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "udo_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "assignment_statement",
+          "named": true
+        },
+        {
+          "type": "control_statement",
+          "named": true
+        },
+        {
+          "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "label_statement",
+          "named": true
+        },
+        {
+          "type": "legacy_typed_assignment_statement",
+          "named": true
+        },
+        {
+          "type": "opcode_statement",
+          "named": true
+        },
+        {
+          "type": "preprocessor_directive",
+          "named": true
+        },
+        {
+          "type": "return_statement",
+          "named": true
+        },
+        {
+          "type": "rigoto_statement",
+          "named": true
+        },
+        {
+          "type": "struct_definition",
+          "named": true
+        },
+        {
+          "type": "typed_assignment_statement",
+          "named": true
+        },
+        {
+          "type": "udo_definition",
           "named": true
         }
       ]
@@ -5261,6 +5203,14 @@
     "named": true
   },
   {
+    "type": "endin",
+    "named": false
+  },
+  {
+    "type": "endop",
+    "named": false
+  },
+  {
     "type": "flag_identifier",
     "named": true
   },
@@ -5277,12 +5227,20 @@
     "named": true
   },
   {
+    "type": "group_p1",
+    "named": true
+  },
+  {
     "type": "header_identifier",
     "named": true
   },
   {
     "type": "identifier",
     "named": true
+  },
+  {
+    "type": "instr",
+    "named": false
   },
   {
     "type": "instr_p1",
@@ -5322,14 +5280,6 @@
   },
   {
     "type": "kw_endif",
-    "named": true
-  },
-  {
-    "type": "kw_endin",
-    "named": true
-  },
-  {
-    "type": "kw_endop",
     "named": true
   },
   {
@@ -5377,10 +5327,6 @@
     "named": true
   },
   {
-    "type": "kw_instr",
-    "named": true
-  },
-  {
     "type": "kw_ithen",
     "named": true
   },
@@ -5397,10 +5343,6 @@
     "named": true
   },
   {
-    "type": "kw_opcode",
-    "named": true
-  },
-  {
     "type": "kw_reinit",
     "named": true
   },
@@ -5410,10 +5352,6 @@
   },
   {
     "type": "kw_rigoto",
-    "named": true
-  },
-  {
-    "type": "kw_struct",
     "named": true
   },
   {
@@ -5473,6 +5411,10 @@
     "named": true
   },
   {
+    "type": "opcode",
+    "named": false
+  },
+  {
     "type": "opcode_name",
     "named": false
   },
@@ -5490,6 +5432,10 @@
   },
   {
     "type": "score_exclamation",
+    "named": true
+  },
+  {
+    "type": "score_line_error",
     "named": true
   },
   {
@@ -5529,8 +5475,8 @@
     "named": true
   },
   {
-    "type": "struct_name",
-    "named": true
+    "type": "struct",
+    "named": false
   },
   {
     "type": "tag_cabbage_end",

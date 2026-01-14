@@ -1,5 +1,5 @@
 (struct_definition
-  (struct_name) @local.definition)
+  struct_name: (identifier) @local.definition)
 
 (struct_definition
     (typed_identifier) @local.definition)
@@ -51,7 +51,8 @@
 (identifier) @local.reference
 (typed_identifier) @local.reference
 (opcode_name) @local.reference
-(struct_name) @local.reference
+(struct_definition
+  struct_name: (identifier) @local.reference)
 
 (instrument_definition
   name: (_) @local.definition)

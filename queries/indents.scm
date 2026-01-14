@@ -1,12 +1,12 @@
 (instrument_definition) @indent
 (instrument_definition
-  (bounded_error (kw_endin) @outdent))
+  (bounded_error "endin" @outdent))
 
 (udo_definition_legacy) @indent
-(udo_definition_legacy (kw_endop) @outdent)
+(udo_definition_legacy "endop" @outdent)
 
 (udo_definition_modern) @indent
-(udo_definition_modern (kw_endop) @outdent)
+(udo_definition_modern "endop" @outdent)
 
 (internal_raw_block
     (kw_close_raw_string) @outdent)

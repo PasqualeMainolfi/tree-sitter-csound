@@ -1,6 +1,9 @@
 #define MACRO # 21 #
 
+
+amp@global:i = init(0)
 freq@global:i = init($M_LN2)
+i10@global:i = init($M_LN2)
 gamp init 0
 givalue = 10
 
