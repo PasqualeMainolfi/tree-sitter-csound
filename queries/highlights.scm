@@ -27,8 +27,7 @@
 (instrument_definition "instr" @keyword.emphasis.strong)
 (instrument_definition name: (_) @entity.name.function)
 
-(instrument_definition
-  (bounded_error "endin" @keyword.emphasis.strong))
+(instrument_definition "endin" @keyword.emphasis.strong)
 
 (comment) @comment
 (block_comment) @comment

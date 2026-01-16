@@ -21,7 +21,6 @@ module.exports = grammar({
       [$.cabbage_statement],
       [$.opcode_statement],
       [$.score_file],
-      [$.if_statement],
       [$.macro_usage]
     ],
 
@@ -376,7 +375,10 @@ module.exports = grammar({
         ','
       )),
       repeat($._statement),
-      $.bounded_error
+      choice(
+        'endin',
+        $.instr_udo_bounded_error
+      )
     )),
 
     internal_raw_block: $ => seq(
@@ -402,7 +404,7 @@ module.exports = grammar({
       optional($.xout_statement),
       choice(
         'endop',
-        $.bounded_error
+        $.instr_udo_bounded_error
       )
     ),
 
@@ -416,7 +418,7 @@ module.exports = grammar({
       optional($.xout_statement),
       choice(
         'endop',
-        $.bounded_error
+        $.instr_udo_bounded_error
       )
     ),
 
@@ -442,7 +444,7 @@ module.exports = grammar({
 
     struct_definition: $ => prec(5, seq(
       'struct',
-      field('struct_name', $.identifier,),
+      field('struct_name', $.identifier),
       field('struct_field', sep1($.typed_identifier, ','))
     )),
 
@@ -621,13 +623,10 @@ module.exports = grammar({
       optional(')')
     ),
 
-    elseif_block: $ => repeat1(
-      seq(
-        $.kw_elseif,
-        $._expression,
-        $.kw_then,
-        repeat($.control_loop_body)
-      )
+    elseif_block: $ => seq(
+      $.kw_elseif,
+      $._expression,
+      optional($.then_block)
     ),
 
     else_block: $ => seq(
@@ -641,19 +640,24 @@ module.exports = grammar({
         $.kw_kthen
     ),
 
-    if_statement: $ => seq(
+    if_statement: $ => prec.left(1, seq(
       choice($.kw_if, $.kw_tif),
       field('condition', $._expression),
       choice(
         seq(
-          $.then_block,
+          optional($.then_block),
           seq(
             field('then_body', repeat($.control_loop_body)),
-            optional($.elseif_block),
+            optional(repeat(
+              seq(
+                $.elseif_block,
+                field('elseif_body', repeat($.control_loop_body))
+              )
+            )),
             optional($.else_block),
             choice(
               $.endif_block,
-              $.bounded_error
+              $.control_statement_bounded_error
             )
           )
         ),
@@ -662,31 +666,31 @@ module.exports = grammar({
           optional(field('else_goto', repeat($.goto_statement)))
         )
       )
-    ),
+    )),
 
-    while_loop: $ => seq(
+    while_loop: $ => prec.left(1, seq(
       $.kw_while,
       $._expression,
       $.kw_do,
       repeat($.control_loop_body),
       choice(
         $.kw_od,
-        $.bounded_error
+        $.control_statement_bounded_error
       )
-    ),
+    )),
 
-    until_loop: $ => seq(
+    until_loop: $ => prec.left(1, seq(
       $.kw_until,
       $._expression,
       $.kw_do,
       repeat($.control_loop_body),
       choice(
         $.kw_od,
-        $.bounded_error
+        $.control_statement_bounded_error
       )
-    ),
+    )),
 
-    for_loop: $ => seq(
+    for_loop: $ => prec.left(1, seq(
       $.kw_for,
       field('iterator', $.identifier),
       $.kw_in,
@@ -695,9 +699,9 @@ module.exports = grammar({
       repeat($.control_loop_body),
       choice(
         $.kw_od,
-        $.bounded_error
+        $.control_statement_bounded_error
       )
-    ),
+    )),
 
     case_header: $ => seq(
       $.kw_case_key,
@@ -706,16 +710,16 @@ module.exports = grammar({
 
     default_header: $ => $.kw_default_key,
 
-    switch_statement: $ => seq(
+    switch_statement: $ => prec.left(1, seq(
       $.kw_switch_start,
       $._expression,
       repeat($.case_block),
       optional($.default_block),
       choice(
         $.kw_switch_end,
-        $.bounded_error
+        $.control_statement_bounded_error
       )
-    ),
+    )),
 
     case_block: $ => prec.left(1, seq(
       field('case_header', $.case_header),
@@ -937,8 +941,13 @@ module.exports = grammar({
 
     // --- END SCORE SECTION ---
 
-    bounded_error: $ => choice(
+    control_statement_bounded_error: $ => choice(
       'endin',
+      'instr',
+      $.tag_instruments_end
+    ),
+
+    instr_udo_bounded_error: $ => choice(
       'instr',
       $.tag_instruments_end
     ),

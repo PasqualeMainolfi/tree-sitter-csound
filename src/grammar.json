@@ -1385,8 +1385,17 @@
             }
           },
           {
-            "type": "SYMBOL",
-            "name": "bounded_error"
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "STRING",
+                "value": "endin"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "instr_udo_bounded_error"
+              }
+            ]
           }
         ]
       }
@@ -1503,7 +1512,7 @@
             },
             {
               "type": "SYMBOL",
-              "name": "bounded_error"
+              "name": "instr_udo_bounded_error"
             }
           ]
         }
@@ -1572,7 +1581,7 @@
             },
             {
               "type": "SYMBOL",
-              "name": "bounded_error"
+              "name": "instr_udo_bounded_error"
             }
           ]
         }
@@ -2979,31 +2988,29 @@
       ]
     },
     "elseif_block": {
-      "type": "REPEAT1",
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "SYMBOL",
-            "name": "kw_elseif"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "_expression"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "kw_then"
-          },
-          {
-            "type": "REPEAT",
-            "content": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "kw_elseif"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_expression"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
               "type": "SYMBOL",
-              "name": "control_loop_body"
+              "name": "then_block"
+            },
+            {
+              "type": "BLANK"
             }
-          }
-        ]
-      }
+          ]
+        }
+      ]
     },
     "else_block": {
       "type": "SEQ",
@@ -3039,261 +3046,304 @@
       ]
     },
     "if_statement": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "CHOICE",
-          "members": [
-            {
+      "type": "PREC_LEFT",
+      "value": 1,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "kw_if"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "kw_tif"
+              }
+            ]
+          },
+          {
+            "type": "FIELD",
+            "name": "condition",
+            "content": {
               "type": "SYMBOL",
-              "name": "kw_if"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "kw_tif"
+              "name": "_expression"
             }
-          ]
-        },
-        {
-          "type": "FIELD",
-          "name": "condition",
-          "content": {
-            "type": "SYMBOL",
-            "name": "_expression"
-          }
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "then_block"
-                },
-                {
-                  "type": "SEQ",
-                  "members": [
-                    {
-                      "type": "FIELD",
-                      "name": "then_body",
-                      "content": {
-                        "type": "REPEAT",
-                        "content": {
-                          "type": "SYMBOL",
-                          "name": "control_loop_body"
-                        }
-                      }
-                    },
-                    {
-                      "type": "CHOICE",
-                      "members": [
-                        {
-                          "type": "SYMBOL",
-                          "name": "elseif_block"
-                        },
-                        {
-                          "type": "BLANK"
-                        }
-                      ]
-                    },
-                    {
-                      "type": "CHOICE",
-                      "members": [
-                        {
-                          "type": "SYMBOL",
-                          "name": "else_block"
-                        },
-                        {
-                          "type": "BLANK"
-                        }
-                      ]
-                    },
-                    {
-                      "type": "CHOICE",
-                      "members": [
-                        {
-                          "type": "SYMBOL",
-                          "name": "endif_block"
-                        },
-                        {
-                          "type": "SYMBOL",
-                          "name": "bounded_error"
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "FIELD",
-                  "name": "then_goto",
-                  "content": {
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SEQ",
+                "members": [
+                  {
                     "type": "CHOICE",
                     "members": [
                       {
                         "type": "SYMBOL",
-                        "name": "goto_statement"
+                        "name": "then_block"
                       },
                       {
-                        "type": "SYMBOL",
-                        "name": "rigoto_statement"
+                        "type": "BLANK"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "SEQ",
+                    "members": [
+                      {
+                        "type": "FIELD",
+                        "name": "then_body",
+                        "content": {
+                          "type": "REPEAT",
+                          "content": {
+                            "type": "SYMBOL",
+                            "name": "control_loop_body"
+                          }
+                        }
+                      },
+                      {
+                        "type": "CHOICE",
+                        "members": [
+                          {
+                            "type": "REPEAT",
+                            "content": {
+                              "type": "SEQ",
+                              "members": [
+                                {
+                                  "type": "SYMBOL",
+                                  "name": "elseif_block"
+                                },
+                                {
+                                  "type": "FIELD",
+                                  "name": "elseif_body",
+                                  "content": {
+                                    "type": "REPEAT",
+                                    "content": {
+                                      "type": "SYMBOL",
+                                      "name": "control_loop_body"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "BLANK"
+                          }
+                        ]
+                      },
+                      {
+                        "type": "CHOICE",
+                        "members": [
+                          {
+                            "type": "SYMBOL",
+                            "name": "else_block"
+                          },
+                          {
+                            "type": "BLANK"
+                          }
+                        ]
+                      },
+                      {
+                        "type": "CHOICE",
+                        "members": [
+                          {
+                            "type": "SYMBOL",
+                            "name": "endif_block"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "control_statement_bounded_error"
+                          }
+                        ]
                       }
                     ]
                   }
-                },
-                {
-                  "type": "CHOICE",
-                  "members": [
-                    {
-                      "type": "FIELD",
-                      "name": "else_goto",
-                      "content": {
-                        "type": "REPEAT",
-                        "content": {
+                ]
+              },
+              {
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "FIELD",
+                    "name": "then_goto",
+                    "content": {
+                      "type": "CHOICE",
+                      "members": [
+                        {
                           "type": "SYMBOL",
                           "name": "goto_statement"
+                        },
+                        {
+                          "type": "SYMBOL",
+                          "name": "rigoto_statement"
                         }
-                      }
-                    },
-                    {
-                      "type": "BLANK"
+                      ]
                     }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      ]
+                  },
+                  {
+                    "type": "CHOICE",
+                    "members": [
+                      {
+                        "type": "FIELD",
+                        "name": "else_goto",
+                        "content": {
+                          "type": "REPEAT",
+                          "content": {
+                            "type": "SYMBOL",
+                            "name": "goto_statement"
+                          }
+                        }
+                      },
+                      {
+                        "type": "BLANK"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
     },
     "while_loop": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "kw_while"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_expression"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "kw_do"
-        },
-        {
-          "type": "REPEAT",
-          "content": {
+      "type": "PREC_LEFT",
+      "value": 1,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
             "type": "SYMBOL",
-            "name": "control_loop_body"
-          }
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
+            "name": "kw_while"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "_expression"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "kw_do"
+          },
+          {
+            "type": "REPEAT",
+            "content": {
               "type": "SYMBOL",
-              "name": "kw_od"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "bounded_error"
+              "name": "control_loop_body"
             }
-          ]
-        }
-      ]
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "kw_od"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "control_statement_bounded_error"
+              }
+            ]
+          }
+        ]
+      }
     },
     "until_loop": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "kw_until"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_expression"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "kw_do"
-        },
-        {
-          "type": "REPEAT",
-          "content": {
+      "type": "PREC_LEFT",
+      "value": 1,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
             "type": "SYMBOL",
-            "name": "control_loop_body"
-          }
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
+            "name": "kw_until"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "_expression"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "kw_do"
+          },
+          {
+            "type": "REPEAT",
+            "content": {
               "type": "SYMBOL",
-              "name": "kw_od"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "bounded_error"
+              "name": "control_loop_body"
             }
-          ]
-        }
-      ]
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "kw_od"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "control_statement_bounded_error"
+              }
+            ]
+          }
+        ]
+      }
     },
     "for_loop": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "kw_for"
-        },
-        {
-          "type": "FIELD",
-          "name": "iterator",
-          "content": {
+      "type": "PREC_LEFT",
+      "value": 1,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
             "type": "SYMBOL",
-            "name": "identifier"
-          }
-        },
-        {
-          "type": "SYMBOL",
-          "name": "kw_in"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_expression"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "kw_do"
-        },
-        {
-          "type": "REPEAT",
-          "content": {
-            "type": "SYMBOL",
-            "name": "control_loop_body"
-          }
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
+            "name": "kw_for"
+          },
+          {
+            "type": "FIELD",
+            "name": "iterator",
+            "content": {
               "type": "SYMBOL",
-              "name": "kw_od"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "bounded_error"
+              "name": "identifier"
             }
-          ]
-        }
-      ]
+          },
+          {
+            "type": "SYMBOL",
+            "name": "kw_in"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "_expression"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "kw_do"
+          },
+          {
+            "type": "REPEAT",
+            "content": {
+              "type": "SYMBOL",
+              "name": "control_loop_body"
+            }
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "kw_od"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "control_statement_bounded_error"
+              }
+            ]
+          }
+        ]
+      }
     },
     "case_header": {
       "type": "SEQ",
@@ -3313,49 +3363,53 @@
       "name": "kw_default_key"
     },
     "switch_statement": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "kw_switch_start"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_expression"
-        },
-        {
-          "type": "REPEAT",
-          "content": {
+      "type": "PREC_LEFT",
+      "value": 1,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
             "type": "SYMBOL",
-            "name": "case_block"
+            "name": "kw_switch_start"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "_expression"
+          },
+          {
+            "type": "REPEAT",
+            "content": {
+              "type": "SYMBOL",
+              "name": "case_block"
+            }
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "default_block"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "kw_switch_end"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "control_statement_bounded_error"
+              }
+            ]
           }
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "default_block"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "kw_switch_end"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "bounded_error"
-            }
-          ]
-        }
-      ]
+        ]
+      }
     },
     "case_block": {
       "type": "PREC_LEFT",
@@ -4338,13 +4392,26 @@
         }
       ]
     },
-    "bounded_error": {
+    "control_statement_bounded_error": {
       "type": "CHOICE",
       "members": [
         {
           "type": "STRING",
           "value": "endin"
         },
+        {
+          "type": "STRING",
+          "value": "instr"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "tag_instruments_end"
+        }
+      ]
+    },
+    "instr_udo_bounded_error": {
+      "type": "CHOICE",
+      "members": [
         {
           "type": "STRING",
           "value": "instr"
@@ -5658,9 +5725,6 @@
     ],
     [
       "score_file"
-    ],
-    [
-      "if_statement"
     ],
     [
       "macro_usage"

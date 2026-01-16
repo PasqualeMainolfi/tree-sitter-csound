@@ -1,4 +1,4 @@
-#define MACRO # 21 #
+#define MACRO # 21 #  
 
 
 amp@global:i = init(0)

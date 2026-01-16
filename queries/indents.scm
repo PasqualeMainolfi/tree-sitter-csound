@@ -1,6 +1,5 @@
 (instrument_definition) @indent
-(instrument_definition
-  (bounded_error "endin" @outdent))
+(instrument_definition "endin" @outdent)
 
 (udo_definition_legacy) @indent
 (udo_definition_legacy "endop" @outdent)

@@ -59,7 +59,7 @@ instr 1
     ifreq = 500
 
     ifreq = gambo.val0 > 300 ? 1000:5000
-    iamp = cat
+    iamp = cat.body
 
     goto(label)
 
@@ -67,30 +67,31 @@ instr 1
 
     iv add 1, iamp
     struct_name:i = poscil(40, 400)
-    instr_name:i = poscil(40, 400)
-
-    if p4 then
-        print(1)
-    endif
+    instr_name:i = poscil(2, 399)
 
     break:
     print(1)
 
-    switch p4
-        case 1
-            print_value(1, 100)
-            for i in [1, 2, 3] do
-                if i == 2 then
-                    value_from_udo_file(1, $MACRO)
-                    break
-                endif
-            od
-            goto loop
+    if p4 then      
+        print()
 
-        case 2
-            print(2)
-        default
-            print(3)
+    switch p4
+    case 1
+        print_value(1, 100)
+        for i in [1, 2, 3] do
+            if i == 2 then
+                value_from_udo_file(1, $MACRO)
+                break
+            endif
+        od
+        goto loop
+
+    case 2
+        print(2)
+    case 3
+        print()
+    default
+        print(3)
     endsw
 
     out(sig, sig)
@@ -105,7 +106,7 @@ endin
 
 /* test */
 
-gi_chain = 0
+gi_chain init 0
 
 instr S1 // resolve this
     ifreq = 200
@@ -139,7 +140,7 @@ $MACROINSTR.  0 1 [ 110 + 220 ]
 $MACROINSTR.  +   .  [ 330 - 55 ]
 i1.5  +   .  [ 44 * 10 ]
 i1  +   .  [ 1100 + 2 ]
-h 1  +   <  [ 5 ^ 4 ]
+; h 1  +   <  [ 5 ^ 4 ]
 i 1  +   .  [ 5660 % 1000 ]
 i 1  +   .  [ 110 & 220 ]
 i 1  +   .  [ 110 | 220 ]

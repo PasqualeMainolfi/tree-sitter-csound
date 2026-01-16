@@ -24,7 +24,8 @@ instr 1
         out(poscil(1, 440))
     }})
 
-    ifreq = 400
+
+    ifreq = 400 
     iamp = 1
     sig:a = poscil(1, ifreq)
 
@@ -62,8 +63,6 @@ instr 1
         i 2  0  3
         i 2  1  3
     }}
-
-
 endin
 
 
