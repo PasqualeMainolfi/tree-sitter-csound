@@ -79,6 +79,7 @@
     (score_statement_group)
     (instr_p1)
     (func_p1)
+    (group_p1)
     (score_carry)
     (score_plus)
     (score_exclamation)

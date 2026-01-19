@@ -7,11 +7,13 @@ module.exports = grammar({
     extras: $ => [/\s/, $.comment, $.block_comment, $._line_continuation],
     conflicts: $ => [
       [$.xin_statement, $.opcode_statement, $.legacy_typed_assignment_statement],
+      [$.score_statement, $._score_statement_instr, $.score_statement_func],
+      [$.score_statement, $.score_statement_instr, $.score_statement_func],
+      [$.score_statement, $.score_statement_func],
       [$.legacy_typed_assignment_statement, $.opcode_statement],
       [$.cs_legacy_file, $.orchestra_statement, $.score_file],
       [$.opcode_statement, $.typed_assignment_statement],
       [$.argument_list, $.parenthesized_expression],
-      [$.score_statement_instr, $.score_statement_func],
       [$.xout_statement, $._expression],
       [$.orchestra_statement, $.score_file],
       [$.cs_legacy_file, $.score_file],
@@ -81,9 +83,9 @@ module.exports = grammar({
       $.boolean_var,
       $.string,
       alias(choice(
-          $.identifier,
-          $.type_identifier_legacy,
-        ), $.identifier),
+        $.identifier,
+        $.type_identifier_legacy,
+      ), $.identifier),
       $.typed_identifier,
       $.array_access,
       $.struct_access,
@@ -184,9 +186,9 @@ module.exports = grammar({
 
     macro_value: $ => token(
       repeat(choice(
-          /[^#\\]/,
-          /\\./
-        ))
+        /[^#\\]/,
+        /\\./
+      ))
     ),
 
     macro_define: $ => prec(10, seq(
@@ -208,7 +210,7 @@ module.exports = grammar({
           $.string,
           $.identifier
         ),
-        '\''),
+          '\''),
         ')'
       ))
     ),
@@ -426,11 +428,11 @@ module.exports = grammar({
       '(',
       optional(sep1(
         choice(
-            $.typed_identifier,
-            $.identifier
+          $.typed_identifier,
+          $.identifier
         ),
-    ',')),
-    ')'
+        ',')),
+      ')'
     ),
 
     modern_udo_outputs: $ => choice(
@@ -478,26 +480,26 @@ module.exports = grammar({
     typed_assignment_statement: $ => prec(2, seq(
       field('left', sep1(choice($.typed_identifier, $.global_typed_identifier), ',')),
       field('operator', choice('=', '+=', '-=', '*=', '/=', $.mod_equal)),
-      field('right', $._expression)
+      field('right', $.argument_list)
     )),
 
     udo_typed_assignment_statement: $ => prec(2, seq(
       optional($._whitespace),
       field('left', sep1(choice($.typed_identifier, $.global_typed_identifier), ',')),
       field('operator', choice('=', '+=', '-=', '*=', '/=', $.mod_equal)),
-      field('right', $._expression)
+      field('right', $.argument_list)
     )),
 
     assignment_statement: $ => seq(
       field('left', sep1($._lvalue, ',')),
       field('operator', choice('=', '+=', '-=', '*=', '/=', $.mod_equal)),
-      field('right', $._expression)
+      field('right', $.argument_list)
     ),
 
     legacy_typed_assignment_statement: $ => prec(3, seq(
       field('left', sep1($.type_identifier_legacy, ',')),
       field('operator', choice('=', '+=', '-=', '*=', '/=', $.mod_equal)),
-      field('right', $._expression)
+      field('right', $.argument_list)
     )),
 
     opcode_statement: $ => choice(
@@ -533,10 +535,10 @@ module.exports = grammar({
 
     global_typed_identifier: $ => prec(2, seq(
       field('name', alias(choice(
-          $.identifier,
-          $.type_identifier_legacy
-        ),
-      $.identifier)
+        $.identifier,
+        $.type_identifier_legacy
+      ),
+        $.identifier)
       ),
       $.global_keyword,
       ':',
@@ -635,9 +637,9 @@ module.exports = grammar({
     ),
 
     then_block: $ => choice(
-        $.kw_then,
-        $.kw_ithen,
-        $.kw_kthen
+      $.kw_then,
+      $.kw_ithen,
+      $.kw_kthen
     ),
 
     if_statement: $ => prec.left(1, seq(
@@ -890,15 +892,22 @@ module.exports = grammar({
     score_statement: $ => seq(
       field('statement', choice(
         $.score_statement_group,
-        $.group_p1
+        $.group_p1,
+        $.macro_usage
       )),
-      field('pfield', repeat($._score_expression)),
+      choice(
+        field('pfield', repeat(choice(
+          $._score_expression,
+          field('macro_identifier', $.identifier)
+        ))),
+        $.score_line_error
+      ),
     ),
 
     score_nestable_loop: $ => seq(
       '{',
       field('count', choice($.number, $.macro_usage)),
-      field('macro_loop_name', $.identifier),
+      field('macro_identifier', $.identifier),
       field('score_loop_body', choice(
         $.score_statement_instr,
         $._score_loop_body
@@ -1018,9 +1027,9 @@ module.exports = grammar({
     flag_identifier:            $ => token(prec(5, /-[-\+]?/)),
     instr_p1:                   $ => token(prec(6, /i(\d+(\.\d*)?|\.\d+)\s+/)),
     func_p1:                    $ => token(prec(6, /f(?:\d+)\s+/)),
-    group_p1:                   $ => token(prec(6, /[aqrtesxybBCvmn](?:\d+)\s+/)),
+    group_p1:                   $ => token(prec(6, seq(/[aqrtesxybBCvmn](\d+(\.\d*)?|\.\d+)/, /\s+/))),
 
-    score_statement_group:      $ => token(prec(5, /[aqrtesxybBCvmn]\s+/)),
+    score_statement_group:      $ => token(prec(5, seq(/[aqrtesxybBCvmn]/, /\s+/))),
     score_statement_i:          $ => token(prec(5, seq('i', /\s+/))),
     score_statement_f:          $ => token(prec(5, seq('f', /\s+/))),
     score_line_error:           $ => token(prec(-1, /[^\n]+/)),

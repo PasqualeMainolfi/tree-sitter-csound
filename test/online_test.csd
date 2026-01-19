@@ -25,7 +25,7 @@ instr 1
     }})
 
 
-    ifreq = 400 
+    ifreq = 400
     iamp = 1
     sig:a = poscil(1, ifreq)
 
@@ -47,6 +47,16 @@ instr 1
     for j in [1, 2, 3] do
         print(j)
     od
+
+    switch p4
+        case 1
+            print(1)
+
+
+
+
+    endsw
+
 
     opcodeinfo(opc:OpcodeDef)
 

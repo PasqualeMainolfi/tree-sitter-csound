@@ -38,19 +38,21 @@ instr 1
     ifreq = 400
     icall = 10
     sig:a = poscil(.7, 440)
-    sig2:a[] = poscile(1, 400)
+    sig2:a[][] = poscil(1, 400)
     sig3:a += poscil(1, 440 * 3)
     filter2:a = poscil(1, givalue)
     filter2 -= gamp
     sig_macro:a = $OSCMACRO(0.7' 550)
 
     a1, a2 pan2 sig, icall
+    iname, isurname = 0, 1
     sig_left:a, sig_right:a, sig_middle:a = pan2(sig, icall)
+    sig2[0] = 100; // fix array access as read
 
     ; asignal poscil 1, 330
     ; asignal[] poscil noise(1), 300
     filter:a = butterbp:a(sig, freq, iamp)
-    afilter butbp:a filter + sig_middle, iamp, givalue
+    afilter butbp:a filter + sig_middle, , givalue
 
     gambo:MyType init 8, 88
     cat:Cat init 0, 0
@@ -72,8 +74,9 @@ instr 1
     break:
     print(1)
 
-    if p4 then      
+    if p4 then
         print()
+    endif
 
     switch p4
     case 1
@@ -126,8 +129,8 @@ endin
 
 #define MACROINSTR # i1 #
 
-f 0 0 4097 10 1 1 1
 
+f 0 0 4097 10 1 1 1
 a 0 0 1
 
 { 4 CNT
@@ -136,17 +139,19 @@ a 0 0 1
     }
 }
 
-$MACROINSTR.  0 1 [ 110 + 220 ]
-$MACROINSTR.  +   .  [ 330 - 55 ]
+$MACROINSTR.  0  1 [ 110 + 220 ]
+$MACROINSTR.  +  .  [ 330 - 55 ]
 i1.5  +   .  [ 44 * 10 ]
 i1  +   .  [ 1100 + 2 ]
 ; h 1  +   <  [ 5 ^ 4 ]
 i 1  +   .  [ 5660 % 1000 ]
 i 1  +   .  [ 110 & 220 ]
-i 1  +   .  [ 110 | 220 ]
-i 1  +   .  [ 110 # 220 ]
 
+r6 REPS
+i 1  +   .  [ 110 | 220 ] $REPS.
+i 1  +   .  [ 110 # 220 ] $REPS.
 i "S1" 10 1 10
+s
 
 e
 </CsScore>

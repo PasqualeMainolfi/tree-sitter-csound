@@ -1945,7 +1945,7 @@
             "name": "right",
             "content": {
               "type": "SYMBOL",
-              "name": "_expression"
+              "name": "argument_list"
             }
           }
         ]
@@ -2054,7 +2054,7 @@
             "name": "right",
             "content": {
               "type": "SYMBOL",
-              "name": "_expression"
+              "name": "argument_list"
             }
           }
         ]
@@ -2130,7 +2130,7 @@
           "name": "right",
           "content": {
             "type": "SYMBOL",
-            "name": "_expression"
+            "name": "argument_list"
           }
         }
       ]
@@ -2208,7 +2208,7 @@
             "name": "right",
             "content": {
               "type": "SYMBOL",
-              "name": "_expression"
+              "name": "argument_list"
             }
           }
         ]
@@ -4170,20 +4170,46 @@
               {
                 "type": "SYMBOL",
                 "name": "group_p1"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "macro_usage"
               }
             ]
           }
         },
         {
-          "type": "FIELD",
-          "name": "pfield",
-          "content": {
-            "type": "REPEAT",
-            "content": {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "FIELD",
+              "name": "pfield",
+              "content": {
+                "type": "REPEAT",
+                "content": {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "_score_expression"
+                    },
+                    {
+                      "type": "FIELD",
+                      "name": "macro_identifier",
+                      "content": {
+                        "type": "SYMBOL",
+                        "name": "identifier"
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            {
               "type": "SYMBOL",
-              "name": "_score_expression"
+              "name": "score_line_error"
             }
-          }
+          ]
         }
       ]
     },
@@ -4213,7 +4239,7 @@
         },
         {
           "type": "FIELD",
-          "name": "macro_loop_name",
+          "name": "macro_identifier",
           "content": {
             "type": "SYMBOL",
             "name": "identifier"
@@ -5128,8 +5154,17 @@
         "type": "PREC",
         "value": 6,
         "content": {
-          "type": "PATTERN",
-          "value": "[aqrtesxybBCvmn](?:\\d+)\\s+"
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "PATTERN",
+              "value": "[aqrtesxybBCvmn](\\d+(\\.\\d*)?|\\.\\d+)"
+            },
+            {
+              "type": "PATTERN",
+              "value": "\\s+"
+            }
+          ]
         }
       }
     },
@@ -5139,8 +5174,17 @@
         "type": "PREC",
         "value": 5,
         "content": {
-          "type": "PATTERN",
-          "value": "[aqrtesxybBCvmn]\\s+"
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "PATTERN",
+              "value": "[aqrtesxybBCvmn]"
+            },
+            {
+              "type": "PATTERN",
+              "value": "\\s+"
+            }
+          ]
         }
       }
     },
@@ -5674,6 +5718,20 @@
       "legacy_typed_assignment_statement"
     ],
     [
+      "score_statement",
+      "_score_statement_instr",
+      "score_statement_func"
+    ],
+    [
+      "score_statement",
+      "score_statement_instr",
+      "score_statement_func"
+    ],
+    [
+      "score_statement",
+      "score_statement_func"
+    ],
+    [
       "legacy_typed_assignment_statement",
       "opcode_statement"
     ],
@@ -5689,10 +5747,6 @@
     [
       "argument_list",
       "parenthesized_expression"
-    ],
-    [
-      "score_statement_instr",
-      "score_statement_func"
     ],
     [
       "xout_statement",

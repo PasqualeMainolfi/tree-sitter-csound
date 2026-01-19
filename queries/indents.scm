@@ -24,7 +24,6 @@
 (else_block) @indent
 (elseif_block) @indent
 
-
 (switch_statement) @indent
 (switch_statement
   [(case_block) (default_block)] @indent)

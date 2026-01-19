@@ -8,9 +8,7 @@
   left: (typed_identifier) @local.definition)
 
 (typed_assignment_statement
-  right: (function_call
-    (argument_list
-        (identifier) @local.reference)))
+  right: (argument_list (identifier) @local.reference))
 
 (pfield) @local.reference
 
