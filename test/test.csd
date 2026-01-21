@@ -49,6 +49,11 @@ instr 1
     sig_left:a, sig_right:a, sig_middle:a = pan2(sig, icall)
     sig2[0] = 100; // fix array access as read
 
+    if (itest1 < $M_MAX_VALUE && itest1 != $M_INF) then
+        prints "FAIL: PI * MAX_VALUE should be >= MAX_VALUE or infinity\n"
+        exitnow 1
+    endif
+
     ; asignal poscil 1, 330
     ; asignal[] poscil noise(1), 300
     filter:a = butterbp:a(sig, freq, iamp)
@@ -132,6 +137,9 @@ endin
 
 f 0 0 4097 10 1 1 1
 a 0 0 1
+f 0 0 4097 10 1 1 1
+a 0 0 1
+i1.5  +   .  [ 44 * 10 ]
 
 { 4 CNT
     { 8 PARTIAL
@@ -139,20 +147,34 @@ a 0 0 1
     }
 }
 
-$MACROINSTR.  0  1 [ 110 + 220 ]
-$MACROINSTR.  +  .  [ 330 - 55 ]
-i1.5  +   .  [ 44 * 10 ]
+$MACROINSTR. 0
+
+$MACROINSTR. 0  1 [ 110 + 220 ]
+$MACROINSTR. +  .  [ 330 - 55 ]
 i1  +   .  [ 1100 + 2 ]
 ; h 1  +   <  [ 5 ^ 4 ]
 i 1  +   .  [ 5660 % 1000 ]
 i 1  +   .  [ 110 & 220 ]
 
+
+i1 +
+
 r6 REPS
 i 1  +   .  [ 110 | 220 ] $REPS.
 i 1  +   .  [ 110 # 220 ] $REPS.
-i "S1" 10 1 10
-s
 
+i "S1" 10
+
+r6 REPS
+s
+i 10 1
+a10 0 0 0
+a 0 0 1
+x 0
 e
+x
+i "S1" 0 10
+i "S1" 10 1 10
+
 </CsScore>
 </CsoundSynthesizer>

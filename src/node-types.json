@@ -830,6 +830,10 @@
         {
           "type": "score_statement_instr",
           "named": true
+        },
+        {
+          "type": "score_statement_wm",
+          "named": true
         }
       ]
     }
@@ -2570,6 +2574,10 @@
       "required": true,
       "types": [
         {
+          "type": "group_p1_safe",
+          "named": true
+        },
+        {
           "type": "macro_usage",
           "named": true
         },
@@ -2623,6 +2631,10 @@
         },
         {
           "type": "score_random_operator",
+          "named": true
+        },
+        {
+          "type": "score_statement_safe",
           "named": true
         },
         {
@@ -2760,6 +2772,10 @@
       "required": true,
       "types": [
         {
+          "type": "group_p1_safe",
+          "named": true
+        },
+        {
           "type": "macro_usage",
           "named": true
         },
@@ -2816,6 +2832,10 @@
           "named": true
         },
         {
+          "type": "score_statement_safe",
+          "named": true
+        },
+        {
           "type": "score_unary_expression",
           "named": true
         },
@@ -2852,6 +2872,10 @@
           },
           {
             "type": "score_statement_instr",
+            "named": true
+          },
+          {
+            "type": "score_statement_wm",
             "named": true
           }
         ]
@@ -2979,6 +3003,10 @@
       "required": true,
       "types": [
         {
+          "type": "group_p1_safe",
+          "named": true
+        },
+        {
           "type": "macro_usage",
           "named": true
         },
@@ -3035,6 +3063,10 @@
           "named": true
         },
         {
+          "type": "score_statement_safe",
+          "named": true
+        },
+        {
           "type": "score_unary_expression",
           "named": true
         },
@@ -3084,30 +3116,15 @@
     }
   },
   {
-    "type": "score_ramping",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "score_statement",
     "named": true,
     "fields": {
-      "macro_identifier": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
       "pfield": {
         "multiple": true,
         "required": false,
         "types": [
           {
-            "type": "identifier",
+            "type": "group_p1_safe",
             "named": true
           },
           {
@@ -3164,6 +3181,10 @@
           },
           {
             "type": "score_random_operator",
+            "named": true
+          },
+          {
+            "type": "score_statement_safe",
             "named": true
           },
           {
@@ -3215,6 +3236,10 @@
         "required": false,
         "types": [
           {
+            "type": "group_p1_safe",
+            "named": true
+          },
+          {
             "type": "macro_usage",
             "named": true
           },
@@ -3268,6 +3293,10 @@
           },
           {
             "type": "score_random_operator",
+            "named": true
+          },
+          {
+            "type": "score_statement_safe",
             "named": true
           },
           {
@@ -3285,6 +3314,10 @@
         "required": false,
         "types": [
           {
+            "type": "group_p1_safe",
+            "named": true
+          },
+          {
             "type": "macro_usage",
             "named": true
           },
@@ -3338,6 +3371,10 @@
           },
           {
             "type": "score_random_operator",
+            "named": true
+          },
+          {
+            "type": "score_statement_safe",
             "named": true
           },
           {
@@ -3355,6 +3392,10 @@
         "required": false,
         "types": [
           {
+            "type": "group_p1_safe",
+            "named": true
+          },
+          {
             "type": "macro_usage",
             "named": true
           },
@@ -3408,6 +3449,10 @@
           },
           {
             "type": "score_random_operator",
+            "named": true
+          },
+          {
+            "type": "score_statement_safe",
             "named": true
           },
           {
@@ -3425,6 +3470,10 @@
         "required": false,
         "types": [
           {
+            "type": "group_p1_safe",
+            "named": true
+          },
+          {
             "type": "macro_usage",
             "named": true
           },
@@ -3478,6 +3527,10 @@
           },
           {
             "type": "score_random_operator",
+            "named": true
+          },
+          {
+            "type": "score_statement_safe",
             "named": true
           },
           {
@@ -3551,6 +3604,10 @@
         "required": false,
         "types": [
           {
+            "type": "group_p1_safe",
+            "named": true
+          },
+          {
             "type": "macro_usage",
             "named": true
           },
@@ -3604,6 +3661,10 @@
           },
           {
             "type": "score_random_operator",
+            "named": true
+          },
+          {
+            "type": "score_statement_safe",
             "named": true
           },
           {
@@ -3635,6 +3696,10 @@
         "required": false,
         "types": [
           {
+            "type": "group_p1_safe",
+            "named": true
+          },
+          {
             "type": "macro_usage",
             "named": true
           },
@@ -3688,6 +3753,10 @@
           },
           {
             "type": "score_random_operator",
+            "named": true
+          },
+          {
+            "type": "score_statement_safe",
             "named": true
           },
           {
@@ -3705,6 +3774,10 @@
         "required": false,
         "types": [
           {
+            "type": "group_p1_safe",
+            "named": true
+          },
+          {
             "type": "macro_usage",
             "named": true
           },
@@ -3758,6 +3831,10 @@
           },
           {
             "type": "score_random_operator",
+            "named": true
+          },
+          {
+            "type": "score_statement_safe",
             "named": true
           },
           {
@@ -3813,6 +3890,128 @@
     }
   },
   {
+    "type": "score_statement_wm",
+    "named": true,
+    "fields": {
+      "macro_identifier": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "pfield": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "group_p1_safe",
+            "named": true
+          },
+          {
+            "type": "macro_usage",
+            "named": true
+          },
+          {
+            "type": "number",
+            "named": true
+          },
+          {
+            "type": "parenthesized_score_expression",
+            "named": true
+          },
+          {
+            "type": "score_binary_expression",
+            "named": true
+          },
+          {
+            "type": "score_carry",
+            "named": true
+          },
+          {
+            "type": "score_exclamation",
+            "named": true
+          },
+          {
+            "type": "score_minus_p",
+            "named": true
+          },
+          {
+            "type": "score_np",
+            "named": true
+          },
+          {
+            "type": "score_operation",
+            "named": true
+          },
+          {
+            "type": "score_plus",
+            "named": true
+          },
+          {
+            "type": "score_plus_p",
+            "named": true
+          },
+          {
+            "type": "score_pp",
+            "named": true
+          },
+          {
+            "type": "score_ramping",
+            "named": true
+          },
+          {
+            "type": "score_random_operator",
+            "named": true
+          },
+          {
+            "type": "score_statement_safe",
+            "named": true
+          },
+          {
+            "type": "score_unary_expression",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          }
+        ]
+      },
+      "statement": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "macro_usage",
+            "named": true
+          },
+          {
+            "type": "score_statement_with_macro",
+            "named": true
+          },
+          {
+            "type": "swmacro_p1",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "score_line_error",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "score_unary_expression",
     "named": true,
     "fields": {},
@@ -3820,6 +4019,10 @@
       "multiple": false,
       "required": true,
       "types": [
+        {
+          "type": "group_p1_safe",
+          "named": true
+        },
         {
           "type": "macro_usage",
           "named": true
@@ -3874,6 +4077,10 @@
         },
         {
           "type": "score_random_operator",
+          "named": true
+        },
+        {
+          "type": "score_statement_safe",
           "named": true
         },
         {
@@ -5088,6 +5295,10 @@
     "named": true
   },
   {
+    "type": "group_p1_safe",
+    "named": true
+  },
+  {
     "type": "header_identifier",
     "named": true
   },
@@ -5316,6 +5527,10 @@
     "named": true
   },
   {
+    "type": "score_ramping",
+    "named": true
+  },
+  {
     "type": "score_random_operator",
     "named": true
   },
@@ -5332,8 +5547,20 @@
     "named": true
   },
   {
+    "type": "score_statement_safe",
+    "named": true
+  },
+  {
+    "type": "score_statement_with_macro",
+    "named": true
+  },
+  {
     "type": "struct",
     "named": false
+  },
+  {
+    "type": "swmacro_p1",
+    "named": true
   },
   {
     "type": "tag_cabbage_end",

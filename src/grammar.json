@@ -3962,6 +3962,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "score_statement_wm"
+        },
+        {
+          "type": "SYMBOL",
           "name": "score_statement"
         }
       ]
@@ -4032,6 +4036,14 @@
         {
           "type": "SYMBOL",
           "name": "score_pp"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "group_p1_safe"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "score_statement_safe"
         }
       ]
     },
@@ -4155,63 +4167,142 @@
       ]
     },
     "score_statement": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "FIELD",
-          "name": "statement",
-          "content": {
+      "type": "PREC",
+      "value": 5,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "FIELD",
+            "name": "statement",
+            "content": {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "score_statement_group"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "group_p1"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "macro_usage"
+                }
+              ]
+            }
+          },
+          {
+            "type": "FIELD",
+            "name": "pfield",
+            "content": {
+              "type": "REPEAT",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_score_expression"
+              }
+            }
+          },
+          {
             "type": "CHOICE",
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "score_statement_group"
+                "name": "score_line_error"
               },
               {
-                "type": "SYMBOL",
-                "name": "group_p1"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "macro_usage"
+                "type": "BLANK"
               }
             ]
           }
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "FIELD",
-              "name": "pfield",
-              "content": {
-                "type": "REPEAT",
-                "content": {
-                  "type": "CHOICE",
-                  "members": [
-                    {
-                      "type": "SYMBOL",
-                      "name": "_score_expression"
-                    },
-                    {
-                      "type": "FIELD",
-                      "name": "macro_identifier",
-                      "content": {
-                        "type": "SYMBOL",
-                        "name": "identifier"
-                      }
-                    }
-                  ]
+        ]
+      }
+    },
+    "score_statement_wm": {
+      "type": "PREC",
+      "value": 5,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "FIELD",
+            "name": "statement",
+            "content": {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "score_statement_with_macro"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "swmacro_p1"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "macro_usage"
                 }
-              }
-            },
-            {
-              "type": "SYMBOL",
-              "name": "score_line_error"
+              ]
             }
-          ]
-        }
-      ]
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "FIELD",
+                "name": "pfield",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_score_expression"
+                }
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          },
+          {
+            "type": "FIELD",
+            "name": "macro_identifier",
+            "content": {
+              "type": "SYMBOL",
+              "name": "identifier"
+            }
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "FIELD",
+                "name": "pfield",
+                "content": {
+                  "type": "REPEAT",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "_score_expression"
+                  }
+                }
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "score_line_error"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          }
+        ]
+      }
     },
     "score_nestable_loop": {
       "type": "SEQ",
@@ -4269,154 +4360,162 @@
       ]
     },
     "score_statement_instr": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "FIELD",
-                  "name": "statement",
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "score_statement_i"
+      "type": "PREC",
+      "value": 10,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "FIELD",
+                    "name": "statement",
+                    "content": {
+                      "type": "SYMBOL",
+                      "name": "score_statement_i"
+                    }
+                  },
+                  {
+                    "type": "FIELD",
+                    "name": "instr",
+                    "content": {
+                      "type": "CHOICE",
+                      "members": [
+                        {
+                          "type": "SYMBOL",
+                          "name": "number"
+                        },
+                        {
+                          "type": "SYMBOL",
+                          "name": "string"
+                        }
+                      ]
+                    }
                   }
-                },
-                {
-                  "type": "FIELD",
-                  "name": "instr",
-                  "content": {
+                ]
+              },
+              {
+                "type": "FIELD",
+                "name": "statement_instr",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "instr_p1"
+                }
+              },
+              {
+                "type": "FIELD",
+                "name": "statement_macro_instr",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "macro_usage"
+                }
+              }
+            ]
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "_score_statement_instr"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "score_line_error"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "score_statement_func": {
+      "type": "PREC",
+      "value": 10,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "FIELD",
+                    "name": "statement",
+                    "content": {
+                      "type": "SYMBOL",
+                      "name": "score_statement_f"
+                    }
+                  },
+                  {
+                    "type": "FIELD",
+                    "name": "table_number",
+                    "content": {
+                      "type": "SYMBOL",
+                      "name": "number"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "FIELD",
+                "name": "statement_func",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "func_p1"
+                }
+              },
+              {
+                "type": "FIELD",
+                "name": "statement_macro_func",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "macro_usage"
+                }
+              }
+            ]
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "FIELD",
+                    "name": "action_time",
+                    "content": {
+                      "type": "SYMBOL",
+                      "name": "_score_expression"
+                    }
+                  },
+                  {
                     "type": "CHOICE",
                     "members": [
                       {
                         "type": "SYMBOL",
-                        "name": "number"
+                        "name": "_score_statement_func"
                       },
                       {
-                        "type": "SYMBOL",
-                        "name": "string"
+                        "type": "BLANK"
                       }
                     ]
                   }
-                }
-              ]
-            },
-            {
-              "type": "FIELD",
-              "name": "statement_instr",
-              "content": {
+                ]
+              },
+              {
                 "type": "SYMBOL",
-                "name": "instr_p1"
+                "name": "score_line_error"
               }
-            },
-            {
-              "type": "FIELD",
-              "name": "statement_macro_instr",
-              "content": {
-                "type": "SYMBOL",
-                "name": "macro_usage"
-              }
-            }
-          ]
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "_score_statement_instr"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "score_line_error"
-            }
-          ]
-        }
-      ]
-    },
-    "score_statement_func": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "FIELD",
-                  "name": "statement",
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "score_statement_f"
-                  }
-                },
-                {
-                  "type": "FIELD",
-                  "name": "table_number",
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "number"
-                  }
-                }
-              ]
-            },
-            {
-              "type": "FIELD",
-              "name": "statement_func",
-              "content": {
-                "type": "SYMBOL",
-                "name": "func_p1"
-              }
-            },
-            {
-              "type": "FIELD",
-              "name": "statement_macro_func",
-              "content": {
-                "type": "SYMBOL",
-                "name": "macro_usage"
-              }
-            }
-          ]
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "FIELD",
-                  "name": "action_time",
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "_score_expression"
-                  }
-                },
-                {
-                  "type": "CHOICE",
-                  "members": [
-                    {
-                      "type": "SYMBOL",
-                      "name": "_score_statement_func"
-                    },
-                    {
-                      "type": "BLANK"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "SYMBOL",
-              "name": "score_line_error"
-            }
-          ]
-        }
-      ]
+            ]
+          }
+        ]
+      }
     },
     "control_statement_bounded_error": {
       "type": "CHOICE",
@@ -4953,8 +5052,8 @@
         "type": "PREC",
         "value": 5,
         "content": {
-          "type": "STRING",
-          "value": "."
+          "type": "PATTERN",
+          "value": "\\s+\\."
         }
       }
     },
@@ -5090,8 +5189,8 @@
     "score_ramping": {
       "type": "TOKEN",
       "content": {
-        "type": "STRING",
-        "value": "<"
+        "type": "PATTERN",
+        "value": "\\s+<\\s+"
       }
     },
     "identifier": {
@@ -5158,7 +5257,38 @@
           "members": [
             {
               "type": "PATTERN",
-              "value": "[aqrtesxybBCvmn](\\d+(\\.\\d*)?|\\.\\d+)"
+              "value": "[aqtesxybBCv](\\d+(\\.\\d*)?|\\.\\d+)"
+            },
+            {
+              "type": "PATTERN",
+              "value": "\\s+"
+            }
+          ]
+        }
+      }
+    },
+    "group_p1_safe": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 6,
+        "content": {
+          "type": "PATTERN",
+          "value": "[aqtesxybBCv](\\d+(\\.\\d*)?|\\.\\d+)"
+        }
+      }
+    },
+    "swmacro_p1": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 6,
+        "content": {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "PATTERN",
+              "value": "[rmn](\\d+(\\.\\d*)?|\\.\\d+)"
             },
             {
               "type": "PATTERN",
@@ -5178,7 +5308,38 @@
           "members": [
             {
               "type": "PATTERN",
-              "value": "[aqrtesxybBCvmn]"
+              "value": "[aqtesxybBCv]"
+            },
+            {
+              "type": "PATTERN",
+              "value": "\\s+"
+            }
+          ]
+        }
+      }
+    },
+    "score_statement_safe": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 5,
+        "content": {
+          "type": "PATTERN",
+          "value": "[aqtesxybBCv]"
+        }
+      }
+    },
+    "score_statement_with_macro": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 5,
+        "content": {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "PATTERN",
+              "value": "[rmn]"
             },
             {
               "type": "PATTERN",
@@ -5234,8 +5395,17 @@
         "type": "PREC",
         "value": -1,
         "content": {
-          "type": "PATTERN",
-          "value": "[^\\n]+"
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "PATTERN",
+              "value": "[^aqrtesxybBCvifrmn(<\\/)]"
+            },
+            {
+              "type": "PATTERN",
+              "value": "[^\\n]+"
+            }
+          ]
         }
       }
     },
@@ -5719,16 +5889,7 @@
     ],
     [
       "score_statement",
-      "_score_statement_instr",
-      "score_statement_func"
-    ],
-    [
-      "score_statement",
       "score_statement_instr",
-      "score_statement_func"
-    ],
-    [
-      "score_statement",
       "score_statement_func"
     ],
     [
