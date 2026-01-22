@@ -6,6 +6,10 @@
     [(raw_script) (generic_closing_tag)] @injection.content)
     (#set! injection.language "python"))
 
+((cabbage_block
+    [(raw_script) (generic_closing_tag)] @injection.content)
+    (#set! injection.language "json"))
+
 ((opcode_statement
     (opcode_name) @_name
     (argument_list

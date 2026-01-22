@@ -1,6 +1,23 @@
+<Cabbage>
+[
+    "come": [ "cmdjkmcd", "mcidmckd"],
+    {
+        "name": 10
+    }
+]
+</Cabbage>
 <CsoundSynthesizer>
 <CsOptions>
+; comment here
+; comment here
+; comment here
+-o dac -+id_artist=dsc
 -o dac
+; and here
+; and here
+; and here
+; and here
+; and here
 </CsOptions>
 <CsInstruments>
 
@@ -88,7 +105,7 @@ instr 1
         print_value(1, 100)
         for i in [1, 2, 3] do
             if i == 2 then
-                value_from_udo_file(1, $MACRO)
+                value_from_udo_file(1, 10)
                 break
             endif
         od
@@ -134,6 +151,9 @@ endin
 
 #define MACROINSTR # i1 #
 
+f 0 14
+
+e
 
 f 0 0 4097 10 1 1 1
 a 0 0 1
@@ -157,13 +177,13 @@ i 1  +   .  [ 5660 % 1000 ]
 i 1  +   .  [ 110 & 220 ]
 
 
-i1 +
+; i1 +
 
 r6 REPS
 i 1  +   .  [ 110 | 220 ] $REPS.
 i 1  +   .  [ 110 # 220 ] $REPS.
 
-i "S1" 10
+; i "S1" 10
 
 r6 REPS
 s

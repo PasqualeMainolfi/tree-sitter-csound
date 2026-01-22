@@ -17,8 +17,8 @@ module.exports = grammar({
       [$.cs_legacy_file, $.score_file],
       [$.cs_legacy_file, $.orchestra_statement],
       [$.array_access, $.opcode_name],
-      [$._score_statement_func],
-      [$.cabbage_statement],
+      // [$.cabbage_statement],
+      [$._score_statement_instr],
       [$.opcode_statement],
       [$.score_file],
       [$.macro_usage]
@@ -246,17 +246,17 @@ module.exports = grammar({
 
     // --- CABBAGE SECTION ---
 
-    cabbage_statement: $ => seq(
-      field('widget', $.identifier),
-      repeat($.cabbage_property)
-    ),
+    // cabbage_statement: $ => seq(
+    //   field('widget', $.identifier),
+    //   repeat($.cabbage_property)
+    // ),
 
-    cabbage_property: $ => seq(
-      field('key', $.identifier),
-      '(',
-      field('value', /[^)]*/),
-      ')'
-    ),
+    // cabbage_property: $ => seq(
+    //   field('key', $.identifier),
+    //   '(',
+    //   field('value', /[^)]*/),
+    //   ')'
+    // ),
 
     // --- END CABBAGE SECTION ---
 
@@ -329,7 +329,6 @@ module.exports = grammar({
     options_block: $ => seq(
       $.tag_options_start,
       repeat($.flag_content),
-      optional($._new_line),
       $.tag_options_end,
       $._new_line
     ),
@@ -353,7 +352,7 @@ module.exports = grammar({
 
     cabbage_block: $ => seq(
       $.tag_cabbage_start,
-      repeat($.cabbage_statement),
+      repeat($.raw_script),
       $.tag_cabbage_end,
       $._new_line
     ),
@@ -877,12 +876,6 @@ module.exports = grammar({
       field('pfield', repeat($._score_expression)),
     ),
 
-    _score_statement_func: $ => seq(
-      field('n_points', $._score_expression),
-      field('gen_id', $._score_expression),
-      field('pfield', repeat($._score_expression)),
-    ),
-
     _score_loop_body: $ => choice(
       $.score_carry,
       $.score_plus,
@@ -949,7 +942,7 @@ module.exports = grammar({
       choice(
         seq(
           field('action_time', $._score_expression),
-          optional($._score_statement_func)
+          field('pfield', repeat($._score_expression))
         ),
         $.score_line_error
       )

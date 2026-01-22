@@ -185,8 +185,8 @@
     (kw_close_raw_string)
 ] @punctuation.bracket
 
-(cabbage_statement . (identifier) @type)
-(cabbage_property . (identifier) @property)
+; (cabbage_statement . (identifier) @type)
+; (cabbage_property . (identifier) @property)
 
 ((opcode_name) @function
  (#not-has-child? @function "typed_identifier"))
