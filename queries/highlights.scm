@@ -85,6 +85,7 @@
     (swmacro_p1)
     (score_carry)
     (score_plus)
+    (score_z_operator)
     (score_exclamation)
     (score_np_operator)
     (score_pp_operator)

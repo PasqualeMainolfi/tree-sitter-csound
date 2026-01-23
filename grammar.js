@@ -313,11 +313,7 @@ module.exports = grammar({
 
     flag_content: $ => seq(
       $.flag_identifier,
-      field('flag_type', choice(
-        $.identifier,
-        $.number,
-        $.string
-      )),
+      field('flag_type', token(prec(5, /[a-zA-Z0-9][a-zA-Z0-9_+-]*/))),
       optional("="),
       optional(field('flag_value', choice(
         $.string,
@@ -785,7 +781,7 @@ module.exports = grammar({
 
     _score_block: $ => seq(
       $.tag_score_start,
-      optional($._new_line),
+      // optional($._new_line),
       field('content', repeat(seq(
         $._score_item,
         $._new_line
@@ -853,7 +849,8 @@ module.exports = grammar({
       $.score_np,
       $.score_pp,
       $.group_p1_safe,
-      $.score_statement_safe
+      $.score_statement_safe,
+      $.score_z_operator
     ),
 
     parenthesized_score_expression: $ => prec.left(
@@ -1012,6 +1009,7 @@ module.exports = grammar({
     score_plus:                 $ => token(prec(5, '+')),
     score_plus_p_operator:      $ => token(prec(5, /\^\+/)),
     score_minus_p_operator:     $ => token(prec(5, /\^-/)),
+    score_z_operator:           $ => token(prec(5, /\s+z/)),
     score_plus_p:               $ => seq($.score_plus_p_operator, $.number),
     score_minus_p:              $ => seq($.score_minus_p_operator, $.number),
     score_exclamation:          $ => token(prec(5, '!')),

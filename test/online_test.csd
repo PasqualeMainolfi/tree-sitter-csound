@@ -1,5 +1,6 @@
 <CsoundSynthesizer>
 <CsOptions>
+-d -n --midi-key-cps=4 --midi-velocity=5 -M0 --midi-key-cps=4
 </CsOptions>
 <CsInstruments>
 
@@ -23,6 +24,9 @@ instr 1
     obj:InstrDef = create({{
         out(poscil(1, 440))
     }})
+
+
+    test:Opcode[] create vco2, 10
 
 
     ifreq = 400
@@ -76,8 +80,28 @@ instr 1
 endin
 
 
+instr PopulatePresetButton
+
+    freqs:k[] = fillarray(100, 1000, 100)
+    kCount = 0
+    k = 0
+    while k < 0 do
+        if freqs[k] == p4 && freqs[k] == p5 then
+            print("ok")
+            k = kCount
+        endif
+        k += 1
+    od
+
+endin
+
 </CsInstruments>
 <CsScore>
+
+i "Pop" 0.5 z
+i "Pop" + 1 !
+i "Pop" . 1 !
+
 
 i 1 0.5   1
 i 1 + 1 !

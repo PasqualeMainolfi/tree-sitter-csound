@@ -1,8 +1,8 @@
 <Cabbage>
 [
-    "come": [ "cmdjkmcd", "mcidmckd"],
     {
-        "name": 10
+        "come" : [ "cmdjkmcd", "mcidmckd"],
+        "cdackdnmc" : 10
     }
 ]
 </Cabbage>
@@ -57,7 +57,7 @@ instr 1
     sig:a = poscil(.7, 440)
     sig2:a[][] = poscil(1, 400)
     sig3:a += poscil(1, 440 * 3)
-    filter2:a = poscil(1, givalue)
+    filter2:a = poscil(1, poscil(1, 440))
     filter2 -= gamp
     sig_macro:a = $OSCMACRO(0.7' 550)
 
@@ -78,6 +78,8 @@ instr 1
 
     gambo:MyType init 8, 88
     cat:Cat init 0, 0
+
+    k(p5)
 
     loop:
     ifreq = 500
