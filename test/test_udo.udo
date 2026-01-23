@@ -1,6 +1,5 @@
 #define MACRO # 21 #
 
-
 eval_amp@global:i = init(0)
 amp@global:i = init(0)
 freq@global:i = init($M_LN2)

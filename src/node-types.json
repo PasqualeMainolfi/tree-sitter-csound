@@ -446,7 +446,7 @@
       "required": true,
       "types": [
         {
-          "type": "raw_script",
+          "type": "cabbage_json_block",
           "named": true
         },
         {
@@ -455,6 +455,33 @@
         },
         {
           "type": "tag_cabbage_start",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "cabbage_json_block",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "cabbage_json_block",
+          "named": true
+        },
+        {
+          "type": "json_atom",
+          "named": true
+        },
+        {
+          "type": "json_punctuation",
+          "named": true
+        },
+        {
+          "type": "strong_string",
           "named": true
         }
       ]
@@ -1111,24 +1138,6 @@
     "type": "flag_content",
     "named": true,
     "fields": {
-      "flag_type": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          },
-          {
-            "type": "number",
-            "named": true
-          },
-          {
-            "type": "string",
-            "named": true
-          }
-        ]
-      },
       "flag_value": {
         "multiple": false,
         "required": false,
@@ -2600,6 +2609,10 @@
           "named": true
         },
         {
+          "type": "score_z_operator",
+          "named": true
+        },
+        {
           "type": "string",
           "named": true
         }
@@ -2672,11 +2685,6 @@
         ]
       }
     }
-  },
-  {
-    "type": "raw_script",
-    "named": true,
-    "fields": {}
   },
   {
     "type": "raw_text",
@@ -2795,6 +2803,10 @@
         },
         {
           "type": "score_unary_expression",
+          "named": true
+        },
+        {
+          "type": "score_z_operator",
           "named": true
         },
         {
@@ -3029,6 +3041,10 @@
           "named": true
         },
         {
+          "type": "score_z_operator",
+          "named": true
+        },
+        {
           "type": "string",
           "named": true
         }
@@ -3150,6 +3166,10 @@
             "named": true
           },
           {
+            "type": "score_z_operator",
+            "named": true
+          },
+          {
             "type": "string",
             "named": true
           }
@@ -3262,6 +3282,10 @@
             "named": true
           },
           {
+            "type": "score_z_operator",
+            "named": true
+          },
+          {
             "type": "string",
             "named": true
           }
@@ -3337,6 +3361,10 @@
           },
           {
             "type": "score_unary_expression",
+            "named": true
+          },
+          {
+            "type": "score_z_operator",
             "named": true
           },
           {
@@ -3474,6 +3502,10 @@
             "named": true
           },
           {
+            "type": "score_z_operator",
+            "named": true
+          },
+          {
             "type": "string",
             "named": true
           }
@@ -3566,6 +3598,10 @@
             "named": true
           },
           {
+            "type": "score_z_operator",
+            "named": true
+          },
+          {
             "type": "string",
             "named": true
           }
@@ -3641,6 +3677,10 @@
           },
           {
             "type": "score_unary_expression",
+            "named": true
+          },
+          {
+            "type": "score_z_operator",
             "named": true
           },
           {
@@ -3778,6 +3818,10 @@
             "named": true
           },
           {
+            "type": "score_z_operator",
+            "named": true
+          },
+          {
             "type": "string",
             "named": true
           }
@@ -3887,6 +3931,10 @@
         },
         {
           "type": "score_unary_expression",
+          "named": true
+        },
+        {
+          "type": "score_z_operator",
           "named": true
         },
         {
@@ -5117,6 +5165,14 @@
     "named": true
   },
   {
+    "type": "json_atom",
+    "named": true
+  },
+  {
+    "type": "json_punctuation",
+    "named": true
+  },
+  {
     "type": "kw_case_key",
     "named": true
   },
@@ -5297,6 +5353,10 @@
     "named": true
   },
   {
+    "type": "raw_script",
+    "named": true
+  },
+  {
     "type": "score_carry",
     "named": true
   },
@@ -5354,6 +5414,14 @@
   },
   {
     "type": "score_statement_with_macro",
+    "named": true
+  },
+  {
+    "type": "score_z_operator",
+    "named": true
+  },
+  {
+    "type": "strong_string",
     "named": true
   },
   {

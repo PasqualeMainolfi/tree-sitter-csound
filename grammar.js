@@ -258,6 +258,38 @@ module.exports = grammar({
     //   ')'
     // ),
 
+    cabbage_json_block: $ => seq(
+      '[',
+      repeat(choice(
+        $.strong_string,
+        $.json_punctuation,
+        $.cabbage_json_block,
+        $.json_atom
+      )),
+      ']'
+    ),
+
+    strong_string: $ => token(prec(5, seq(
+      '"',
+      repeat(choice(
+        /[^"\\]+/,
+        /\\./
+      )),
+      '"'
+    ))),
+
+    json_punctuation: $ => token(prec(2, choice('{', '}', ',', ':'))),
+
+    json_atom: $ => token(prec(1, choice(
+        /-?\d+(\.\d+)?([eE][+-]?\d+)?/,
+        'true', 'false', 'null'
+    ))),
+
+    // cabbage_statement: $ => seq(
+    //     $.identifier,
+    //     repeat(seq('(', /[^)]*/, ')')) // Argomenti tra parentesi tonde
+    // ),
+
     // --- END CABBAGE SECTION ---
 
     // --- OPTIONAL TAG ---
@@ -348,7 +380,7 @@ module.exports = grammar({
 
     cabbage_block: $ => seq(
       $.tag_cabbage_start,
-      repeat($.raw_script),
+      repeat($.cabbage_json_block),
       $.tag_cabbage_end,
       $._new_line
     ),
@@ -1068,7 +1100,7 @@ module.exports = grammar({
     tag_html_end:               $ => token(prec(10, /<\/html>/)),
     generic_closing_tag:        $ => token(prec(1, /(<\/[^>]+>)/)),
 
-    raw_script:                 $ => choice(/[^<]+/, seq('<', /[^/]/)),
+    raw_script:                 $ => token(prec(1, choice(/[^<]+/, seq('<', /[^/]/)))),
     raw_text:                   $ => choice(/[^}]+/, seq('}', /[^}]/)),
 
     _new_line:                  $ => token(/\r?\n/),
