@@ -52,14 +52,8 @@ instr 1
         print(j)
     od
 
-    switch p4
-        case 1
-            print(1)
-
-
-
-
-    endsw
+    ain in
+    aout reverb 1, p5
 
 
     opcodeinfo(opc:OpcodeDef)

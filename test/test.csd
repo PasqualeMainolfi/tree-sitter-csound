@@ -455,7 +455,11 @@ givalue = 10
 struct MyType val0:i, val1:i
 struct MyDog val:a
 
+/**
+testing doc
+*/
 instr 1
+    ain in
     ifreq = 400
     icall = 10
     sig:a = poscil(.7, 440)
@@ -478,7 +482,7 @@ instr 1
     ; asignal poscil 1, 330
     ; asignal[] poscil noise(1), 300
     filter:a = butterbp:a(sig, freq, iamp)
-    afilter butbp:a filter + sig_middle, , givalue
+    afilter butbp:a filter + sig_middle, givalue
 
     gambo:MyType init 8, 88
     cat:Cat init 0, 0

@@ -381,6 +381,11 @@ module.exports = grammar({
     cabbage_block: $ => seq(
       $.tag_cabbage_start,
       repeat($.cabbage_json_block),
+      // field('cabbage_content', repeat(choice(
+      //   $.strong_string,
+      //   $.raw_script,
+      //   $.generic_closing_tag,
+      // ))),
       $.tag_cabbage_end,
       $._new_line
     ),
@@ -393,14 +398,15 @@ module.exports = grammar({
 
     instrument_definition: $ => prec(7, seq(
       field('instr', token(prec(5, 'instr'))),
-      field('name', sep1(
+      field('name', prec.left(sep1(
         choice(
           $.identifier,
           $.number,
           $.plus_identifier
         ),
         ','
-      )),
+      ))),
+      optional($._new_line),
       repeat($._statement),
       choice(
         'endin',
@@ -472,7 +478,8 @@ module.exports = grammar({
     struct_definition: $ => prec(5, seq(
       'struct',
       field('struct_name', $.identifier),
-      field('struct_field', sep1($.typed_identifier, ','))
+      field('struct_field', sep1($.typed_identifier, ',')),
+      optional('endstruct')
     )),
 
     struct_access: $ => prec(10, seq(
@@ -502,33 +509,33 @@ module.exports = grammar({
       )
     ),
 
-    typed_assignment_statement: $ => prec(2, seq(
+    typed_assignment_statement: $ => prec.dynamic(5, prec(2, seq(
       field('left', sep1(choice($.typed_identifier, $.global_typed_identifier), ',')),
       field('operator', choice('=', '+=', '-=', '*=', '/=', $.mod_equal)),
       field('right', $.argument_list)
-    )),
+    ))),
 
-    udo_typed_assignment_statement: $ => prec(2, seq(
+    udo_typed_assignment_statement: $ => prec.dynamic(5, prec(2, seq(
       optional($._whitespace),
       field('left', sep1(choice($.typed_identifier, $.global_typed_identifier), ',')),
       field('operator', choice('=', '+=', '-=', '*=', '/=', $.mod_equal)),
       field('right', $.argument_list)
-    )),
+    ))),
 
-    assignment_statement: $ => seq(
+    assignment_statement: $ => prec.dynamic(5, seq(
       field('left', sep1($._lvalue, ',')),
       field('operator', choice('=', '+=', '-=', '*=', '/=', $.mod_equal)),
       field('right', $.argument_list)
-    ),
+    )),
 
-    legacy_typed_assignment_statement: $ => prec(3, seq(
+    legacy_typed_assignment_statement: $ => prec.dynamic(5, prec(3, seq(
       field('left', sep1($.type_identifier_legacy, ',')),
       field('operator', choice('=', '+=', '-=', '*=', '/=', $.mod_equal)),
       field('right', $.argument_list)
-    )),
+    ))),
 
     opcode_statement: $ => choice(
-      prec.dynamic(0, prec(3, seq(
+      prec.dynamic(1, prec(3, seq(
         field('outputs', sep1(
           choice(
             $.typed_identifier,
@@ -541,12 +548,12 @@ module.exports = grammar({
             field('op', $.opcode_name),
             field('inputs', optional($.argument_list))
           ),
-          field('op_macro', $.macro_usage)
+          field('op_macro', $.macro_usage),
         )
       ))),
       prec.dynamic(0, prec(2, seq(
         field('op', $.opcode_name),
-        field('inputs', optional($.argument_list))
+        optional(field('inputs', $.argument_list))
       )))
     ),
 
@@ -1100,7 +1107,7 @@ module.exports = grammar({
     tag_html_end:               $ => token(prec(10, /<\/html>/)),
     generic_closing_tag:        $ => token(prec(1, /(<\/[^>]+>)/)),
 
-    raw_script:                 $ => token(prec(1, choice(/[^<]+/, seq('<', /[^/]/)))),
+    raw_script:                 $ => token(prec(1, choice(/[^<]+/, seq('<', /[^\/C]/)))),
     raw_text:                   $ => choice(/[^}]+/, seq('}', /[^}]/)),
 
     _new_line:                  $ => token(/\r?\n/),
