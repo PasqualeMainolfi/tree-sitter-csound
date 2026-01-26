@@ -5125,6 +5125,10 @@
     "named": false
   },
   {
+    "type": "endstruct",
+    "named": false
+  },
+  {
     "type": "flag_identifier",
     "named": true
   },
