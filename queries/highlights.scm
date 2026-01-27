@@ -9,7 +9,6 @@
 
 (type_identifier) @type
 (typed_identifier type: (_) @type)
-(type_identifier_legacy) @type
 
 (label_statement) @label
 
@@ -39,6 +38,7 @@
     (pfield)
 ] @constant.builtin.emphasis
 
+(included_file) @string
 
 [
     (kw_include)

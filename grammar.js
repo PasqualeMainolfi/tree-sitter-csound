@@ -158,12 +158,13 @@ module.exports = grammar({
       repeat(seq(',', $._expression))
     ),
 
+    included_file: $ => choice($.string, seq('<', /[^>]*/, '>')),
     include_directive: $ => seq(
       choice(
         $.kw_include,
         $.kw_includestr
       ),
-      field('included_file', $.string)
+      field('included_file', $.included_file),
     ),
 
     undef_directive: $ => seq(

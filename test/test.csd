@@ -431,6 +431,7 @@ nchnls = 2
 0dbfs = 1
 
 #include "test_udo.udo"
+#include <test_udo.udo>
 
 #define PIG # 21 #
 #define OSCMACRO(VOLUME' FREQ) # poscil($VOLUME, $FREQ) #
