@@ -486,6 +486,32 @@
         }
       ]
     },
+    "included_file": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "string"
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "<"
+            },
+            {
+              "type": "PATTERN",
+              "value": "[^>]*"
+            },
+            {
+              "type": "STRING",
+              "value": ">"
+            }
+          ]
+        }
+      ]
+    },
     "include_directive": {
       "type": "SEQ",
       "members": [
@@ -507,7 +533,7 @@
           "name": "included_file",
           "content": {
             "type": "SYMBOL",
-            "name": "string"
+            "name": "included_file"
           }
         }
       ]

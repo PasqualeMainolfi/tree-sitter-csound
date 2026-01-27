@@ -1772,7 +1772,7 @@
         "required": true,
         "types": [
           {
-            "type": "string",
+            "type": "included_file",
             "named": true
           }
         ]
@@ -1788,6 +1788,21 @@
         },
         {
           "type": "kw_includestr",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "included_file",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "string",
           "named": true
         }
       ]
