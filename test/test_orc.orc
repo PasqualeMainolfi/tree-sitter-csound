@@ -9,7 +9,7 @@ nchnls = 1
 iamp@global:i = init(0)
 
 instr 1
-    ifreq = 500 
+    ifreq = 500
     asig $OSCMACRO(1' ifreq)
     outs(asig, asig)
 endin

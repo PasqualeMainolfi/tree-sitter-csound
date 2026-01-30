@@ -14,7 +14,7 @@ opcode value_from_udo_file(value:i, value1:i):(ii)
     xout(value, $MACRO)
 endop
 
-opcode add, ii, ii 
+opcode add, ii, ii
     i1, i2 xin
     xout(i1, i2)
 endop

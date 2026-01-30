@@ -533,7 +533,7 @@ module.exports = grammar({
     ))),
 
     opcode_statement: $ => choice(
-      prec.dynamic(1, prec(3, seq(
+      prec.dynamic(3, prec(2, seq(
         field('outputs', sep1(
           choice(
             $.typed_identifier,
@@ -546,12 +546,15 @@ module.exports = grammar({
             field('op', $.opcode_name),
             field('inputs', optional($.argument_list))
           ),
-          field('op_macro', $.macro_usage),
+          field('op_macro', $.macro_usage)
         )
       ))),
-      prec.dynamic(0, prec(2, seq(
+      prec.dynamic(2, prec(2, seq(
         field('op', $.opcode_name),
-        optional(field('inputs', $.argument_list))
+        field('inputs', $.argument_list))
+      )),
+      prec.dynamic(1, prec(0, seq(
+        field('op', $.opcode_name),
       )))
     ),
 
@@ -578,7 +581,7 @@ module.exports = grammar({
       ))
     )),
 
-    label_statement: $ => prec.dynamic(10, prec(1,
+    label_statement: $ => prec.dynamic(1, prec(1,
       seq(
         field('label_name', alias(choice($.identifier, $.type_identifier_legacy), $.identifier)),
         optional(':'),

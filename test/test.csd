@@ -460,6 +460,8 @@ givalue = 10
 struct MyType val0:i, val1:i
 struct MyDog val:a
 
+massign 0, 0
+
 /**
 testing doc
 */
@@ -533,6 +535,13 @@ instr 1
     default
         print(3)
     endsw
+
+    kcnth, kcgv, kcnbdhm, ksnjs  midiin
+
+    midiout kcnth 
+    kcgb71 chnget "filter1"
+
+
 
     out(sig, sig)
 endin
