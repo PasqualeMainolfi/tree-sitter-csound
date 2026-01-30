@@ -455,8 +455,7 @@ endop
 
 freq@global:i = init($M_LN2)
 gamp init 0
-givalue = 10
-
+givalue = 10 
 struct MyType val0:i, val1:i
 struct MyDog val:a
 
@@ -489,6 +488,7 @@ instr 1
     ; asignal poscil 1, 330
     ; asignal[] poscil noise(1), 300
     filter:a = butterbp:a(sig, freq, iamp)
+    afilter butbp:a filter + sig_middle, givalue
     afilter butbp:a filter + sig_middle, givalue
 
     gambo:MyType init 8, 88
@@ -538,7 +538,7 @@ instr 1
 
     kcnth, kcgv, kcnbdhm, ksnjs  midiin
 
-    midiout kcnth 
+    midiout kcnth
     kcgb71 chnget "filter1"
 
 

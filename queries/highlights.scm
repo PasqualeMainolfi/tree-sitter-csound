@@ -1,14 +1,8 @@
 (global_typed_identifier name: (identifier) @variable)
 
-(typed_identifier
-    name: (identifier) @variable)
-
 (flag_identifier) @tag
 (flag_content flag_type: (_) @constant.builtin)
 (flag_content flag_value: (_) @variable)
-
-(type_identifier) @type
-(typed_identifier type: (_) @type)
 
 (label_statement) @label
 
@@ -212,3 +206,11 @@
 
 (macro_name
     id: (_) @macro.emphasis.strong)
+
+(type_identifier) @type
+
+(typed_identifier
+  name: (identifier) @variable)
+
+(typed_identifier
+  type: (identifier) @type)

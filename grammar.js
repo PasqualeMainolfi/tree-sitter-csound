@@ -19,7 +19,7 @@ module.exports = grammar({
       [$.array_access, $.opcode_name],
       // [$.cabbage_statement],
       [$._score_statement_instr],
-      [$.opcode_statement],
+      // [$.opcode_statement],
       [$.score_file],
       [$.macro_usage]
     ],
@@ -532,30 +532,33 @@ module.exports = grammar({
       field('right', $.argument_list)
     ))),
 
-    opcode_statement: $ => choice(
-      prec.dynamic(3, prec(2, seq(
-        field('outputs', sep1(
+    opcode_statement: $ => seq(
+      choice(
+        prec.dynamic(3, prec(3, seq(
+          field('outputs', sep1(
+            choice(
+              $.typed_identifier,
+              $.type_identifier_legacy
+            ),
+            ','
+          )),
           choice(
-            $.typed_identifier,
-            $.type_identifier_legacy
-          ),
-          ','
+            seq(
+              field('op', $.opcode_name),
+              field('inputs', optional($.argument_list))
+            ),
+            field('op_macro', $.macro_usage)
+          )
+        ))),
+        prec.dynamic(2, prec(3, seq(
+          field('op', $.opcode_name),
+          field('inputs', $.argument_list))
         )),
-        choice(
-          seq(
-            field('op', $.opcode_name),
-            field('inputs', optional($.argument_list))
-          ),
-          field('op_macro', $.macro_usage)
-        )
-      ))),
-      prec.dynamic(2, prec(2, seq(
-        field('op', $.opcode_name),
-        field('inputs', $.argument_list))
-      )),
-      prec.dynamic(1, prec(0, seq(
-        field('op', $.opcode_name),
-      )))
+        prec.dynamic(1, prec(0, seq(
+          field('op', $.opcode_name),
+        )))
+      ),
+      $._new_line
     ),
 
     typed_identifier: $ => prec(5,

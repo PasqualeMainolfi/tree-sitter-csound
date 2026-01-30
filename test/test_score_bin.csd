@@ -32,7 +32,7 @@ struct MyDog val:a
 pyruni({{
 import random
 
-pool = [(1 + i/10.0) ** 1.2 for i in range(100)]
+pool = [(1 + i / 10.0) ** 1.2 for i in range(100)]
 
 def get_number_from_pool(n, p):
     if random.random() < p:
@@ -63,8 +63,8 @@ instr 1
     ; asignal[] poscil noise(1), 300
     filter:a = butterbp(sig, freq, iamp)
     afilter butbp:a filter, iamp, givalue
+    gambo:MyType init 8, 88 
 
-    gambo:MyType init 8, 88
 
     loop:
     ifreq = 500

@@ -2342,130 +2342,130 @@
       }
     },
     "opcode_statement": {
-      "type": "CHOICE",
+      "type": "SEQ",
       "members": [
         {
-          "type": "PREC_DYNAMIC",
-          "value": 1,
-          "content": {
-            "type": "PREC",
-            "value": 3,
-            "content": {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "FIELD",
-                  "name": "outputs",
-                  "content": {
-                    "type": "SEQ",
-                    "members": [
-                      {
-                        "type": "CHOICE",
-                        "members": [
-                          {
-                            "type": "SYMBOL",
-                            "name": "typed_identifier"
-                          },
-                          {
-                            "type": "SYMBOL",
-                            "name": "type_identifier_legacy"
-                          }
-                        ]
-                      },
-                      {
-                        "type": "REPEAT",
-                        "content": {
-                          "type": "SEQ",
-                          "members": [
-                            {
-                              "type": "STRING",
-                              "value": ","
-                            },
-                            {
-                              "type": "CHOICE",
-                              "members": [
-                                {
-                                  "type": "SYMBOL",
-                                  "name": "typed_identifier"
-                                },
-                                {
-                                  "type": "SYMBOL",
-                                  "name": "type_identifier_legacy"
-                                }
-                              ]
-                            }
-                          ]
-                        }
-                      }
-                    ]
-                  }
-                },
-                {
-                  "type": "CHOICE",
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "PREC_DYNAMIC",
+              "value": 3,
+              "content": {
+                "type": "PREC",
+                "value": 3,
+                "content": {
+                  "type": "SEQ",
                   "members": [
                     {
-                      "type": "SEQ",
-                      "members": [
-                        {
-                          "type": "FIELD",
-                          "name": "op",
-                          "content": {
-                            "type": "SYMBOL",
-                            "name": "opcode_name"
-                          }
-                        },
-                        {
-                          "type": "FIELD",
-                          "name": "inputs",
-                          "content": {
+                      "type": "FIELD",
+                      "name": "outputs",
+                      "content": {
+                        "type": "SEQ",
+                        "members": [
+                          {
                             "type": "CHOICE",
                             "members": [
                               {
                                 "type": "SYMBOL",
-                                "name": "argument_list"
+                                "name": "typed_identifier"
                               },
                               {
-                                "type": "BLANK"
+                                "type": "SYMBOL",
+                                "name": "type_identifier_legacy"
                               }
                             ]
+                          },
+                          {
+                            "type": "REPEAT",
+                            "content": {
+                              "type": "SEQ",
+                              "members": [
+                                {
+                                  "type": "STRING",
+                                  "value": ","
+                                },
+                                {
+                                  "type": "CHOICE",
+                                  "members": [
+                                    {
+                                      "type": "SYMBOL",
+                                      "name": "typed_identifier"
+                                    },
+                                    {
+                                      "type": "SYMBOL",
+                                      "name": "type_identifier_legacy"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "CHOICE",
+                      "members": [
+                        {
+                          "type": "SEQ",
+                          "members": [
+                            {
+                              "type": "FIELD",
+                              "name": "op",
+                              "content": {
+                                "type": "SYMBOL",
+                                "name": "opcode_name"
+                              }
+                            },
+                            {
+                              "type": "FIELD",
+                              "name": "inputs",
+                              "content": {
+                                "type": "CHOICE",
+                                "members": [
+                                  {
+                                    "type": "SYMBOL",
+                                    "name": "argument_list"
+                                  },
+                                  {
+                                    "type": "BLANK"
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "FIELD",
+                          "name": "op_macro",
+                          "content": {
+                            "type": "SYMBOL",
+                            "name": "macro_usage"
                           }
                         }
                       ]
-                    },
-                    {
-                      "type": "FIELD",
-                      "name": "op_macro",
-                      "content": {
-                        "type": "SYMBOL",
-                        "name": "macro_usage"
-                      }
                     }
                   ]
                 }
-              ]
-            }
-          }
-        },
-        {
-          "type": "PREC_DYNAMIC",
-          "value": 0,
-          "content": {
-            "type": "PREC",
-            "value": 2,
-            "content": {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "FIELD",
-                  "name": "op",
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "opcode_name"
-                  }
-                },
-                {
-                  "type": "CHOICE",
+              }
+            },
+            {
+              "type": "PREC_DYNAMIC",
+              "value": 2,
+              "content": {
+                "type": "PREC",
+                "value": 3,
+                "content": {
+                  "type": "SEQ",
                   "members": [
+                    {
+                      "type": "FIELD",
+                      "name": "op",
+                      "content": {
+                        "type": "SYMBOL",
+                        "name": "opcode_name"
+                      }
+                    },
                     {
                       "type": "FIELD",
                       "name": "inputs",
@@ -2473,15 +2473,37 @@
                         "type": "SYMBOL",
                         "name": "argument_list"
                       }
-                    },
-                    {
-                      "type": "BLANK"
                     }
                   ]
                 }
-              ]
+              }
+            },
+            {
+              "type": "PREC_DYNAMIC",
+              "value": 1,
+              "content": {
+                "type": "PREC",
+                "value": 0,
+                "content": {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "FIELD",
+                      "name": "op",
+                      "content": {
+                        "type": "SYMBOL",
+                        "name": "opcode_name"
+                      }
+                    }
+                  ]
+                }
+              }
             }
-          }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_new_line"
         }
       ]
     },
@@ -2595,7 +2617,7 @@
     },
     "label_statement": {
       "type": "PREC_DYNAMIC",
-      "value": 10,
+      "value": 1,
       "content": {
         "type": "PREC",
         "value": 1,
@@ -6035,9 +6057,6 @@
     ],
     [
       "_score_statement_instr"
-    ],
-    [
-      "opcode_statement"
     ],
     [
       "score_file"
