@@ -434,7 +434,7 @@ module.exports = grammar({
       ',',
       field('inputs', $.legacy_udo_args),
       optional($.xin_statement),
-      repeat($._statement),
+      field('udo_body', repeat($._statement)),
       optional($.xout_statement),
       choice(
         'endop',
@@ -448,7 +448,7 @@ module.exports = grammar({
       field('inputs', $.modern_udo_inputs),
       ':',
       field('outputs', $.modern_udo_outputs),
-      repeat($._statement),
+      field('udo_body', repeat($._statement)),
       optional($.xout_statement),
       choice(
         'endop',
@@ -499,15 +499,12 @@ module.exports = grammar({
       $.kw_xin,
     )),
 
-    xout_statement: $ => choice(
-      seq(
-        $.kw_xout,
-        field('inputs', $.parenthesized_expression),
-      ),
-      seq(
-        $.kw_xout,
-        field('inputs', $.argument_list),
-      )
+    xout_statement: $ => seq(
+      $.kw_xout,
+      field('inputs', choice(
+        $.parenthesized_expression,
+        $.argument_list
+      )),
     ),
 
     typed_assignment_statement: $ => prec.dynamic(5, prec(2, seq(

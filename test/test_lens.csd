@@ -10,7 +10,7 @@
 ; nchnls = 2
 ; 0dbfs = 1
 
-; opcode add, ii, ii
+; opcode add, ii, ii 
 ;     i1, Skey, i2 xin
 ;     klast init 0
 ;     xout(i1, i2)

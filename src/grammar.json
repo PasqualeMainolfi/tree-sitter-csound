@@ -1589,10 +1589,14 @@
           ]
         },
         {
-          "type": "REPEAT",
+          "type": "FIELD",
+          "name": "udo_body",
           "content": {
-            "type": "SYMBOL",
-            "name": "_statement"
+            "type": "REPEAT",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_statement"
+            }
           }
         },
         {
@@ -1658,10 +1662,14 @@
           }
         },
         {
-          "type": "REPEAT",
+          "type": "FIELD",
+          "name": "udo_body",
           "content": {
-            "type": "SYMBOL",
-            "name": "_statement"
+            "type": "REPEAT",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_statement"
+            }
           }
         },
         {
@@ -1932,41 +1940,28 @@
       }
     },
     "xout_statement": {
-      "type": "CHOICE",
+      "type": "SEQ",
       "members": [
         {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "kw_xout"
-            },
-            {
-              "type": "FIELD",
-              "name": "inputs",
-              "content": {
-                "type": "SYMBOL",
-                "name": "parenthesized_expression"
-              }
-            }
-          ]
+          "type": "SYMBOL",
+          "name": "kw_xout"
         },
         {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "kw_xout"
-            },
-            {
-              "type": "FIELD",
-              "name": "inputs",
-              "content": {
+          "type": "FIELD",
+          "name": "inputs",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "parenthesized_expression"
+              },
+              {
                 "type": "SYMBOL",
                 "name": "argument_list"
               }
-            }
-          ]
+            ]
+          }
         }
       ]
     },

@@ -431,7 +431,6 @@ nchnls = 2
 0dbfs = 1
 
 #include "test_udo.udo"
-#include <test_udo.udo>
 
 #define PIG # 21 #
 #define OSCMACRO(VOLUME' FREQ) # poscil($VOLUME, $FREQ) #
@@ -440,13 +439,18 @@ osc_handle@global:i = OSCinit(8080)
 
 opcode print_value(value:i, value1:i):(ii)
     print(value, value1)
-    xout(value, $PIG)
+    xout(value, 10)
 endop
 
-opcode add, ii, ii
-    i1, Skey, i2 xin
+opcode print_value_with_no_arg():(void)
+    print("Hello, World!")
+endop
+
+opcode add, iS, iio
+    i1, i2, ivalue xin
     klast init 0
-    xout(i1, i2)
+    ivalue += 1
+    xout i1, i2
 endop
 
 freq@global:i = init($M_LN2)
@@ -464,7 +468,7 @@ instr 1
     ifreq = 400
     icall = 10
     sig:a = poscil(.7, 440)
-    sig2:a[][] = poscil(1, 400)
+    sig2:a[][] = poscile(1, 400)
     sig3:a += poscil(1, 440 * 3)
     filter2:a = poscil(1, poscil(1, 440))
     filter2 -= gamp
