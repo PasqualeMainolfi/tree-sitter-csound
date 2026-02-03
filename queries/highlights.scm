@@ -214,3 +214,11 @@
 
 (typed_identifier
   type: (identifier) @type)
+
+((opcode_name) @function
+ (#not-has-child? @function "typed_identifier"))
+
+(opcode_name
+    (typed_identifier
+        name: (_) @function
+        type: (_) @type))

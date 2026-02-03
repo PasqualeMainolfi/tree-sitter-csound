@@ -28,7 +28,8 @@
   ],
   "dependencies": {
     "node-addon-api": "^8.5.0",
-    "node-gyp-build": "^4.8.4"
+    "node-gyp-build": "^4.8.4",
+    "web-tree-sitter": "^0.26.3"
   },
   "devDependencies": {
     "prebuildify": "^6.0.1",
@@ -47,6 +48,8 @@
     "install": "node-gyp-build",
     "prestart": "tree-sitter build --wasm",
     "start": "tree-sitter playground",
-    "test": "node --test bindings/node/*_test.js"
+    "test": "node --test bindings/node/*_test.js",
+    "build:wasm": "tree-sitter build --wasm",
+    "prepare": "npm run build:wasm"
   }
 }
