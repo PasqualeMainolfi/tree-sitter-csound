@@ -469,9 +469,9 @@ module.exports = grammar({
 
     modern_udo_outputs: $ => choice(
       seq(
-        '(',
+        optional('('),
         $.legacy_udo_args,
-        ')'
+        optional(')')
       ),
       $.kw_void
     ),
