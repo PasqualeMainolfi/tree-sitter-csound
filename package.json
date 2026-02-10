@@ -24,7 +24,8 @@
     "bindings/node/*",
     "queries/*",
     "src/**",
-    "*.wasm"
+    "*.wasm",
+    "tree-sitter-csound.wasm"
   ],
   "dependencies": {
     "node-addon-api": "^8.5.0",
@@ -50,6 +51,6 @@
     "start": "tree-sitter playground",
     "test": "node --test bindings/node/*_test.js",
     "build:wasm": "tree-sitter build --wasm",
-    "prepare": "npm run build:wasm"
+    "prepublishOnly": "tree-sitter run build:wasm"
   }
 }
