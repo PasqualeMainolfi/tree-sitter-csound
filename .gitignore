@@ -43,6 +43,7 @@ zig-out/
 
 # Grammar volatiles
 *.wasm
+!tree-sitter-csound.wasm
 *.obj
 *.o
 
