@@ -437,7 +437,7 @@ nchnls = 2
 
 osc_handle@global:i = OSCinit(8080)
 
-opcode print_value(value:i, value1:i):(ii)
+opcode print_value(value:i, value1:i, ioffset):ii
     print(value, value1)
     xout(value, 10)
 endop
@@ -456,7 +456,7 @@ endop
 freq@global:i = init($M_LN2)
 gamp init 0
 givalue = 10
-struct MyType val0:i, val1:i
+struct MyType val0:i, val1:i, kamp, ioffset
 struct MyDog val:a
 
 massign 0, 0
@@ -508,7 +508,7 @@ instr 1
     var:b = true
 
     iv add 1, iamp
-    struct_name:i = poscil(40, 400)  
+    struct_name:i = poscil(40, 400)
     instr_name:i = poscil(2, 399)
 
     break:

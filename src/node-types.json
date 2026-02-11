@@ -2183,6 +2183,10 @@
           "named": true
         },
         {
+          "type": "type_identifier_legacy",
+          "named": true
+        },
+        {
           "type": "typed_identifier",
           "named": true
         }
@@ -4035,6 +4039,10 @@
             "named": false
           },
           {
+            "type": "type_identifier_legacy",
+            "named": true
+          },
+          {
             "type": "typed_identifier",
             "named": true
           }
@@ -4931,6 +4939,10 @@
           },
           {
             "type": "type_identifier_legacy",
+            "named": true
+          },
+          {
+            "type": "typed_identifier",
             "named": true
           }
         ]

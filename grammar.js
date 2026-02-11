@@ -17,6 +17,8 @@ module.exports = grammar({
       [$.cs_legacy_file, $.score_file],
       [$.cs_legacy_file, $.orchestra_statement],
       [$.array_access, $.opcode_name],
+      [$.xin_statement, $.opcode_statement, $.typed_assignment_statement],
+      [$.xin_statement, $.opcode_statement],
       // [$.cabbage_statement],
       [$._score_statement_instr],
       // [$.opcode_statement],
@@ -461,6 +463,7 @@ module.exports = grammar({
       optional(sep1(
         choice(
           $.typed_identifier,
+          $.type_identifier_legacy, // add also in grammar poss
           $.identifier
         ),
         ',')),
@@ -479,7 +482,12 @@ module.exports = grammar({
     struct_definition: $ => prec(5, seq(
       'struct',
       field('struct_name', $.identifier),
-      field('struct_field', sep1($.typed_identifier, ',')),
+      field('struct_field', sep1(
+        choice(
+          $.typed_identifier,
+          $.type_identifier_legacy
+        ), ',') // todo add type identifier legacy possibilty
+      ),
       optional('endstruct')
     )),
 
@@ -494,10 +502,15 @@ module.exports = grammar({
       field('struct_member', $.identifier)
     )),
 
-    xin_statement: $ => prec.dynamic(10, seq(
-      field('outputs', sep1($.type_identifier_legacy, ',')),
+    xin_statement: $ => prec.dynamic(10, prec(5, seq( // todo add typed identifier possibilty
+      field('outputs', sep1(
+        choice(
+          $.type_identifier_legacy,
+          $.typed_identifier
+          ), ',')
+      ),
       $.kw_xin,
-    )),
+    ))),
 
     xout_statement: $ => seq(
       $.kw_xout,
