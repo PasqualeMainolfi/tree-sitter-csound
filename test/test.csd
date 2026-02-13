@@ -492,7 +492,7 @@ instr 1
     afilter butbp:a filter + sig_middle, givalue
     afilter butbp:a filter + sig_middle, givalue
 
-    gambo:MyType init 8, 88
+    gambo:MyType init 8, 88, 99, 99
     cat:Cat init 0, 0
 
     k(p5)
