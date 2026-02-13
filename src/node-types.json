@@ -280,6 +280,10 @@
             "named": true
           },
           {
+            "type": "header_identifier",
+            "named": true
+          },
+          {
             "type": "identifier",
             "named": true
           },

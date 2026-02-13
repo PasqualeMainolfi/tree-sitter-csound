@@ -145,6 +145,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "header_identifier"
+        },
+        {
+          "type": "SYMBOL",
           "name": "typed_identifier"
         },
         {
@@ -5207,14 +5211,43 @@
         "value": "[a-zA-Z0-9_\\[\\]]+"
       }
     },
+    "identifier": {
+      "type": "PATTERN",
+      "value": "[a-zA-Z_]\\w*"
+    },
     "header_identifier": {
       "type": "TOKEN",
       "content": {
         "type": "PREC",
-        "value": 10,
+        "value": 2,
         "content": {
-          "type": "PATTERN",
-          "value": "(sr|kr|ksmps|nchnls|nchnls_i|0dbfs)"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "sr"
+            },
+            {
+              "type": "STRING",
+              "value": "kr"
+            },
+            {
+              "type": "STRING",
+              "value": "ksmps"
+            },
+            {
+              "type": "STRING",
+              "value": "nchnls"
+            },
+            {
+              "type": "STRING",
+              "value": "nchnls_i"
+            },
+            {
+              "type": "STRING",
+              "value": "0dbfs"
+            }
+          ]
         }
       }
     },
@@ -5375,10 +5408,6 @@
         "type": "PATTERN",
         "value": "\\s+<\\s+"
       }
-    },
-    "identifier": {
-      "type": "PATTERN",
-      "value": "[a-zA-Z_]\\w*"
     },
     "plus_identifier": {
       "type": "PATTERN",
@@ -6127,6 +6156,10 @@
     [
       "xin_statement",
       "opcode_statement"
+    ],
+    [
+      "_lvalue",
+      "header_assignment"
     ],
     [
       "_score_statement_instr"
