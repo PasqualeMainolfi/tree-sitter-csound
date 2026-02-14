@@ -87,7 +87,51 @@
             "named": true
           },
           {
+            "type": "array_data",
+            "named": true
+          },
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "boolean_var",
+            "named": true
+          },
+          {
+            "type": "function_call",
+            "named": true
+          },
+          {
+            "type": "header_identifier",
+            "named": true
+          },
+          {
             "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "internal_raw_block",
+            "named": true
+          },
+          {
+            "type": "macro_usage",
+            "named": true
+          },
+          {
+            "type": "number",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "pfield",
+            "named": true
+          },
+          {
+            "type": "string",
             "named": true
           },
           {
@@ -95,7 +139,11 @@
             "named": true
           },
           {
-            "type": "type_identifier_legacy",
+            "type": "ternary_expression",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
             "named": true
           }
         ]
