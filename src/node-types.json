@@ -68,10 +68,6 @@
           "named": true
         },
         {
-          "type": "typed_identifier",
-          "named": true
-        },
-        {
           "type": "unary_expression",
           "named": true
         }
@@ -170,10 +166,6 @@
           "named": true
         },
         {
-          "type": "typed_identifier",
-          "named": true
-        },
-        {
           "type": "unary_expression",
           "named": true
         }
@@ -246,10 +238,6 @@
         },
         {
           "type": "ternary_expression",
-          "named": true
-        },
-        {
-          "type": "typed_identifier",
           "named": true
         },
         {
@@ -409,10 +397,6 @@
         },
         {
           "type": "ternary_expression",
-          "named": true
-        },
-        {
-          "type": "typed_identifier",
           "named": true
         },
         {
@@ -623,10 +607,6 @@
         },
         {
           "type": "ternary_expression",
-          "named": true
-        },
-        {
-          "type": "typed_identifier",
           "named": true
         },
         {
@@ -1109,10 +1089,6 @@
           "named": true
         },
         {
-          "type": "typed_identifier",
-          "named": true
-        },
-        {
           "type": "unary_expression",
           "named": true
         }
@@ -1273,10 +1249,6 @@
         },
         {
           "type": "ternary_expression",
-          "named": true
-        },
-        {
-          "type": "typed_identifier",
           "named": true
         },
         {
@@ -1488,10 +1460,6 @@
           "named": true
         },
         {
-          "type": "typed_identifier",
-          "named": true
-        },
-        {
           "type": "unary_expression",
           "named": true
         }
@@ -1604,10 +1572,6 @@
           },
           {
             "type": "ternary_expression",
-            "named": true
-          },
-          {
-            "type": "typed_identifier",
             "named": true
           },
           {
@@ -2225,7 +2189,7 @@
         "required": false,
         "types": [
           {
-            "type": "typed_identifier",
+            "type": "typed_opcode_name",
             "named": true
           }
         ]
@@ -2542,10 +2506,6 @@
         },
         {
           "type": "ternary_expression",
-          "named": true
-        },
-        {
-          "type": "typed_identifier",
           "named": true
         },
         {
@@ -4153,10 +4113,6 @@
           "named": true
         },
         {
-          "type": "typed_identifier",
-          "named": true
-        },
-        {
           "type": "unary_expression",
           "named": true
         }
@@ -4166,80 +4122,217 @@
   {
     "type": "ternary_expression",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "array_access",
-          "named": true
-        },
-        {
-          "type": "array_data",
-          "named": true
-        },
-        {
-          "type": "binary_expression",
-          "named": true
-        },
-        {
-          "type": "boolean_var",
-          "named": true
-        },
-        {
-          "type": "function_call",
-          "named": true
-        },
-        {
-          "type": "header_identifier",
-          "named": true
-        },
-        {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "internal_raw_block",
-          "named": true
-        },
-        {
-          "type": "macro_usage",
-          "named": true
-        },
-        {
-          "type": "number",
-          "named": true
-        },
-        {
-          "type": "parenthesized_expression",
-          "named": true
-        },
-        {
-          "type": "pfield",
-          "named": true
-        },
-        {
-          "type": "string",
-          "named": true
-        },
-        {
-          "type": "struct_access",
-          "named": true
-        },
-        {
-          "type": "ternary_expression",
-          "named": true
-        },
-        {
-          "type": "typed_identifier",
-          "named": true
-        },
-        {
-          "type": "unary_expression",
-          "named": true
-        }
-      ]
+    "fields": {
+      "condition": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "array_access",
+            "named": true
+          },
+          {
+            "type": "array_data",
+            "named": true
+          },
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "boolean_var",
+            "named": true
+          },
+          {
+            "type": "function_call",
+            "named": true
+          },
+          {
+            "type": "header_identifier",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "internal_raw_block",
+            "named": true
+          },
+          {
+            "type": "macro_usage",
+            "named": true
+          },
+          {
+            "type": "number",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "pfield",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          },
+          {
+            "type": "struct_access",
+            "named": true
+          },
+          {
+            "type": "ternary_expression",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          }
+        ]
+      },
+      "first_choice": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "array_access",
+            "named": true
+          },
+          {
+            "type": "array_data",
+            "named": true
+          },
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "boolean_var",
+            "named": true
+          },
+          {
+            "type": "function_call",
+            "named": true
+          },
+          {
+            "type": "header_identifier",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "internal_raw_block",
+            "named": true
+          },
+          {
+            "type": "macro_usage",
+            "named": true
+          },
+          {
+            "type": "number",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "pfield",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          },
+          {
+            "type": "struct_access",
+            "named": true
+          },
+          {
+            "type": "ternary_expression",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          }
+        ]
+      },
+      "second_choice": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "array_access",
+            "named": true
+          },
+          {
+            "type": "array_data",
+            "named": true
+          },
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "boolean_var",
+            "named": true
+          },
+          {
+            "type": "function_call",
+            "named": true
+          },
+          {
+            "type": "header_identifier",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "internal_raw_block",
+            "named": true
+          },
+          {
+            "type": "macro_usage",
+            "named": true
+          },
+          {
+            "type": "number",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "pfield",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          },
+          {
+            "type": "struct_access",
+            "named": true
+          },
+          {
+            "type": "ternary_expression",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -4360,6 +4453,32 @@
     }
   },
   {
+    "type": "typed_opcode_name",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "type": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "udo_definition",
     "named": true,
     "fields": {},
@@ -4464,7 +4583,47 @@
       "required": false,
       "types": [
         {
+          "type": "assignment_statement",
+          "named": true
+        },
+        {
+          "type": "control_statement",
+          "named": true
+        },
+        {
+          "type": "function_call",
+          "named": true
+        },
+        {
           "type": "instr_udo_bounded_error",
+          "named": true
+        },
+        {
+          "type": "label_statement",
+          "named": true
+        },
+        {
+          "type": "legacy_typed_assignment_statement",
+          "named": true
+        },
+        {
+          "type": "opcode_statement",
+          "named": true
+        },
+        {
+          "type": "return_statement",
+          "named": true
+        },
+        {
+          "type": "rigoto_statement",
+          "named": true
+        },
+        {
+          "type": "struct_definition",
+          "named": true
+        },
+        {
+          "type": "typed_assignment_statement",
           "named": true
         },
         {
@@ -4702,10 +4861,6 @@
           "named": true
         },
         {
-          "type": "typed_identifier",
-          "named": true
-        },
-        {
           "type": "unary_expression",
           "named": true
         }
@@ -4820,10 +4975,6 @@
           "named": true
         },
         {
-          "type": "typed_identifier",
-          "named": true
-        },
-        {
           "type": "unary_expression",
           "named": true
         }
@@ -4916,10 +5067,6 @@
         },
         {
           "type": "ternary_expression",
-          "named": true
-        },
-        {
-          "type": "typed_identifier",
           "named": true
         },
         {

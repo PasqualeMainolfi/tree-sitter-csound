@@ -232,10 +232,6 @@
         },
         {
           "type": "SYMBOL",
-          "name": "typed_identifier"
-        },
-        {
-          "type": "SYMBOL",
           "name": "array_access"
         },
         {
@@ -1584,6 +1580,21 @@
           "type": "CHOICE",
           "members": [
             {
+              "type": "REPEAT",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_statement"
+              }
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
               "type": "SYMBOL",
               "name": "xin_statement"
             },
@@ -2688,7 +2699,7 @@
       "value": 1,
       "content": {
         "type": "PREC",
-        "value": 1,
+        "value": 2,
         "content": {
           "type": "SEQ",
           "members": [
@@ -2718,8 +2729,11 @@
               "type": "CHOICE",
               "members": [
                 {
-                  "type": "STRING",
-                  "value": ":"
+                  "type": "TOKEN",
+                  "content": {
+                    "type": "PATTERN",
+                    "value": ":\\s*"
+                  }
                 },
                 {
                   "type": "BLANK"
@@ -2727,12 +2741,73 @@
               ]
             },
             {
-              "type": "SYMBOL",
-              "name": "_new_line"
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_new_line"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
             }
           ]
         }
       }
+    },
+    "typed_opcode_name": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "ALIAS",
+            "content": {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "identifier"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "type_identifier_legacy"
+                }
+              ]
+            },
+            "named": true,
+            "value": "identifier"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": ":"
+        },
+        {
+          "type": "FIELD",
+          "name": "type",
+          "content": {
+            "type": "ALIAS",
+            "content": {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "identifier"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "type_identifier"
+                }
+              ]
+            },
+            "named": true,
+            "value": "identifier"
+          }
+        }
+      ]
     },
     "opcode_name": {
       "type": "CHOICE",
@@ -2742,7 +2817,7 @@
           "name": "opcode_typed_name",
           "content": {
             "type": "SYMBOL",
-            "name": "typed_identifier"
+            "name": "typed_opcode_name"
           }
         },
         {
@@ -2796,30 +2871,42 @@
       }
     },
     "ternary_expression": {
-      "type": "PREC_RIGHT",
-      "value": 0,
+      "type": "PREC_DYNAMIC",
+      "value": 10,
       "content": {
         "type": "SEQ",
         "members": [
           {
-            "type": "SYMBOL",
-            "name": "_expression"
+            "type": "FIELD",
+            "name": "condition",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_expression"
+            }
           },
           {
             "type": "STRING",
             "value": "?"
           },
           {
-            "type": "SYMBOL",
-            "name": "_expression"
+            "type": "FIELD",
+            "name": "first_choice",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_expression"
+            }
           },
           {
             "type": "STRING",
             "value": ":"
           },
           {
-            "type": "SYMBOL",
-            "name": "_expression"
+            "type": "FIELD",
+            "name": "second_choice",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_expression"
+            }
           }
         ]
       }
@@ -6160,6 +6247,16 @@
     [
       "_lvalue",
       "header_assignment"
+    ],
+    [
+      "_expression",
+      "typed_opcode_name"
+    ],
+    [
+      "ternary_expression"
+    ],
+    [
+      "udo_definition_legacy"
     ],
     [
       "_score_statement_instr"
