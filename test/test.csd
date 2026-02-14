@@ -497,7 +497,7 @@ instr 1
 
     k(p5)
 
-    loop:
+    label:
     ifreq = 500
 
     ifreq = gambo.val0 > 300 ? 1000 : 500

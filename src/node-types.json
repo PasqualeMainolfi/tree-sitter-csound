@@ -1367,9 +1367,20 @@
   {
     "type": "goto_statement",
     "named": true,
-    "fields": {},
+    "fields": {
+      "label_name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
         {
@@ -1382,10 +1393,6 @@
         },
         {
           "type": "kw_kgoto",
-          "named": true
-        },
-        {
-          "type": "label_statement",
           "named": true
         }
       ]
@@ -2692,9 +2699,20 @@
   {
     "type": "rigoto_statement",
     "named": true,
-    "fields": {},
+    "fields": {
+      "label_name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
         {
@@ -2703,10 +2721,6 @@
         },
         {
           "type": "kw_rigoto",
-          "named": true
-        },
-        {
-          "type": "label_statement",
           "named": true
         }
       ]

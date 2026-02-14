@@ -603,10 +603,10 @@ module.exports = grammar({
       ))
     )),
 
-    label_statement: $ => prec.dynamic(1, prec(2,
+    label_statement: $ => prec.dynamic(1, prec(1,
       seq(
         field('label_name', alias(choice($.identifier, $.type_identifier_legacy), $.identifier)),
-        optional(token(/:\s*/)),
+        /:\s*/,
         optional($._new_line)
       )
     )),
@@ -672,7 +672,7 @@ module.exports = grammar({
         $.kw_kgoto
       ),
       optional('('),
-      $.label_statement,
+      field('label_name', alias(choice($.identifier, $.type_identifier_legacy), $.identifier)),
       optional(')')
     ),
 
@@ -682,7 +682,7 @@ module.exports = grammar({
         $.kw_reinit,
       ),
       optional('('),
-      $.label_statement,
+      field('label_name', alias(choice($.identifier, $.type_identifier_legacy), $.identifier)),
       optional(')')
     ),
 
