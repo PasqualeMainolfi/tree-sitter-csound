@@ -16,18 +16,21 @@ module.exports = grammar({
       [$.orchestra_statement, $.score_file],
       [$.cs_legacy_file, $.score_file],
       [$.cs_legacy_file, $.orchestra_statement],
-      [$.array_access, $.opcode_name],
       [$.xin_statement, $.opcode_statement, $.typed_assignment_statement],
       [$.xin_statement, $.opcode_statement],
-      [$._lvalue, $.header_assignment],
+      [$._lvalue, $._expression],
+      [$._lvalue, $._expression, $.header_assignment],
+      [$._statement, $._expression],
       [$._expression, $.typed_opcode_name],
+      [$._expression, $.opcode_name],
       [$.ternary_expression],
       [$.udo_definition_legacy],
       // [$.cabbage_statement],
       [$._score_statement_instr],
       // [$.opcode_statement],
       [$.score_file],
-      [$.macro_usage]
+      [$.macro_usage],
+      [$.return_statement]
     ],
 
   rules: {
@@ -77,8 +80,9 @@ module.exports = grammar({
     ),
 
     _expression: $ => choice(
-      $.internal_raw_block,
+      $.array_access,
       $.function_call,
+      $.internal_raw_block,
       $.unary_expression,
       $.binary_expression,
       $.ternary_expression,
@@ -92,7 +96,6 @@ module.exports = grammar({
         $.type_identifier_legacy,
       ), $.identifier),
       // $.typed_identifier,
-      $.array_access,
       $.struct_access,
       $.macro_usage,
       $.array_data,
@@ -142,17 +145,12 @@ module.exports = grammar({
       )
     ),
 
-    array_access: $ => seq(
-      field('array', choice(
-        $.identifier,
-        $.array_access,
-        $.type_identifier_legacy,
-        $.struct_access
-      )),
+    array_access: $ => prec(2, seq(
+      field('array', $._expression),
       '[',
       $._expression,
       ']'
-    ),
+    )),
 
     array_data: $ => seq(
       '[',
@@ -399,7 +397,10 @@ module.exports = grammar({
     ),
 
     header_assignment: $ => seq(
-      $.header_identifier,
+      choice(
+        $.header_identifier,
+        alias($.header_0dbfs, $.header_identifier)
+      ),
       '=',
       $._expression
     ),
@@ -794,7 +795,7 @@ module.exports = grammar({
       field('default_body', repeat($._statement))
     )),
 
-    function_call: $ => prec(2,
+    function_call: $ => prec(10,
       seq(
         field('function', $.opcode_name),
         '(',
@@ -1074,7 +1075,8 @@ module.exports = grammar({
     legacy_udo_args:            $ => token(/[a-zA-Z0-9_\[\]]+/),
     identifier:                 $ => /[a-zA-Z_]\w*/,
     // header_identifier:          $ => token(prec(10, /(sr|kr|ksmps|nchnls|nchnls_i|0dbfs)/)),
-    header_identifier:          $ => token(prec(2, choice('sr', 'kr', 'ksmps', 'nchnls', 'nchnls_i', '0dbfs'))),
+    header_0dbfs:               $ => token(prec(10, '0dbfs')),
+    header_identifier:          $ => token(prec(2, choice('sr', 'kr', 'ksmps', 'nchnls', 'nchnls_i'))),
     score_carry:                $ => token(prec(5, /\s+\./)),
     score_plus:                 $ => token(prec(5, '+')),
     score_plus_p_operator:      $ => token(prec(5, /\^\+/)),
@@ -1107,7 +1109,7 @@ module.exports = grammar({
 
     global_keyword:             $ => token('@global'),
     type_identifier:            $ => token(prec(1, /(InstrDef|Instr|Opcode|OpcodeDef|Complex|[aikbSfw])(\[\])*/)),
-    type_identifier_legacy:     $ => token(prec(2, /g?[aikbSfw][a-zA-Z0-9_\[\]]*/)),
+    type_identifier_legacy:     $ => token(prec(2, /g?[aikbSfw][a-zA-Z0-9_]*(\[\])*/)),
     // word_boundary:              $ =>/[aikbSfwgsn0][a-zA-Z0-9_\[\]]*/,
     number:                     $ => token(prec(10, choice(/\d+\.\d*([eE][+-]?\d+)?/, /\.\d+([eE][+-]?\d+)?/, /\d+[eE][+-]?\d+/, /\d+/, /0[xX][0-9a-fA-F]+/))),
     string:                     $ => seq('"', repeat(choice(/[^"\\\n]+/, /\\./)), '"'),

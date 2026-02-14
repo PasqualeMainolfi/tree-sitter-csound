@@ -54,6 +54,7 @@ instr 1
     sig:a = poscil(iamp, freq)
 
     while p4 > 10 do
+        p2 += ifreq[ii % lenarray:i(p4)]
         print(9)
     od
 
