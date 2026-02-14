@@ -20,6 +20,9 @@ module.exports = grammar({
       [$.xin_statement, $.opcode_statement, $.typed_assignment_statement],
       [$.xin_statement, $.opcode_statement],
       [$._lvalue, $.header_assignment],
+      [$._expression, $.typed_opcode_name],
+      [$.ternary_expression],
+      [$.udo_definition_legacy],
       // [$.cabbage_statement],
       [$._score_statement_instr],
       // [$.opcode_statement],
@@ -88,7 +91,7 @@ module.exports = grammar({
         $.identifier,
         $.type_identifier_legacy,
       ), $.identifier),
-      $.typed_identifier,
+      // $.typed_identifier,
       $.array_access,
       $.struct_access,
       $.macro_usage,
@@ -437,6 +440,7 @@ module.exports = grammar({
       field('outputs', $.legacy_udo_args),
       ',',
       field('inputs', $.legacy_udo_args),
+      optional(repeat($._statement)),
       optional($.xin_statement),
       field('udo_body', repeat($._statement)),
       optional($.xout_statement),
@@ -599,16 +603,22 @@ module.exports = grammar({
       ))
     )),
 
-    label_statement: $ => prec.dynamic(1, prec(1,
+    label_statement: $ => prec.dynamic(1, prec(2,
       seq(
         field('label_name', alias(choice($.identifier, $.type_identifier_legacy), $.identifier)),
-        optional(':'),
-        $._new_line
+        optional(token(/:\s*/)),
+        optional($._new_line)
       )
     )),
 
+    typed_opcode_name: $ => seq(
+      field('name', alias(choice($.identifier, $.type_identifier_legacy), $.identifier)),
+      ':',
+      field('type', alias(choice($.identifier, $.type_identifier), $.identifier))
+    ),
+
     opcode_name: $ => choice(
-      field('opcode_typed_name', $.typed_identifier),
+      field('opcode_typed_name', $.typed_opcode_name),
       alias(choice($.type_identifier_legacy, $.identifier), 'opcode_name')
     ),
 
@@ -620,12 +630,12 @@ module.exports = grammar({
       $._expression
     )),
 
-    ternary_expression: $ => prec.right(seq(
-      $._expression,
+    ternary_expression: $ => prec.dynamic(10, seq(
+      field('condition', $._expression),
       '?',
-      $._expression,
+      field('first_choice', $._expression),
       ':',
-      $._expression
+      field('second_choice', $._expression)
     )),
 
     binary_expression: $ => choice(

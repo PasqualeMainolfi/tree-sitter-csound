@@ -16,8 +16,17 @@ obj_out:InstrDef = create(R{
     out(poscil(1, 440))
 }R)
 
-instr 1
+instr SEQUENCER
+    canShuffle:k init 0
+    column:k init 0
+    scrubberPos: k init 0
+    bpm:k = cabbageGetValue("bpmSlider")
 
+
+endin
+
+
+instr 1
     bar:Foo init 8, 88
     print(bar.val0, bar.val1)
 

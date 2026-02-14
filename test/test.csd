@@ -500,7 +500,7 @@ instr 1
     loop:
     ifreq = 500
 
-    ifreq = gambo.val0 > 300 ? 1000:5000
+    ifreq = gambo.val0 > 300 ? 1000 : 500
     iamp = cat.body
 
     goto(label)
