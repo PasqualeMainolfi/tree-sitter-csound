@@ -180,16 +180,11 @@
     (kw_close_raw_string)
 ] @punctuation.bracket
 
-; (cabbage_statement . (identifier) @type)
-; (cabbage_property . (identifier) @property)
+(cabbage_statement
+  widget: (identifier) @type)
 
-; ((opcode_name) @function
-;  (#not-has-child? @function "opcode_typed_name"))
-
-; (opcode_name
-;     (typed_opcode_name
-;         name: (_) @function
-;         type: (_) @type))
+(cabbage_property
+  key: (identifier) @function)
 
 [
   (return_statement)

@@ -884,6 +884,106 @@
         ]
       }
     },
+    "cabbage_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "widget",
+          "content": {
+            "type": "SYMBOL",
+            "name": "identifier"
+          }
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "cabbage_property"
+          }
+        }
+      ]
+    },
+    "cabbage_property": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "key",
+          "content": {
+            "type": "SYMBOL",
+            "name": "identifier"
+          }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": ":"
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "number"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "identifier"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": "("
+        },
+        {
+          "type": "FIELD",
+          "name": "args",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "_expression"
+              },
+              {
+                "type": "REPEAT",
+                "content": {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "STRING",
+                      "value": ","
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "_expression"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "STRING",
+          "value": ")"
+        }
+      ]
+    },
     "cabbage_json_block": {
       "type": "SEQ",
       "members": [
@@ -1345,8 +1445,17 @@
         {
           "type": "REPEAT",
           "content": {
-            "type": "SYMBOL",
-            "name": "cabbage_json_block"
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "cabbage_json_block"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "cabbage_statement"
+              }
+            ]
           }
         },
         {
@@ -2431,8 +2540,8 @@
               "type": "PREC_DYNAMIC",
               "value": 3,
               "content": {
-                "type": "PREC",
-                "value": 3,
+                "type": "PREC_RIGHT",
+                "value": 0,
                 "content": {
                   "type": "SEQ",
                   "members": [
@@ -2452,6 +2561,14 @@
                               {
                                 "type": "SYMBOL",
                                 "name": "type_identifier_legacy"
+                              },
+                              {
+                                "type": "SYMBOL",
+                                "name": "array_access"
+                              },
+                              {
+                                "type": "SYMBOL",
+                                "name": "struct_access"
                               }
                             ]
                           },
@@ -2474,6 +2591,14 @@
                                     {
                                       "type": "SYMBOL",
                                       "name": "type_identifier_legacy"
+                                    },
+                                    {
+                                      "type": "SYMBOL",
+                                      "name": "array_access"
+                                    },
+                                    {
+                                      "type": "SYMBOL",
+                                      "name": "struct_access"
                                     }
                                   ]
                                 }
@@ -2534,7 +2659,7 @@
               "value": 2,
               "content": {
                 "type": "PREC",
-                "value": 3,
+                "value": 2,
                 "content": {
                   "type": "SEQ",
                   "members": [
@@ -2553,6 +2678,90 @@
                         "type": "SYMBOL",
                         "name": "argument_list"
                       }
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "type": "PREC_DYNAMIC",
+              "value": 1,
+              "content": {
+                "type": "PREC_RIGHT",
+                "value": 0,
+                "content": {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "FIELD",
+                      "name": "outputs",
+                      "content": {
+                        "type": "SEQ",
+                        "members": [
+                          {
+                            "type": "SYMBOL",
+                            "name": "identifier"
+                          },
+                          {
+                            "type": "REPEAT",
+                            "content": {
+                              "type": "SEQ",
+                              "members": [
+                                {
+                                  "type": "STRING",
+                                  "value": ","
+                                },
+                                {
+                                  "type": "SYMBOL",
+                                  "name": "identifier"
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "CHOICE",
+                      "members": [
+                        {
+                          "type": "SEQ",
+                          "members": [
+                            {
+                              "type": "FIELD",
+                              "name": "op",
+                              "content": {
+                                "type": "SYMBOL",
+                                "name": "opcode_name"
+                              }
+                            },
+                            {
+                              "type": "FIELD",
+                              "name": "inputs",
+                              "content": {
+                                "type": "CHOICE",
+                                "members": [
+                                  {
+                                    "type": "SYMBOL",
+                                    "name": "argument_list"
+                                  },
+                                  {
+                                    "type": "BLANK"
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "FIELD",
+                          "name": "op_macro",
+                          "content": {
+                            "type": "SYMBOL",
+                            "name": "macro_usage"
+                          }
+                        }
+                      ]
                     }
                   ]
                 }
@@ -6292,13 +6501,28 @@
     ],
     [
       "_expression",
+      "legacy_typed_assignment_statement"
+    ],
+    [
+      "_expression",
       "opcode_name"
+    ],
+    [
+      "_lvalue",
+      "opcode_statement"
+    ],
+    [
+      "opcode_name",
+      "opcode_statement"
     ],
     [
       "ternary_expression"
     ],
     [
       "udo_definition_legacy"
+    ],
+    [
+      "cabbage_statement"
     ],
     [
       "_score_statement_instr"

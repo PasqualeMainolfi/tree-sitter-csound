@@ -449,7 +449,7 @@ endop
 opcode add, iS, iio
     i1, i2, ivalue xin
     klast init 0
-    ivalue += 1
+    ivalue += 1.0
     xout i1, i2
 endop
 

@@ -99,6 +99,20 @@ instr PopulatePresetButton
 
 endin
 
+
+instr 3
+    irChan[] init 5
+    if(filevalid(chnget:S("test")) == 1) then
+        irChan[4], irChan[5] diskin2(chnget:S("test"), ipitch, 0, 1)
+    endif
+
+    Reset:
+    writePointer init 0
+    readPointer init 0
+
+
+endin
+
 </CsInstruments>
 <CsScore>
 

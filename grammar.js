@@ -22,12 +22,14 @@ module.exports = grammar({
       [$._lvalue, $._expression, $.header_assignment],
       [$._statement, $._expression],
       [$._expression, $.typed_opcode_name],
+      [$._expression, $.legacy_typed_assignment_statement],
       [$._expression, $.opcode_name],
+      [$._lvalue, $.opcode_statement],
+      [$.opcode_name, $.opcode_statement],
       [$.ternary_expression],
       [$.udo_definition_legacy],
-      // [$.cabbage_statement],
+      [$.cabbage_statement],
       [$._score_statement_instr],
-      // [$.opcode_statement],
       [$.score_file],
       [$.macro_usage],
       [$.return_statement]
@@ -252,17 +254,18 @@ module.exports = grammar({
 
     // --- CABBAGE SECTION ---
 
-    // cabbage_statement: $ => seq(
-    //   field('widget', $.identifier),
-    //   repeat($.cabbage_property)
-    // ),
+    cabbage_statement: $ => seq(
+      field('widget', $.identifier),
+      repeat($.cabbage_property)
+    ),
 
-    // cabbage_property: $ => seq(
-    //   field('key', $.identifier),
-    //   '(',
-    //   field('value', /[^)]*/),
-    //   ')'
-    // ),
+    cabbage_property: $ => seq(
+      field('key', $.identifier),
+      optional(seq(':', choice($.number, $.identifier))),
+      '(',
+      field('args', sep1($._expression, ',')),
+      ')'
+    ),
 
     cabbage_json_block: $ => seq(
       '[',
@@ -290,11 +293,6 @@ module.exports = grammar({
         /-?\d+(\.\d+)?([eE][+-]?\d+)?/,
         'true', 'false', 'null'
     ))),
-
-    // cabbage_statement: $ => seq(
-    //     $.identifier,
-    //     repeat(seq('(', /[^)]*/, ')')) // Argomenti tra parentesi tonde
-    // ),
 
     // --- END CABBAGE SECTION ---
 
@@ -386,12 +384,10 @@ module.exports = grammar({
 
     cabbage_block: $ => seq(
       $.tag_cabbage_start,
-      repeat($.cabbage_json_block),
-      // field('cabbage_content', repeat(choice(
-      //   $.strong_string,
-      //   $.raw_script,
-      //   $.generic_closing_tag,
-      // ))),
+      repeat(choice(
+        $.cabbage_json_block,
+        $.cabbage_statement
+      )),
       $.tag_cabbage_end,
       $._new_line
     ),
@@ -554,11 +550,13 @@ module.exports = grammar({
 
     opcode_statement: $ => seq(
       choice(
-        prec.dynamic(3, prec(3, seq(
+        prec.dynamic(3, prec.right(seq(
           field('outputs', sep1(
             choice(
               $.typed_identifier,
-              $.type_identifier_legacy
+              $.type_identifier_legacy,
+              $.array_access,
+              $.struct_access,
             ),
             ','
           )),
@@ -570,10 +568,23 @@ module.exports = grammar({
             field('op_macro', $.macro_usage)
           )
         ))),
-        prec.dynamic(2, prec(3, seq(
+        prec.dynamic(2, prec(2, seq(
           field('op', $.opcode_name),
           field('inputs', $.argument_list))
         )),
+        prec.dynamic(1, prec.right(seq(
+          field('outputs', sep1(
+            $.identifier,
+            ','
+          )),
+          choice(
+            seq(
+              field('op', $.opcode_name),
+              field('inputs', optional($.argument_list))
+            ),
+            field('op_macro', $.macro_usage)
+          )
+        ))),
         prec.dynamic(1, prec(0, seq(
           field('op', $.opcode_name),
         )))
@@ -1111,8 +1122,16 @@ module.exports = grammar({
     type_identifier:            $ => token(prec(1, /(InstrDef|Instr|Opcode|OpcodeDef|Complex|[aikbSfw])(\[\])*/)),
     type_identifier_legacy:     $ => token(prec(2, /g?[aikbSfw][a-zA-Z0-9_]*(\[\])*/)),
     // word_boundary:              $ =>/[aikbSfwgsn0][a-zA-Z0-9_\[\]]*/,
-    number:                     $ => token(prec(10, choice(/\d+\.\d*([eE][+-]?\d+)?/, /\.\d+([eE][+-]?\d+)?/, /\d+[eE][+-]?\d+/, /\d+/, /0[xX][0-9a-fA-F]+/))),
-    string:                     $ => seq('"', repeat(choice(/[^"\\\n]+/, /\\./)), '"'),
+
+    number: $ => token(prec(10, choice(
+      /\d+\.\d*([eE][+-]?\d+)?/,
+      /\.\d+([eE][+-]?\d+)?/,
+      /\d+[eE][+-]?\d+/,
+      /\d+/,
+      /0[xX][0-9a-fA-F]+/
+    ))),
+
+    string: $ => seq('"', repeat(choice(/[^"\\\n]+/, /\\./)), '"'),
     boolean_var:                $ => choice($.kw_true, $.kw_false),
     tag_synthesizer_start:      $ => token(prec(10, /<CsoundSynthesi[sz]er>/)),
     tag_synthesizer_end:        $ => token(prec(10, /<\/CsoundSynthesi[sz]er>/)),
