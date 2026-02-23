@@ -9,6 +9,13 @@ ksmps = 1
 nchnls = 2
 0dbfs = 1
 
+// solve assignment var[][]
+
+lpos:i[][] = init(8, 8)
+lpos[][] = fillarray( \
+    1, 2, 3 \ ;comment
+)
+
 freq@global:i = 400
 struct Foo val0:i, val1:i
 

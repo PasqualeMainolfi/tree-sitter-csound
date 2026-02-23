@@ -4,7 +4,7 @@
 module.exports = grammar({
     name: 'csound',
     word: $ => $.type_identifier_legacy,
-    extras: $ => [/\s/, $.comment, $.block_comment, $._line_continuation],
+    extras: $ => [/\s/, $.comment, $.block_comment, $.line_continuation, $.line_continuation_comment],
     conflicts: $ => [
       [$.xin_statement, $.opcode_statement, $.legacy_typed_assignment_statement],
       [$.score_statement, $.score_statement_instr, $.score_statement_func],
@@ -150,15 +150,15 @@ module.exports = grammar({
     array_access: $ => prec(2, seq(
       field('array', $._expression),
       '[',
-      $._expression,
+      optional($._expression),
       ']'
     )),
 
-    array_data: $ => seq(
+    array_data: $ => prec(1, seq(
       '[',
       sep1($._expression, ','),
       ']'
-    ),
+    )),
 
     argument_list: $ => seq(
       $._expression,
@@ -1164,9 +1164,18 @@ module.exports = grammar({
 
     _new_line:                  $ => token(/\r?\n/),
     _whitespace:                $ => /\s+/,
-    _line_continuation:         $ => token(prec(1, seq('\\', /\s*\r?\n/))),
 
-
+    line_continuation: $ => token(prec(1,seq('\\', /\s*\r?\n/))),
+    line_continuation_comment: $ => token(prec(1,
+      seq(
+        '\\',
+        repeat(choice(
+          /\s/,
+          /;[^\r\n]*/
+        )),
+        /\r?\n/
+      )
+    ))
 
     // --- END KEYWORDS ---
 

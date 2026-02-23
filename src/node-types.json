@@ -151,7 +151,7 @@
     },
     "children": {
       "multiple": false,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "array_access",
@@ -5729,6 +5729,16 @@
   {
     "type": "legacy_udo_args",
     "named": true
+  },
+  {
+    "type": "line_continuation",
+    "named": true,
+    "extra": true
+  },
+  {
+    "type": "line_continuation_comment",
+    "named": true,
+    "extra": true
   },
   {
     "type": "macro_value",

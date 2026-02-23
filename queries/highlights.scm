@@ -24,6 +24,8 @@
 
 (comment) @comment
 (block_comment) @comment
+(line_continuation) @comment
+(line_continuation_comment) @comment
 (string) @string
 (number) @number
 
