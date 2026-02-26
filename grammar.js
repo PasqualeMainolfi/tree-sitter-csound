@@ -101,7 +101,8 @@ module.exports = grammar({
       $.struct_access,
       $.macro_usage,
       $.array_data,
-      $.pfield
+      $.pfield,
+      // $.slicing_dots
     ),
 
     control_statement: $ => choice(
@@ -147,10 +148,16 @@ module.exports = grammar({
       )
     ),
 
+    array_slice: $ => seq(
+      optional(field('left_index', $._expression)),
+      field('colon', ':'),
+      optional(field('right_index', $._expression)),
+    ),
+
     array_access: $ => prec(2, seq(
       field('array', $._expression),
       '[',
-      optional($._expression),
+      optional(choice($._expression, $.array_slice)),
       ']'
     )),
 
@@ -651,6 +658,7 @@ module.exports = grammar({
     )),
 
     binary_expression: $ => choice(
+      prec.left(10, seq($._expression, $.slicing_dots, $._expression)),
       prec.right(9, seq($._expression, '^', $._expression)),
       prec.left(8, seq($._expression, choice('*', '/', '%'), $._expression)),
       prec.left(7, seq($._expression, choice('+', '-'), $._expression)),
@@ -1123,15 +1131,31 @@ module.exports = grammar({
     type_identifier_legacy:     $ => token(prec(2, /g?[aikbSfw][a-zA-Z0-9_]*(\[\])*/)),
     // word_boundary:              $ =>/[aikbSfwgsn0][a-zA-Z0-9_\[\]]*/,
 
-    number: $ => token(prec(10, choice(
-      /\d+\.\d*([eE][+-]?\d+)?/,
-      /\.\d+([eE][+-]?\d+)?/,
-      /\d+[eE][+-]?\d+/,
-      /\d+/,
-      /0[xX][0-9a-fA-F]+/
-    ))),
+    // number: $ => token(prec(10, choice(
+    //   /\d+\.\d*([eE][+-]?\d+)?/,
+    //   /\.\d+([eE][+-]?\d+)?/,
+    //   /\d+[eE][+-]?\d+/,
+    //   /\d+/,
+    //   /0[xX][0-9a-fA-F]+/
+    // ))),
 
-    string: $ => seq('"', repeat(choice(/[^"\\\n]+/, /\\./)), '"'),
+    number: $ => choice(
+      token(prec(10, choice(
+        /\d+\.\d+([eE][+-]?\d+)?/,
+        /\.\d+([eE][+-]?\d+)?/,
+        /\d+[eE][+-]?\d+/,
+        // /\d+/,
+        /0[xX][0-9a-fA-F]+/
+      ))),
+      /\d+/,
+      prec.dynamic(-1, seq(
+        /\d+/,
+        token.immediate('.')
+      ))
+    ),
+
+    slicing_dots:               $ => token(prec(15, '...')),
+    string:                     $ => seq('"', repeat(choice(/[^"\\\n]+/, /\\./)), '"'),
     boolean_var:                $ => choice($.kw_true, $.kw_false),
     tag_synthesizer_start:      $ => token(prec(10, /<CsoundSynthesi[sz]er>/)),
     tag_synthesizer_end:        $ => token(prec(10, /<\/CsoundSynthesi[sz]er>/)),

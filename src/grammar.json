@@ -381,6 +381,51 @@
         ]
       }
     },
+    "array_slice": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "FIELD",
+              "name": "left_index",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_expression"
+              }
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "FIELD",
+          "name": "colon",
+          "content": {
+            "type": "STRING",
+            "value": ":"
+          }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "FIELD",
+              "name": "right_index",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_expression"
+              }
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
     "array_access": {
       "type": "PREC",
       "value": 2,
@@ -403,8 +448,17 @@
             "type": "CHOICE",
             "members": [
               {
-                "type": "SYMBOL",
-                "name": "_expression"
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "SYMBOL",
+                    "name": "_expression"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "array_slice"
+                  }
+                ]
               },
               {
                 "type": "BLANK"
@@ -3125,6 +3179,27 @@
     "binary_expression": {
       "type": "CHOICE",
       "members": [
+        {
+          "type": "PREC_LEFT",
+          "value": 10,
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "_expression"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "slicing_dots"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_expression"
+              }
+            ]
+          }
+        },
         {
           "type": "PREC_RIGHT",
           "value": 9,
@@ -5992,34 +6067,70 @@
       }
     },
     "number": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "TOKEN",
+          "content": {
+            "type": "PREC",
+            "value": 10,
+            "content": {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "PATTERN",
+                  "value": "\\d+\\.\\d+([eE][+-]?\\d+)?"
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "\\.\\d+([eE][+-]?\\d+)?"
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "\\d+[eE][+-]?\\d+"
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "0[xX][0-9a-fA-F]+"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "PATTERN",
+          "value": "\\d+"
+        },
+        {
+          "type": "PREC_DYNAMIC",
+          "value": -1,
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "PATTERN",
+                "value": "\\d+"
+              },
+              {
+                "type": "IMMEDIATE_TOKEN",
+                "content": {
+                  "type": "STRING",
+                  "value": "."
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "slicing_dots": {
       "type": "TOKEN",
       "content": {
         "type": "PREC",
-        "value": 10,
+        "value": 15,
         "content": {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "PATTERN",
-              "value": "\\d+\\.\\d*([eE][+-]?\\d+)?"
-            },
-            {
-              "type": "PATTERN",
-              "value": "\\.\\d+([eE][+-]?\\d+)?"
-            },
-            {
-              "type": "PATTERN",
-              "value": "\\d+[eE][+-]?\\d+"
-            },
-            {
-              "type": "PATTERN",
-              "value": "\\d+"
-            },
-            {
-              "type": "PATTERN",
-              "value": "0[xX][0-9a-fA-F]+"
-            }
-          ]
+          "type": "STRING",
+          "value": "..."
         }
       }
     },

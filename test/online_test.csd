@@ -92,9 +92,10 @@ endin
 
 
 instr PopulatePresetButton
-
-    freqs:k[] = fillarray(100, 1000, 100)
-    kCount = 0
+    index:Foo = init(0, 5)
+    freqs:k[] = fillarray(100, 1000, 100, 100, 1000, 100)
+    freq2:i[] = freqs[index.val0...index.val1]
+    kCount = 1
     k = 0
     while k < 0 do
         if freqs[k] == p4 && freqs[k] == p5 then
