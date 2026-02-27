@@ -1499,9 +1499,13 @@
     "named": true,
     "fields": {
       "iterator": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
+          {
+            "type": ",",
+            "named": false
+          },
           {
             "type": "identifier",
             "named": true
@@ -2598,6 +2602,10 @@
           },
           {
             "type": "array_access",
+            "named": true
+          },
+          {
+            "type": "global_typed_identifier",
             "named": true
           },
           {

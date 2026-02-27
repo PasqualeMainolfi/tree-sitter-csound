@@ -564,6 +564,7 @@ module.exports = grammar({
               $.type_identifier_legacy,
               $.array_access,
               $.struct_access,
+              $.global_typed_identifier
             ),
             ','
           )),
@@ -775,7 +776,7 @@ module.exports = grammar({
 
     for_loop: $ => prec.left(1, seq(
       $.kw_for,
-      field('iterator', $.identifier),
+      field('iterator', sep1($.identifier, ',')),
       $.kw_in,
       $._expression,
       $.kw_do,

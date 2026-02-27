@@ -2635,6 +2635,10 @@
                               {
                                 "type": "SYMBOL",
                                 "name": "struct_access"
+                              },
+                              {
+                                "type": "SYMBOL",
+                                "name": "global_typed_identifier"
                               }
                             ]
                           },
@@ -2665,6 +2669,10 @@
                                     {
                                       "type": "SYMBOL",
                                       "name": "struct_access"
+                                    },
+                                    {
+                                      "type": "SYMBOL",
+                                      "name": "global_typed_identifier"
                                     }
                                   ]
                                 }
@@ -3932,8 +3940,29 @@
             "type": "FIELD",
             "name": "iterator",
             "content": {
-              "type": "SYMBOL",
-              "name": "identifier"
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "identifier"
+                },
+                {
+                  "type": "REPEAT",
+                  "content": {
+                    "type": "SEQ",
+                    "members": [
+                      {
+                        "type": "STRING",
+                        "value": ","
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "identifier"
+                      }
+                    ]
+                  }
+                }
+              ]
             }
           },
           {
