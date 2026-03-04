@@ -1,5 +1,16 @@
+<CabbageARA>
+{
+  "channels": [
+    { "id": "ara_tempo",  "type": "number" },
+    { "id": "ara_rms",    "type": "number" },
+    { "id": "lufs",       "type": "number" },
+    { "id": "ara_source", "type": "string" }
+  ],
+  "testFile": "/Users/rwalsh/audio/test.wav"
+}
+</CabbageARA>
 <Cabbage>
-[
+{
     {
         "//": "=================== FORM: Classic Subtractive Synth ===================",
         "type": "form",
@@ -408,7 +419,7 @@
         },
         "active": false
     }
-]
+}
 </Cabbage>
 <CsoundSynthesizer>
 <CsOptions>

@@ -28,7 +28,6 @@ module.exports = grammar({
       [$.opcode_name, $.opcode_statement],
       [$.ternary_expression],
       [$.udo_definition_legacy],
-      [$.cabbage_statement],
       [$._score_statement_instr],
       [$.score_file],
       [$.macro_usage],
@@ -68,6 +67,7 @@ module.exports = grammar({
       $.control_statement,
       $.rigoto_statement,
       $.struct_definition,
+      $.macro_usage,
       $.return_statement
     ),
 
@@ -229,7 +229,7 @@ module.exports = grammar({
     ),
 
     csd_file: $ => seq(
-      optional($.cabbage_block),
+      optional(repeat($.cabbage_block)),
       $.tag_synthesizer_start,
       repeat($.csd_element),
       $.tag_synthesizer_end,
@@ -261,28 +261,29 @@ module.exports = grammar({
 
     // --- CABBAGE SECTION ---
 
-    cabbage_statement: $ => seq(
-      field('widget', $.identifier),
-      repeat($.cabbage_property)
-    ),
+    // deprecated
+    // cabbage_statement: $ => seq(
+    //   field('widget', $.identifier),
+    //   repeat($.cabbage_property)
+    // ),
 
-    cabbage_property: $ => seq(
-      field('key', $.identifier),
-      optional(seq(':', choice($.number, $.identifier))),
-      '(',
-      field('args', sep1($._expression, ',')),
-      ')'
-    ),
+    // cabbage_property: $ => seq(
+    //   field('key', $.identifier),
+    //   optional(seq(':', choice($.number, $.identifier))),
+    //   '(',
+    //   field('args', sep1($._expression, ',')),
+    //   ')'
+    // ),
 
     cabbage_json_block: $ => seq(
-      '[',
+      '{',
       repeat(choice(
         $.strong_string,
         $.json_punctuation,
         $.cabbage_json_block,
         $.json_atom
       )),
-      ']'
+      '}'
     ),
 
     strong_string: $ => token(prec(5, seq(
@@ -294,7 +295,7 @@ module.exports = grammar({
       '"'
     ))),
 
-    json_punctuation: $ => token(prec(2, choice('{', '}', ',', ':'))),
+    json_punctuation: $ => token(prec(2, choice('{', '}', ',', ':', '[', ']'))),
 
     json_atom: $ => token(prec(1, choice(
         /-?\d+(\.\d+)?([eE][+-]?\d+)?/,
@@ -390,12 +391,9 @@ module.exports = grammar({
     ),
 
     cabbage_block: $ => seq(
-      $.tag_cabbage_start,
-      repeat(choice(
-        $.cabbage_json_block,
-        $.cabbage_statement
-      )),
-      $.tag_cabbage_end,
+      choice($.tag_cabbage_start, $.tag_cabbageara_start),
+      optional($.cabbage_json_block),
+      choice($.tag_cabbage_end, $.tag_cabbageara_end),
       $._new_line
     ),
 
@@ -1170,6 +1168,8 @@ module.exports = grammar({
     tag_score_end:              $ => token(prec(10, /<\/CsScore>/)),
     tag_cabbage_start:          $ => token(prec(10, /<Cabbage>/)),
     tag_cabbage_end:            $ => token(prec(10, /<\/Cabbage>/)),
+    tag_cabbageara_start:       $ => token(prec(10, /<CabbageARA>/)),
+    tag_cabbageara_end:         $ => token(prec(10, /<\/CabbageARA>/)),
     tag_csfileb_start:          $ => token(prec(10, /<CsFileB(\s+[^>]*)?>/)),
     tag_csfileb_end:            $ => token(prec(10, /<\/CsFileB>/)),
     tag_csmidifileb:            $ => token(prec(10, /<CsMidifileB(\s+[^>]*)?>/)),

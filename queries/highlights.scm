@@ -118,6 +118,8 @@
     (tag_score_end)
     (tag_cabbage_start)
     (tag_cabbage_end)
+    (tag_cabbageara_start)
+    (tag_cabbageara_end)
     (tag_csfileb_start)
     (tag_csfileb_end)
     (tag_csmidifileb)
@@ -181,12 +183,6 @@
     (kw_open_raw_string)
     (kw_close_raw_string)
 ] @punctuation.bracket
-
-(cabbage_statement
-  widget: (identifier) @type)
-
-(cabbage_property
-  key: (identifier) @function)
 
 [
   (return_statement)
