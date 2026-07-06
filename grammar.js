@@ -97,6 +97,7 @@ module.exports = grammar({
         $.identifier,
         $.type_identifier_legacy,
       ), $.identifier),
+      $.typed_opcode_name,
       // $.typed_identifier,
       $.struct_access,
       $.macro_usage,
@@ -157,7 +158,7 @@ module.exports = grammar({
     array_access: $ => prec(2, seq(
       field('array', $._expression),
       '[',
-      optional(choice($._expression, $.array_slice)),
+      optional(choice(prec.dynamic(1, $._expression), $.array_slice)),
       ']'
     )),
 

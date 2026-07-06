@@ -453,6 +453,11 @@ opcode print_value(value:i, value1:i, ioffset):ii
     xout(value, 10)
 endop
 
+opcode print_value(value:i, value1:i, offset:o):ii
+    print(value, value1, offset)
+    xout(value, 10)
+endop
+
 opcode print_value_with_no_arg():(void)
     print("Hello, World!")
 endop
@@ -519,7 +524,7 @@ instr 1
     var:b = true
 
     iv add 1, iamp
-    struct_name:i = poscil(40, 400)
+    struct_name:i = poscil:a(40, 400)
     instr_name:i = poscil(2, 399)
 
     break:

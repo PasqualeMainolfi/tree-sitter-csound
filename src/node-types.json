@@ -68,6 +68,10 @@
           "named": true
         },
         {
+          "type": "typed_opcode_name",
+          "named": true
+        },
+        {
           "type": "unary_expression",
           "named": true
         }
@@ -140,6 +144,10 @@
           },
           {
             "type": "ternary_expression",
+            "named": true
+          },
+          {
+            "type": "typed_opcode_name",
             "named": true
           },
           {
@@ -218,6 +226,10 @@
           "named": true
         },
         {
+          "type": "typed_opcode_name",
+          "named": true
+        },
+        {
           "type": "unary_expression",
           "named": true
         }
@@ -290,6 +302,10 @@
         },
         {
           "type": "ternary_expression",
+          "named": true
+        },
+        {
+          "type": "typed_opcode_name",
           "named": true
         },
         {
@@ -378,6 +394,10 @@
             "named": true
           },
           {
+            "type": "typed_opcode_name",
+            "named": true
+          },
+          {
             "type": "unary_expression",
             "named": true
           }
@@ -445,6 +465,10 @@
           },
           {
             "type": "ternary_expression",
+            "named": true
+          },
+          {
+            "type": "typed_opcode_name",
             "named": true
           },
           {
@@ -609,6 +633,10 @@
         },
         {
           "type": "ternary_expression",
+          "named": true
+        },
+        {
+          "type": "typed_opcode_name",
           "named": true
         },
         {
@@ -831,6 +859,10 @@
         },
         {
           "type": "ternary_expression",
+          "named": true
+        },
+        {
+          "type": "typed_opcode_name",
           "named": true
         },
         {
@@ -1321,6 +1353,10 @@
           "named": true
         },
         {
+          "type": "typed_opcode_name",
+          "named": true
+        },
+        {
           "type": "unary_expression",
           "named": true
         }
@@ -1485,6 +1521,10 @@
         },
         {
           "type": "ternary_expression",
+          "named": true
+        },
+        {
+          "type": "typed_opcode_name",
           "named": true
         },
         {
@@ -1703,6 +1743,10 @@
           "named": true
         },
         {
+          "type": "typed_opcode_name",
+          "named": true
+        },
+        {
           "type": "unary_expression",
           "named": true
         }
@@ -1815,6 +1859,10 @@
           },
           {
             "type": "ternary_expression",
+            "named": true
+          },
+          {
+            "type": "typed_opcode_name",
             "named": true
           },
           {
@@ -2782,6 +2830,10 @@
         },
         {
           "type": "ternary_expression",
+          "named": true
+        },
+        {
+          "type": "typed_opcode_name",
           "named": true
         },
         {
@@ -4396,6 +4448,10 @@
           "named": true
         },
         {
+          "type": "typed_opcode_name",
+          "named": true
+        },
+        {
           "type": "unary_expression",
           "named": true
         }
@@ -4471,6 +4527,10 @@
             "named": true
           },
           {
+            "type": "typed_opcode_name",
+            "named": true
+          },
+          {
             "type": "unary_expression",
             "named": true
           }
@@ -4541,6 +4601,10 @@
             "named": true
           },
           {
+            "type": "typed_opcode_name",
+            "named": true
+          },
+          {
             "type": "unary_expression",
             "named": true
           }
@@ -4608,6 +4672,10 @@
           },
           {
             "type": "ternary_expression",
+            "named": true
+          },
+          {
+            "type": "typed_opcode_name",
             "named": true
           },
           {
@@ -5160,6 +5228,10 @@
           "named": true
         },
         {
+          "type": "typed_opcode_name",
+          "named": true
+        },
+        {
           "type": "unary_expression",
           "named": true
         }
@@ -5274,6 +5346,10 @@
           "named": true
         },
         {
+          "type": "typed_opcode_name",
+          "named": true
+        },
+        {
           "type": "unary_expression",
           "named": true
         }
@@ -5366,6 +5442,10 @@
         },
         {
           "type": "ternary_expression",
+          "named": true
+        },
+        {
+          "type": "typed_opcode_name",
           "named": true
         },
         {

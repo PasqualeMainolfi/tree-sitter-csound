@@ -240,6 +240,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "typed_opcode_name"
+        },
+        {
+          "type": "SYMBOL",
           "name": "struct_access"
         },
         {
@@ -455,8 +459,12 @@
                 "type": "CHOICE",
                 "members": [
                   {
-                    "type": "SYMBOL",
-                    "name": "_expression"
+                    "type": "PREC_DYNAMIC",
+                    "value": 1,
+                    "content": {
+                      "type": "SYMBOL",
+                      "name": "_expression"
+                    }
                   },
                   {
                     "type": "SYMBOL",
