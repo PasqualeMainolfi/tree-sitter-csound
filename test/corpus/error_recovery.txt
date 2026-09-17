@@ -1,0 +1,110 @@
+============================================================
+Incomplete argument list does not swallow endin
+============================================================
+
+instr 1
+  aSig oscili kAmp, 
+endin
+
+---
+
+(source_file
+  (cs_legacy_file
+      (orchestra_statement
+        (instrument_definition
+          name: (number)
+          (ERROR
+            (type_identifier_legacy)
+            (opcode_name)
+            (identifier))))))
+
+============================================================
+Incomplete expression does not swallow endin
+============================================================
+
+instr 1
+  aSig = kAmp * 
+endin
+
+---
+
+(source_file
+  (cs_legacy_file
+      (orchestra_statement
+        (instrument_definition
+          name: (number)
+          (legacy_typed_assignment_statement
+            left: (type_identifier_legacy)
+            right: (argument_list
+              (identifier)))
+          (ERROR)))))
+
+============================================================
+Unclosed call does not swallow the rest
+============================================================
+
+instr 1
+  aOut = oscili(kAmp, 
+endin
+instr 2
+endin
+
+---
+
+(source_file
+  (cs_legacy_file
+      (orchestra_statement
+        (instrument_definition
+          name: (number)
+          (legacy_typed_assignment_statement
+            left: (type_identifier_legacy)
+            right: (argument_list
+              (identifier)))
+          (ERROR
+            (identifier))))
+      (orchestra_statement
+        (instrument_definition
+          name: (number)))))
+
+============================================================
+Incomplete struct access does not swallow endin
+============================================================
+
+instr 1
+  kv = p.
+endin
+
+---
+
+(source_file
+  (cs_legacy_file
+      (orchestra_statement
+        (instrument_definition
+          name: (number)
+          (legacy_typed_assignment_statement
+            left: (type_identifier_legacy)
+            right: (argument_list
+              (identifier)))
+          (ERROR)))))
+
+============================================================
+Lone macro symbol does not swallow endin
+============================================================
+
+instr 1
+  kv = $
+endin
+
+---
+
+(source_file
+  (cs_legacy_file
+      (orchestra_statement
+        (instrument_definition
+          name: (number)
+          (legacy_typed_assignment_statement
+            left: (type_identifier_legacy)
+            right: (argument_list
+              (macro_usage
+                id: (MISSING identifier))))))))
+

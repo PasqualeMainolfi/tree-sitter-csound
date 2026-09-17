@@ -1,0 +1,394 @@
+============================================================
+Opcode statement with outputs
+============================================================
+
+instr 1
+  aSig oscili 0.5, 440
+  outs aSig, aSig
+endin
+
+---
+
+(source_file
+  (cs_legacy_file
+    (orchestra_statement
+      (instrument_definition
+        (number)
+        (opcode_statement
+          (type_identifier_legacy)
+          (opcode_name)
+          (argument_list
+            (number)
+            (number)))
+        (opcode_statement
+          (opcode_name)
+          (argument_list
+            (identifier)
+            (identifier)))))))
+
+============================================================
+Opcode without arguments before instr
+============================================================
+
+FLrun
+instr 1
+  turnoff
+endin
+
+---
+
+(source_file
+  (cs_legacy_file
+    (orchestra_statement
+      (opcode_statement
+        (opcode_name)))
+    (orchestra_statement
+      (instrument_definition
+        (number)
+        (opcode_statement
+          (opcode_name))))))
+
+============================================================
+Opcode statement without trailing newline
+============================================================
+
+instr 1
+  turnoff
+endin
+---
+
+(source_file
+  (cs_legacy_file
+    (orchestra_statement
+      (instrument_definition
+        (number)
+        (opcode_statement
+          (opcode_name))))))
+
+============================================================
+Identifiers starting with keywords
+============================================================
+
+instr 1
+  odd = 1
+  doit = 2
+  returnValue = 3
+  caseCount = 4
+  trueVal = 5
+  src = 6
+  kramp = 7
+endin
+
+---
+
+(source_file
+  (cs_legacy_file
+    (orchestra_statement
+      (instrument_definition
+        (number)
+        (assignment_statement
+          (identifier)
+          (argument_list
+            (number)))
+        (assignment_statement
+          (identifier)
+          (argument_list
+            (number)))
+        (assignment_statement
+          (identifier)
+          (argument_list
+            (number)))
+        (assignment_statement
+          (identifier)
+          (argument_list
+            (number)))
+        (assignment_statement
+          (identifier)
+          (argument_list
+            (number)))
+        (assignment_statement
+          (identifier)
+          (argument_list
+            (number)))
+        (legacy_typed_assignment_statement
+          (type_identifier_legacy)
+          (argument_list
+            (number)))))))
+
+============================================================
+Header identifiers
+============================================================
+
+sr = 44100
+ksmps = 32
+nchnls = 2
+0dbfs = 1
+
+---
+
+(source_file
+  (cs_legacy_file
+    (orchestra_statement
+      (assignment_statement
+        (header_identifier)
+        (argument_list
+          (number))))
+    (orchestra_statement
+      (assignment_statement
+        (header_identifier)
+        (argument_list
+          (number))))
+    (orchestra_statement
+      (assignment_statement
+        (header_identifier)
+        (argument_list
+          (number))))
+    (orchestra_statement
+      (header_assignment
+        (header_identifier)
+        (number)))))
+
+============================================================
+0dbfs in expressions
+============================================================
+
+instr 1
+  a1 oscili 0dbfs/2, 440
+endin
+
+---
+
+(source_file
+  (cs_legacy_file
+    (orchestra_statement
+      (instrument_definition
+        (number)
+        (opcode_statement
+          (type_identifier_legacy)
+          (opcode_name)
+          (argument_list
+            (binary_expression
+              (header_identifier)
+              (number))
+            (number)))))))
+
+============================================================
+Output-only opcode statement
+============================================================
+
+instr 1
+  icps cpsmidi
+  iamp ampmidi .3
+endin
+
+---
+
+(source_file
+  (cs_legacy_file
+    (orchestra_statement
+      (instrument_definition
+        (number)
+        (opcode_statement
+          (type_identifier_legacy)
+          (opcode_name))
+        (opcode_statement
+          (type_identifier_legacy)
+          (opcode_name)
+          (argument_list
+            (number)))))))
+
+============================================================
+Mixed typed and legacy assignment targets
+============================================================
+
+instr 1
+  cfs:k[], krms, err:k = lpcanal(a1, 1)
+endin
+
+---
+
+(source_file
+  (cs_legacy_file
+    (orchestra_statement
+      (instrument_definition
+        (number)
+        (typed_assignment_statement
+          (typed_identifier
+            (identifier)
+            (type_identifier))
+          (type_identifier_legacy)
+          (typed_identifier
+            (identifier)
+            (type_identifier))
+          (argument_list
+            (function_call
+              (opcode_name)
+              (argument_list
+                (identifier)
+                (number)))))))))
+
+============================================================
+Bitwise xor operator
+============================================================
+
+instr 1
+  kx = i0B # i0A
+endin
+
+---
+
+(source_file
+  (cs_legacy_file
+    (orchestra_statement
+      (instrument_definition
+        (number)
+        (legacy_typed_assignment_statement
+          (type_identifier_legacy)
+          (argument_list
+            (binary_expression
+              (identifier)
+              (identifier))))))))
+
+============================================================
+Pfield as opcode output
+============================================================
+
+instr 1
+  p3 init 1
+endin
+
+---
+
+(source_file
+  (cs_legacy_file
+    (orchestra_statement
+      (instrument_definition
+        (number)
+        (opcode_statement
+          (pfield)
+          (opcode_name)
+          (argument_list
+            (number)))))))
+
+============================================================
+Until loop closed by enduntil
+============================================================
+
+instr 1
+  until kx >= 3 do
+    kx += 1
+  enduntil
+endin
+
+---
+
+(source_file
+  (cs_legacy_file
+    (orchestra_statement
+      (instrument_definition
+        (number)
+        (control_statement
+          (until_loop
+            (kw_until)
+            (binary_expression
+              (identifier)
+              (number))
+            (kw_do)
+            (control_loop_body
+              (legacy_typed_assignment_statement
+                (type_identifier_legacy)
+                (argument_list
+                  (number))))
+            (kw_od)))))))
+
+============================================================
+Switch with multiple case values
+============================================================
+
+instr 1
+  switch 3
+    case 0, 2
+      prints "no"
+    default
+      prints "yes"
+  endsw
+endin
+
+---
+
+(source_file
+  (cs_legacy_file
+    (orchestra_statement
+      (instrument_definition
+        (number)
+        (control_statement
+          (switch_statement
+            (kw_switch_start)
+            (number)
+            (case_block
+              (case_header
+                (kw_case_key)
+                (number)
+                (number))
+              (opcode_statement
+                (opcode_name)
+                (argument_list
+                  (string))))
+            (default_block
+              (default_header
+                (kw_default_key))
+              (opcode_statement
+                (opcode_name)
+                (argument_list
+                  (string))))
+            (kw_switch_end)))))))
+
+============================================================
+Empty macro body
+============================================================
+
+#define DEBUG ##
+
+---
+
+(source_file
+  (cs_legacy_file
+    (preprocessor_directive
+      (macro_define
+        (kw_define)
+        (macro_name
+          (identifier))
+        (macro_value)))))
+
+============================================================
+Preprocessor directives inside an instrument
+============================================================
+
+instr 1
+  #ifdef DEBUG
+    prints "debug"
+  #end
+  #include "lib.udo"
+endin
+
+---
+
+(source_file
+  (cs_legacy_file
+    (orchestra_statement
+      (instrument_definition
+        (number)
+        (preprocessor_directive
+          (ifdef_directive
+            (kw_ifdef)
+            (identifier)
+            (opcode_statement
+              (opcode_name)
+              (argument_list
+                (string)))
+            (kw_end)))
+        (preprocessor_directive
+          (include_directive
+            (kw_include)
+            (included_file
+              (string))))))))

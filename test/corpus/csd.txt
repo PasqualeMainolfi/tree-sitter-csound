@@ -1,0 +1,170 @@
+============================================================
+Empty file
+============================================================
+
+
+---
+
+(source_file)
+
+============================================================
+Options with raw values
+============================================================
+
+<CsoundSynthesizer>
+<CsOptions>
+-odac -o dac -Mhw:1,0 --limiter=.95 -o out.wav -b1024 -+rtaudio=jack --nodisplays -d
+-+id_artist="Some Name" -+id_title=Song
+</CsOptions>
+</CsoundSynthesizer>
+
+---
+
+(source_file
+  (csd_file
+    (tag_synthesizer_start)
+    (csd_element
+      (options_block
+        (tag_options_start)
+        (flag_content
+          (flag_identifier)
+          (flag_type)
+          (identifier))
+        (flag_content
+          (flag_identifier)
+          (flag_type)
+          (identifier))
+        (flag_content
+          (flag_identifier)
+          (flag_type)
+          (identifier))
+        (flag_content
+          (flag_identifier)
+          (flag_type)
+          (number))
+        (flag_content
+          (flag_identifier)
+          (flag_type)
+          (identifier))
+        (flag_content
+          (flag_identifier)
+          (flag_type)
+          (number))
+        (flag_content
+          (flag_identifier)
+          (flag_type)
+          (identifier))
+        (flag_content
+          (flag_identifier)
+          (flag_type))
+        (flag_content
+          (flag_identifier)
+          (flag_type))
+        (flag_content
+          (flag_identifier)
+          (flag_type)
+          (string))
+        (flag_content
+          (flag_identifier)
+          (flag_type)
+          (identifier))
+        (tag_options_end)))
+    (tag_synthesizer_end)))
+
+============================================================
+Incomplete option flag
+============================================================
+
+<CsoundSynthesizer>
+<CsOptions>
+-odac --
+</CsOptions>
+</CsoundSynthesizer>
+
+---
+
+(source_file
+  (csd_file
+    (tag_synthesizer_start)
+    (csd_element
+      (options_block
+        (tag_options_start)
+        (flag_content
+          (flag_identifier)
+          (flag_type)
+          (identifier))
+        (flag_content
+          (flag_identifier))
+        (tag_options_end)))
+    (tag_synthesizer_end)))
+
+============================================================
+Trailing whitespace after the document
+============================================================
+
+<CsoundSynthesizer>
+<CsInstruments>
+instr 1
+endin
+</CsInstruments>
+</CsoundSynthesizer>
+ 
+
+---
+
+(source_file
+  (csd_file
+    (tag_synthesizer_start)
+    (csd_element
+      (instruments_block
+        (tag_instruments_start)
+        (orchestra_file
+          (orchestra_statement
+            (instrument_definition
+              (number))))
+        (tag_instruments_end)))
+    (tag_synthesizer_end)))
+
+============================================================
+Cabbage block with nested objects
+============================================================
+
+<Cabbage>
+{
+  "channels": [
+    { "id": "gain", "range": { "min": 0, "max": 1 } }
+  ]
+}
+</Cabbage>
+<CsoundSynthesizer>
+</CsoundSynthesizer>
+
+---
+
+(source_file
+  (csd_file
+    (cabbage_block
+      (tag_cabbage_start)
+      (cabbage_json_block
+        (strong_string)
+        (json_punctuation)
+        (json_punctuation)
+        (cabbage_json_block
+          (strong_string)
+          (json_punctuation)
+          (strong_string)
+          (json_punctuation)
+          (strong_string)
+          (json_punctuation)
+          (cabbage_json_block
+            (strong_string)
+            (json_punctuation)
+            (json_atom)
+            (json_punctuation)
+            (strong_string)
+            (json_punctuation)
+            (json_atom)))
+        (json_punctuation))
+      (tag_cabbage_end))
+    (tag_synthesizer_start)
+    (tag_synthesizer_end)))

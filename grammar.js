@@ -4,30 +4,67 @@
 module.exports = grammar({
     name: 'csound',
     word: $ => $.type_identifier_legacy,
+    externals: $ => [
+      'instr',
+      'endin',
+      'opcode',
+      'endop',
+      $.kw_od,
+      $.kw_do,
+      $.kw_endif,
+      $.kw_fi,
+      $.kw_then,
+      $.kw_else,
+      $.kw_elseif,
+      $.kw_until,
+      $.kw_switch_end,
+      $.kw_tif,
+      $.kw_switch_start,
+      $.kw_case_key,
+      $.kw_default_key,
+      $.kw_goto,
+      $.kw_rigoto,
+      $.kw_reinit,
+      $.kw_return,
+      $.kw_true,
+      $.continue_statement,
+      $.header_identifier,
+      $.identifier,
+      $._new_line,
+      $.score_carry,
+      $.score_z_operator,
+      $.score_ramping,
+      $._score_statement_bare,
+      $._score_group_p1_bare,
+      $._score_swmacro_p1_bare,
+      $._score_statement_i_quoted,
+      $._error_sentinel,
+    ],
     extras: $ => [/\s/, $.comment, $.block_comment, $.line_continuation, $.line_continuation_comment],
     conflicts: $ => [
       [$.xin_statement, $.opcode_statement, $.legacy_typed_assignment_statement],
+      [$.xin_statement, $.opcode_statement, $.legacy_typed_assignment_statement, $.typed_assignment_statement],
       [$.score_statement, $.score_statement_instr, $.score_statement_func],
-      [$.legacy_typed_assignment_statement, $.opcode_statement],
-      [$.cs_legacy_file, $.orchestra_statement, $.score_file],
       [$.opcode_statement, $.typed_assignment_statement],
       [$.argument_list, $.parenthesized_expression],
       [$.xout_statement, $._expression],
-      [$.orchestra_statement, $.score_file],
       [$.cs_legacy_file, $.score_file],
-      [$.cs_legacy_file, $.orchestra_statement],
+      [$.cs_legacy_file, $._statement],
+      [$._statement, $.score_file],
+      [$.cs_legacy_file, $._statement, $.score_file],
       [$.xin_statement, $.opcode_statement, $.typed_assignment_statement],
       [$.xin_statement, $.opcode_statement],
       [$._lvalue, $._expression],
       [$._lvalue, $._expression, $.header_assignment],
+      [$._expression, $.header_assignment],
       [$._statement, $._expression],
       [$._expression, $.typed_opcode_name],
       [$._expression, $.legacy_typed_assignment_statement],
+      [$._expression, $.typed_assignment_statement],
       [$._expression, $.opcode_name],
       [$._lvalue, $.opcode_statement],
       [$.opcode_name, $.opcode_statement],
       [$.ternary_expression],
-      [$.udo_definition_legacy],
       [$._score_statement_instr],
       [$.score_file],
       [$.macro_usage],
@@ -38,10 +75,10 @@ module.exports = grammar({
 
     // --- GENERAL SECTION ---
 
-    source_file: $ => choice(
+    source_file: $ => optional(choice(
       $.cs_legacy_file,
       $.csd_file
-    ),
+    )),
 
     cs_legacy_file: $ => seq(
       optional(alias($.preprocessor_directive, 'cs_common_instructions')),
@@ -68,7 +105,10 @@ module.exports = grammar({
       $.rigoto_statement,
       $.struct_definition,
       $.macro_usage,
-      $.return_statement
+      $.return_statement,
+      $.xin_statement,
+      $.xout_statement,
+      $.preprocessor_directive
     ),
 
     _lvalue: $ => choice(
@@ -90,6 +130,7 @@ module.exports = grammar({
       $.ternary_expression,
       $.parenthesized_expression,
       $.header_identifier,
+      alias($.header_0dbfs, $.header_identifier),
       $.number,
       $.boolean_var,
       $.string,
@@ -118,13 +159,11 @@ module.exports = grammar({
     orchestra_statement: $ => choice(
       $.header_assignment,
       $.instrument_definition,
-      $.preprocessor_directive,
       $.udo_definition,
       $._statement
     ),
 
     udo_statement: $ => choice(
-      $.preprocessor_directive,
       $.udo_definition,
       $._statement
     ),
@@ -209,7 +248,7 @@ module.exports = grammar({
       $.kw_define,
       field('macro_name', $.macro_name),
       '#',
-      field('macro_values', $.macro_value),
+      optional(field('macro_values', $.macro_value)),
       '#'
     )),
 
@@ -234,7 +273,6 @@ module.exports = grammar({
       $.tag_synthesizer_start,
       repeat($.csd_element),
       $.tag_synthesizer_end,
-      optional($._whitespace)
     ),
 
     csd_element: $ => choice(
@@ -296,7 +334,7 @@ module.exports = grammar({
       '"'
     ))),
 
-    json_punctuation: $ => token(prec(2, choice('{', '}', ',', ':', '[', ']'))),
+    json_punctuation: $ => token(prec(2, choice(',', ':', '[', ']'))),
 
     json_atom: $ => token(prec(1, choice(
         /-?\d+(\.\d+)?([eE][+-]?\d+)?/,
@@ -356,15 +394,27 @@ module.exports = grammar({
 
     // --- OPTIONS SECTION ---
 
-    flag_content: $ => seq(
-      $.flag_identifier,
-      field('flag_type', token(prec(5, /[a-zA-Z0-9][a-zA-Z0-9_+-]*/))),
-      optional("="),
-      optional(field('flag_value', choice(
-        $.string,
-        $.number,
-        $.identifier
-      )))
+    flag_content: $ => choice(
+      // short option: a single character, with the value attached or separated
+      // (-odac, -o dac, -b1024)
+      seq(
+        alias($._flag_short_prefix, $.flag_identifier),
+        optional(field('flag_type', alias($._flag_short_type, $.flag_type))),
+        optional(field('flag_value', $._flag_value))
+      ),
+      // long option: --nodisplays, --limiter=.95, -+rtaudio=jack
+      seq(
+        alias($._flag_long_prefix, $.flag_identifier),
+        optional(field('flag_type', $.flag_type)),
+        optional('='),
+        optional(field('flag_value', $._flag_value))
+      )
+    ),
+
+    _flag_value: $ => choice(
+      $.string,
+      $.number,
+      alias($._flag_raw_value, $.identifier)
     ),
 
     options_block: $ => seq(
@@ -408,7 +458,7 @@ module.exports = grammar({
     ),
 
     instrument_definition: $ => prec(7, seq(
-      field('instr', token(prec(5, 'instr'))),
+      field('instr', 'instr'),
       field('name', prec.left(sep1(
         choice(
           $.identifier,
@@ -443,10 +493,7 @@ module.exports = grammar({
       field('outputs', $.legacy_udo_args),
       ',',
       field('inputs', $.legacy_udo_args),
-      optional(repeat($._statement)),
-      optional($.xin_statement),
       field('udo_body', repeat($._statement)),
-      optional($.xout_statement),
       choice(
         'endop',
         $.instr_udo_bounded_error
@@ -460,7 +507,6 @@ module.exports = grammar({
       ':',
       field('outputs', $.modern_udo_outputs),
       field('udo_body', repeat($._statement)),
-      optional($.xout_statement),
       choice(
         'endop',
         $.instr_udo_bounded_error
@@ -530,14 +576,12 @@ module.exports = grammar({
     ),
 
     typed_assignment_statement: $ => prec.dynamic(5, prec(2, seq(
-      field('left', sep1(choice($.typed_identifier, $.global_typed_identifier), ',')),
-      field('operator', choice('=', '+=', '-=', '*=', '/=', $.mod_equal)),
-      field('right', $.argument_list)
-    ))),
-
-    udo_typed_assignment_statement: $ => prec.dynamic(5, prec(2, seq(
-      optional($._whitespace),
-      field('left', sep1(choice($.typed_identifier, $.global_typed_identifier), ',')),
+      // at least one typed target; legacy-typed targets may be mixed in
+      field('left', seq(
+        repeat(seq($.type_identifier_legacy, ',')),
+        choice($.typed_identifier, $.global_typed_identifier),
+        repeat(seq(',', choice($.typed_identifier, $.global_typed_identifier, $.type_identifier_legacy)))
+      )),
       field('operator', choice('=', '+=', '-=', '*=', '/=', $.mod_equal)),
       field('right', $.argument_list)
     ))),
@@ -563,7 +607,8 @@ module.exports = grammar({
               $.type_identifier_legacy,
               $.array_access,
               $.struct_access,
-              $.global_typed_identifier
+              $.global_typed_identifier,
+              $.pfield
             ),
             ','
           )),
@@ -665,7 +710,7 @@ module.exports = grammar({
       prec.left(6, seq($._expression, choice('<<', '>>'), $._expression)),
       prec.left(5, seq($._expression, choice('<', '>', '<=', '>=', '==', '!=', '='), $._expression)),
       prec.left(4, seq($._expression, '&', $._expression)),
-      prec.left(3, seq($._expression, '|', $._expression)),
+      prec.left(3, seq($._expression, choice('|', '#'), $._expression)),
       prec.left(2, seq($._expression, '&&', $._expression)),
       prec.left(1, seq($._expression, '||', $._expression))
     ),
@@ -788,7 +833,7 @@ module.exports = grammar({
 
     case_header: $ => seq(
       $.kw_case_key,
-      $._expression,
+      sep1($._expression, ','),
     ),
 
     default_header: $ => $.kw_default_key,
@@ -970,23 +1015,36 @@ module.exports = grammar({
     score_statement: $ => prec(5, seq(
       field('statement', choice(
         $.score_statement_group,
+        alias($._score_statement_bare, $.score_statement_group),
         $.group_p1,
+        alias($._score_group_p1_bare, $.group_p1),
         $.macro_usage
       )),
       field('pfield', repeat($._score_expression)),
       optional($.score_line_error)
     )),
 
-    score_statement_wm: $ => prec(5, seq(
-      field('statement', choice(
-        $.score_statement_with_macro,
-        $.swmacro_p1,
-        $.macro_usage
-      )),
-      optional(field('pfield', $._score_expression)),
-      field('macro_identifier', $.identifier),
-      optional(field('pfield', repeat($._score_expression))),
-      optional($.score_line_error)
+    score_statement_wm: $ => prec(5, choice(
+      seq(
+        field('statement', choice(
+          $.score_statement_with_macro,
+          $.swmacro_p1,
+          alias($._score_swmacro_p1_bare, $.swmacro_p1)
+        )),
+        optional(field('pfield', $._score_expression)),
+        optional(seq(
+          field('macro_identifier', $.identifier),
+          optional(field('pfield', repeat($._score_expression))),
+        )),
+        optional($.score_line_error)
+      ),
+      seq(
+        field('statement', $.macro_usage),
+        optional(field('pfield', $._score_expression)),
+        field('macro_identifier', $.identifier),
+        optional(field('pfield', repeat($._score_expression))),
+        optional($.score_line_error)
+      )
     )),
 
     score_nestable_loop: $ => seq(
@@ -1005,6 +1063,10 @@ module.exports = grammar({
         seq(
           field('statement', $.score_statement_i),
           field('instr', choice($.number, $.string))
+        ),
+        seq(
+          field('statement', alias($._score_statement_i_quoted, $.score_statement_i)),
+          field('instr', $.string)
         ),
         field('statement_instr', $.instr_p1),
         field('statement_macro_instr', $.macro_usage),
@@ -1051,37 +1113,18 @@ module.exports = grammar({
     kw_open_raw_string:         $ => choice(token('{{'), token('R{')),
     kw_close_raw_string:        $ => choice(token('}}'), token('}R')),
     kw_void:                    $ => token(prec(5, 'void')),
-    kw_true:                    $ => token(prec(5, 'true')),
     kw_false:                   $ => token(prec(5, 'false')),
     kw_xin:                     $ => token('xin'),
     kw_xout:                    $ => token('xout'),
     kw_if:                      $ => token(prec(5, 'if')),
-    kw_tif:                     $ => token(prec(5, 'tif')),
-    kw_endif:                   $ => token(prec(5, 'endif')),
-    kw_fi:                      $ => token(prec(5, 'fi')),
-    kw_then:                    $ => token(prec(5, 'then')),
     kw_ithen:                   $ => token(prec(5, 'ithen')),
     kw_kthen:                   $ => token(prec(5, 'kthen')),
-    kw_elseif:                  $ => token(prec(5, 'elseif')),
-    kw_else:                    $ => token(prec(5, 'else')),
     kw_while:                   $ => token(prec(5, 'while')),
-    kw_until:                   $ => token(prec(5, 'until')),
-    kw_do:                      $ => token(prec(5, 'do')),
-    kw_od:                      $ => token(prec(5, 'od')),
     kw_for:                     $ => token(prec(5, 'for')),
     kw_in:                      $ => token(prec(5, 'in')),
     break_statement:            $ => token(prec(5, 'break')),
-    continue_statement:         $ => token(prec(5, 'continue')),
-    kw_switch_start:            $ => token(prec(5, 'switch')),
-    kw_switch_end:              $ => token(prec(5, 'endsw')),
-    kw_case_key:                $ => token(prec(5, 'case')),
-    kw_default_key:             $ => token(prec(5, 'default')),
-    kw_goto:                    $ => token(prec(5, 'goto')),
     kw_kgoto:                   $ => token(prec(5, 'kgoto')),
     kw_igoto:                   $ => token(prec(5, 'igoto')),
-    kw_rigoto:                  $ => token(prec(5, 'rigoto')),
-    kw_return:                  $ => token(prec(5, /(return|rireturn)/)),
-    kw_reinit:                  $ => token(prec(5, 'reinit')),
     kw_include:                 $ => token(prec(5, '#include')),
     kw_includestr:              $ => token(prec(5, '#includestr')),
     kw_define :                 $ => token(prec(5, '#define')),
@@ -1093,14 +1136,10 @@ module.exports = grammar({
     pfield:                     $ => token(prec(5, /p[0-9]+/)),
     legacy_udo_args:            $ => token(/[a-zA-Z0-9_\[\]]+/),
     identifier:                 $ => /[a-zA-Z_]\w*/,
-    // header_identifier:          $ => token(prec(10, /(sr|kr|ksmps|nchnls|nchnls_i|0dbfs)/)),
     header_0dbfs:               $ => token(prec(10, '0dbfs')),
-    header_identifier:          $ => token(prec(2, choice('sr', 'kr', 'ksmps', 'nchnls', 'nchnls_i'))),
-    score_carry:                $ => token(prec(5, /\s+\./)),
     score_plus:                 $ => token(prec(5, '+')),
     score_plus_p_operator:      $ => token(prec(5, /\^\+/)),
     score_minus_p_operator:     $ => token(prec(5, /\^-/)),
-    score_z_operator:           $ => token(prec(5, /\s+z/)),
     score_plus_p:               $ => seq($.score_plus_p_operator, $.number),
     score_minus_p:              $ => seq($.score_minus_p_operator, $.number),
     score_exclamation:          $ => token(prec(5, '!')),
@@ -1109,21 +1148,23 @@ module.exports = grammar({
     score_pp_operator:          $ => token(prec(5, 'pp')),
     score_np:                   $ => seq($.score_np_operator, $.number),
     score_pp:                   $ => seq($.score_pp_operator, $.number),
-    score_ramping:              $ => token(/\s+<\s+/),
     plus_identifier:            $ => /\+[a-zA-Z_]\w*/,
     mod_equal:                  $ => seq('%', '='),
-    flag_identifier:            $ => token(prec(5, /-[-\+]?/)),
-    instr_p1:                   $ => token(prec(6, /i(\d+(\.\d*)?|\.\d+)\s+/)),
-    func_p1:                    $ => token(prec(6, /f(?:\d+)\s+/)),
-    group_p1:                   $ => token(prec(6, seq(/[aqtesxybBCv](\d+(\.\d*)?|\.\d+)/, /\s+/))),
+    _flag_short_prefix:         $ => token(prec(5, '-')),
+    _flag_long_prefix:          $ => token(prec(5, /-[-+]/)),
+    _flag_short_type:           $ => token.immediate(prec(5, /[a-zA-Z0-9@]/)),
+    flag_type:                  $ => token.immediate(prec(5, /[a-zA-Z0-9][a-zA-Z0-9_+-]*/)),
+    instr_p1:                   $ => token(prec(6, /i(\d+(\.\d*)?|\.\d+)[ \t]+/)),
+    func_p1:                    $ => token(prec(6, /f(?:\d+)[ \t]+/)),
+    group_p1:                   $ => token(prec(6, seq(/[aqtesxybBCv](\d+(\.\d*)?|\.\d+)/, /[ \t]+/))),
     group_p1_safe:              $ => token(prec(6, /[aqtesxybBCv](\d+(\.\d*)?|\.\d+)/)),
-    swmacro_p1:                 $ => token(prec(6, seq(/[rmn](\d+(\.\d*)?|\.\d+)/, /\s+/))),
+    swmacro_p1:                 $ => token(prec(6, seq(/[rmn](\d+(\.\d*)?|\.\d+)/, /[ \t]+/))),
 
-    score_statement_group:      $ => token(prec(5, seq(/[aqtesxybBCv]/, /\s+/))),
+    score_statement_group:      $ => token(prec(5, seq(/[aqtesxybBCv]/, /[ \t]+/))),
     score_statement_safe:       $ => token(prec(5, /[aqtesxybBCv]/)),
-    score_statement_with_macro: $ => token(prec(5, seq(/[rmn]/, /\s+/))),
-    score_statement_i:          $ => token(prec(5, seq('i', /\s+/))),
-    score_statement_f:          $ => token(prec(5, seq('f', /\s+/))),
+    score_statement_with_macro: $ => token(prec(5, seq(/[rmn]/, /[ \t]+/))),
+    score_statement_i:          $ => token(prec(5, seq('i', /[ \t]+/))),
+    score_statement_f:          $ => token(prec(5, seq('f', /[ \t]+/))),
     score_line_error:           $ => token(prec(-1, seq(/[^aqrtesxybBCvifrmn(<\/)]/, /[^\n]+/))),
 
     global_keyword:             $ => token('@global'),
@@ -1154,6 +1195,7 @@ module.exports = grammar({
       ))
     ),
 
+    _flag_raw_value:            $ => token(/[^\s;"=\-][^\s;"]*/),
     slicing_dots:               $ => token(prec(15, '...')),
     string:                     $ => seq('"', repeat(choice(/[^"\\\n]+/, /\\./)), '"'),
     boolean_var:                $ => choice($.kw_true, $.kw_false),
@@ -1188,8 +1230,6 @@ module.exports = grammar({
     raw_script:                 $ => token(prec(1, choice(/[^<]+/, seq('<', /[^\/C]/)))),
     raw_text:                   $ => choice(/[^}]+/, seq('}', /[^}]/)),
 
-    _new_line:                  $ => token(/\r?\n/),
-    _whitespace:                $ => /\s+/,
 
     line_continuation: $ => token(prec(1,seq('\\', /\s*\r?\n/))),
     line_continuation_comment: $ => token(prec(1,

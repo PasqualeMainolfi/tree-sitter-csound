@@ -1,0 +1,70 @@
+============================================================
+Legacy udo with statements after xout
+============================================================
+
+opcode Foo, a, a
+  ain xin
+  aout = ain
+  xout aout
+  kcnt = 1
+endop
+
+---
+
+(source_file
+  (cs_legacy_file
+    (orchestra_statement
+      (udo_definition
+        (udo_definition_legacy
+          (opcode_name)
+          (legacy_udo_args)
+          (legacy_udo_args)
+          (xin_statement
+            (type_identifier_legacy)
+            (kw_xin))
+          (legacy_typed_assignment_statement
+            (type_identifier_legacy)
+            (argument_list
+              (identifier)))
+          (xout_statement
+            (kw_xout)
+            (argument_list
+              (identifier)))
+          (legacy_typed_assignment_statement
+            (type_identifier_legacy)
+            (argument_list
+              (number))))))))
+
+============================================================
+Modern udo
+============================================================
+
+opcode Bar(amp:k, freq:k):(a)
+  xout oscili(amp, freq)
+endop
+
+---
+
+(source_file
+  (cs_legacy_file
+    (orchestra_statement
+      (udo_definition
+        (udo_definition_modern
+          (opcode_name)
+          (modern_udo_inputs
+            (typed_identifier
+              (identifier)
+              (type_identifier))
+            (typed_identifier
+              (identifier)
+              (type_identifier)))
+          (modern_udo_outputs
+            (legacy_udo_args))
+          (xout_statement
+            (kw_xout)
+            (argument_list
+              (function_call
+                (opcode_name)
+                (argument_list
+                  (identifier)
+                  (identifier))))))))))

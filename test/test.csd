@@ -453,11 +453,6 @@ opcode print_value(value:i, value1:i, ioffset):ii
     xout(value, 10)
 endop
 
-opcode print_value(value:i, value1:i, offset:o):ii
-    print(value, value1, offset)
-    xout(value, 10)
-endop
-
 opcode print_value_with_no_arg():(void)
     print("Hello, World!")
 endop
@@ -536,7 +531,7 @@ instr 1
 
     switch p4
     case 1
-        print_value(1, 100)
+        v1:i, v2:i = print_value(1, 100, 1)
         for i in [1, 2, 3] do
             if i == 2 then
                 value_from_udo_file(1, 10)

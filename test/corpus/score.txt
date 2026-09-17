@@ -1,0 +1,139 @@
+============================================================
+Section and end statements
+============================================================
+
+<CsoundSynthesizer>
+<CsScore>
+i 1 0 1
+s
+i 1 0 1
+e
+</CsScore>
+</CsoundSynthesizer>
+
+---
+
+(source_file
+  (csd_file
+    (tag_synthesizer_start)
+    (csd_element
+      (score_block
+        (tag_score_start)
+        (score_statement_instr
+          (score_statement_i)
+          (number)
+          (number)
+          (number))
+        (score_statement
+          (score_statement_group))
+        (score_statement_instr
+          (score_statement_i)
+          (number)
+          (number)
+          (number))
+        (score_statement
+          (score_statement_group))
+        (tag_score_end)))
+    (tag_synthesizer_end)))
+
+============================================================
+Statements with p1 and no other p-fields
+============================================================
+
+<CsoundSynthesizer>
+<CsScore>
+r3
+i1 0 1
+e4
+</CsScore>
+</CsoundSynthesizer>
+
+---
+
+(source_file
+  (csd_file
+    (tag_synthesizer_start)
+    (csd_element
+      (score_block
+        (tag_score_start)
+        (score_statement_wm
+          (swmacro_p1))
+        (score_statement_instr
+          (instr_p1)
+          (number)
+          (number))
+        (score_statement
+          (group_p1))
+        (tag_score_end)))
+    (tag_synthesizer_end)))
+
+============================================================
+Carry ramp and infinity
+============================================================
+
+<CsoundSynthesizer>
+<CsScore>
+i1 0 1 100
+i1 + . <
+i1 + . 200
+i1 0 z
+</CsScore>
+</CsoundSynthesizer>
+
+---
+
+(source_file
+  (csd_file
+    (tag_synthesizer_start)
+    (csd_element
+      (score_block
+        (tag_score_start)
+        (score_statement_instr
+          (instr_p1)
+          (number)
+          (number)
+          (number))
+        (score_statement_instr
+          (instr_p1)
+          (score_plus)
+          (score_carry)
+          (score_ramping))
+        (score_statement_instr
+          (instr_p1)
+          (score_plus)
+          (score_carry)
+          (number))
+        (score_statement_instr
+          (instr_p1)
+          (number)
+          (score_z_operator))
+        (tag_score_end)))
+    (tag_synthesizer_end)))
+
+============================================================
+Named instrument attached to i
+============================================================
+
+<CsoundSynthesizer>
+<CsScore>
+i"scan" 0 2 -6
+</CsScore>
+</CsoundSynthesizer>
+
+---
+
+(source_file
+  (csd_file
+    (tag_synthesizer_start)
+    (csd_element
+      (score_block
+        (tag_score_start)
+        (score_statement_instr
+          (score_statement_i)
+          (string)
+          (number)
+          (number)
+          (score_unary_expression
+            (number)))
+        (tag_score_end)))
+    (tag_synthesizer_end)))
