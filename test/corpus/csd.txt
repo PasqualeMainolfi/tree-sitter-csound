@@ -168,3 +168,96 @@ Cabbage block with nested objects
       (tag_cabbage_end))
     (tag_synthesizer_start)
     (tag_synthesizer_end)))
+
+============================================================
+CsTest block before CsoundSynthesizer
+============================================================
+
+<CsTest>
+description = "reject managed opcode-array outputs"
+
+[expect]
+exit = "nonzero"
+stderr = ["Opcode[] run does not support managed array output elements"]
+</CsTest>
+<CsoundSynthesizer>
+<CsOptions>
+-nd
+</CsOptions>
+<CsInstruments>
+instr 1
+endin
+</CsInstruments>
+<CsScore>
+i1 0 1
+</CsScore>
+</CsoundSynthesizer>
+
+---
+
+(source_file
+  (csd_file
+    (cstest_block
+      (tag_cstest_start)
+      (raw_script)
+      (tag_cstest_end))
+    (tag_synthesizer_start)
+    (csd_element
+      (options_block
+        (tag_options_start)
+        (flag_content
+          (flag_identifier)
+          (flag_type)
+          (identifier))
+        (tag_options_end)))
+    (csd_element
+      (instruments_block
+        (tag_instruments_start)
+        (orchestra_file
+          (orchestra_statement
+            (instrument_definition
+              (number))))
+        (tag_instruments_end)))
+    (csd_element
+      (score_block
+        (tag_score_start)
+        (score_statement_instr
+          (instr_p1)
+          (number)
+          (number))
+        (tag_score_end)))
+    (tag_synthesizer_end)))
+
+============================================================
+CsTest block with angle brackets in TOML strings
+============================================================
+
+<CsTest>
+description = "expected failure: binary < and << and <= parse errors"
+args = ["-nd", "--nodisplays"]
+
+[expect]
+exit = "nonzero"
+stderr_regex = ['Opcode\[\]', "a </b> c"]
+</CsTest>
+<CsoundSynthesizer>
+</CsoundSynthesizer>
+
+---
+
+(source_file
+  (csd_file
+    (cstest_block
+      (tag_cstest_start)
+      (raw_script)
+      (raw_script)
+      (raw_script)
+      (raw_script)
+      (raw_script)
+      (raw_script)
+      (raw_script)
+      (generic_closing_tag)
+      (raw_script)
+      (tag_cstest_end))
+    (tag_synthesizer_start)
+    (tag_synthesizer_end)))

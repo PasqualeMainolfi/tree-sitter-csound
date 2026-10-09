@@ -2,6 +2,7 @@
 (instruments_block) @fold
 (score_block) @fold
 (cabbage_block) @fold
+(cstest_block) @fold
 
 (instrument_definition) @fold
 (udo_definition_legacy) @fold

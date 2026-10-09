@@ -132,6 +132,8 @@
     (tag_short_licence_end)
     (tag_html_start)
     (tag_html_end)
+    (tag_cstest_start)
+    (tag_cstest_end)
 ] @tag.emphasis
 
 [

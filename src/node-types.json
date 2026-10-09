@@ -1190,6 +1190,10 @@
           "named": true
         },
         {
+          "type": "cstest_block",
+          "named": true
+        },
+        {
           "type": "tag_synthesizer_end",
           "named": true
         },
@@ -1198,6 +1202,46 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "cstest_block",
+    "named": true,
+    "fields": {
+      "content": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "generic_closing_tag",
+            "named": true
+          },
+          {
+            "type": "raw_script",
+            "named": true
+          }
+        ]
+      },
+      "cstest_end_tag": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "tag_cstest_end",
+            "named": true
+          }
+        ]
+      },
+      "cstest_start_tag": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "tag_cstest_start",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -3925,6 +3969,10 @@
             "named": true
           },
           {
+            "type": "score_unary_expression",
+            "named": true
+          },
+          {
             "type": "string",
             "named": true
           }
@@ -4368,11 +4416,6 @@
         }
       ]
     }
-  },
-  {
-    "type": "string",
-    "named": true,
-    "fields": {}
   },
   {
     "type": "struct_access",
@@ -5595,10 +5638,6 @@
     "named": false
   },
   {
-    "type": "\"",
-    "named": false
-  },
-  {
     "type": "#",
     "named": false
   },
@@ -6071,6 +6110,10 @@
     "named": true
   },
   {
+    "type": "string",
+    "named": true
+  },
+  {
     "type": "strong_string",
     "named": true
   },
@@ -6120,6 +6163,14 @@
   },
   {
     "type": "tag_cssamplefileb",
+    "named": true
+  },
+  {
+    "type": "tag_cstest_end",
+    "named": true
+  },
+  {
+    "type": "tag_cstest_start",
     "named": true
   },
   {

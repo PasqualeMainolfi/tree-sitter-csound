@@ -137,3 +137,45 @@ i"scan" 0 2 -6
             (number)))
         (tag_score_end)))
     (tag_synthesizer_end)))
+
+============================================================
+Negative p1 turns off a held note
+============================================================
+
+<CsoundSynthesizer>
+<CsScore>
+i 2 0 -1 1
+i -2 .5 0
+i -"name" 1 0
+</CsScore>
+</CsoundSynthesizer>
+
+---
+
+(source_file
+  (csd_file
+    (tag_synthesizer_start)
+    (csd_element
+      (score_block
+        (tag_score_start)
+        (score_statement_instr
+          (score_statement_i)
+          (number)
+          (number)
+          (score_unary_expression
+            (number))
+          (number))
+        (score_statement_instr
+          (score_statement_i)
+          (score_unary_expression
+            (number))
+          (number)
+          (number))
+        (score_statement_instr
+          (score_statement_i)
+          (score_unary_expression
+            (string))
+          (number)
+          (number))
+        (tag_score_end)))
+    (tag_synthesizer_end)))

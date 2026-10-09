@@ -392,3 +392,28 @@ endin
             (kw_include)
             (included_file
               (string))))))))
+
+============================================================
+String with escape followed by semicolon
+============================================================
+
+instr 1
+  prints "a\n; b"
+  prints "c"
+endin
+
+---
+
+(source_file
+  (cs_legacy_file
+    (orchestra_statement
+      (instrument_definition
+        (number)
+        (opcode_statement
+          (opcode_name)
+          (argument_list
+            (string)))
+        (opcode_statement
+          (opcode_name)
+          (argument_list
+            (string)))))))

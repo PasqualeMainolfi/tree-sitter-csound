@@ -2,74 +2,74 @@
 // @ts-check
 
 module.exports = grammar({
-    name: 'csound',
-    word: $ => $.type_identifier_legacy,
-    externals: $ => [
-      'instr',
-      'endin',
-      'opcode',
-      'endop',
-      $.kw_od,
-      $.kw_do,
-      $.kw_endif,
-      $.kw_fi,
-      $.kw_then,
-      $.kw_else,
-      $.kw_elseif,
-      $.kw_until,
-      $.kw_switch_end,
-      $.kw_tif,
-      $.kw_switch_start,
-      $.kw_case_key,
-      $.kw_default_key,
-      $.kw_goto,
-      $.kw_rigoto,
-      $.kw_reinit,
-      $.kw_return,
-      $.kw_true,
-      $.continue_statement,
-      $.header_identifier,
-      $.identifier,
-      $._new_line,
-      $.score_carry,
-      $.score_z_operator,
-      $.score_ramping,
-      $._score_statement_bare,
-      $._score_group_p1_bare,
-      $._score_swmacro_p1_bare,
-      $._score_statement_i_quoted,
-      $._error_sentinel,
-    ],
-    extras: $ => [/\s/, $.comment, $.block_comment, $.line_continuation, $.line_continuation_comment],
-    conflicts: $ => [
-      [$.xin_statement, $.opcode_statement, $.legacy_typed_assignment_statement],
-      [$.xin_statement, $.opcode_statement, $.legacy_typed_assignment_statement, $.typed_assignment_statement],
-      [$.score_statement, $.score_statement_instr, $.score_statement_func],
-      [$.opcode_statement, $.typed_assignment_statement],
-      [$.argument_list, $.parenthesized_expression],
-      [$.xout_statement, $._expression],
-      [$.cs_legacy_file, $.score_file],
-      [$.cs_legacy_file, $._statement],
-      [$._statement, $.score_file],
-      [$.cs_legacy_file, $._statement, $.score_file],
-      [$.xin_statement, $.opcode_statement, $.typed_assignment_statement],
-      [$.xin_statement, $.opcode_statement],
-      [$._lvalue, $._expression],
-      [$._lvalue, $._expression, $.header_assignment],
-      [$._expression, $.header_assignment],
-      [$._statement, $._expression],
-      [$._expression, $.typed_opcode_name],
-      [$._expression, $.legacy_typed_assignment_statement],
-      [$._expression, $.typed_assignment_statement],
-      [$._expression, $.opcode_name],
-      [$._lvalue, $.opcode_statement],
-      [$.opcode_name, $.opcode_statement],
-      [$.ternary_expression],
-      [$._score_statement_instr],
-      [$.score_file],
-      [$.macro_usage],
-      [$.return_statement]
-    ],
+  name: 'csound',
+  word: $ => $.type_identifier_legacy,
+  externals: $ => [
+    'instr',
+    'endin',
+    'opcode',
+    'endop',
+    $.kw_od,
+    $.kw_do,
+    $.kw_endif,
+    $.kw_fi,
+    $.kw_then,
+    $.kw_else,
+    $.kw_elseif,
+    $.kw_until,
+    $.kw_switch_end,
+    $.kw_tif,
+    $.kw_switch_start,
+    $.kw_case_key,
+    $.kw_default_key,
+    $.kw_goto,
+    $.kw_rigoto,
+    $.kw_reinit,
+    $.kw_return,
+    $.kw_true,
+    $.continue_statement,
+    $.header_identifier,
+    $.identifier,
+    $._new_line,
+    $.score_carry,
+    $.score_z_operator,
+    $.score_ramping,
+    $._score_statement_bare,
+    $._score_group_p1_bare,
+    $._score_swmacro_p1_bare,
+    $._score_statement_i_quoted,
+    $._error_sentinel,
+  ],
+  extras: $ => [/\s/, $.comment, $.block_comment, $.line_continuation, $.line_continuation_comment],
+  conflicts: $ => [
+    [$.xin_statement, $.opcode_statement, $.legacy_typed_assignment_statement],
+    [$.xin_statement, $.opcode_statement, $.legacy_typed_assignment_statement, $.typed_assignment_statement],
+    [$.score_statement, $.score_statement_instr, $.score_statement_func],
+    [$.opcode_statement, $.typed_assignment_statement],
+    [$.argument_list, $.parenthesized_expression],
+    [$.xout_statement, $._expression],
+    [$.cs_legacy_file, $.score_file],
+    [$.cs_legacy_file, $._statement],
+    [$._statement, $.score_file],
+    [$.cs_legacy_file, $._statement, $.score_file],
+    [$.xin_statement, $.opcode_statement, $.typed_assignment_statement],
+    [$.xin_statement, $.opcode_statement],
+    [$._lvalue, $._expression],
+    [$._lvalue, $._expression, $.header_assignment],
+    [$._expression, $.header_assignment],
+    [$._statement, $._expression],
+    [$._expression, $.typed_opcode_name],
+    [$._expression, $.legacy_typed_assignment_statement],
+    [$._expression, $.typed_assignment_statement],
+    [$._expression, $.opcode_name],
+    [$._lvalue, $.opcode_statement],
+    [$.opcode_name, $.opcode_statement],
+    [$.ternary_expression],
+    [$._score_statement_instr],
+    [$.score_file],
+    [$.macro_usage],
+    [$.return_statement]
+  ],
 
   rules: {
 
@@ -269,7 +269,8 @@ module.exports = grammar({
     ),
 
     csd_file: $ => seq(
-      optional(repeat($.cabbage_block)),
+      optional($.cstest_block),
+      repeat($.cabbage_block),
       $.tag_synthesizer_start,
       repeat($.csd_element),
       $.tag_synthesizer_end,
@@ -337,8 +338,8 @@ module.exports = grammar({
     json_punctuation: $ => token(prec(2, choice(',', ':', '[', ']'))),
 
     json_atom: $ => token(prec(1, choice(
-        /-?\d+(\.\d+)?([eE][+-]?\d+)?/,
-        'true', 'false', 'null'
+      /-?\d+(\.\d+)?([eE][+-]?\d+)?/,
+      'true', 'false', 'null'
     ))),
 
     // --- END CABBAGE SECTION ---
@@ -385,6 +386,17 @@ module.exports = grammar({
         ))
       ),
       optional(field('optional_end_tag', $.tag_html_end))
+    ),
+
+    cstest_block: $ => seq(
+      field('cstest_start_tag', $.tag_cstest_start),
+      field('content',
+        repeat(choice(
+          $.raw_script,
+          $.generic_closing_tag
+        )
+      )),
+      field('cstest_end_tag', $.tag_cstest_end)
     ),
 
     optional_tag_block: $ => choice($.generic_tag_block, $.html_block),
@@ -1000,6 +1012,9 @@ module.exports = grammar({
       ']'
     ),
 
+    // negative p1 turns off a held note: `i -2 .5 0`
+    _score_negative_instr: $ => seq('-', choice($.number, $.string)),
+
     _score_statement_instr: $ => seq(
       field('start_time', $._score_expression),
       field('duration', $._score_expression),
@@ -1062,7 +1077,11 @@ module.exports = grammar({
       choice(
         seq(
           field('statement', $.score_statement_i),
-          field('instr', choice($.number, $.string))
+          field('instr', choice(
+            $.number,
+            $.string,
+            alias($._score_negative_instr, $.score_unary_expression)
+          ))
         ),
         seq(
           field('statement', alias($._score_statement_i_quoted, $.score_statement_i)),
@@ -1197,7 +1216,7 @@ module.exports = grammar({
 
     _flag_raw_value:            $ => token(/[^\s;"=\-][^\s;"]*/),
     slicing_dots:               $ => token(prec(15, '...')),
-    string:                     $ => seq('"', repeat(choice(/[^"\\\n]+/, /\\./)), '"'),
+    string:                     $ => token(seq('"', repeat(choice(/[^"\\\n]/, /\\./)), '"')),
     boolean_var:                $ => choice($.kw_true, $.kw_false),
     tag_synthesizer_start:      $ => token(prec(10, /<CsoundSynthesi[sz]er>/)),
     tag_synthesizer_end:        $ => token(prec(10, /<\/CsoundSynthesi[sz]er>/)),
@@ -1225,6 +1244,8 @@ module.exports = grammar({
     tag_short_licence_end:      $ => token(prec(10, /<\/CsShortLicen[cs]e>/)),
     tag_html_start:             $ => token(prec(10, /<html(\s+[^>]*)?>/)),
     tag_html_end:               $ => token(prec(10, /<\/html>/)),
+    tag_cstest_start:           $ => token(prec(10, /<CsTest>/)),
+    tag_cstest_end:             $ => token(prec(10, /<\/CsTest>/)),
     generic_closing_tag:        $ => token(prec(1, /(<\/[^>]+>)/)),
 
     raw_script:                 $ => token(prec(1, choice(/[^<]+/, seq('<', /[^\/C]/)))),

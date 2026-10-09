@@ -6,6 +6,11 @@
     [(raw_script) (generic_closing_tag) (strong_string)] @injection.content)
     (#set! injection.language "python"))
 
+((cstest_block
+    [(raw_script) (generic_closing_tag)] @injection.content)
+    (#set! injection.language "toml")
+    (#set! injection.combined))
+
 ; ((cabbage_block
 ;     [(raw_script) (generic_closing_tag) (string)] @injection.content)
 ;     (#set! injection.language "json"))
