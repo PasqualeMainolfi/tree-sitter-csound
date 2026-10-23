@@ -1973,34 +1973,43 @@
           "type": "SEQ",
           "members": [
             {
-              "type": "CHOICE",
+              "type": "STRING",
+              "value": "("
+            },
+            {
+              "type": "SEQ",
               "members": [
                 {
-                  "type": "STRING",
-                  "value": "("
+                  "type": "SYMBOL",
+                  "name": "legacy_udo_args"
                 },
                 {
-                  "type": "BLANK"
+                  "type": "REPEAT",
+                  "content": {
+                    "type": "SEQ",
+                    "members": [
+                      {
+                        "type": "STRING",
+                        "value": ","
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "legacy_udo_args"
+                      }
+                    ]
+                  }
                 }
               ]
             },
             {
-              "type": "SYMBOL",
-              "name": "legacy_udo_args"
-            },
-            {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "STRING",
-                  "value": ")"
-                },
-                {
-                  "type": "BLANK"
-                }
-              ]
+              "type": "STRING",
+              "value": ")"
             }
           ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "legacy_udo_args"
         },
         {
           "type": "SYMBOL",

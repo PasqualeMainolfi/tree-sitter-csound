@@ -11,7 +11,7 @@
 
 (udo_definition_legacy inputs: (_) @type)
 (udo_definition_legacy outputs: (_) @type)
-(udo_definition_modern outputs: (_) @type)
+(udo_definition_modern outputs: (modern_udo_outputs (legacy_udo_args) @type))
 (udo_definition_legacy "opcode" @keyword)
 (udo_definition_modern "opcode" @keyword)
 (udo_definition_legacy "endop" @keyword)
