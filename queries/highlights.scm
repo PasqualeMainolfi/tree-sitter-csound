@@ -210,8 +210,7 @@
 (typed_identifier
   type: (identifier) @type)
 
-((opcode_name) @function
- (#not-has-child? @function "typed_opcode_name"))
+(opcode_name !opcode_typed_name) @function
 
 (opcode_name
     (typed_opcode_name
