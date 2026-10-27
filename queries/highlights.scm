@@ -90,8 +90,6 @@
     (continue_statement)
 ] @keyword
 
-(identifier) @variable
-
 (struct_definition
   struct_name: (identifier) @type)
 
@@ -216,3 +214,8 @@
     (typed_opcode_name
         name: (_) @function
         type: (_) @type))
+
+; Generic fallback: keep it last. The LSPs keep the first capture of a node
+; (pattern order), so earlier, more specific rules (typed opcode names, types,
+; struct names, members) must not be shadowed by it.
+(identifier) @variable

@@ -26,7 +26,7 @@ obj_out:InstrDef = create(R{
 instr SEQUENCER
     canShuffle:k init 0
     column:k init 0
-    scrubberPos: k init 0
+    scrubberPos: k init 0 
     bpm:k = cabbageGetValue("bpmSlider")
 
 
@@ -41,7 +41,7 @@ instr 1
         out(poscil(1, 440))
     }})
 
-
+    
     test:Opcode[] create vco2, 10
 
 
