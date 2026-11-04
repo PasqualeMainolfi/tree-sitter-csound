@@ -147,3 +147,66 @@ endop
               (type_identifier)))
           (modern_udo_outputs
             (kw_void)))))))
+
+============================================================
+Modern udo with user types starting like a builtin type
+============================================================
+
+opcode Baz(t:Sid, u:wFoo):(Sid)
+  xout t
+endop
+
+---
+
+(source_file
+  (cs_legacy_file
+    (orchestra_statement
+      (udo_definition
+        (udo_definition_modern
+          (opcode_name)
+          (modern_udo_inputs
+            (typed_identifier
+              (identifier)
+              (identifier))
+            (typed_identifier
+              (identifier)
+              (identifier)))
+          (modern_udo_outputs
+            (legacy_udo_args))
+          (xout_statement
+            (kw_xout)
+            (argument_list
+              (identifier))))))))
+
+============================================================
+Modern udo with user type array inputs
+============================================================
+
+opcode Baz(t:Foo, u:Foo[], v:Sid[][]):(Foo)
+  xout t
+endop
+
+---
+
+(source_file
+  (cs_legacy_file
+    (orchestra_statement
+      (udo_definition
+        (udo_definition_modern
+          (opcode_name)
+          (modern_udo_inputs
+            (typed_identifier
+              (identifier)
+              (identifier))
+            (typed_identifier
+              (identifier)
+              (identifier))
+            (typed_identifier
+              (identifier)
+              (identifier)))
+          (modern_udo_outputs
+            (legacy_udo_args))
+          (xout_statement
+            (kw_xout)
+            (argument_list
+              (identifier))))))))

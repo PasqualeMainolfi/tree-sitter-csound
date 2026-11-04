@@ -661,7 +661,7 @@ module.exports = grammar({
       seq(
         field('name', alias(choice($.identifier, $.type_identifier_legacy), $.identifier)),
         ':',
-        field('type', choice($.type_identifier, $.identifier))
+        field('type', choice($.type_identifier, alias($._user_array_type, $.identifier), $.identifier))
       )
     ),
 
@@ -676,6 +676,7 @@ module.exports = grammar({
       ':',
       field('type', choice(
         $.type_identifier,
+        alias($._user_array_type, $.identifier),
         $.identifier
       ))
     )),
@@ -691,7 +692,7 @@ module.exports = grammar({
     typed_opcode_name: $ => seq(
       field('name', alias(choice($.identifier, $.type_identifier_legacy), $.identifier)),
       ':',
-      field('type', alias(choice($.identifier, $.type_identifier), $.identifier))
+      field('type', alias(choice($.identifier, $._user_array_type, $.type_identifier), $.identifier))
     ),
 
     opcode_name: $ => choice(
@@ -833,7 +834,11 @@ module.exports = grammar({
 
     for_loop: $ => prec.left(1, seq(
       $.kw_for,
-      field('iterator', sep1($.identifier, ',')),
+      field('iterator', sep1(choice(
+        $.typed_identifier,
+        alias($.type_identifier_legacy, $.identifier),
+        $.identifier
+      ), ',')),
       $.kw_in,
       $._expression,
       $.kw_do,
@@ -1155,6 +1160,11 @@ module.exports = grammar({
     kw_elsedef:                 $ => token(prec(5, '#else')),
     pfield:                     $ => token(prec(5, /p[0-9]+/)),
     legacy_udo_args:            $ => token(/[a-zA-Z0-9_\[\]]+/),
+    // Same precedence as identifier and declared before it: the longest match wins, so
+    // user types such as Sid6581Voice or Instrument stay whole, and a tie (S, Instr) picks this rule.
+    type_identifier:            $ => token(/(InstrDef|Instr|Opcode|OpcodeDef|Complex|[aikbSfw])(\[\])*/),
+    // a user type array is one token, like k[]: the longest match wins over identifier
+    _user_array_type:           $ => token(/[a-zA-Z_]\w*(\[\])+/),
     identifier:                 $ => /[a-zA-Z_]\w*/,
     header_0dbfs:               $ => token(prec(10, '0dbfs')),
     score_plus:                 $ => token(prec(5, '+')),
@@ -1188,7 +1198,6 @@ module.exports = grammar({
     score_line_error:           $ => token(prec(-1, seq(/[^aqrtesxybBCvifrmn(<\/)]/, /[^\n]+/))),
 
     global_keyword:             $ => token('@global'),
-    type_identifier:            $ => token(prec(1, /(InstrDef|Instr|Opcode|OpcodeDef|Complex|[aikbSfw])(\[\])*/)),
     type_identifier_legacy:     $ => token(prec(2, /g?[aikbSfw][a-zA-Z0-9_]*(\[\])*/)),
     // word_boundary:              $ =>/[aikbSfwgsn0][a-zA-Z0-9_\[\]]*/,
 

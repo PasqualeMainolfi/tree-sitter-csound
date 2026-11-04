@@ -417,3 +417,282 @@ endin
           (opcode_name)
           (argument_list
             (string)))))))
+
+============================================================
+User type names starting like a builtin type
+============================================================
+
+instr 1
+  a1:Sid6581Voice = 1
+  a2:kFoo = 1
+  a3:Instrument = 1
+  a4:Complexity = 1
+  a5:Sid[] init 2
+  a6@global:Stuff = 1
+endin
+
+---
+
+(source_file
+  (cs_legacy_file
+    (orchestra_statement
+      (instrument_definition
+        (number)
+        (typed_assignment_statement
+          (typed_identifier
+            (identifier)
+            (identifier))
+          (argument_list
+            (number)))
+        (typed_assignment_statement
+          (typed_identifier
+            (identifier)
+            (identifier))
+          (argument_list
+            (number)))
+        (typed_assignment_statement
+          (typed_identifier
+            (identifier)
+            (identifier))
+          (argument_list
+            (number)))
+        (typed_assignment_statement
+          (typed_identifier
+            (identifier)
+            (identifier))
+          (argument_list
+            (number)))
+        (opcode_statement
+          (typed_identifier
+            (identifier)
+            (identifier))
+          (opcode_name)
+          (argument_list
+            (number)))
+        (typed_assignment_statement
+          (global_typed_identifier
+            (identifier)
+            (global_keyword)
+            (identifier))
+          (argument_list
+            (number)))))))
+
+============================================================
+Builtin types stay type identifiers
+============================================================
+
+instr 1
+  a1:k = 1
+  a2:S = 1
+  a3:Instr = 1
+  a4:Complex = 1
+  a5:k[] = 1
+  a6@global:i = 1
+endin
+
+---
+
+(source_file
+  (cs_legacy_file
+    (orchestra_statement
+      (instrument_definition
+        (number)
+        (typed_assignment_statement
+          (typed_identifier
+            (identifier)
+            (type_identifier))
+          (argument_list
+            (number)))
+        (typed_assignment_statement
+          (typed_identifier
+            (identifier)
+            (type_identifier))
+          (argument_list
+            (number)))
+        (typed_assignment_statement
+          (typed_identifier
+            (identifier)
+            (type_identifier))
+          (argument_list
+            (number)))
+        (typed_assignment_statement
+          (typed_identifier
+            (identifier)
+            (type_identifier))
+          (argument_list
+            (number)))
+        (typed_assignment_statement
+          (typed_identifier
+            (identifier)
+            (type_identifier))
+          (argument_list
+            (number)))
+        (typed_assignment_statement
+          (global_typed_identifier
+            (identifier)
+            (global_keyword)
+            (type_identifier))
+          (argument_list
+            (number)))))))
+
+============================================================
+User type arrays
+============================================================
+
+struct Row values:i[], rows:Row[]
+
+instr 1
+  a1:Foo[] init 2
+  a2:Foo[][] init 2, 2
+  a3:Sid[] = a1
+  a4@global:Foo[] init 2
+  a5 = a1[0]
+  a6 = a2[0][1]
+endin
+
+---
+
+(source_file
+  (cs_legacy_file
+    (orchestra_statement
+      (struct_definition
+        (identifier)
+        (typed_identifier
+          (identifier)
+          (type_identifier))
+        (typed_identifier
+          (identifier)
+          (identifier))))
+    (orchestra_statement
+      (instrument_definition
+        (number)
+        (opcode_statement
+          (typed_identifier
+            (identifier)
+            (identifier))
+          (opcode_name)
+          (argument_list
+            (number)))
+        (opcode_statement
+          (typed_identifier
+            (identifier)
+            (identifier))
+          (opcode_name)
+          (argument_list
+            (number)
+            (number)))
+        (typed_assignment_statement
+          (typed_identifier
+            (identifier)
+            (identifier))
+          (argument_list
+            (identifier)))
+        (opcode_statement
+          (global_typed_identifier
+            (identifier)
+            (global_keyword)
+            (identifier))
+          (opcode_name)
+          (argument_list
+            (number)))
+        (legacy_typed_assignment_statement
+          (type_identifier_legacy)
+          (argument_list
+            (array_access
+              (identifier)
+              (number))))
+        (legacy_typed_assignment_statement
+          (type_identifier_legacy)
+          (argument_list
+            (array_access
+              (array_access
+                (identifier)
+                (number))
+              (number))))))))
+
+============================================================
+For loop iterators
+============================================================
+
+instr 1
+  for a in b do
+    print a
+  od
+  for c, d in b do
+    print c
+  od
+  for e:i in b do
+    print e
+  od
+  for f:Foo, g:k in b do
+    print g
+  od
+endin
+
+---
+
+(source_file
+  (cs_legacy_file
+    (orchestra_statement
+      (instrument_definition
+        (number)
+        (control_statement
+          (for_loop
+            (kw_for)
+            (identifier)
+            (kw_in)
+            (identifier)
+            (kw_do)
+            (control_loop_body
+              (opcode_statement
+                (opcode_name)
+                (argument_list
+                  (identifier))))
+            (kw_od)))
+        (control_statement
+          (for_loop
+            (kw_for)
+            (identifier)
+            (identifier)
+            (kw_in)
+            (identifier)
+            (kw_do)
+            (control_loop_body
+              (opcode_statement
+                (opcode_name)
+                (argument_list
+                  (identifier))))
+            (kw_od)))
+        (control_statement
+          (for_loop
+            (kw_for)
+            (typed_identifier
+              (identifier)
+              (type_identifier))
+            (kw_in)
+            (identifier)
+            (kw_do)
+            (control_loop_body
+              (opcode_statement
+                (opcode_name)
+                (argument_list
+                  (identifier))))
+            (kw_od)))
+        (control_statement
+          (for_loop
+            (kw_for)
+            (typed_identifier
+              (identifier)
+              (identifier))
+            (typed_identifier
+              (identifier)
+              (type_identifier))
+            (kw_in)
+            (identifier)
+            (kw_do)
+            (control_loop_body
+              (opcode_statement
+                (opcode_name)
+                (argument_list
+                  (identifier))))
+            (kw_od)))))))
