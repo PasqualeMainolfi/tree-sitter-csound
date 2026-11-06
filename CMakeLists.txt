@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.13)
 
 project(tree-sitter-csound
-        VERSION "1.6.4"
+        VERSION "1.6.5"
         DESCRIPTION "Csound grammar for the tree-sitter parser"
         HOMEPAGE_URL "https://github.com/PasqualeMainolfi/tree-sitter-csound"
         LANGUAGES C)

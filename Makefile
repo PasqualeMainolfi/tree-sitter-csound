@@ -4,7 +4,7 @@ endif
 
 LANGUAGE_NAME := tree-sitter-csound
 HOMEPAGE_URL := https://github.com/PasqualeMainolfi/tree-sitter-csound
-VERSION := 1.6.4
+VERSION := 1.6.5
 
 # repository
 SRC_DIR := src

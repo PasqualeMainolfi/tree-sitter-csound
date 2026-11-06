@@ -1569,8 +1569,17 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "SYMBOL",
-              "name": "cabbage_json_block"
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "cabbage_json_block"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "include_directive"
+                }
+              ]
             },
             {
               "type": "BLANK"

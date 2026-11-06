@@ -678,6 +678,10 @@
           "named": true
         },
         {
+          "type": "include_directive",
+          "named": true
+        },
+        {
           "type": "tag_cabbage_end",
           "named": true
         },

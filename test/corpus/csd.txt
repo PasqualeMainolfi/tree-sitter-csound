@@ -170,6 +170,32 @@ Cabbage block with nested objects
     (tag_synthesizer_end)))
 
 ============================================================
+Cabbage block including an external JSON file
+============================================================
+
+<Cabbage>
+// widgets in an external file
+#include "widgets.json"
+</Cabbage>
+<CsoundSynthesizer>
+</CsoundSynthesizer>
+
+---
+
+(source_file
+  (csd_file
+    (cabbage_block
+      (tag_cabbage_start)
+      (comment)
+      (include_directive
+        (kw_include)
+        included_file: (included_file
+          (string)))
+      (tag_cabbage_end))
+    (tag_synthesizer_start)
+    (tag_synthesizer_end)))
+
+============================================================
 CsTest block before CsoundSynthesizer
 ============================================================
 

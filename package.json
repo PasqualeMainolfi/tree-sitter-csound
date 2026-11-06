@@ -1,6 +1,6 @@
 {
   "name": "tree-sitter-csound",
-  "version": "1.6.4",
+  "version": "1.6.5",
   "description": "Csound grammar for the tree-sitter parser",
   "repository": "github:PasqualeMainolfi/tree-sitter-csound",
   "license": "MIT",

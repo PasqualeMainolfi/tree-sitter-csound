@@ -455,7 +455,7 @@ module.exports = grammar({
 
     cabbage_block: $ => seq(
       choice($.tag_cabbage_start, $.tag_cabbageara_start),
-      optional($.cabbage_json_block),
+      optional(choice($.cabbage_json_block, $.include_directive)),
       choice($.tag_cabbage_end, $.tag_cabbageara_end),
       $._new_line
     ),

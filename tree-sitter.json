@@ -17,7 +17,7 @@
     }
   ],
   "metadata": {
-    "version": "1.6.4",
+    "version": "1.6.5",
     "license": "MIT",
     "description": "Csound grammar for the tree-sitter parser",
     "authors": [
